@@ -6,6 +6,8 @@ on:
     paths:
       - '.github/workflows/update.yml'
       - 'scripts/update.py'
+      - 'public/index.html'
+      - 'public/enhance.js'
       - 'tests/**'
   schedule:
     - cron: '17 8 * * *'
