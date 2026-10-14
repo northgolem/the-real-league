@@ -248,12 +248,20 @@
     if (footer) footer.textContent = tr.footer(String(new Date().getFullYear()));
     const footerSource = document.querySelector('footer .container span:last-child');
     if (footerSource) {
-      footerSource.textContent = language === 'es' ? 'Datos de ' : 'Match data from ';
+      // Keep the exact attribution required by football-data.org's terms.
+      footerSource.textContent = 'Football data provided by the ';
       const sourceLink = document.createElement('a');
-      sourceLink.href = historical ? dataset.sourceUrl : 'https://www.football-data.org/';
+      sourceLink.href = 'https://www.football-data.org/';
       sourceLink.rel = 'noopener';
-      sourceLink.textContent = historical ? dataset.source : 'football-data.org';
+      sourceLink.textContent = 'Football-Data.org API';
       footerSource.append(sourceLink, '.');
+      if (historical) {
+        const archiveLink = document.createElement('a');
+        archiveLink.href = dataset.sourceUrl;
+        archiveLink.rel = 'noopener';
+        archiveLink.textContent = dataset.source;
+        footerSource.append(' · Historical results: ', archiveLink, '.');
+      }
     }
     const leader = live && dataset.alternativeTable && dataset.alternativeTable[0];
     set('#headline', leader ? (historical ? tr.oldHeadline(leader.name) : tr.headline(leader.name)) : tr.defaultHeadline);
