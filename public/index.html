@@ -4,17 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#112c24">
-<meta name="description" content="La Liga de los Mortales: the Spanish football table with every Barcelona and Real Madrid game removed. A new league, a new champion.">
+<meta name="description" content="La Liga de los Mortales: La Liga without Real Madrid and Barcelona. Same results, fewer gods.">
 <title>La Liga de los Mortales | The Real League</title>
 <link rel="canonical" href="https://the-real-league.pages.dev/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="The Real League">
 <meta property="og:url" content="https://the-real-league.pages.dev/">
 <meta property="og:title" content="La Liga de los Mortales — The Real League">
-<meta property="og:description" content="La Liga without Real Madrid or Barcelona. Every match they played is removed. Who leads the rest?">
+<meta property="og:description" content="La Liga without Real Madrid or Barcelona. Same results, fewer gods.">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="La Liga de los Mortales — The Real League">
-<meta name="twitter:description" content="The alternative Spanish football league, without Madrid or Barça. Updated automatically.">
+<meta name="twitter:description" content="The football table without Madrid or Barça. Same results, fewer gods. Updated automatically.">
 <style>
 :root{--ink:#172f28;--muted:#64756c;--gold:#cba962;--paper:#f5f3e9;--line:#dcded2;--deep:#112c24;--cream:#e7e7d8}*{box-sizing:border-box}
 html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
@@ -28,26 +28,26 @@ a{color:inherit}button{font:inherit;cursor:pointer}.container{max-width:1060px;p
 </head>
 <body>
 <header class="masthead"><div class="container">
-<nav class="topbar"><a class="brand" href="/">◈ &nbsp; The Real League</a><div class="topright">NO GIANTS. <span>JUST FOOTBALL.</span></div><div class="language-picker" role="group" aria-label="Language / Idioma"><button class="lang-button active" type="button" data-lang="en" aria-pressed="true">EN</button><button class="lang-button" type="button" data-lang="es" aria-pressed="false">ES</button></div></nav>
-<div class="hero"><div class="eyebrow">Spain · 2026/27 · The alternative table</div><h1>La Liga de<br><em>los Mortales.</em></h1><p>What would Spanish football look like if Real Madrid and Barcelona didn't exist? We removed every match they played. This is everyone else's league.</p><div class="pillbar"><span class="pill"><span class="x">✕</span> Real Madrid</span><span class="pill"><span class="x">✕</span> FC Barcelona</span><span class="pill">18 teams left</span></div></div>
+<nav class="topbar"><a class="brand" href="/">◈ &nbsp; The Real League</a><div class="topright">NO GODS. <span>JUST FOOTBALL.</span></div><div class="language-picker" role="group" aria-label="Language / Idioma"><button class="lang-button active" type="button" data-lang="en" aria-pressed="true">EN</button><button class="lang-button" type="button" data-lang="es" aria-pressed="false">ES</button></div></nav>
+<div class="hero"><div class="eyebrow">Spain · 2026/27 · The alternative table</div><h1>La Liga de<br><em>los Mortales.</em></h1><p>Real Madrid and Barcelona have had a decent run. We’ve removed every match involving either club — points, goals, the lot. The other 18 can get on with it.</p><div class="pillbar"><span class="pill"><span class="x">✕</span> Real Madrid</span><span class="pill"><span class="x">✕</span> FC Barcelona</span><span class="pill">18 teams left</span></div></div>
 </div></header>
 <main class="container content">
 <div class="meta"><div class="tag"><span class="dot"></span> <span id="status">Preview mode · waiting for results</span></div><div class="tag" id="updated">Season 2026/27</div></div>
-<section class="card" aria-label="League table"><div class="cardhead"><div><div class="eyebrow">The standings</div><h2>Everyone else can win.</h2><p id="matchinfo">The table recalculates automatically once a results feed is connected.</p></div><div class="switch" aria-label="Table selection"><button class="active" id="alternative" aria-pressed="true">No Giants</button><button id="original" aria-pressed="false">All Teams</button></div></div>
-<div class="tablewrap"><table><thead><tr><th>#</th><th>Club</th><th>P</th><th class="hidden-mobile">W</th><th class="hidden-mobile">D</th><th class="hidden-mobile">L</th><th>GD</th><th>Pts</th></tr></thead><tbody id="rows"></tbody></table><div class="empty" id="empty"><strong>A different champion is coming.</strong><p>This is a real working website prototype. Connect the free football-results feed to publish the actual 2026/27 league, without fabricated scores or positions.</p></div></div>
+<section class="card" aria-label="League table"><div class="cardhead"><div><div class="eyebrow">The standings</div><h2>The mortals get a turn.</h2><p id="matchinfo">The table recalculates automatically once a results feed is connected.</p></div><div class="switch" aria-label="Table selection"><button class="active" id="alternative" aria-pressed="true">No Gods</button><button id="original" aria-pressed="false">All Teams</button></div></div>
+<div class="tablewrap"><table><thead><tr><th>#</th><th>Club</th><th>P</th><th class="hidden-mobile">W</th><th class="hidden-mobile">D</th><th class="hidden-mobile">L</th><th>GD</th><th>Pts</th></tr></thead><tbody id="rows"></tbody></table><div class="empty" id="empty"><strong>The mortals are warming up.</strong><p>The standings will appear after the results feed completes its first update.</p></div></div>
 <div class="footnote" id="disclaimer">Provisional table: ranking by points, goal difference, then goals scored. Spanish head-to-head tiebreakers may change the official order. Source: <a href="https://www.football-data.org/" rel="noopener">Football-Data.org API</a>.</div>
 </section>
-<section class="insight"><div class="story"><div class="eyebrow" style="color:#6d8a6f">The weekly story</div><h3 id="headline">A league without its biggest two.</h3><p id="storytext">The question is simple: who would come out on top if the rest of Spain played only each other? Once the data feed runs, we'll automatically spotlight the latest leader here.</p></div><div class="stats"><div class="eyebrow" style="color:#4f775c">Matches removed</div><div class="big" id="removed">—</div><div class="small">Games involving Real Madrid or Barcelona that no longer count.</div></div></section>
+<section class="insight"><div class="story"><div class="eyebrow" style="color:#6d8a6f">As things stand</div><h3 id="headline">The gods can sit this one out.</h3><p id="storytext">Their matches don’t count here. Everyone else’s do. That’s the whole trick.</p></div><div class="stats"><div class="eyebrow" style="color:#4f775c">Matches removed</div><div class="big" id="removed">—</div><div class="small">Completed matches involving Madrid or Barcelona that no longer count.</div></div></section>
 <section class="metrics-section" aria-labelledby="insights-heading">
-  <h2 id="insights-heading">What changes without the giants?</h2>
+  <h2 id="insights-heading">Life without the gods</h2>
   <div class="metrics-grid">
     <article class="metric-card"><div class="metric-label" id="race-label">The title race</div><h3 class="metric-value" id="race-value">—</h3><p class="metric-explain" id="race-explain"></p></article>
-    <article class="metric-card"><div class="metric-label" id="slayers-label">Points wiped out</div><h3 class="metric-value" id="slayers-value">—</h3><p class="metric-explain" id="slayers-explain"></p></article>
-    <article class="metric-card"><div class="metric-label" id="rebound-label">Biggest GD recovery</div><h3 class="metric-value" id="rebound-value">—</h3><p class="metric-explain" id="rebound-explain"></p></article>
+    <article class="metric-card"><div class="metric-label" id="slayers-label">Points quietly erased</div><h3 class="metric-value" id="slayers-value">—</h3><p class="metric-explain" id="slayers-explain"></p></article>
+    <article class="metric-card"><div class="metric-label" id="rebound-label">Goal difference restored</div><h3 class="metric-value" id="rebound-value">—</h3><p class="metric-explain" id="rebound-explain"></p></article>
   </div>
 </section>
-<div class="sectionhead"><h2>How does it work?</h2></div><section class="rules"><div class="rule"><span>01 / THE GIANTS</span><b>Madrid and Barça are out.</b><p>Real Madrid and FC Barcelona do not appear in our standings. The other 18 clubs remain.</p></div><div class="rule"><span>02 / THE MATCHES</span><b>Their results disappear too.</b><p>Every match involving either excluded club is deleted — not just points, but goals and games played.</p></div><div class="rule"><span>03 / THE TABLE</span><b>Same football. New champion.</b><p>All other matches count normally. We recompute league positions after every data refresh.</p></div></section>
-<div class="actionrow"><button class="primary" id="share">Share the alternative league ↗</button><button class="secondary" id="copy">Copy link</button><span class="notification" id="notice" role="status" aria-live="polite"></span></div>
+<div class="sectionhead"><h2>How does it work?</h2></div><section class="rules"><div class="rule"><span>01 / THE GODS</span><b>The gods sit this one out.</b><p>Madrid and Barcelona don’t appear in the table. The other 18 clubs do.</p></div><div class="rule"><span>02 / THE MATCHES</span><b>And so do their matches.</b><p>Every match involving either club goes: points, goals and games played. No selective memory.</p></div><div class="rule"><span>03 / THE TABLE</span><b>The mortals carry on.</b><p>Only matches between the remaining clubs count. Same results, different table.</p></div></section>
+<div class="actionrow"><button class="primary" id="share">Share the table ↗</button><button class="secondary" id="copy">Copy link</button><span class="notification" id="notice" role="status" aria-live="polite"></span></div>
 </main>
 <footer><div class="container"><span>© <span id="year"></span> The Real League · Independent football thought experiment, not affiliated with LaLiga or any club.</span><span>Football data provided by the <a href="https://www.football-data.org/">Football-Data.org API</a>.</span></div></footer>
 <script>
@@ -61,16 +61,16 @@ $('matchinfo').textContent=live?`${alt?data.includedMatches:data.completedMatche
 $('status').textContent=live?'Results feed connected · delayed scores':'Preview mode · waiting for results';
 $('updated').textContent=live?`Updated ${new Date(data.generatedAt).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}`:'Season 2026/27';
 $('removed').textContent=live?data.excludedMatches:'—';
-const leader=data?.alternativeTable?.[0];$('headline').textContent=live&&leader?`${leader.name} lead the Mortals.`:'A league without its biggest two.';
-$('storytext').textContent=live&&leader?`With every Madrid and Barcelona fixture removed, ${leader.name} top the alternative standings on ${leader.Pts} points from ${leader.P} matches. A different football story, calculated from the same results.`:"The question is simple: who would come out on top if the rest of Spain played only each other? Once the data feed runs, we'll automatically spotlight the latest leader here.";
+const leader=data?.alternativeTable?.[0];$('headline').textContent=live&&leader?`${leader.name} are top. For now.`:'The gods can sit this one out.';
+$('storytext').textContent=live&&leader?`Remove every match involving Madrid or Barça, and ${leader.name} lead with ${leader.Pts} points from ${leader.P} matches. No scores have been invented.`:"Their matches don’t count here. Everyone else’s do. That’s the whole trick.";
 if (typeof window.renderEnhancements === 'function') window.renderEnhancements(data,view);
 }
 $('alternative').addEventListener('click',()=>{view='alternative';render()});$('original').addEventListener('click',()=>{view='original';render()});
 function notify(s){$('notice').textContent=s}
-$('copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(location.href);notify('Link copied.')}catch(e){notify('Copy the address from your browser.')}});
-$('share').addEventListener('click',async()=>{const payload=window.getSharePayload?window.getSharePayload():{title:'La Liga de los Mortales — The Real League',text:'La Liga without Real Madrid or Barcelona. Who leads now?',url:location.href};try{if(navigator.share)await navigator.share(payload);else{await navigator.clipboard.writeText(`${payload.text} ${payload.url}`);notify('Share text copied.')}}catch(e){if(e.name!=='AbortError')notify('You can copy the link instead.')}});
+$('copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(location.href);notify(window.getNotice?window.getNotice('copied'):'Link copied.')}catch(e){notify(window.getNotice?window.getNotice('copyFallback'):'Copy the address from your browser.')}});
+$('share').addEventListener('click',async()=>{const payload=window.getSharePayload?window.getSharePayload():{title:'La Liga de los Mortales — The Real League',text:'La Liga without Real Madrid or Barcelona. The gods are sitting this one out.',url:location.href};try{if(navigator.share)await navigator.share(payload);else{await navigator.clipboard.writeText(`${payload.text} ${payload.url}`);notify(window.getNotice?window.getNotice('shareCopied'):'Share text copied.')}}catch(e){if(e.name!=='AbortError')notify(window.getNotice?window.getNotice('shareError'):'You can copy the link instead.')}});
 $('year').textContent=new Date().getFullYear();
-fetch('./data/standings.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('No standings data');return r.json()}).then(d=>{data=d;render()}).catch(()=>{notify('Results file unavailable; the site is in preview mode.');render()});
+fetch('./data/standings.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('No standings data');return r.json()}).then(d=>{data=d;if(window.normalizeClubNames)window.normalizeClubNames(data);render()}).catch(()=>{notify(window.getNotice?window.getNotice('resultsError'):'Results file unavailable; the site is in preview mode.');render()});
 </script>
 <script src="/enhance.js"></script>
 </body></html>
