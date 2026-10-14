@@ -28,6 +28,7 @@ const es = element({dataset:{lang:'es'}});
 const doc = {
   documentElement: {lang:'en'},
   querySelector(selector) {
+    if (selector.startsWith('#')) return this.getElementById(selector.slice(1));
     if (!selectors.has(selector)) selectors.set(selector, element());
     return selectors.get(selector);
   },
