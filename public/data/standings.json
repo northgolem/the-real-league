@@ -2,7 +2,7 @@
   "mode": "live",
   "competition": "La Liga de los Mortales",
   "season": "2026/27",
-  "generatedAt": "2026-10-14T11:29:31+00:00",
+  "generatedAt": "2026-10-14T14:00:40+00:00",
   "latestResultAt": "2026-10-12T19:00:00Z",
   "excluded": [
     "Real Madrid",
@@ -27,7 +27,7 @@
     },
     {
       "id": 78,
-      "name": "Atleti",
+      "name": "Atlético Madrid",
       "P": 8,
       "W": 6,
       "D": 1,
@@ -276,7 +276,7 @@
   "alternativeTable": [
     {
       "id": 78,
-      "name": "Atleti",
+      "name": "Atlético Madrid",
       "P": 7,
       "W": 5,
       "D": 1,
