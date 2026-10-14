@@ -219,7 +219,14 @@
       attribution.rel = 'noopener';
       attribution.textContent = historical ? dataset.source : 'football-data.org';
       footnote.append(attribution, '.');
-      if (historical && dataset.historicalNote) footnote.append(' '+dataset.historicalNote);
+      if (historical && dataset.historicalNote) {
+        const note = dataset.seasonId === '1979-80'
+          ? (language === 'es' ? '1979/80: un partido fue anulado y no figura en el archivo.' : dataset.historicalNote)
+          : dataset.seasonId === '1986-87'
+          ? (language === 'es' ? '1986/87: formato especial con una segunda fase.' : dataset.historicalNote)
+          : dataset.historicalNote;
+        footnote.append(' ' + note);
+      }
       if (historical && dataset.seasonId === '2024-25') {
         const extra = document.createElement('a');
         extra.href = 'https://www.laliga.com/en-GB/laliga-easports/results/2024-25/gameweek-38';
@@ -239,6 +246,15 @@
     set('#copy', tr.copyButton);
     const footer = document.querySelector('footer .container span');
     if (footer) footer.textContent = tr.footer(String(new Date().getFullYear()));
+    const footerSource = document.querySelector('footer .container span:last-child');
+    if (footerSource) {
+      footerSource.textContent = language === 'es' ? 'Datos de ' : 'Match data from ';
+      const sourceLink = document.createElement('a');
+      sourceLink.href = historical ? dataset.sourceUrl : 'https://www.football-data.org/';
+      sourceLink.rel = 'noopener';
+      sourceLink.textContent = historical ? dataset.source : 'football-data.org';
+      footerSource.append(sourceLink, '.');
+    }
     const leader = live && dataset.alternativeTable && dataset.alternativeTable[0];
     set('#headline', leader ? (historical ? tr.oldHeadline(leader.name) : tr.headline(leader.name)) : tr.defaultHeadline);
     set('#storytext', leader ? (historical ? tr.oldStory(leader,season,dataset.pointsPerWin) : tr.story(leader)) : tr.defaultStory);
