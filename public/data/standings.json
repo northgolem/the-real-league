@@ -1,0 +1,18 @@
+{
+  "mode": "preview",
+  "competition": "La Liga de los Mortales",
+  "season": "2026/27",
+  "generatedAt": null,
+  "latestResultAt": null,
+  "excluded": [
+    "Real Madrid",
+    "FC Barcelona"
+  ],
+  "completedMatches": 0,
+  "excludedMatches": 0,
+  "includedMatches": 0,
+  "officialTableApproximation": [],
+  "alternativeTable": [],
+  "methodology": "All games involving Real Madrid or Barcelona removed.",
+  "source": "football-data.org"
+}
