@@ -75,5 +75,5 @@ assert.match(selectors.get('.hero p').textContent,/El Real Madrid y el Barça/);
 assert.equal(selectors.get('thead th:nth-child(3)').textContent,'PJ');
 assert.match(context.window.getSharePayload().text,/La Liga sin Madrid ni Barça/);
 context.window.renderEnhancements(dataset,'original');
-assert.match(doc.getElementById('matchinfo').textContent,/20 equipos/);
+assert.match(doc.getElementById('matchinfo').textContent,/20 clubes/);
 console.log('Bilingual insight smoke tests passed.');
