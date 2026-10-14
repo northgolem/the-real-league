@@ -27,7 +27,7 @@ OUT = ROOT / "public/history"
 # All known Spanish league years through the last completed season.
 FIRST = 1928
 LAST = 2025
-SKIPPED = {1936, 1937, 1938, 1962}
+SKIPPED = {1936, 1937, 1938, 1962}  # No league during Civil War; 1962/63 not in licensed source
 OLD_SOURCE = "https://raw.githubusercontent.com/Jack-Tilley/es-espana/master"
 NEW_SOURCE = "https://raw.githubusercontent.com/openfootball/football.json/master"
 
@@ -42,7 +42,7 @@ def clean_name(original):
     rules = [
         (r"^(?:fc |cf |f c )?barcelona(?: fc)?$", "FC Barcelona"),
         (r"^(?:real )?madrid(?: (?:cf|fc))?$", "Real Madrid"),
-        (r"^(?:atletico|athletic)(?: club)?(?: de)? madrid(?: cf)?$|^atletico aviacion$", "Atlético Madrid"),
+        (r"^(?:club )?(?:atletico|athletic)(?: club)?(?: de)? madrid(?: cf)?$|^atletico aviacion$", "Atlético Madrid"),
         (r"^athletic(?: club)?(?: de)? bilbao(?: (?:cf|fc))?$|^athletic club$", "Athletic Club"),
         (r"^(?:rcd? )?(?:la coruna|deportivo(?: la coruna)?|dep la coruna|deportivo de la coruna)$", "Deportivo La Coruña"),
         (r"^(?:rc )?celta(?: de)? vigo(?: cf)?$|^celta$", "Celta Vigo"),
@@ -107,10 +107,40 @@ def parse_archive(text, year):
     else:
         doc = json.loads(text)
         for match in doc.get("matches", []):
-            result = (match.get("score") or {}).get("ft")
+            rawscore = match.get("score") or {}
+            result = rawscore if isinstance(rawscore, list) else rawscore.get("ft")
             if not isinstance(result, list) or len(result) != 2 or not all(type(v) is int for v in result):
                 continue
             output.append((clean_name(match["team1"]), clean_name(match["team2"]), result[0], result[1]))
+        if year == 2024:
+            # OpenFootball 2024/25 lacks the ten final-round scores. These ten
+            # factual results are checked against LaLiga's official Jornada 38.
+            # https://www.laliga.com/en-GB/laliga-easports/results/2024-25/gameweek-38
+            final_round = {
+                ("Real Betis", "Valencia"): (1, 1),
+                ("Real Madrid", "Real Sociedad"): (2, 0),
+                ("Espanyol", "UD Las Palmas"): (2, 0),
+                ("CD Leganés", "Real Valladolid"): (3, 0),
+                ("Alavés", "Osasuna"): (1, 1),
+                ("Getafe", "Celta Vigo"): (1, 2),
+                ("Rayo Vallecano", "RCD Mallorca"): (0, 0),
+                ("Girona FC", "Atlético Madrid"): (0, 4),
+                ("Villarreal", "Sevilla FC"): (4, 2),
+                ("Athletic Club", "FC Barcelona"): (0, 3),
+            }
+            extra = []
+            for match in doc.get("matches", []):
+                score = match.get("score") or {}
+                if isinstance(score, dict) and "ft" in score:
+                    continue
+                pair = (clean_name(match["team1"]), clean_name(match["team2"]))
+                if pair not in final_round:
+                    raise ValueError("Unexpected unscored 2024/25 match: " + repr(pair))
+                home_goals, away_goals = final_round[pair]
+                extra.append((pair[0], pair[1], home_goals, away_goals))
+            if len(extra) != 10 or len(set((h,a) for h,a,_,_ in extra)) != 10:
+                raise ValueError("2024/25 final-round corrections do not match ten unique games")
+            output.extend(extra)
     return output
 
 def standings(matches, year, season, source, source_url):
@@ -126,7 +156,12 @@ def standings(matches, year, season, source, source_url):
     expected = n * (n-1)
     # 1986/87 had a second-phase format, not the ordinary double round robin.
     # Keep it only if its recorded matches are genuinely numerous enough.
-    if year == 1986:
+    if year == 1979:
+        # An annulled 1979/80 fixture is omitted by the archival source.
+        # See engsoccerdata's Spain documentation; do not invent a replacement.
+        if len(matches) != expected - 1:
+            raise ValueError(f"{season}: expected {expected-1} non-annulled fixtures, received {len(matches)}")
+    elif year == 1986:
         if len(matches) < expected:
             raise ValueError(f"{season}: incomplete exceptional-format year ({len(matches)} matches)")
     elif len(matches) != expected:
@@ -191,6 +226,7 @@ def standings(matches, year, season, source, source_url):
         "source":source,
         "sourceUrl":source_url,
         "specialFormat":year==1986,
+        "historicalNote": "1979/80: one fixture annulled and absent from the archival source." if year==1979 else ("1986/87: special second-phase league format." if year==1986 else ""),
         "methodology":"Each match involving Real Madrid or FC Barcelona removed. Season-era points rules preserved. Rankings use points, goal difference and goals scored; official head-to-head tiebreakers and disciplinary deductions not recreated."
     }
 
@@ -239,13 +275,14 @@ def main():
             "pointsPerWin":data["pointsPerWin"],
             "clubs":len(data["alternativeTable"]),
             "matches":data["includedMatches"],
-            "specialFormat":data["specialFormat"]
+            "specialFormat":data["specialFormat"],
+            "historicalNote":data["historicalNote"]
         })
     (OUT/"index.json").write_text(json.dumps(index,ensure_ascii=False,separators=(",",":"))+"\n",encoding="utf-8")
     print(f"WROTE {len(successes)} validated completed seasons; skipped {len(failures)} incomplete/unavailable:")
     for year,msg in sorted(failures.items()):
         print(f"  {year}: {msg}")
-    print("Civil war seasons 1936-39 and unarchived 1962-63 intentionally omitted.")
+    print("Civil War 1936-39 and unarchived 1962-63 intentionally omitted.")
 
 if __name__ == "__main__":
     main()
