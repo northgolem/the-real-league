@@ -8,6 +8,7 @@ on:
       - 'scripts/update.py'
       - 'public/index.html'
       - 'public/enhance.js'
+      - 'public/history.js'
       - 'tests/**'
   schedule:
     - cron: '17 8 * * *'
@@ -28,6 +29,10 @@ jobs:
         run: node --check public/enhance.js
       - name: Check bilingual table behavior
         run: node tests/test_browser.mjs
+      - name: Check historical navigation syntax
+        run: node --check public/history.js
+      - name: Validate historical tables
+        run: node tests/test_seasons.mjs
       - name: Update standings
         env:
           FOOTBALL_DATA_TOKEN: ${{ secrets.FOOTBALL_DATA_TOKEN }}
