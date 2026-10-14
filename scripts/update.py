@@ -9,6 +9,7 @@ from urllib.request import Request, urlopen
 OUT = Path(__file__).resolve().parents[1] / "public/data/standings.json"
 SEASON = int(os.getenv("SEASON", "2026"))
 EXCLUDED_IDS = {81, 86}  # FC Barcelona and Real Madrid
+DISPLAY_NAMES = {78: "Atlético Madrid"}  # Avoid API nicknames in editorial copy
 
 def compute(matches, season=SEASON, generated_at=None):
     clubs = {}
@@ -16,7 +17,7 @@ def compute(matches, season=SEASON, generated_at=None):
         for side in ("homeTeam", "awayTeam"):
             t = m.get(side) or {}
             if t.get("id") is not None:
-                clubs[t["id"]] = {"id": t["id"], "name": t.get("shortName") or t.get("name") or str(t["id"])}
+                clubs[t["id"]] = {"id": t["id"], "name": DISPLAY_NAMES.get(t["id"], t.get("shortName") or t.get("name") or str(t["id"]))}
     if not EXCLUDED_IDS.issubset(clubs):
         raise ValueError("Missing Barcelona or Real Madrid in feed")
 
