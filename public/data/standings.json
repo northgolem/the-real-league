@@ -2,7 +2,7 @@
   "mode": "live",
   "competition": "La Liga de los Mortales",
   "season": "2026/27",
-  "generatedAt": "2026-10-14T14:00:40+00:00",
+  "generatedAt": "2026-10-14T14:57:08+00:00",
   "latestResultAt": "2026-10-12T19:00:00Z",
   "excluded": [
     "Real Madrid",
@@ -14,7 +14,7 @@
   "officialTableApproximation": [
     {
       "id": 81,
-      "name": "Barça",
+      "name": "FC Barcelona",
       "P": 8,
       "W": 8,
       "D": 0,
@@ -105,7 +105,7 @@
     },
     {
       "id": 560,
-      "name": "Deportivo",
+      "name": "Deportivo La Coruña",
       "P": 8,
       "W": 2,
       "D": 4,
@@ -118,7 +118,7 @@
     },
     {
       "id": 558,
-      "name": "Celta",
+      "name": "Celta Vigo",
       "P": 8,
       "W": 1,
       "D": 5,
@@ -131,7 +131,7 @@
     },
     {
       "id": 77,
-      "name": "Athletic",
+      "name": "Athletic Club",
       "P": 6,
       "W": 2,
       "D": 2,
@@ -196,7 +196,7 @@
     },
     {
       "id": 5335,
-      "name": "Santander",
+      "name": "Racing Santander",
       "P": 8,
       "W": 2,
       "D": 2,
@@ -351,7 +351,7 @@
     },
     {
       "id": 560,
-      "name": "Deportivo",
+      "name": "Deportivo La Coruña",
       "P": 8,
       "W": 2,
       "D": 4,
@@ -366,7 +366,7 @@
     },
     {
       "id": 77,
-      "name": "Athletic",
+      "name": "Athletic Club",
       "P": 5,
       "W": 2,
       "D": 2,
@@ -381,7 +381,7 @@
     },
     {
       "id": 558,
-      "name": "Celta",
+      "name": "Celta Vigo",
       "P": 8,
       "W": 1,
       "D": 5,
@@ -456,7 +456,7 @@
     },
     {
       "id": 5335,
-      "name": "Santander",
+      "name": "Racing Santander",
       "P": 7,
       "W": 2,
       "D": 2,
