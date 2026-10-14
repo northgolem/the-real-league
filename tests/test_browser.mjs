@@ -59,6 +59,8 @@ const context = {
 vm.runInNewContext(source, context, {filename:'enhance.js'});
 context.window.renderEnhancements(dataset, 'alternative');
 assert.equal(doc.documentElement.lang,'en');
+assert.equal(dataset.alternativeTable.find(row=>row.id===78)?.name,'Atlético Madrid');
+assert.match(selectors.get('.topright').innerHTML,/NO GODS/);
 assert.match(selectors.get('.hero p').textContent,/Real Madrid and Barcelona/);
 assert.equal(doc.getElementById('race-value').textContent,
   dataset.alternativeTable.filter(r=>r.Pts===dataset.alternativeTable[0].Pts).map(r=>r.name).join(' / '));
@@ -67,9 +69,11 @@ assert.notEqual(doc.getElementById('rebound-value').textContent,'—');
 es.click();
 context.window.renderEnhancements(dataset,'alternative');
 assert.equal(doc.documentElement.lang,'es');
-assert.match(selectors.get('.hero p').textContent,/¿Cómo sería La Liga/);
+assert.equal(doc.getElementById('alternative').textContent,'Sin dioses');
+assert.match(selectors.get('.topright').innerHTML,/SIN DIOSES/);
+assert.match(selectors.get('.hero p').textContent,/El Real Madrid y el Barça/);
 assert.equal(selectors.get('thead th:nth-child(3)').textContent,'PJ');
-assert.match(context.window.getSharePayload().text,/La Liga sin el Madrid/);
+assert.match(context.window.getSharePayload().text,/La Liga sin Madrid ni Barça/);
 context.window.renderEnhancements(dataset,'original');
 assert.match(doc.getElementById('matchinfo').textContent,/20 equipos/);
 console.log('Bilingual insight smoke tests passed.');
