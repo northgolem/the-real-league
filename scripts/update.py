@@ -9,7 +9,16 @@ from urllib.request import Request, urlopen
 OUT = Path(__file__).resolve().parents[1] / "public/data/standings.json"
 SEASON = int(os.getenv("SEASON", "2026"))
 EXCLUDED_IDS = {81, 86}  # FC Barcelona and Real Madrid
-DISPLAY_NAMES = {78: "Atlético Madrid"}  # Avoid API nicknames in editorial copy
+# Editorial display names, keyed by stable football-data.org club IDs.
+# The feed's shortName is useful for score tickers, but not every table label.
+DISPLAY_NAMES = {
+    78: "Atlético Madrid",
+    77: "Athletic Club",
+    560: "Deportivo La Coruña",
+    558: "Celta Vigo",
+    5335: "Racing Santander",
+    81: "FC Barcelona",
+}
 
 def compute(matches, season=SEASON, generated_at=None):
     clubs = {}
