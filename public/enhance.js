@@ -11,7 +11,7 @@
       heading: 'Everyone else can win.',
       noGiants: 'No Giants',
       allTeams: 'All Teams',
-      w: 'W', d: 'D', l: 'L',
+      club: 'Club', played: 'P', gd: 'GD', pts: 'Pts', w: 'W', d: 'D', l: 'L',
       feedLive: 'Results connected · delayed scores',
       feedPreview: 'Preview mode · waiting for results',
       season: season => 'Season ' + season,
@@ -63,7 +63,7 @@
       heading: 'Aquí todos pueden ganar.',
       noGiants: 'Sin gigantes',
       allTeams: 'Todos',
-      w: 'G', d: 'E', l: 'P',
+      club: 'Equipo', played: 'PJ', gd: 'DG', pts: 'Pts', w: 'G', d: 'E', l: 'P',
       feedLive: 'Resultados conectados · marcadores con retraso',
       feedPreview: 'Vista previa · esperando resultados',
       season: season => 'Temporada ' + season,
@@ -152,11 +152,15 @@
     set('.cardhead h2', tr.heading);
     set('#alternative', tr.noGiants);
     set('#original', tr.allTeams);
+    set('thead th:nth-child(2)', tr.club);
+    set('thead th:nth-child(3)', tr.played);
     set('thead th:nth-child(4)', tr.w);
     set('thead th:nth-child(5)', tr.d);
     set('thead th:nth-child(6)', tr.l);
+    set('thead th:nth-child(7)', tr.gd);
+    set('thead th:nth-child(8)', tr.pts);
     set('#status', live ? tr.feedLive : tr.feedPreview);
-    set('#updated', live ? tr.updated(dateString(dataset.latestResultAt || dataset.generatedAt)) : tr.season(season));
+    set('#updated', live ? tr.updated(dateString(dataset.generatedAt)) : tr.season(season));
     set('#matchinfo', live ? tr.counted(alt ? dataset.includedMatches : dataset.completedMatches, alt) : tr.waiting);
     set('#empty strong', tr.emptyHeading);
     set('#empty p', tr.emptyBody);
