@@ -3,104 +3,104 @@
   'use strict';
   const translations = {
     en: {
-      masthead: 'NO GIANTS. <span>JUST FOOTBALL.</span>',
+      masthead: 'NO GODS. <span>JUST FOOTBALL.</span>',
       eyebrow: season => 'Spain · ' + season + ' · The alternative table',
-      pitch: "What would Spanish football look like if Real Madrid and Barcelona didn't exist? We removed every match they played. This is everyone else's league.",
+      pitch: "Real Madrid and Barcelona have had a decent run. We’ve removed every match involving either club — points, goals, the lot. The other 18 can get on with it.",
       left: '18 teams left',
       headingEyebrow: 'The standings',
-      heading: 'Everyone else can win.',
-      noGiants: 'No Giants',
+      heading: 'The mortals get a turn.',
+      noGiants: 'No Gods',
       allTeams: 'All Teams',
       club: 'Club', played: 'P', gd: 'GD', pts: 'Pts', w: 'W', d: 'D', l: 'L',
       feedLive: 'Results connected · delayed scores',
       feedPreview: 'Preview mode · waiting for results',
       season: season => 'Season ' + season,
       updated: date => 'Updated ' + date,
-      counted: (count, alternative) => count + ' completed matches counted · ' + (alternative ? 'Real Madrid and Barcelona excluded' : 'All 20 clubs included'),
+      counted: (count, alternative) => count + ' completed matches · ' + (alternative ? 'Madrid and Barça excluded' : 'all 20 clubs included'),
       waiting: 'The table recalculates automatically once a results feed is connected.',
-      emptyHeading: 'A different champion is coming.',
+      emptyHeading: 'The mortals are warming up.',
       emptyBody: 'Live standings will appear after the results feed has completed its first update.',
       footerNote: 'Provisional order uses points, goal difference and goals scored rather than the league’s head-to-head tiebreakers. Arrows compare with our calculated full table. Source: ',
-      weekly: 'The weekly story',
-      headline: name => name + ' lead the Mortals.',
-      story: leader => 'With every Madrid and Barcelona fixture removed, ' + leader.name + ' top the alternative table on ' + leader.Pts + ' points from ' + leader.P + ' matches.',
-      defaultHeadline: 'A league without its biggest two.',
-      defaultStory: "Who would come out on top if the rest of Spain played only each other? We'll follow the standings throughout the season.",
+      weekly: 'As things stand',
+      headline: name => name + ' are top. For now.',
+      story: leader => 'Remove every match involving Madrid or Barça, and ' + leader.name + ' lead with ' + leader.Pts + ' points from ' + leader.P + ' matches. No scores have been invented.',
+      defaultHeadline: 'The gods can sit this one out.',
+      defaultStory: "Their matches don’t count here. Everyone else’s do. That’s the whole trick.",
       matchesRemoved: 'Matches removed',
       removedText: 'Completed fixtures involving Real Madrid or Barcelona that no longer count.',
-      insightsHeading: 'What changes without the giants?',
+      insightsHeading: 'Life without the gods',
       raceTitle: 'The title race',
       raceSame: (names, pts) => names + ' · level on ' + pts + ' pts',
       raceAlone: (club, lead) => club + ' · ' + lead + ' point' + (lead === 1 ? '' : 's') + ' clear',
       raceExplain: 'Lead at the top of the alternative standings',
-      slayersTitle: 'Points wiped out',
+      slayersTitle: 'Points quietly erased',
       slayersValue: (pts) => pts + ' points',
-      slayersExplain: (clubs) => clubs + ' earned these against Madrid or Barça — their points no longer count here',
-      slayersNone: 'No club has taken points off either giant yet',
-      reboundTitle: 'Biggest GD recovery',
-      reboundExplain: club => club + ' improve their goal difference most after deleting results against the giants',
-      reboundNone: 'No club has recovered goal difference yet',
+      slayersExplain: (clubs) => clubs + ' earned them against Madrid or Barça. We’ve removed them.',
+      slayersNone: 'Nobody has taken points off either club. Yet.',
+      reboundTitle: 'Goal difference restored',
+      reboundExplain: club => club + ' benefit most when results against Madrid and Barça disappear',
+      reboundNone: 'Nobody has recovered goal difference. Yet.',
       how: 'How does it work?',
       rules: [
-        ['Madrid and Barça are out.', 'Real Madrid and FC Barcelona do not appear in our standings. The other 18 clubs remain.'],
-        ['Their results disappear too.', 'Every match involving either excluded club is deleted — not just points, but goals and matches played.'],
-        ['Same football. New champion.', 'All other matches count normally. We recalculate the table after each update.']
+        ['The gods sit this one out.', 'Madrid and Barcelona don’t appear in the table. The other 18 clubs do.'],
+        ['And so do their matches.', 'Every match involving either club goes: points, goals and games played. No selective memory.'],
+        ['The mortals carry on.', 'Only matches between the remaining clubs count. Same results, different table.']
       ],
-      shareButton: 'Share the alternative league ↗',
+      shareButton: 'Share the table ↗',
       copyButton: 'Copy link',
-      share: leader => 'La Liga without Real Madrid or Barça. ' + (leader ? leader.name + ' lead on ' + leader.Pts + ' points. ' : '') + 'See the alternative table:',
+      share: leader => 'La Liga without Madrid and Barça. Don’t worry, we’ve only removed them from the table. ' + (leader ? leader.name + ' lead on ' + leader.Pts + ' points. ' : '') + 'See for yourself:',
       copied: 'Link copied.',
       shareCopied: 'Share text copied.',
       copyFallback: 'Copy the address from your browser.',
       footer: year => '© ' + year + ' The Real League · Independent football experiment, not affiliated with LaLiga or any club.'
     },
     es: {
-      masthead: 'SIN GIGANTES. <span>SOLO FÚTBOL.</span>',
+      masthead: 'SIN DIOSES. <span>SOLO FÚTBOL.</span>',
       eyebrow: season => 'España · ' + season + ' · La clasificación alternativa',
-      pitch: '¿Cómo sería La Liga sin el Real Madrid y el Barcelona? Hemos eliminado todos sus partidos, incluidos puntos y goles. Esta es la liga de los demás.',
+      pitch: 'El Real Madrid y el Barça ya han tenido una buena racha. Hemos borrado todos sus partidos: puntos, goles y todo lo demás. A ver qué hacen los otros 18.',
       left: '18 equipos',
       headingEyebrow: 'La clasificación',
-      heading: 'Aquí todos pueden ganar.',
-      noGiants: 'Sin gigantes',
+      heading: 'Les toca a los mortales.',
+      noGiants: 'Sin dioses',
       allTeams: 'Todos',
       club: 'Equipo', played: 'PJ', gd: 'DG', pts: 'Pts', w: 'G', d: 'E', l: 'P',
       feedLive: 'Resultados conectados · marcadores con retraso',
       feedPreview: 'Vista previa · esperando resultados',
       season: season => 'Temporada ' + season,
       updated: date => 'Actualizado el ' + date,
-      counted: (count, alternative) => count + ' partidos disputados · ' + (alternative ? 'sin Madrid ni Barça' : 'incluidos los 20 equipos'),
+      counted: (count, alternative) => count + ' partidos disputados · ' + (alternative ? 'sin Madrid ni Barça' : 'con los 20 clubes'),
       waiting: 'La clasificación se actualiza automáticamente al recibir nuevos resultados.',
-      emptyHeading: 'Pronto habrá otro campeón.',
+      emptyHeading: 'Los mortales están calentando.',
       emptyBody: 'La clasificación aparecerá cuando termine la primera actualización de los resultados.',
       footerNote: 'Orden provisional por puntos, diferencia de goles y goles a favor, sin aplicar todos los criterios de desempate oficiales. Las flechas comparan con nuestra tabla completa calculada. Fuente: ',
-      weekly: 'La historia de la semana',
-      headline: name => 'El líder de los Mortales: ' + name + '.',
-      story: leader => 'Al eliminar todos los partidos del Madrid y el Barça, ' + leader.name + ' encabeza la clasificación alternativa con ' + leader.Pts + ' puntos en ' + leader.P + ' partidos.',
-      defaultHeadline: 'Una liga sin sus dos gigantes.',
-      defaultStory: '¿Quién mandaría si el resto de España solo jugara entre sí? Seguiremos esta clasificación durante toda la temporada.',
+      weekly: 'Así están las cosas',
+      headline: name => name + ' manda. De momento.',
+      story: leader => 'Sin los partidos del Madrid ni del Barça, ' + leader.name + ' lidera con ' + leader.Pts + ' puntos en ' + leader.P + ' encuentros. No hemos inventado ningún marcador.',
+      defaultHeadline: 'Hoy descansan los dioses.',
+      defaultStory: 'Sus partidos no cuentan aquí. Los de los demás, sí. No tiene más misterio.',
       matchesRemoved: 'Partidos eliminados',
       removedText: 'Partidos disputados contra el Real Madrid o el Barcelona que ya no cuentan.',
-      insightsHeading: '¿Qué cambia sin los gigantes?',
+      insightsHeading: 'La vida sin los dioses',
       raceTitle: 'La lucha por el título',
       raceSame: (names, pts) => names + ' · empatados a ' + pts + ' puntos',
       raceAlone: (club, lead) => club + ' · ventaja de ' + lead + ' punto' + (lead === 1 ? '' : 's'),
       raceExplain: 'Así está la cabeza de la clasificación alternativa',
-      slayersTitle: 'Puntos que desaparecen',
+      slayersTitle: 'Puntos discretamente borrados',
       slayersValue: pts => pts + ' puntos',
-      slayersExplain: clubs => clubs + ' los consiguieron ante Madrid o Barça; ahora se descuentan',
-      slayersNone: 'Nadie ha puntuado ante los gigantes todavía',
-      reboundTitle: 'Mayor mejora de diferencia de goles',
-      reboundExplain: club => club + ' recupera más diferencia de goles al quitar sus partidos contra los gigantes',
-      reboundNone: 'Nadie ha mejorado aún su diferencia de goles',
+      slayersExplain: clubs => clubs + ' los consiguieron ante Madrid o Barça. Aquí no cuentan.',
+      slayersNone: 'Nadie ha puntuado ante esos dos clubes. De momento.',
+      reboundTitle: 'Diferencia de goles recuperada',
+      reboundExplain: club => club + ' mejora más su diferencia de goles al borrar los partidos contra Madrid y Barça',
+      reboundNone: 'De momento, nadie recupera diferencia de goles.',
       how: '¿Cómo funciona?',
       rules: [
-        ['Madrid y Barça quedan fuera.', 'Ni el Real Madrid ni el FC Barcelona aparecen en esta clasificación. Quedan otros 18 equipos.'],
-        ['Sus partidos también desaparecen.', 'Se eliminan todos sus encuentros: puntos, goles y partidos jugados.'],
-        ['Mismo fútbol, otro campeón.', 'Los demás encuentros siguen contando. Recalculamos la tabla tras cada actualización.']
+        ['Los dioses se quedan fuera.', 'Madrid y Barça no aparecen en esta tabla. Los otros 18, sí.'],
+        ['Y sus partidos también.', 'Se eliminan todos sus encuentros: puntos, goles y partidos jugados. Sin excepciones.'],
+        ['Los mortales siguen.', 'Solo cuentan los partidos entre los otros clubes. Los mismos resultados, otra clasificación.']
       ],
-      shareButton: 'Compartir esta liga ↗',
+      shareButton: 'Compartir la tabla ↗',
       copyButton: 'Copiar enlace',
-      share: leader => 'La Liga sin el Madrid ni el Barça. ' + (leader ? leader.name + ' lidera con ' + leader.Pts + ' puntos. ' : '') + 'Mira la clasificación:',
+      share: leader => 'La Liga sin Madrid ni Barça. Tranquilos, solo los hemos borrado de la tabla. ' + (leader ? leader.name + ' lidera con ' + leader.Pts + ' puntos. ' : '') + 'Aquí está:',
       copied: 'Enlace copiado.',
       shareCopied: 'Texto para compartir copiado.',
       copyFallback: 'Copia la dirección del navegador.',
@@ -124,7 +124,18 @@
   };
   const sign = value => (value > 0 ? '+' : '') + value;
 
+  function normalizeClubNames(dataset) {
+    if (!dataset || typeof dataset !== 'object') return;
+    for (const table of [dataset.alternativeTable, dataset.officialTableApproximation]) {
+      for (const club of table || []) {
+        if (club.id === 78) club.name = 'Atlético Madrid';
+      }
+    }
+  }
+  window.normalizeClubNames = normalizeClubNames;
+
   window.renderEnhancements = function (dataset, view) {
+    normalizeClubNames(dataset);
     const tr = translations[language];
     const live = dataset && dataset.mode === 'live';
     const alt = view !== 'original';
@@ -132,8 +143,8 @@
     document.documentElement.lang = language;
     document.title = 'La Liga de los Mortales | The Real League';
     const description = language === 'es'
-      ? 'La clasificación de La Liga sin el Real Madrid y el Barcelona: todos sus partidos, puntos y goles desaparecen. Datos actualizados automáticamente.'
-      : 'The alternative La Liga table without Real Madrid and Barcelona. Every match, point and goal involving the giants is removed. Updated automatically.';
+      ? 'La Liga sin Real Madrid ni Barcelona. Los mismos resultados, menos dioses. Clasificación actualizada automáticamente.'
+      : 'La Liga without Real Madrid and Barcelona. Same results, fewer gods. Standings updated automatically.';
     for (const selector of ['meta[name="description"]','meta[property="og:description"]','meta[name="twitter:description"]']) {
       const el = document.querySelector(selector);
       if (el) el.setAttribute('content', description);
