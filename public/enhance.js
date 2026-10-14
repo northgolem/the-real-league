@@ -13,6 +13,12 @@
       allTeams: 'All Teams',
       club: 'Club', played: 'P', gd: 'GD', pts: 'Pts', w: 'W', d: 'D', l: 'L',
       feedLive: 'Results connected · delayed scores',
+      feedHistorical: 'Archived season · recalculated results',
+      archiveKicker: 'The history they didn’t write',
+      archiveHeading: 'One league. A few different champions.',
+      oldSeason: season => 'Season ' + season + ' · archive',
+      oldHeadline: name => name + ' won this version.',
+      oldStory: (leader, season, pts) => 'In ' + season + ', remove every match involving Madrid or Barça and the title goes to ' + leader.name + ' on ' + leader.Pts + ' points. ' + pts + ' points for a win, as it was then.',
       feedPreview: 'Preview mode · waiting for results',
       season: season => 'Season ' + season,
       updated: date => 'Updated ' + date,
@@ -68,6 +74,12 @@
       allTeams: 'Todos',
       club: 'Equipo', played: 'PJ', gd: 'DG', pts: 'Pts', w: 'G', d: 'E', l: 'P',
       feedLive: 'Resultados conectados · marcadores con retraso',
+      feedHistorical: 'Temporada archivada · resultados recalculados',
+      archiveKicker: 'La historia que no escribieron',
+      archiveHeading: 'Una liga. Bastantes campeones distintos.',
+      oldSeason: season => 'Temporada ' + season + ' · archivo',
+      oldHeadline: name => name + ' fue campeón. Aquí, al menos.',
+      oldStory: (leader, season, pts) => 'En ' + season + ', sin los partidos del Madrid ni del Barça, el título es para ' + leader.name + ' con ' + leader.Pts + ' puntos. ' + pts + ' puntos por victoria, como entonces.',
       feedPreview: 'Vista previa · esperando resultados',
       season: season => 'Temporada ' + season,
       updated: date => 'Actualizado el ' + date,
@@ -153,7 +165,8 @@
   window.renderEnhancements = function (dataset, view) {
     normalizeClubNames(dataset);
     const tr = translations[language];
-    const live = dataset && dataset.mode === 'live';
+    const historical = dataset && dataset.mode === 'historical';
+    const live = dataset && (dataset.mode === 'live' || historical);
     const alt = view !== 'original';
     const season = dataset && dataset.season || '2026/27';
     document.documentElement.lang = language;
@@ -174,7 +187,8 @@
     if (masthead) masthead.innerHTML = tr.masthead;
     set('.hero .eyebrow', tr.eyebrow(season));
     set('.hero p', tr.pitch);
-    set('.pillbar .pill:last-child', tr.left);
+    const remainingClubs = live ? dataset.alternativeTable.length : 18;
+    set('.pillbar .pill:last-child', language === 'es' ? remainingClubs + ' equipos' : remainingClubs + ' clubs left');
     set('.cardhead .eyebrow', tr.headingEyebrow);
     set('.cardhead h2', tr.heading);
     set('#alternative', tr.noGiants);
@@ -186,19 +200,33 @@
     set('thead th:nth-child(6)', tr.l);
     set('thead th:nth-child(7)', tr.gd);
     set('thead th:nth-child(8)', tr.pts);
-    set('#status', live ? tr.feedLive : tr.feedPreview);
-    set('#updated', live ? tr.updated(dateString(dataset.generatedAt)) : tr.season(season));
-    set('#matchinfo', live ? tr.counted(alt ? dataset.includedMatches : dataset.completedMatches, alt) : tr.waiting);
+    set('#status', live ? (historical ? tr.feedHistorical : tr.feedLive) : tr.feedPreview);
+    set('#updated', historical ? tr.oldSeason(season) : live ? tr.updated(dateString(dataset.generatedAt)) : tr.season(season));
+    const total = live ? dataset.officialTableApproximation.length : 20;
+    const effective = alt ? total - 2 : total;
+    set('#matchinfo', live ?
+      ((alt ? dataset.includedMatches : dataset.completedMatches)
+       + (language === 'es' ? ' partidos · ' + effective + ' clubes' : ' matches · ' + effective + ' clubs')
+       + (historical ? ' · ' + dataset.pointsPerWin + (language === 'es' ? ' puntos por victoria' : ' points per win') : ''))
+      : tr.waiting);
     set('#empty strong', tr.emptyHeading);
     set('#empty p', tr.emptyBody);
     const footnote = document.getElementById('disclaimer');
     if (footnote) {
       footnote.textContent = tr.footerNote;
       const attribution = document.createElement('a');
-      attribution.href = 'https://www.football-data.org/';
+      attribution.href = historical ? dataset.sourceUrl : 'https://www.football-data.org/';
       attribution.rel = 'noopener';
-      attribution.textContent = 'football-data.org';
+      attribution.textContent = historical ? dataset.source : 'football-data.org';
       footnote.append(attribution, '.');
+      if (historical && dataset.historicalNote) footnote.append(' '+dataset.historicalNote);
+      if (historical && dataset.seasonId === '2024-25') {
+        const extra = document.createElement('a');
+        extra.href = 'https://www.laliga.com/en-GB/laliga-easports/results/2024-25/gameweek-38';
+        extra.rel = 'noopener';
+        extra.textContent = language === 'es' ? 'Resultados de la última jornada: LaLiga' : 'Final matchday results: LaLiga';
+        footnote.append(' · ',extra);
+      }
     }
     set('.story .eyebrow', tr.weekly);
     set('.stats .eyebrow', tr.matchesRemoved);
@@ -212,8 +240,11 @@
     const footer = document.querySelector('footer .container span');
     if (footer) footer.textContent = tr.footer(String(new Date().getFullYear()));
     const leader = live && dataset.alternativeTable && dataset.alternativeTable[0];
-    set('#headline', leader ? tr.headline(leader.name) : tr.defaultHeadline);
-    set('#storytext', leader ? tr.story(leader) : tr.defaultStory);
+    set('#headline', leader ? (historical ? tr.oldHeadline(leader.name) : tr.headline(leader.name)) : tr.defaultHeadline);
+    set('#storytext', leader ? (historical ? tr.oldStory(leader,season,dataset.pointsPerWin) : tr.story(leader)) : tr.defaultStory);
+    set('#archive-kicker', tr.archiveKicker);
+    set('#archive-heading', tr.archiveHeading);
+    if (typeof window.refreshSeasonPickerLanguage === 'function') window.refreshSeasonPickerLanguage();
     set('#insights-heading', tr.insightsHeading);
     set('#race-label', tr.raceTitle);
     set('#slayers-label', tr.slayersTitle);
@@ -224,7 +255,7 @@
       return;
     }
     const table = dataset.alternativeTable;
-    const fullMap = new Map(dataset.officialTableApproximation.map(row => [row.id, row]));
+    const fullMap = new Map(dataset.officialTableApproximation.map(row => [row.id ?? row.name, row]));
     const leaders = table.filter(row => row.Pts === leader.Pts);
     const next = table.find(row => row.Pts < leader.Pts);
     set('#race-value', leaders.length > 1 ? leaders.map(row => row.name).join(' / ') : leader.name);
@@ -232,7 +263,7 @@
       ? tr.raceSame(leaders.length + (language === 'es' ? ' equipos' : ' clubs'), leader.Pts)
       : tr.raceAlone(leader.name, next ? leader.Pts - next.Pts : 0));
     const comparisons = table.map(row => {
-      const full = fullMap.get(row.id);
+      const full = fullMap.get(row.id ?? row.name);
       return { name: row.name, pointsRemoved: full ? full.Pts - row.Pts : 0, gdRecovered: full ? row.GD - full.GD : 0 };
     });
     const topPoints = Math.max(...comparisons.map(row => row.pointsRemoved));
@@ -261,7 +292,7 @@
 
   window.getSharePayload = function () {
     const tr = translations[language];
-    const leader = typeof data !== 'undefined' && data?.mode === 'live' ? data.alternativeTable?.[0] : null;
+    const leader = typeof data !== 'undefined' && (data?.mode === 'live' || data?.mode === 'historical') ? data.alternativeTable?.[0] : null;
     return {
       title: 'La Liga de los Mortales — The Real League',
       text: tr.share(leader),
