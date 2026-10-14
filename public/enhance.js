@@ -52,6 +52,9 @@
       copied: 'Link copied.',
       shareCopied: 'Share text copied.',
       copyFallback: 'Copy the address from your browser.',
+      shareError: 'You can copy the link instead.',
+      resultsError: 'Results unavailable for now. The gods may have interfered.',
+      ruleKickers: ['01 / THE GODS', '02 / THE MATCHES', '03 / THE TABLE'],
       footer: year => '© ' + year + ' The Real League · Independent football experiment, not affiliated with LaLiga or any club.'
     },
     es: {
@@ -104,6 +107,9 @@
       copied: 'Enlace copiado.',
       shareCopied: 'Texto para compartir copiado.',
       copyFallback: 'Copia la dirección del navegador.',
+      shareError: 'Puedes copiar el enlace.',
+      resultsError: 'No hay resultados por ahora. Puede que los dioses hayan intervenido.',
+      ruleKickers: ['01 / LOS DIOSES', '02 / LOS PARTIDOS', '03 / LA TABLA'],
       footer: year => '© ' + year + ' The Real League · Experimento futbolístico independiente, sin relación con LaLiga ni con los clubes.'
     }
   };
@@ -189,7 +195,7 @@
     set('.stats .small', tr.removedText);
     set('.sectionhead h2', tr.how);
     document.querySelectorAll('.rule').forEach((el, index) => {
-      setRule(el, tr.rules[index]);
+      setRule(el, tr.rules[index], tr.ruleKickers[index]);
     });
     set('#share', tr.shareButton);
     set('#copy', tr.copyButton);
@@ -229,13 +235,19 @@
     set('#rebound-explain', topGD > 0 ? tr.reboundExplain(mostHelped.join(' / ')) : tr.reboundNone);
   };
 
-  function setRule(element, pair) {
+  function setRule(element, pair, kickerLabel) {
     if (!pair) return;
+    const kicker = element.querySelector('span');
+    if (kicker) kicker.textContent = kickerLabel;
     const bold = element.querySelector('b');
     const paragraph = element.querySelector('p');
     if (bold) bold.textContent = pair[0];
     if (paragraph) paragraph.textContent = pair[1];
   }
+
+  window.getNotice = function (kind) {
+    return translations[language][kind] || '';
+  };
 
   window.getSharePayload = function () {
     const tr = translations[language];
