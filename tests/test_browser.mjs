@@ -60,6 +60,16 @@ vm.runInNewContext(source, context, {filename:'enhance.js'});
 context.window.renderEnhancements(dataset, 'alternative');
 assert.equal(doc.documentElement.lang,'en');
 assert.equal(dataset.alternativeTable.find(row=>row.id===78)?.name,'Atlético Madrid');
+for (const [id, name] of [
+  [77, 'Athletic Club'],
+  [560, 'Deportivo La Coruña'],
+  [558, 'Celta Vigo'],
+  [5335, 'Racing Santander'],
+  [81, 'FC Barcelona']
+]) {
+  assert.equal(dataset.officialTableApproximation.find(row=>row.id===id)?.name,name);
+}
+
 assert.match(selectors.get('.topright').innerHTML,/NO GODS/);
 assert.match(selectors.get('.hero p').textContent,/Real Madrid and Barcelona/);
 assert.equal(doc.getElementById('race-value').textContent,
