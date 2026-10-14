@@ -134,7 +134,17 @@
     if (!dataset || typeof dataset !== 'object') return;
     for (const table of [dataset.alternativeTable, dataset.officialTableApproximation]) {
       for (const club of table || []) {
-        if (club.id === 78) club.name = 'Atlético Madrid';
+        const preferredNames = {
+          78: 'Atlético Madrid',
+          77: 'Athletic Club',
+          560: 'Deportivo La Coruña',
+          558: 'Celta Vigo',
+          5335: 'Racing Santander',
+          81: 'FC Barcelona'
+        };
+        if (Object.prototype.hasOwnProperty.call(preferredNames, club.id)) {
+          club.name = preferredNames[club.id];
+        }
       }
     }
   }
