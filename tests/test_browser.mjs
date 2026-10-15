@@ -71,7 +71,11 @@ for (const [id, name] of [
 }
 
 assert.match(selectors.get('.topright').innerHTML,/NO GODS/);
-assert.match(selectors.get('.hero p').textContent,/Real Madrid and Barcelona/);
+assert.equal(selectors.get('.hero-slogan .line1').textContent,'The money clubs can sod off.');
+assert.equal(selectors.get('.hero-slogan .line2').textContent,'Things are looking up.');
+assert.match(selectors.get('.hero-explainer').textContent,/Madrid and Barça/);
+assert.equal(doc.getElementById('archive-heading').textContent,'Apparently, other clubs can win things.');
+assert.match(context.window.getSharePayload().title,/The Usurper League/);
 assert.equal(doc.getElementById('race-value').textContent,
   dataset.alternativeTable.filter(r=>r.Pts===dataset.alternativeTable[0].Pts).map(r=>r.name).join(' / '));
 assert.notEqual(doc.getElementById('slayers-value').textContent,'—');
@@ -81,9 +85,12 @@ context.window.renderEnhancements(dataset,'alternative');
 assert.equal(doc.documentElement.lang,'es');
 assert.equal(doc.getElementById('alternative').textContent,'Sin dioses');
 assert.match(selectors.get('.topright').innerHTML,/SIN DIOSES/);
-assert.match(selectors.get('.hero p').textContent,/El Real Madrid y el Barça/);
+assert.equal(selectors.get('.hero-slogan .line1').textContent,'Que les den a los clubes millonarios.');
+assert.equal(selectors.get('.hero-slogan .line2').textContent,'Ahora sí que pinta bien.');
+assert.match(selectors.get('.hero-explainer').textContent,/El Madrid y el Barça/);
+assert.match(doc.getElementById('archive-heading').textContent,/demás también saben ganar/);
 assert.equal(selectors.get('thead th:nth-child(3)').textContent,'PJ');
-assert.match(context.window.getSharePayload().text,/La Liga sin Madrid ni Barça/);
+assert.match(context.window.getSharePayload().text,/Que les den a los clubes millonarios/);
 context.window.renderEnhancements(dataset,'original');
 assert.match(doc.getElementById('matchinfo').textContent,/20 clubes/);
 console.log('Bilingual insight smoke tests passed.');
