@@ -1,0 +1,28 @@
+name: Check public website DNS and HTTPS
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/check-site.yml
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Resolve site and test HTTPS
+        shell: bash
+        run: |
+          echo "BASELINE: example.com resolves?"
+          dig +short example.com A | head -5
+          echo "CLOUDFLARE SITE DNS (default resolver)"
+          dig the-real-league.pages.dev A +time=4 +tries=1
+          echo "CLOUDFLARE SITE DNS (1.1.1.1)"
+          dig @1.1.1.1 the-real-league.pages.dev A +time=5 +tries=1
+          echo "CLOUDFLARE SITE DNS (8.8.8.8)"
+          dig @8.8.8.8 the-real-league.pages.dev A +time=5 +tries=1
+          echo "CLOUDFLARE SITE DNS (AAAA and CNAME)"
+          dig the-real-league.pages.dev AAAA +noall +answer
+          dig the-real-league.pages.dev CNAME +noall +answer
+          echo "PUBLIC HTTPS"
+          curl -sSL -o /dev/null -w "HTTP status=%{http_code} remote IP=%{remote_ip} redirect=%{url_effective}\n" --max-time 15 https://the-real-league.pages.dev/ || true
+          echo "BASELINE HTTPS"
+          curl -sSL -o /dev/null -w "HTTP status=%{http_code}\n" --max-time 10 https://example.com/ || true
