@@ -47,7 +47,13 @@
       }
     }
   }
-  window.refreshSeasonPickerLanguage = paintSelection;
+  window.refreshSeasonPickerLanguage = function () {
+    paintSelection();
+    document.querySelectorAll('.decade-button').forEach(button => {
+      const decade = button.dataset.decade;
+      button.textContent = document.documentElement.lang === 'es' ? 'Años '+decade : decade+'s';
+    });
+  };
   function setQuery(season) {
     const url = new URL(location.href);
     if (season === LIVE) url.searchParams.delete('season');
@@ -69,7 +75,7 @@
       }
       return;
     }
-    setMessage(document.documentElement.lang === 'es' ? 'Cargando temporada…' : 'Loading season…');
+    setMessage(document.documentElement.lang === 'es' ? 'Desenterrando la temporada…' : 'Digging out the season…');
     try {
       const response = await fetch('/history/'+encodeURIComponent(season)+'.json');
       if (!response.ok) throw new Error('HTTP '+response.status);
@@ -86,8 +92,8 @@
     } catch (error) {
       if (selected !== season) return;
       setMessage(document.documentElement.lang === 'es'
-        ? 'No hemos podido cargar la temporada. Vuelve a intentarlo.'
-        : 'Could not load this season. Try again.');
+        ? 'Este año se nos resiste. Prueba otra vez.'
+        : 'That season is being difficult. Try again.');
     }
   }
 
@@ -112,7 +118,8 @@
       const button = document.createElement('button');
       button.type='button';
       button.className='decade-button';
-      button.textContent=decade+'s';
+      button.dataset.decade=String(decade);
+      button.textContent=document.documentElement.lang === 'es' ? 'Años '+decade : decade+'s';
       button.addEventListener('click',()=>{
         const target=[...strip.children].find(tab=>Number(tab.dataset.season.slice(0,4))<decade+10 && Number(tab.dataset.season.slice(0,4))>=decade);
         if (target) target.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});
@@ -145,8 +152,12 @@
     available=[{id:LIVE,label:'2026/27'},...index.seasons];
     populate();
     if (available.some(row=>row.id===desired)) choose(desired,false);
-    else setMessage('Some older seasons are absent where complete results are unavailable.');
+    else setMessage(document.documentElement.lang==='es'
+      ? 'Falta alguna temporada: preferimos un hueco a inventarnos resultados.'
+      : "A few seasons are missing. We'd rather leave a gap than invent results.");
   }).catch(()=>{
-    setMessage(document.documentElement.lang==='es'?'El archivo histórico está en preparación.':'The historical archive is being prepared.');
+    setMessage(document.documentElement.lang==='es'
+      ? 'El archivo está descansando. Volveremos a probar.'
+      : "The archive is having a day off. We'll try again.");
   });
 })();
