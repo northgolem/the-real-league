@@ -1,128 +1,132 @@
-/* The Real League v1.1: bilingual editorial layer. No external dependencies. */
+/* The Usurper League: editorial voice and bilingual frontend. No external dependencies. */
 (function () {
   'use strict';
   const translations = {
     en: {
       masthead: 'NO GODS. <span>JUST FOOTBALL.</span>',
-      eyebrow: season => 'Spain · ' + season + ' · The alternative table',
-      pitch: "Real Madrid and Barcelona have had a decent run. We’ve removed every match involving either club — points, goals, the lot. The other 18 can get on with it.",
-      left: '18 teams left',
-      headingEyebrow: 'The standings',
-      heading: 'The mortals get a turn.',
+      eyebrow: season => 'SPAIN / LA LIGA DE LOS MORTALES / ' + season,
+      slogan1: 'The money clubs can sod off.',
+      slogan2: 'Things are looking up.',
+      pitch: "Madrid and Barça have had a decent run. Several, actually. We've removed all their matches — points, goals, the lot — and given everyone else a league worth arguing about.",
+      left: 'clubs left',
+      headingEyebrow: 'THE TABLE, RECONSIDERED',
+      heading: 'Someone else gets a go.',
       noGiants: 'No Gods',
-      allTeams: 'All Teams',
+      allTeams: 'With Everyone',
       club: 'Club', played: 'P', gd: 'GD', pts: 'Pts', w: 'W', d: 'D', l: 'L',
-      feedLive: 'Results connected · delayed scores',
-      feedHistorical: 'Archived season · recalculated results',
-      archiveKicker: 'The history they didn’t write',
-      archiveHeading: 'One league. A few different champions.',
-      oldSeason: season => 'Season ' + season + ' · archive',
-      oldHeadline: name => name + ' won this version.',
-      oldStory: (leader, season, pts) => 'In ' + season + ', remove every match involving Madrid or Barça and the title goes to ' + leader.name + ' on ' + leader.Pts + ' points. ' + pts + ' points for a win, as it was then.',
-      feedPreview: 'Preview mode · waiting for results',
+      feedLive: 'Latest available results · not live scores',
+      feedHistorical: 'A completed season · an entirely different outcome',
+      archiveKicker: 'ALMOST A CENTURY OF ALTERNATIVE ENDINGS',
+      archiveHeading: 'Apparently, other clubs can win things.',
+      oldSeason: season => 'The ' + season + ' season · archives',
+      oldHeadline: name => name + ' were champions. In this version.',
+      oldStory: (leader, season, pts) => "Remove Madrid and Barça's fixtures from " + season + " and " + leader.name + " finish top on " + leader.Pts + " points. That's " + pts + " points per win, as the rules required. The scores are real. The trophy, regrettably, is not.",
+      feedPreview: 'The results are having a moment',
       season: season => 'Season ' + season,
-      updated: date => 'Updated ' + date,
-      counted: (count, alternative) => count + ' completed matches · ' + (alternative ? 'Madrid and Barça excluded' : 'all 20 clubs included'),
-      waiting: 'The table recalculates automatically once a results feed is connected.',
-      emptyHeading: 'The mortals are warming up.',
-      emptyBody: 'Live standings will appear after the results feed has completed its first update.',
-      footerNote: 'Provisional order uses points, goal difference and goals scored rather than the league’s head-to-head tiebreakers. Arrows compare with our calculated full table. Source: ',
-      weekly: 'As things stand',
-      headline: name => name + ' are top. For now.',
-      story: leader => 'Remove every match involving Madrid or Barça, and ' + leader.name + ' lead with ' + leader.Pts + ' points from ' + leader.P + ' matches. No scores have been invented.',
-      defaultHeadline: 'The gods can sit this one out.',
-      defaultStory: "Their matches don’t count here. Everyone else’s do. That’s the whole trick.",
+      updated: date => 'Results checked ' + date,
+      counted: (count, alternative) => count + ' completed matches · ' + (alternative ? 'Madrid and Barça excused' : 'all clubs invited back'),
+      waiting: "The table is waiting for the results feed. Even usurpers need data.",
+      emptyHeading: "Nobody's won anything yet.",
+      emptyBody: 'The table will appear when the results are in. We refuse to make up the scores.',
+      footerNote: "This is our calculation, not LaLiga's official table. Ordered by points, goal difference and goals scored; official head-to-head rules and historic deductions are not modelled. Arrows compare with our full-table calculation. Data: ",
+      weekly: 'THE LATEST UPSET (OF THE ESTABLISHED ORDER)',
+      headline: name => name + ' lead. Well, well.',
+      story: leader => "Remove every Madrid and Barça fixture and " + leader.name + " lead the rest on " + leader.Pts + " points from " + leader.P + " matches. No scores have been altered. That would be cheating.",
+      defaultHeadline: 'The gods have been excused.',
+      defaultStory: "The other clubs still have to play the football. We've simply taken the usual winners out of the equation.",
       matchesRemoved: 'Matches removed',
-      removedText: 'Completed fixtures involving Real Madrid or Barcelona that no longer count.',
-      insightsHeading: 'Life without the gods',
-      raceTitle: 'The title race',
-      raceSame: (names, pts) => names + ' · level on ' + pts + ' pts',
+      removedText: 'Games involving either of the absent clubs. We checked twice.',
+      insightsHeading: "Turns out they weren't essential.",
+      raceTitle: 'A proper title race',
+      raceSame: (names, pts) => names + ' · ' + pts + ' pts each. Awkward.',
       raceAlone: (club, lead) => club + ' · ' + lead + ' point' + (lead === 1 ? '' : 's') + ' clear',
-      raceExplain: 'Lead at the top of the alternative standings',
-      slayersTitle: 'Points quietly erased',
-      slayersValue: (pts) => pts + ' points',
-      slayersExplain: (clubs) => clubs + ' earned them against Madrid or Barça. We’ve removed them.',
-      slayersNone: 'Nobody has taken points off either club. Yet.',
+      raceExplain: 'The top of the table. A pleasant change.',
+      slayersTitle: 'Points we took away',
+      slayersValue: pts => pts + ' points',
+      slayersExplain: clubs => clubs + ' earned these against Madrid or Barça. Admirable, but they no longer count.',
+      slayersNone: 'Nobody has taken points off those two yet. Do try.',
       reboundTitle: 'Goal difference restored',
-      reboundExplain: club => club + ' benefit most when results against Madrid and Barça disappear',
-      reboundNone: 'Nobody has recovered goal difference. Yet.',
-      how: 'How does it work?',
+      reboundExplain: clubs => clubs + ' gain the most goal difference once those matches vanish. A relief.',
+      reboundNone: 'No goal difference has been rescued yet.',
+      how: 'How we stole the league',
       rules: [
-        ['The gods sit this one out.', 'Madrid and Barcelona don’t appear in the table. The other 18 clubs do.'],
-        ['And so do their matches.', 'Every match involving either club goes: points, goals and games played. No selective memory.'],
-        ['The mortals carry on.', 'Only matches between the remaining clubs count. Same results, different table.']
+        ['Two clubs. One polite goodbye.', "Madrid and Barça sit this one out. The remaining clubs get a table of their own."],
+        ['Their results go with them.', "Every match involving either side disappears: points, goals and games played. We're very thorough."],
+        ['Then things get interesting.', "Everyone else keeps their real results. No invented scores. Just a different champion."]
       ],
-      shareButton: 'Share the table ↗',
-      copyButton: 'Copy link',
-      share: leader => 'La Liga without Madrid and Barça. Don’t worry, we’ve only removed them from the table. ' + (leader ? leader.name + ' lead on ' + leader.Pts + ' points. ' : '') + 'See for yourself:',
-      copied: 'Link copied.',
-      shareCopied: 'Share text copied.',
-      copyFallback: 'Copy the address from your browser.',
-      shareError: 'You can copy the link instead.',
-      resultsError: 'Results unavailable for now. The gods may have interfered.',
-      ruleKickers: ['01 / THE GODS', '02 / THE MATCHES', '03 / THE TABLE'],
-      footer: year => '© ' + year + ' The Real League · Independent football experiment, not affiliated with LaLiga or any club.'
+      shareButton: 'Tell a fellow sufferer ↗',
+      copyButton: 'Copy the evidence',
+      share: leader => 'The Usurper League. The money clubs can sod off. Things are looking up. ' + (leader ? leader.name + ' lead on ' + leader.Pts + ' points. ' : '') + 'Have a look:',
+      copied: 'Link copied. Carry on.',
+      shareCopied: 'Evidence copied. Spread the word.',
+      copyFallback: 'Copy the address from your browser. Old-fashioned, but effective.',
+      shareError: 'Try copying the link instead.',
+      resultsError: "The scores aren't available just now. Even revolutions have technical difficulties.",
+      ruleKickers: ['01 / THE EXITS', '02 / THE ERASER', '03 / THE FUN'],
+      footer: year => '© ' + year + ' The Usurper League · An independent exercise in footballing wishful thinking. Not affiliated with LaLiga or any club.'
     },
     es: {
       masthead: 'SIN DIOSES. <span>SOLO FÚTBOL.</span>',
-      eyebrow: season => 'España · ' + season + ' · La clasificación alternativa',
-      pitch: 'El Real Madrid y el Barça ya han tenido una buena racha. Hemos borrado todos sus partidos: puntos, goles y todo lo demás. A ver qué hacen los otros 18.',
-      left: '18 equipos',
-      headingEyebrow: 'La clasificación',
-      heading: 'Les toca a los mortales.',
+      eyebrow: season => 'ESPAÑA / LA LIGA DE LOS MORTALES / ' + season,
+      slogan1: 'Que les den a los clubes millonarios.',
+      slogan2: 'Ahora sí que pinta bien.',
+      pitch: 'El Madrid y el Barça ya han tenido su turno. Unas cuantas veces, de hecho. Hemos quitado todos sus partidos —puntos, goles, todo— y al resto le hemos dejado una liga por la que merece la pena discutir.',
+      left: 'clubes en juego',
+      headingEyebrow: 'LA TABLA, CON UN PEQUEÑO CAMBIO',
+      heading: 'Ahora les toca a los demás.',
       noGiants: 'Sin dioses',
-      allTeams: 'Todos',
+      allTeams: 'Con todos',
       club: 'Equipo', played: 'PJ', gd: 'DG', pts: 'Pts', w: 'G', d: 'E', l: 'P',
-      feedLive: 'Resultados conectados · marcadores con retraso',
-      feedHistorical: 'Temporada archivada · resultados recalculados',
-      archiveKicker: 'La historia que no escribieron',
-      archiveHeading: 'Una liga. Bastantes campeones distintos.',
+      feedLive: 'Últimos resultados disponibles · no en directo',
+      feedHistorical: 'Temporada completa · un desenlace bastante distinto',
+      archiveKicker: 'CASI UN SIGLO DE FINALES ALTERNATIVOS',
+      archiveHeading: 'Resulta que los demás también saben ganar.',
       oldSeason: season => 'Temporada ' + season + ' · archivo',
       oldHeadline: name => name + ' fue campeón. Aquí, al menos.',
-      oldStory: (leader, season, pts) => 'En ' + season + ', sin los partidos del Madrid ni del Barça, el título es para ' + leader.name + ' con ' + leader.Pts + ' puntos. ' + pts + ' puntos por victoria, como entonces.',
-      feedPreview: 'Vista previa · esperando resultados',
+      oldStory: (leader, season, pts) => 'Si quitamos los partidos del Madrid y del Barça en ' + season + ', ' + leader.name + ' termina primero con ' + leader.Pts + ' puntos. ' + pts + ' puntos por victoria, como mandaba el reglamento. Los resultados son reales. La copa, por desgracia, no.',
+      feedPreview: 'Esperando resultados. Pacientemente.',
       season: season => 'Temporada ' + season,
-      updated: date => 'Actualizado el ' + date,
-      counted: (count, alternative) => count + ' partidos disputados · ' + (alternative ? 'sin Madrid ni Barça' : 'con los 20 clubes'),
-      waiting: 'La clasificación se actualiza automáticamente al recibir nuevos resultados.',
-      emptyHeading: 'Los mortales están calentando.',
-      emptyBody: 'La clasificación aparecerá cuando termine la primera actualización de los resultados.',
-      footerNote: 'Orden provisional por puntos, diferencia de goles y goles a favor, sin aplicar todos los criterios de desempate oficiales. Las flechas comparan con nuestra tabla completa calculada. Fuente: ',
-      weekly: 'Así están las cosas',
-      headline: name => name + ' manda. De momento.',
-      story: leader => 'Sin los partidos del Madrid ni del Barça, ' + leader.name + ' lidera con ' + leader.Pts + ' puntos en ' + leader.P + ' encuentros. No hemos inventado ningún marcador.',
-      defaultHeadline: 'Hoy descansan los dioses.',
-      defaultStory: 'Sus partidos no cuentan aquí. Los de los demás, sí. No tiene más misterio.',
+      updated: date => 'Resultados comprobados el ' + date,
+      counted: (count, alternative) => count + ' partidos · ' + (alternative ? 'Madrid y Barça fuera' : 'todos invitados'),
+      waiting: 'Esperamos los resultados. Hasta los usurpadores necesitan datos.',
+      emptyHeading: 'Todavía no ha ganado nadie.',
+      emptyBody: 'La clasificación aparecerá cuando lleguen los resultados. No pensamos inventarnos marcadores.',
+      footerNote: 'Esta es nuestra clasificación, no la oficial de LaLiga. Ordenamos por puntos, diferencia de goles y goles a favor; no aplicamos todos los desempates oficiales ni sanciones históricas. Las flechas comparan con nuestra tabla completa. Datos: ',
+      weekly: 'LA ÚLTIMA SORPRESA (PARA LOS DE SIEMPRE)',
+      headline: name => name + ' manda. Vaya, vaya.',
+      story: leader => 'Sin los partidos del Madrid ni del Barça, ' + leader.name + ' lidera con ' + leader.Pts + ' puntos en ' + leader.P + ' encuentros. No hemos cambiado un solo marcador. Eso sí sería hacer trampas.',
+      defaultHeadline: 'Los dioses tienen el día libre.',
+      defaultStory: 'Los demás siguen jugando los partidos. Solo hemos quitado a los ganadores habituales de la ecuación.',
       matchesRemoved: 'Partidos eliminados',
-      removedText: 'Partidos disputados contra el Real Madrid o el Barcelona que ya no cuentan.',
-      insightsHeading: 'La vida sin los dioses',
+      removedText: 'Partidos contra los dos ausentes. Los hemos contado dos veces.',
+      insightsHeading: 'Parece que no eran imprescindibles.',
       raceTitle: 'La lucha por el título',
-      raceSame: (names, pts) => names + ' · empatados a ' + pts + ' puntos',
-      raceAlone: (club, lead) => club + ' · ventaja de ' + lead + ' punto' + (lead === 1 ? '' : 's'),
-      raceExplain: 'Así está la cabeza de la clasificación alternativa',
-      slayersTitle: 'Puntos discretamente borrados',
+      raceSame: (names, pts) => names + ' · ' + pts + ' puntos cada uno. Vaya lío.',
+      raceAlone: (club, lead) => club + ' · ' + lead + ' punto' + (lead === 1 ? '' : 's') + ' de ventaja',
+      raceExplain: 'Lo más alto de la tabla. Se agradece el cambio.',
+      slayersTitle: 'Puntos que hemos borrado',
       slayersValue: pts => pts + ' puntos',
-      slayersExplain: clubs => clubs + ' los consiguieron ante Madrid o Barça. Aquí no cuentan.',
-      slayersNone: 'Nadie ha puntuado ante esos dos clubes. De momento.',
+      slayersExplain: clubs => clubs + ' los consiguieron ante Madrid o Barça. Muy meritorio, pero aquí ya no cuentan.',
+      slayersNone: 'Nadie ha puntuado ante esos dos. Por ahora.',
       reboundTitle: 'Diferencia de goles recuperada',
-      reboundExplain: club => club + ' mejora más su diferencia de goles al borrar los partidos contra Madrid y Barça',
-      reboundNone: 'De momento, nadie recupera diferencia de goles.',
-      how: '¿Cómo funciona?',
+      reboundExplain: clubs => clubs + ' recupera más diferencia de goles sin esos partidos. Menos mal.',
+      reboundNone: 'De momento, nadie ha recuperado diferencia de goles.',
+      how: 'Cómo nos quedamos con la liga',
       rules: [
-        ['Los dioses se quedan fuera.', 'Madrid y Barça no aparecen en esta tabla. Los otros 18, sí.'],
-        ['Y sus partidos también.', 'Se eliminan todos sus encuentros: puntos, goles y partidos jugados. Sin excepciones.'],
-        ['Los mortales siguen.', 'Solo cuentan los partidos entre los otros clubes. Los mismos resultados, otra clasificación.']
+        ['Dos clubes. Hasta luego.', 'Madrid y Barça descansan. Los demás tienen una clasificación para ellos solos.'],
+        ['Sus partidos se van con ellos.', 'Borramos cada encuentro contra cualquiera de los dos: puntos, goles y partidos jugados. Sin excepciones.'],
+        ['Y empieza lo bueno.', 'Los demás resultados son reales. No inventamos nada. Salvo un campeón diferente.']
       ],
-      shareButton: 'Compartir la tabla ↗',
-      copyButton: 'Copiar enlace',
-      share: leader => 'La Liga sin Madrid ni Barça. Tranquilos, solo los hemos borrado de la tabla. ' + (leader ? leader.name + ' lidera con ' + leader.Pts + ' puntos. ' : '') + 'Aquí está:',
-      copied: 'Enlace copiado.',
-      shareCopied: 'Texto para compartir copiado.',
-      copyFallback: 'Copia la dirección del navegador.',
-      shareError: 'Puedes copiar el enlace.',
-      resultsError: 'No hay resultados por ahora. Puede que los dioses hayan intervenido.',
-      ruleKickers: ['01 / LOS DIOSES', '02 / LOS PARTIDOS', '03 / LA TABLA'],
-      footer: year => '© ' + year + ' The Real League · Experimento futbolístico independiente, sin relación con LaLiga ni con los clubes.'
+      shareButton: 'Compártelo con otro sufrido ↗',
+      copyButton: 'Copiar la prueba',
+      share: leader => 'The Usurper League. Que les den a los clubes millonarios. Ahora sí que pinta bien. ' + (leader ? leader.name + ' lidera con ' + leader.Pts + ' puntos. ' : '') + 'Mira:',
+      copied: 'Enlace copiado. Seguimos.',
+      shareCopied: 'Prueba copiada. Que corra la voz.',
+      copyFallback: 'Copia la dirección del navegador. Funciona de toda la vida.',
+      shareError: 'Prueba a copiar el enlace.',
+      resultsError: 'Ahora mismo no hay resultados. Hasta las revoluciones tienen problemas técnicos.',
+      ruleKickers: ['01 / LA SALIDA', '02 / LA GOMA DE BORRAR', '03 / LA DIVERSIÓN'],
+      footer: year => '© ' + year + ' The Usurper League · Un experimento futbolístico con cierto optimismo. Sin relación con LaLiga ni con los clubes.'
     }
   };
 
@@ -170,10 +174,10 @@
     const alt = view !== 'original';
     const season = dataset && dataset.season || '2026/27';
     document.documentElement.lang = language;
-    document.title = 'La Liga de los Mortales | The Real League';
+    document.title = 'The Usurper League | ' + season + ' | Football for the Rest of Us';
     const description = language === 'es'
-      ? 'La Liga sin Real Madrid ni Barcelona. Los mismos resultados, menos dioses. Clasificación actualizada automáticamente.'
-      : 'La Liga without Real Madrid and Barcelona. Same results, fewer gods. Standings updated automatically.';
+      ? 'Que les den a los clubes millonarios. Ahora sí que pinta bien. La Liga sin Madrid ni Barça, con casi un siglo de historia alternativa.'
+      : 'The money clubs can sod off. Things are looking up. La Liga without Madrid or Barça, with 94 seasons of alternative history.';
     for (const selector of ['meta[name="description"]','meta[property="og:description"]','meta[name="twitter:description"]']) {
       const el = document.querySelector(selector);
       if (el) el.setAttribute('content', description);
@@ -185,10 +189,12 @@
     });
     const masthead = document.querySelector('.topright');
     if (masthead) masthead.innerHTML = tr.masthead;
-    set('.hero .eyebrow', tr.eyebrow(season));
-    set('.hero p', tr.pitch);
+    set('#competition-kicker', tr.eyebrow(season));
+    set('.hero-slogan .line1', tr.slogan1);
+    set('.hero-slogan .line2', tr.slogan2);
+    set('.hero-explainer', tr.pitch);
     const remainingClubs = live ? dataset.alternativeTable.length : 18;
-    set('.pillbar .pill:last-child', language === 'es' ? remainingClubs + ' equipos' : remainingClubs + ' clubs left');
+    set('.pillbar .pill:last-child', remainingClubs + ' ' + tr.left);
     set('.cardhead .eyebrow', tr.headingEyebrow);
     set('.cardhead h2', tr.heading);
     set('#alternative', tr.noGiants);
@@ -318,7 +324,7 @@
     const tr = translations[language];
     const leader = typeof data !== 'undefined' && (data?.mode === 'live' || data?.mode === 'historical') ? data.alternativeTable?.[0] : null;
     return {
-      title: 'La Liga de los Mortales — The Real League',
+      title: 'The Usurper League — ' + (typeof data !== 'undefined' && data?.season ? data.season : 'La Liga'),
       text: tr.share(leader),
       url: location.href
     };
