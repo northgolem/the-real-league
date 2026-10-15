@@ -93,4 +93,15 @@ assert.equal(selectors.get('thead th:nth-child(3)').textContent,'PJ');
 assert.match(context.window.getSharePayload().text,/Que les den a los clubes millonarios/);
 context.window.renderEnhancements(dataset,'original');
 assert.match(doc.getElementById('matchinfo').textContent,/20 clubes/);
-console.log('Bilingual insight smoke tests passed.');
+
+// The historical articles need the same editorial voice in both languages.
+const archive = JSON.parse(fs.readFileSync('public/history/1994-95.json','utf8'));
+context.window.renderEnhancements(archive,'alternative');
+assert.match(doc.getElementById('storytext').textContent,/La copa, por desgracia, no/);
+assert.match(doc.getElementById('headline').textContent,/Aquí, al menos/);
+en.click();
+context.window.renderEnhancements(archive,'alternative');
+assert.match(doc.getElementById('storytext').textContent,/The trophy, regrettably, is not/);
+assert.match(doc.getElementById('headline').textContent,/In this version/);
+assert.match(selectors.get('footer .container span').textContent,/The Usurper League/);
+console.log('Usurper League bilingual and historic editorial tests passed.');
