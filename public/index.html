@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#112c24">
-<meta name="description" content="The Usurper League: the money clubs can sod off. Things are looking up. Spain's alternative table, plus 94 seasons of what might have been.">
+<meta name="description" content="The Usurper League: the money clubs can sod off. We're having a league. Spain's alternative standings and nearly a century of different champions.">
 <title>The Usurper League | The Money Clubs Can Sod Off</title>
 <link rel="canonical" href="https://the-real-league.pages.dev/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="The Usurper League">
 <meta property="og:url" content="https://the-real-league.pages.dev/">
 <meta property="og:title" content="The Usurper League — Football for the Rest of Us">
-<meta property="og:description" content="The money clubs can sod off. Things are looking up. La Liga without Madrid or Barça.">
+<meta property="og:description" content="The money clubs can sod off. We’re having a league. Same football. Much more interesting.">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="The Usurper League — Football for the Rest of Us">
 <meta name="twitter:description" content="No Madrid. No Barça. The rest of football gets a turn. Updated tables and alternative champions.">
@@ -35,17 +35,23 @@ a{color:inherit}button{font:inherit;cursor:pointer}.container{max-width:1060px;p
 .hero-period{color:#f2e8d5}
 .hero-slogan{font-family:Georgia,"Times New Roman",serif;font-size:clamp(21px,2.7vw,30px)!important;line-height:1.27!important;letter-spacing:-.02em;max-width:700px!important;margin:22px 0 0!important;color:#f7f0db!important}
 .hero-slogan span{display:block}.hero-slogan .line2{color:var(--gold);font-style:italic}
-.hero .hero-explainer{max-width:620px;color:#c5d4c9;font-size:15px;line-height:1.7;margin:20px 0 0}
+.hero .hero-explainer{max-width:680px;color:#e0e7dd;font-size:15px;line-height:1.65;margin:20px 0 0}
+.hero .hero-sandpit{max-width:650px;color:#d5bd84;font-family:Georgia,"Times New Roman",serif;font-size:21px;line-height:1.35;font-style:italic;margin:13px 0 0}
+.hero .hero-method{max-width:640px;color:#c5d4c9;font-size:15px;line-height:1.65;margin:17px 0 0}
+.hero .hero-closer{max-width:620px;color:#f5efdf;font-size:14px;font-weight:750;letter-spacing:.01em;margin:14px 0 0}
 .hero .eyebrow{max-width:670px}.hero{max-width:840px;padding-bottom:72px}
-@media(max-width:710px){.brand{font-size:11px;letter-spacing:.12em}.hero{padding:43px 0 49px}.hero .hero-explainer{font-size:14px}.hero-slogan{font-size:23px!important}}
+@media(max-width:710px){.brand{font-size:11px;letter-spacing:.12em}.hero{padding:43px 0 49px}.hero .hero-explainer,.hero .hero-method{font-size:14px}.hero .hero-sandpit{font-size:19px}.hero-slogan{font-size:23px!important}}
 </style>
 </head>
 <body>
 <header class="masthead"><div class="container">
 <nav class="topbar"><a class="brand" href="/">◈ &nbsp; The Usurper League</a><div class="topright">NO GODS. <span>JUST FOOTBALL.</span></div><div class="language-picker" role="group" aria-label="Language / Idioma"><button class="lang-button active" type="button" data-lang="en" aria-pressed="true">EN</button><button class="lang-button" type="button" data-lang="es" aria-pressed="false">ES</button></div></nav>
 <div class="hero"><div class="eyebrow" id="competition-kicker">SPAIN / LA LIGA DE LOS MORTALES / 2026–27</div><h1>The <em>Usurper</em><br>League<span class="hero-period">.</span></h1>
-<p class="hero-slogan"><span class="line1">The money clubs can sod off.</span><span class="line2">Things are looking up.</span></p>
-<p class="hero-explainer">Madrid and Barça have had a decent run. Several, actually. We’ve removed all their matches — points, goals, the lot — and given everyone else a league worth arguing about.</p><div class="pillbar"><span class="pill"><span class="x">✕</span> Real Madrid</span><span class="pill"><span class="x">✕</span> FC Barcelona</span><span class="pill">18 teams left</span></div></div>
+<p class="hero-slogan"><span class="line1">The money clubs can sod off.</span><span class="line2">We’re having a league.</span></p>
+<p class="hero-explainer">Yes, yes. Real Madrid and Barcelona are very good at football. We’ve all noticed.</p>
+<p class="hero-sandpit">They can go and play in their own sandpit.</p>
+<p class="hero-method">Meanwhile, we’ve removed every match involving either of them — points, goals, the lot — and given everyone else a chance to win something.</p>
+<p class="hero-closer">Same football. Much more interesting.</p><div class="pillbar"><span class="pill"><span class="x">✕</span> Real Madrid</span><span class="pill"><span class="x">✕</span> FC Barcelona</span><span class="pill">18 teams left</span></div></div>
 </div></header>
 <main class="container content">
 <section class="history-nav" aria-label="Choose football season">
@@ -90,7 +96,7 @@ if (typeof window.renderEnhancements === 'function') window.renderEnhancements(d
 $('alternative').addEventListener('click',()=>{view='alternative';render()});$('original').addEventListener('click',()=>{view='original';render()});
 function notify(s){$('notice').textContent=s}
 $('copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(location.href);notify(window.getNotice?window.getNotice('copied'):'Link copied.')}catch(e){notify(window.getNotice?window.getNotice('copyFallback'):'Copy the address from your browser.')}});
-$('share').addEventListener('click',async()=>{const payload=window.getSharePayload?window.getSharePayload():{title:'The Usurper League — Football for the Rest of Us',text:'The money clubs can sod off. Things are looking up. La Liga without Madrid or Barça.',url:location.href};try{if(navigator.share)await navigator.share(payload);else{await navigator.clipboard.writeText(`${payload.text} ${payload.url}`);notify(window.getNotice?window.getNotice('shareCopied'):'Share text copied.')}}catch(e){if(e.name!=='AbortError')notify(window.getNotice?window.getNotice('shareError'):'You can copy the link instead.')}});
+$('share').addEventListener('click',async()=>{const payload=window.getSharePayload?window.getSharePayload():{title:'The Usurper League — Football for the Rest of Us',text:'The money clubs can sod off. We’re having a league. Same football. Much more interesting.',url:location.href};try{if(navigator.share)await navigator.share(payload);else{await navigator.clipboard.writeText(`${payload.text} ${payload.url}`);notify(window.getNotice?window.getNotice('shareCopied'):'Share text copied.')}}catch(e){if(e.name!=='AbortError')notify(window.getNotice?window.getNotice('shareError'):'You can copy the link instead.')}});
 $('year').textContent=new Date().getFullYear();
 fetch('./data/standings.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('No standings data');return r.json()}).then(d=>{if(window.normalizeClubNames)window.normalizeClubNames(d);if(window.setCurrentSeasonData)window.setCurrentSeasonData(d);else {data=d;render()}}).catch(()=>{notify(window.getNotice?window.getNotice('resultsError'):'Results file unavailable; the site is in preview mode.');render()});
 </script>
