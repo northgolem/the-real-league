@@ -6,8 +6,11 @@
       masthead: 'NO GODS. <span>JUST FOOTBALL.</span>',
       eyebrow: season => 'SPAIN / LA LIGA DE LOS MORTALES / ' + season,
       slogan1: 'The money clubs can sod off.',
-      slogan2: 'Things are looking up.',
-      pitch: "Madrid and Barça have had a decent run. Several, actually. We've removed all their matches — points, goals, the lot — and given everyone else a league worth arguing about.",
+      slogan2: 'We’re having a league.',
+      intro: "Yes, yes. Real Madrid and Barcelona are very good at football. We've all noticed.",
+      sandpit: 'They can go and play in their own sandpit.',
+      method: "Meanwhile, we've removed every match involving either of them — points, goals, the lot — and given everyone else a chance to win something.",
+      closer: 'Same football. Much more interesting.',
       left: 'clubs left',
       headingEyebrow: 'THE TABLE, RECONSIDERED',
       heading: 'Someone else gets a go.',
@@ -56,7 +59,7 @@
       ],
       shareButton: 'Tell a fellow sufferer ↗',
       copyButton: 'Copy the evidence',
-      share: leader => 'The Usurper League. The money clubs can sod off. Things are looking up. ' + (leader ? leader.name + ' lead on ' + leader.Pts + ' points. ' : '') + 'Have a look:',
+      share: leader => 'The Usurper League. The money clubs can sod off. We’re having a league. ' + (leader ? leader.name + ' lead on ' + leader.Pts + ' points. ' : '') + 'Same football. Much more interesting:',
       copied: 'Link copied. Carry on.',
       shareCopied: 'Evidence copied. Spread the word.',
       copyFallback: 'Copy the address from your browser. Old-fashioned, but effective.',
@@ -69,8 +72,11 @@
       masthead: 'SIN DIOSES. <span>SOLO FÚTBOL.</span>',
       eyebrow: season => 'ESPAÑA / LA LIGA DE LOS MORTALES / ' + season,
       slogan1: 'Que les den a los clubes millonarios.',
-      slogan2: 'Ahora sí que pinta bien.',
-      pitch: 'El Madrid y el Barça ya han tenido su turno. Unas cuantas veces, de hecho. Hemos quitado todos sus partidos —puntos, goles, todo— y al resto le hemos dejado una liga por la que merece la pena discutir.',
+      slogan2: 'Nosotros montamos nuestra liga.',
+      intro: 'Sí, sí. El Real Madrid y el Barça juegan muy bien al fútbol. Ya nos hemos enterado.',
+      sandpit: 'Que se vayan a jugar a su propio patio.',
+      method: 'Mientras tanto, hemos quitado todos los partidos en los que participa cualquiera de los dos: puntos, goles, todo. Y los demás tienen una oportunidad de ganar algo.',
+      closer: 'El mismo fútbol. Mucho más interesante.',
       left: 'clubes en juego',
       headingEyebrow: 'LA TABLA, CON UN PEQUEÑO CAMBIO',
       heading: 'Ahora les toca a los demás.',
@@ -119,7 +125,7 @@
       ],
       shareButton: 'Compártelo con otro sufrido ↗',
       copyButton: 'Copiar la prueba',
-      share: leader => 'The Usurper League. Que les den a los clubes millonarios. Ahora sí que pinta bien. ' + (leader ? leader.name + ' lidera con ' + leader.Pts + ' puntos. ' : '') + 'Mira:',
+      share: leader => 'The Usurper League. Que les den a los clubes millonarios. Nosotros montamos nuestra liga. ' + (leader ? leader.name + ' lidera con ' + leader.Pts + ' puntos. ' : '') + 'El mismo fútbol. Mucho más interesante:',
       copied: 'Enlace copiado. Seguimos.',
       shareCopied: 'Prueba copiada. Que corra la voz.',
       copyFallback: 'Copia la dirección del navegador. Funciona de toda la vida.',
@@ -176,8 +182,8 @@
     document.documentElement.lang = language;
     document.title = 'The Usurper League | ' + season + ' | Football for the Rest of Us';
     const description = language === 'es'
-      ? 'Que les den a los clubes millonarios. Ahora sí que pinta bien. La Liga sin Madrid ni Barça, con casi un siglo de historia alternativa.'
-      : 'The money clubs can sod off. Things are looking up. La Liga without Madrid or Barça, with 94 seasons of alternative history.';
+      ? 'Que les den a los clubes millonarios. Nosotros montamos nuestra liga. El mismo fútbol, sin Madrid ni Barça.'
+      : 'The money clubs can sod off. We’re having a league. Same football, without Madrid or Barça. Almost a century of alternative history.';
     for (const selector of ['meta[name="description"]','meta[property="og:description"]','meta[name="twitter:description"]']) {
       const el = document.querySelector(selector);
       if (el) el.setAttribute('content', description);
@@ -192,7 +198,10 @@
     set('#competition-kicker', tr.eyebrow(season));
     set('.hero-slogan .line1', tr.slogan1);
     set('.hero-slogan .line2', tr.slogan2);
-    set('.hero-explainer', tr.pitch);
+    set('.hero-explainer', tr.intro);
+    set('.hero-sandpit', tr.sandpit);
+    set('.hero-method', tr.method);
+    set('.hero-closer', tr.closer);
     const remainingClubs = live ? dataset.alternativeTable.length : 18;
     set('.pillbar .pill:last-child', remainingClubs + ' ' + tr.left);
     set('.cardhead .eyebrow', tr.headingEyebrow);
