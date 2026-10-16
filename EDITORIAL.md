@@ -2,7 +2,7 @@
 
 ## The premise
 
-The money clubs can sod off. Things are looking up.
+The money clubs can sod off. We're having a league.
 
 The Usurper League is a joyful, slightly impudent alternative football table. We take the matches involving a league's dominant money clubs out of the record, recalculate the remaining clubs' results and see what happens. For Spain, that means **Real Madrid and FC Barcelona**, with their fixtures, goals and points removed. The full-table comparison remains a *calculation*, not LaLiga's official ranking.
 
@@ -22,8 +22,11 @@ The Usurper League is a joyful, slightly impudent alternative football table. We
 
 Good:
 - **THE USURPER LEAGUE**
-- *The money clubs can sod off. Things are looking up.*
+- *The money clubs can sod off. We're having a league.*
 - "Apparently, other clubs can win things."
+- "Yes, yes. Real Madrid and Barcelona are very good at football. We've all noticed."
+- "They can go and play in their own sandpit."
+- "Same football. Much more interesting."
 - "The scores are real. The trophy, regrettably, is not."
 - "The gods have been excused."
 
@@ -37,11 +40,11 @@ Too much:
 Write Spanish **as Spanish**, not as a line-by-line translation. Preserve the joke and the level of irreverence.
 
 English:
-- "The money clubs can sod off. Things are looking up."
+- "The money clubs can sod off. We're having a league."
 - "The scores are real. The trophy, regrettably, is not."
 
 Spanish:
-- "Que les den a los clubes millonarios. Ahora sí que pinta bien."
+- "Que les den a los clubes millonarios. Nosotros montamos nuestra liga."
 - "Los resultados son reales. La copa, por desgracia, no."
 
 Keep the global brand **The Usurper League** in both languages. *La Liga de los Mortales* is the name of the Spanish competition within it, not the website's parent brand.
