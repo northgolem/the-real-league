@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://the-real-league.pages.dev/sitemap.xml
+Sitemap: https://usurperleague.com/sitemap.xml
