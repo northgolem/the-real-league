@@ -188,7 +188,13 @@
     const alt = view !== 'original';
     const season = dataset && dataset.season || '2026/27';
     document.documentElement.lang = language;
-    document.title = 'The Usurper League | ' + season + ' | Football for the Rest of Us';
+    document.title = historical
+      ? (language === 'es'
+          ? 'La Liga ' + season + ' sin Madrid ni Barça | The Usurper League'
+          : 'La Liga ' + season + ' Without Real Madrid & Barcelona | The Usurper League')
+      : (language === 'es'
+          ? 'La Liga sin Real Madrid ni Barcelona | The Usurper League'
+          : 'La Liga Without Real Madrid & Barcelona | The Usurper League');
     const description = language === 'es'
       ? 'La Liga sin Real Madrid ni Barcelona. Clasificaciones recalculadas y casi un siglo de campeones alternativos. Fútbol real, distintos ganadores.'
       : 'La Liga without Real Madrid or Barcelona: recalculated standings and 94 seasons of alternative champions. Same matches, different winners.';
