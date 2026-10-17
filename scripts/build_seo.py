@@ -24,6 +24,11 @@ def e(value):
     return escape(str(value), quote=True)
 
 
+def ordinal(number):
+    """An English ordinal suffix, only for our reconstructed finishing position."""
+    return "th" if 11 <= number % 100 <= 13 else {1: "st", 2: "nd", 3: "rd"}.get(number % 10, "th")
+
+
 def write_if_changed(path, content):
     path.parent.mkdir(parents=True, exist_ok=True)
     if not path.exists() or path.read_text(encoding="utf-8") != content:
