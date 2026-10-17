@@ -24,6 +24,7 @@
       feedHistorical: 'A completed season · an entirely different outcome',
       archiveKicker: 'ALMOST A CENTURY OF ALTERNATIVE ENDINGS',
       archiveHeading: 'Apparently, other clubs can win things.',
+      archiveAll: 'Explore the alternative champions & every historical table ↗',
       oldSeason: season => 'The ' + season + ' season · archives',
       oldHeadline: name => name + ' were champions. In this version.',
       oldStory: (leader, season, pts) => "Remove Madrid and Barça's fixtures from " + season + " and " + leader.name + " finish top on " + leader.Pts + " points. That's " + pts + " points per win, as the rules required. The scores are real. The trophy, regrettably, is not.",
@@ -93,6 +94,7 @@
       feedHistorical: 'Temporada completa · un desenlace bastante distinto',
       archiveKicker: 'CASI UN SIGLO DE FINALES ALTERNATIVOS',
       archiveHeading: 'Resulta que los demás también saben ganar.',
+      archiveAll: 'Ver los campeones alternativos y todas las temporadas ↗',
       oldSeason: season => 'Temporada ' + season + ' · archivo',
       oldHeadline: name => name + ' fue campeón. Aquí, al menos.',
       oldStory: (leader, season, pts) => 'Si quitamos los partidos del Madrid y del Barça en ' + season + ', ' + leader.name + ' termina primero con ' + leader.Pts + ' puntos. ' + pts + ' puntos por victoria, como mandaba el reglamento. Los resultados son reales. La copa, por desgracia, no.',
@@ -188,8 +190,8 @@
     document.documentElement.lang = language;
     document.title = 'The Usurper League | ' + season + ' | Football for the Rest of Us';
     const description = language === 'es'
-      ? 'Que los niños ricos se queden con su patio. Nosotros montamos nuestra liga. Fútbol sin Madrid ni Barça, con casi un siglo de historia alternativa.'
-      : 'Let the rich kids keep the sandpit. We’re having a league. Real fixtures, different champions, and nearly a century of alternative history.';
+      ? 'La Liga sin Real Madrid ni Barcelona. Clasificaciones recalculadas y casi un siglo de campeones alternativos. Fútbol real, distintos ganadores.'
+      : 'La Liga without Real Madrid or Barcelona: recalculated standings and 94 seasons of alternative champions. Same matches, different winners.';
     for (const selector of ['meta[name="description"]','meta[property="og:description"]','meta[name="twitter:description"]']) {
       const el = document.querySelector(selector);
       if (el) el.setAttribute('content', description);
@@ -202,6 +204,7 @@
     const masthead = document.querySelector('.topright');
     if (masthead) masthead.innerHTML = tr.masthead;
     set('#competition-kicker', tr.eyebrow(season));
+    set('#archive-all-link', tr.archiveAll);
     set('.hero-slogan .line1', tr.slogan1);
     set('.hero-headline-first', tr.heroTitle1);
     set('.hero-headline-second', tr.heroTitle2);
