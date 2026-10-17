@@ -2,15 +2,15 @@
   "mode": "live",
   "competition": "La Liga de los Mortales",
   "season": "2026/27",
-  "generatedAt": "2026-10-15T20:18:20+00:00",
-  "latestResultAt": "2026-10-12T19:00:00Z",
+  "generatedAt": "2026-10-17T08:39:26+00:00",
+  "latestResultAt": "2026-10-16T19:00:00Z",
   "excluded": [
     "Real Madrid",
     "FC Barcelona"
   ],
-  "completedMatches": 78,
+  "completedMatches": 79,
   "excludedMatches": 16,
-  "includedMatches": 62,
+  "includedMatches": 63,
   "officialTableApproximation": [
     {
       "id": 81,
@@ -106,14 +106,14 @@
     {
       "id": 560,
       "name": "Deportivo La Coruña",
-      "P": 8,
+      "P": 9,
       "W": 2,
-      "D": 4,
+      "D": 5,
       "L": 2,
-      "GF": 12,
-      "GA": 11,
+      "GF": 13,
+      "GA": 12,
       "GD": 1,
-      "Pts": 10,
+      "Pts": 11,
       "position": 8
     },
     {
@@ -223,14 +223,14 @@
     {
       "id": 88,
       "name": "Levante",
-      "P": 7,
+      "P": 8,
       "W": 1,
-      "D": 3,
+      "D": 4,
       "L": 3,
-      "GF": 11,
-      "GA": 15,
+      "GF": 12,
+      "GA": 16,
       "GD": -4,
-      "Pts": 6,
+      "Pts": 7,
       "position": 17
     },
     {
@@ -352,14 +352,14 @@
     {
       "id": 560,
       "name": "Deportivo La Coruña",
-      "P": 8,
+      "P": 9,
       "W": 2,
-      "D": 4,
+      "D": 5,
       "L": 2,
-      "GF": 12,
-      "GA": 11,
+      "GF": 13,
+      "GA": 12,
       "GD": 1,
-      "Pts": 10,
+      "Pts": 11,
       "position": 6,
       "originalPosition": 8,
       "positionChange": 2
@@ -485,6 +485,21 @@
       "positionChange": 2
     },
     {
+      "id": 88,
+      "name": "Levante",
+      "P": 7,
+      "W": 1,
+      "D": 4,
+      "L": 2,
+      "GF": 10,
+      "GA": 12,
+      "GD": -2,
+      "Pts": 7,
+      "position": 15,
+      "originalPosition": 17,
+      "positionChange": 2
+    },
+    {
       "id": 285,
       "name": "Elche",
       "P": 6,
@@ -495,24 +510,9 @@
       "GA": 9,
       "GD": 0,
       "Pts": 6,
-      "position": 15,
-      "originalPosition": 18,
-      "positionChange": 3
-    },
-    {
-      "id": 88,
-      "name": "Levante",
-      "P": 6,
-      "W": 1,
-      "D": 3,
-      "L": 2,
-      "GF": 9,
-      "GA": 11,
-      "GD": -2,
-      "Pts": 6,
       "position": 16,
-      "originalPosition": 17,
-      "positionChange": 1
+      "originalPosition": 18,
+      "positionChange": 2
     },
     {
       "id": 95,
