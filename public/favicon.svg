@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-labelledby="t">
+<title id="t">The Usurper League — crowned football</title>
+<rect width="96" height="96" rx="21" fill="#102e25"/>
+<g stroke="#e9e4d2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+ <circle cx="47" cy="57" r="25" fill="#f6f1dd"/>
+ <path d="m47 42-11 8 4 13h14l5-13z" fill="#102e25" stroke="#102e25"/>
+ <path d="M23 51l13-1m18 13 12 11M31 76l9-13m19-13 14-7M47 32v10" stroke="#102e25" stroke-width="2.8"/>
+</g>
+<path d="m26 32-1-22 16 14 11-19 12 18 16-13-5 25z" fill="#c49b45" stroke="#f6e6b9" stroke-width="2.2" stroke-linejoin="round" transform="rotate(-12 50 22)"/>
+<circle cx="25" cy="12" r="3" fill="#e4bb65"/><circle cx="52" cy="6" r="3" fill="#e4bb65"/><circle cx="80" cy="10" r="3" fill="#e4bb65"/>
+</svg>
