@@ -5,17 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#102e25">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<meta name="description" content="The Usurper League: the money clubs can sod off. We're having a league. Spain's alternative standings and nearly a century of different champions.">
-<title>The Usurper League | The Money Clubs Can Sod Off</title>
-<link rel="canonical" href="https://the-real-league.pages.dev/">
+<meta name="description" content="La Liga without Real Madrid or Barcelona: explore today’s recalculated standings and 94 seasons of alternative Spanish champions. Same matches, different winners.">
+<title>La Liga Without Real Madrid &amp; Barcelona | The Usurper League</title>
+<link rel="canonical" href="https://usurperleague.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="The Usurper League">
-<meta property="og:url" content="https://the-real-league.pages.dev/">
-<meta property="og:title" content="The Usurper League — Football for the Rest of Us">
+<meta property="og:url" content="https://usurperleague.com/">
+<meta property="og:title" content="La Liga Without Madrid &amp; Barça | The Usurper League">
 <meta property="og:description" content="The money clubs can sod off. We’re having a league. Same football. Much more interesting.">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="The Usurper League — Football for the Rest of Us">
-<meta name="twitter:description" content="No Madrid. No Barça. The rest of football gets a turn. Updated tables and alternative champions.">
+<meta name="twitter:title" content="La Liga Without Madrid &amp; Barça | The Usurper League">
+<meta name="twitter:description" content="All their matches removed. Everyone else gets a title race. Explore the recalculated La Liga table and 94 historical seasons.">
 <style>
 :root{--ink:#172f28;--muted:#64756c;--gold:#cba962;--paper:#f5f3e9;--line:#dcded2;--deep:#112c24;--cream:#e7e7d8}*{box-sizing:border-box}
 html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
@@ -44,6 +44,7 @@ a{color:inherit}button{font:inherit;cursor:pointer}.container{max-width:1060px;p
 @media(max-width:710px){.brand{font-size:11px;letter-spacing:.12em}.hero{padding:43px 0 49px}.hero .hero-explainer,.hero .hero-method{font-size:14px}.hero .hero-sandpit{font-size:19px}.hero-slogan{font-size:23px!important}}
 </style>
 <link rel="stylesheet" href="/design.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"The Usurper League","url":"https://usurperleague.com/","description":"Alternative football league tables calculated without Real Madrid and FC Barcelona."}</script>
 </head>
 <body>
 <header class="masthead"><div class="container">
@@ -94,6 +95,7 @@ a{color:inherit}button{font:inherit;cursor:pointer}.container{max-width:1060px;p
   <div class="decade-links" id="decade-links" aria-label="Jump to decade"></div>
   <div class="season-wrapper"><button type="button" class="season-arrow" id="season-left" aria-label="Earlier seasons">‹</button><div class="season-scroll" role="tablist" aria-label="La Liga season" id="season-tabs"><button class="season-tab active" role="tab" aria-selected="true" data-season="2026-27">2026/27</button></div><button type="button" class="season-arrow" id="season-right" aria-label="Later seasons">›</button></div>
   <p id="season-alert" role="status" aria-live="polite"></p>
+  <p class="archive-search-link"><a href="/la-liga/" id="archive-all-link">Explore the alternative champions &amp; every historical table ↗</a></p>
 </section>
 <div class="sectionhead" id="how-it-works"><h2>How we stole the league</h2></div><section class="rules"><div class="rule"><span>01 / THE EXITS</span><b>Two clubs. One polite goodbye.</b><p>Real Madrid and Barcelona have their own table. This one is for everyone else.</p></div><div class="rule"><span>02 / THE ERASER</span><b>Their results go with them.</b><p>Every fixture against either club disappears. Points, goals, games played. We don’t do half-measures.</p></div><div class="rule"><span>03 / THE FUN</span><b>Then things get interesting.</b><p>Everyone else keeps their actual results. No invented scores, no fantasy transfers. Just a different champion.</p></div></section>
 <div class="actionrow"><button class="primary" id="share">Share the table ↗</button><button class="secondary" id="copy">Copy link</button><span class="notification" id="notice" role="status" aria-live="polite"></span></div>
