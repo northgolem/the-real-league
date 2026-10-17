@@ -42,24 +42,37 @@ a{color:inherit}button{font:inherit;cursor:pointer}.container{max-width:1060px;p
 .hero .eyebrow{max-width:670px}.hero{max-width:840px;padding-bottom:72px}
 @media(max-width:710px){.brand{font-size:11px;letter-spacing:.12em}.hero{padding:43px 0 49px}.hero .hero-explainer,.hero .hero-method{font-size:14px}.hero .hero-sandpit{font-size:19px}.hero-slogan{font-size:23px!important}}
 </style>
+<link rel="stylesheet" href="/design.css">
 </head>
 <body>
 <header class="masthead"><div class="container">
-<nav class="topbar"><a class="brand" href="/">◈ &nbsp; The Usurper League</a><div class="topright">NO GODS. <span>JUST FOOTBALL.</span></div><div class="language-picker" role="group" aria-label="Language / Idioma"><button class="lang-button active" type="button" data-lang="en" aria-pressed="true">EN</button><button class="lang-button" type="button" data-lang="es" aria-pressed="false">ES</button></div></nav>
-<div class="hero"><div class="eyebrow" id="competition-kicker">SPAIN / LA LIGA DE LOS MORTALES / 2026–27</div><h1>The <em>Usurper</em><br>League<span class="hero-period">.</span></h1>
-<p class="hero-slogan"><span class="line1">The money clubs can sod off.</span><span class="line2">We’re having a league.</span></p>
-<p class="hero-explainer">Yes, yes. Real Madrid and Barcelona are very good at football. We’ve all noticed.</p>
-<p class="hero-sandpit">They can go and play in their own sandpit.</p>
-<p class="hero-method">Meanwhile, we’ve removed every match involving either of them — points, goals, the lot — and given everyone else a chance to win something.</p>
-<p class="hero-closer">Same football. Much more interesting.</p><div class="pillbar"><span class="pill"><span class="x">✕</span> Real Madrid</span><span class="pill"><span class="x">✕</span> FC Barcelona</span><span class="pill">18 teams left</span></div></div>
-</div></header>
+<nav class="topbar" aria-label="Main navigation">
+  <a class="brand" href="/"><span class="brand-mark" aria-hidden="true">♛</span>The Usurper League</a>
+  <div class="site-nav"><a href="#league-table" id="nav-standings">Standings</a><a href="#archive" id="nav-archive">The archive</a><a href="#how-it-works" id="nav-how">How it works</a></div>
+  <div class="topright">NO GODS. <span>JUST FOOTBALL.</span></div>
+  <div class="language-picker" role="group" aria-label="Language / Idioma"><button class="lang-button active" type="button" data-lang="en" aria-pressed="true">EN</button><button class="lang-button" type="button" data-lang="es" aria-pressed="false">ES</button></div>
+</nav></div></header>
+<section class="hero-section" aria-label="The Usurper League — introduction"><div class="container"><div class="hero hero-layout">
+  <div class="hero-identity">
+    <div class="hero-art">
+      <img class="hero-logo" src="/usurper-logo.png" width="1150" height="655" alt="The Usurper League — crowned football mascot and vintage wordmark" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
+      <h1 class="logo-fallback" id="site-title" hidden>The <em>Usurper</em> League.</h1>
+    </div>
+    <p class="hero-slogan"><span class="line1">Let the rich kids keep the sandpit.</span><span class="line2">We’re having a league.</span></p>
+  </div>
+  <div class="hero-editorial">
+    <div class="eyebrow" id="competition-kicker">SPAIN / LA LIGA DE LOS MORTALES / 2026–27</div>
+    <h2 class="hero-headline"><span class="hero-headline-first">Same game.</span><br><span class="hero-headline-second">Different favourites.</span></h2>
+    <p class="hero-explainer">Yes, yes. Real Madrid and Barcelona are very good at football. We’ve all noticed.</p>
+    <p class="hero-sandpit">They can go and play in their own sandpit.</p>
+    <p class="hero-method">Meanwhile, we’ve removed every match involving either of them — points, goals, the lot — and given everyone else a chance to win something.</p>
+    <p class="hero-closer">Same football. Much more interesting.</p>
+    <div class="pillbar"><span class="pill"><span class="x">✕</span> Real Madrid</span><span class="pill"><span class="x">✕</span> FC Barcelona</span><span class="pill">18 teams left</span></div>
+    <div class="hero-actions"><a class="hero-button" id="hero-cta" href="#league-table">View the standings ↗</a><a class="hero-text-link" id="hero-about-link" href="#how-it-works">How it works</a></div>
+  </div>
+</div></div></section>
 <main class="container content">
-<section class="history-nav" aria-label="Choose football season">
-  <div class="history-top"><div><div class="eyebrow" id="archive-kicker">ALMOST A CENTURY OF ALTERNATIVE ENDINGS</div><h2 class="history-heading" id="archive-heading">Apparently, other clubs can win things.</h2></div><span class="history-context" id="season-context">Current season · updated daily</span></div>
-  <div class="decade-links" id="decade-links" aria-label="Jump to decade"></div>
-  <div class="season-wrapper"><button type="button" class="season-arrow" id="season-left" aria-label="Earlier seasons">‹</button><div class="season-scroll" role="tablist" aria-label="La Liga season" id="season-tabs"><button class="season-tab active" role="tab" aria-selected="true" data-season="2026-27">2026/27</button></div><button type="button" class="season-arrow" id="season-right" aria-label="Later seasons">›</button></div>
-  <p id="season-alert" role="status" aria-live="polite"></p>
-</section>
+
 <div class="meta"><div class="tag"><span class="dot"></span> <span id="status">Preview mode · waiting for results</span></div><div class="tag" id="updated">Season 2026/27</div></div>
 <section class="card" id="league-table" aria-label="League table"><div class="cardhead"><div><div class="eyebrow">The standings</div><h2>Someone else gets a go.</h2><p id="matchinfo">The table recalculates automatically once a results feed is connected.</p></div><div class="switch" aria-label="Table selection"><button class="active" id="alternative" aria-pressed="true">No Gods</button><button id="original" aria-pressed="false">All Teams</button></div></div>
 <div class="tablewrap"><table><thead><tr><th>#</th><th>Club</th><th>P</th><th class="hidden-mobile">W</th><th class="hidden-mobile">D</th><th class="hidden-mobile">L</th><th>GD</th><th>Pts</th></tr></thead><tbody id="rows"></tbody></table><div class="empty" id="empty"><strong>The mortals are warming up.</strong><p>The standings will appear after the results feed completes its first update.</p></div></div>
@@ -74,7 +87,13 @@ a{color:inherit}button{font:inherit;cursor:pointer}.container{max-width:1060px;p
     <article class="metric-card"><div class="metric-label" id="rebound-label">Goal difference restored</div><h3 class="metric-value" id="rebound-value">—</h3><p class="metric-explain" id="rebound-explain"></p></article>
   </div>
 </section>
-<div class="sectionhead"><h2>How we stole the league</h2></div><section class="rules"><div class="rule"><span>01 / THE EXITS</span><b>Two clubs. One polite goodbye.</b><p>Real Madrid and Barcelona have their own table. This one is for everyone else.</p></div><div class="rule"><span>02 / THE ERASER</span><b>Their results go with them.</b><p>Every fixture against either club disappears. Points, goals, games played. We don’t do half-measures.</p></div><div class="rule"><span>03 / THE FUN</span><b>Then things get interesting.</b><p>Everyone else keeps their actual results. No invented scores, no fantasy transfers. Just a different champion.</p></div></section>
+<section class="history-nav" id="archive" aria-label="Choose football season">
+  <div class="history-top"><div><div class="eyebrow" id="archive-kicker">ALMOST A CENTURY OF ALTERNATIVE ENDINGS</div><h2 class="history-heading" id="archive-heading">Apparently, other clubs can win things.</h2></div><span class="history-context" id="season-context">Current season · updated daily</span></div>
+  <div class="decade-links" id="decade-links" aria-label="Jump to decade"></div>
+  <div class="season-wrapper"><button type="button" class="season-arrow" id="season-left" aria-label="Earlier seasons">‹</button><div class="season-scroll" role="tablist" aria-label="La Liga season" id="season-tabs"><button class="season-tab active" role="tab" aria-selected="true" data-season="2026-27">2026/27</button></div><button type="button" class="season-arrow" id="season-right" aria-label="Later seasons">›</button></div>
+  <p id="season-alert" role="status" aria-live="polite"></p>
+</section>
+<div class="sectionhead" id="how-it-works"><h2>How we stole the league</h2></div><section class="rules"><div class="rule"><span>01 / THE EXITS</span><b>Two clubs. One polite goodbye.</b><p>Real Madrid and Barcelona have their own table. This one is for everyone else.</p></div><div class="rule"><span>02 / THE ERASER</span><b>Their results go with them.</b><p>Every fixture against either club disappears. Points, goals, games played. We don’t do half-measures.</p></div><div class="rule"><span>03 / THE FUN</span><b>Then things get interesting.</b><p>Everyone else keeps their actual results. No invented scores, no fantasy transfers. Just a different champion.</p></div></section>
 <div class="actionrow"><button class="primary" id="share">Share the table ↗</button><button class="secondary" id="copy">Copy link</button><span class="notification" id="notice" role="status" aria-live="polite"></span></div>
 </main>
 <footer><div class="container"><span>© <span id="year"></span> The Usurper League · Independent football thought experiment, not affiliated with LaLiga or any club.</span><span>Football data provided by the <a href="https://www.football-data.org/">Football-Data.org API</a>.</span></div></footer>
