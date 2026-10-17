@@ -6,7 +6,7 @@ body{background:var(--paper);color:var(--ink);background-image:radial-gradient(c
 .masthead:after{display:none}
 .topbar{border:0;padding:14px 0;min-height:66px;gap:18px}
 .brand{font-family:Georgia,"Times New Roman",serif;text-transform:uppercase;font-size:17px;letter-spacing:-.015em;font-weight:800;color:#f8f5e7;white-space:nowrap}
-.brand-mark{color:var(--gold);font-size:22px;margin-right:7px;vertical-align:-1px}
+.brand-mark{display:inline-block;width:25px;height:25px;margin-right:9px;vertical-align:-7px;border-radius:6px}
 .site-nav{display:flex;gap:24px;align-items:center;margin-left:auto}
 .site-nav a{color:#eceadc;text-decoration:none;font-size:11px;letter-spacing:.115em;text-transform:uppercase;font-weight:750;white-space:nowrap;border-bottom:1px solid transparent;padding:6px 0}
 .site-nav a:hover,.site-nav a:focus-visible{border-color:var(--gold);color:#fff}
@@ -20,7 +20,7 @@ body{background:var(--paper);color:var(--ink);background-image:radial-gradient(c
 .hero-art{min-height:300px;display:flex;align-items:center;justify-content:center}
 .hero-logo{width:100%;max-width:660px;height:auto;display:block;mix-blend-mode:multiply}
 .hero-logo[hidden],.logo-fallback[hidden]{display:none!important}
-.hero h1.logo-fallback{font-size:clamp(56px,6vw,90px);color:var(--deep);margin:0;text-align:center;line-height:.95}
+.hero .logo-fallback{font-family:Georgia,"Times New Roman",serif;font-size:clamp(56px,6vw,90px);color:var(--deep);margin:0;text-align:center;line-height:.95}
 .logo-fallback em{color:var(--gold)}
 .hero .hero-slogan{color:var(--deep)!important;text-align:center;font-family:Georgia,"Times New Roman",serif;font-size:clamp(20px,2vw,25px)!important;margin:12px 0 0!important;max-width:none!important;font-weight:400}
 .hero-slogan .line1{font-style:italic}
@@ -119,3 +119,5 @@ footer .container{font-size:11px;line-height:1.8}footer a{color:#f0dda8}
   .hero-button{font-size:10px}.hero-text-link{font-size:10px}
   .tablewrap th,.tablewrap td{padding:12px 9px}
 }
+
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
