@@ -5,7 +5,10 @@
     en: {
       masthead: 'NO GODS. <span>JUST FOOTBALL.</span>',
       eyebrow: season => 'SPAIN / LA LIGA DE LOS MORTALES / ' + season,
-      slogan1: 'The money clubs can sod off.',
+      slogan1: 'Let the rich kids keep the sandpit.',
+      heroTitle1: 'Same game.',
+      heroTitle2: 'Different favourites.',
+      navStandings: 'Standings', navArchive: 'The archive', navHow: 'How it works', heroCta: 'View the standings ↗',
       slogan2: 'We’re having a league.',
       intro: "Yes, yes. Real Madrid and Barcelona are very good at football. We've all noticed.",
       sandpit: 'They can go and play in their own sandpit.',
@@ -71,7 +74,10 @@
     es: {
       masthead: 'SIN DIOSES. <span>SOLO FÚTBOL.</span>',
       eyebrow: season => 'ESPAÑA / LA LIGA DE LOS MORTALES / ' + season,
-      slogan1: 'Que les den a los clubes millonarios.',
+      slogan1: 'Que los niños ricos se queden con su patio.',
+      heroTitle1: 'El mismo fútbol.',
+      heroTitle2: 'Otros favoritos.',
+      navStandings: 'Clasificación', navArchive: 'El archivo', navHow: 'Cómo funciona', heroCta: 'Ver la clasificación ↗',
       slogan2: 'Nosotros montamos nuestra liga.',
       intro: 'Sí, sí. El Real Madrid y el Barça juegan muy bien al fútbol. Ya nos hemos enterado.',
       sandpit: 'Que se vayan a jugar a su propio patio.',
@@ -182,8 +188,8 @@
     document.documentElement.lang = language;
     document.title = 'The Usurper League | ' + season + ' | Football for the Rest of Us';
     const description = language === 'es'
-      ? 'Que les den a los clubes millonarios. Nosotros montamos nuestra liga. El mismo fútbol, sin Madrid ni Barça.'
-      : 'The money clubs can sod off. We’re having a league. Same football, without Madrid or Barça. Almost a century of alternative history.';
+      ? 'Que los niños ricos se queden con su patio. Nosotros montamos nuestra liga. Fútbol sin Madrid ni Barça, con casi un siglo de historia alternativa.'
+      : 'Let the rich kids keep the sandpit. We’re having a league. Real fixtures, different champions, and nearly a century of alternative history.';
     for (const selector of ['meta[name="description"]','meta[property="og:description"]','meta[name="twitter:description"]']) {
       const el = document.querySelector(selector);
       if (el) el.setAttribute('content', description);
@@ -197,6 +203,13 @@
     if (masthead) masthead.innerHTML = tr.masthead;
     set('#competition-kicker', tr.eyebrow(season));
     set('.hero-slogan .line1', tr.slogan1);
+    set('.hero-headline-first', tr.heroTitle1);
+    set('.hero-headline-second', tr.heroTitle2);
+    set('#nav-standings', tr.navStandings);
+    set('#nav-archive', tr.navArchive);
+    set('#nav-how', tr.navHow);
+    set('#hero-cta', tr.heroCta);
+    set('#hero-about-link', tr.navHow);
     set('.hero-slogan .line2', tr.slogan2);
     set('.hero-explainer', tr.intro);
     set('.hero-sandpit', tr.sandpit);
