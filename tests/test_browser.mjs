@@ -71,8 +71,11 @@ for (const [id, name] of [
 }
 
 assert.match(selectors.get('.topright').innerHTML,/NO GODS/);
-assert.equal(selectors.get('.hero-slogan .line1').textContent,'The money clubs can sod off.');
+assert.equal(selectors.get('.hero-slogan .line1').textContent,'Let the rich kids keep the sandpit.');
 assert.equal(selectors.get('.hero-slogan .line2').textContent,'We’re having a league.');
+assert.equal(selectors.get('.hero-headline-first').textContent,'Same game.');
+assert.equal(selectors.get('.hero-headline-second').textContent,'Different favourites.');
+assert.equal(doc.getElementById('nav-archive').textContent,'The archive');
 assert.match(selectors.get('.hero-explainer').textContent,/Real Madrid and Barcelona are very good/);
 assert.equal(selectors.get('.hero-sandpit').textContent,'They can go and play in their own sandpit.');
 assert.match(selectors.get('.hero-method').textContent,/removed every match involving either/);
@@ -88,8 +91,11 @@ context.window.renderEnhancements(dataset,'alternative');
 assert.equal(doc.documentElement.lang,'es');
 assert.equal(doc.getElementById('alternative').textContent,'Sin dioses');
 assert.match(selectors.get('.topright').innerHTML,/SIN DIOSES/);
-assert.equal(selectors.get('.hero-slogan .line1').textContent,'Que les den a los clubes millonarios.');
+assert.equal(selectors.get('.hero-slogan .line1').textContent,'Que los niños ricos se queden con su patio.');
 assert.equal(selectors.get('.hero-slogan .line2').textContent,'Nosotros montamos nuestra liga.');
+assert.equal(selectors.get('.hero-headline-first').textContent,'El mismo fútbol.');
+assert.equal(selectors.get('.hero-headline-second').textContent,'Otros favoritos.');
+assert.equal(doc.getElementById('nav-standings').textContent,'Clasificación');
 assert.match(selectors.get('.hero-explainer').textContent,/El Real Madrid y el Barça/);
 assert.equal(selectors.get('.hero-sandpit').textContent,'Que se vayan a jugar a su propio patio.');
 assert.match(selectors.get('.hero-method').textContent,/hemos quitado todos los partidos/);
