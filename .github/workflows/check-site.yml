@@ -24,5 +24,15 @@ jobs:
           dig the-real-league.pages.dev CNAME +noall +answer
           echo "PUBLIC HTTPS"
           curl -sSL -o /dev/null -w "HTTP status=%{http_code} remote IP=%{remote_ip} redirect=%{url_effective}\n" --max-time 15 https://the-real-league.pages.dev/ || true
+          echo "NEW DOMAIN AND ARCHIVE DNS"
+          dig @1.1.1.1 usurperleague.com A +short
+          echo "NEW DOMAIN LIVE HOMEPAGE"
+          curl -sSL -o /dev/null -w "home HTTP=%{http_code} dest=%{url_effective}\\n" --max-time 15 https://usurperleague.com/ || true
+          echo "NEW DOMAIN LIVE INDEX"
+          curl -sSL -o /dev/null -w "archive HTTP=%{http_code} dest=%{url_effective}\\n" --max-time 15 https://usurperleague.com/la-liga/ || true
+          echo "NEW DOMAIN LIVE 2023-24"
+          curl -sSL -o /dev/null -w "2023-24 HTTP=%{http_code} dest=%{url_effective}\\n" --max-time 15 https://usurperleague.com/la-liga/2023-24/ || true
+          echo "NEW DOMAIN LIVE SITEMAP"
+          curl -sSL -o /dev/null -w "sitemap HTTP=%{http_code} dest=%{url_effective}\\n" --max-time 15 https://usurperleague.com/sitemap.xml || true
           echo "BASELINE HTTPS"
           curl -sSL -o /dev/null -w "HTTP status=%{http_code}\n" --max-time 10 https://example.com/ || true
