@@ -72,6 +72,7 @@
         data = liveData;
         render();
         paintSelection();
+        if (updateURL) $('league-table')?.scrollIntoView?.({behavior:'smooth',block:'start'});
       }
       return;
     }
@@ -89,6 +90,7 @@
       render();
       paintSelection();
       setMessage('');
+      if (updateURL) $('league-table')?.scrollIntoView?.({behavior:'smooth',block:'start'});
     } catch (error) {
       if (selected !== season) return;
       setMessage(document.documentElement.lang === 'es'
