@@ -2,52 +2,52 @@
   "mode": "live",
   "competition": "La Liga de los Mortales",
   "season": "2026/27",
-  "generatedAt": "2026-10-17T09:30:17+00:00",
-  "latestResultAt": "2026-10-16T19:00:00Z",
+  "generatedAt": "2026-10-17T20:30:56+00:00",
+  "latestResultAt": "2026-10-17T16:30:00Z",
   "excluded": [
     "Real Madrid",
     "FC Barcelona"
   ],
-  "completedMatches": 79,
-  "excludedMatches": 16,
-  "includedMatches": 63,
+  "completedMatches": 82,
+  "excludedMatches": 17,
+  "includedMatches": 65,
   "officialTableApproximation": [
     {
       "id": 81,
       "name": "FC Barcelona",
-      "P": 8,
-      "W": 8,
+      "P": 9,
+      "W": 9,
       "D": 0,
       "L": 0,
-      "GF": 34,
-      "GA": 7,
-      "GD": 27,
-      "Pts": 24,
+      "GF": 39,
+      "GA": 9,
+      "GD": 30,
+      "Pts": 27,
       "position": 1
     },
     {
       "id": 78,
       "name": "Atlético Madrid",
-      "P": 8,
-      "W": 6,
+      "P": 9,
+      "W": 7,
       "D": 1,
       "L": 1,
-      "GF": 18,
+      "GF": 19,
       "GA": 8,
-      "GD": 10,
-      "Pts": 19,
+      "GD": 11,
+      "Pts": 22,
       "position": 2
     },
     {
       "id": 90,
       "name": "Real Betis",
-      "P": 8,
+      "P": 9,
       "W": 6,
       "D": 1,
-      "L": 1,
-      "GF": 14,
-      "GA": 9,
-      "GD": 5,
+      "L": 2,
+      "GF": 16,
+      "GA": 14,
+      "GD": 2,
       "Pts": 19,
       "position": 3
     },
@@ -117,6 +117,19 @@
       "position": 8
     },
     {
+      "id": 94,
+      "name": "Villarreal",
+      "P": 9,
+      "W": 2,
+      "D": 3,
+      "L": 4,
+      "GF": 13,
+      "GA": 13,
+      "GD": 0,
+      "Pts": 9,
+      "position": 9
+    },
+    {
       "id": 558,
       "name": "Celta Vigo",
       "P": 8,
@@ -127,7 +140,7 @@
       "GA": 6,
       "GD": 2,
       "Pts": 8,
-      "position": 9
+      "position": 10
     },
     {
       "id": 77,
@@ -140,31 +153,18 @@
       "GA": 6,
       "GD": 1,
       "Pts": 8,
-      "position": 10
-    },
-    {
-      "id": 94,
-      "name": "Villarreal",
-      "P": 8,
-      "W": 2,
-      "D": 2,
-      "L": 4,
-      "GF": 13,
-      "GA": 13,
-      "GD": 0,
-      "Pts": 8,
       "position": 11
     },
     {
       "id": 80,
       "name": "Espanyol",
-      "P": 8,
+      "P": 9,
       "W": 2,
       "D": 2,
-      "L": 4,
+      "L": 5,
       "GF": 11,
-      "GA": 11,
-      "GD": 0,
+      "GA": 12,
+      "GD": -1,
       "Pts": 8,
       "position": 12
     },
@@ -236,14 +236,14 @@
     {
       "id": 285,
       "name": "Elche",
-      "P": 8,
+      "P": 9,
       "W": 1,
-      "D": 3,
+      "D": 4,
       "L": 4,
       "GF": 11,
       "GA": 17,
       "GD": -6,
-      "Pts": 6,
+      "Pts": 7,
       "position": 18
     },
     {
@@ -277,14 +277,14 @@
     {
       "id": 78,
       "name": "Atlético Madrid",
-      "P": 7,
-      "W": 5,
+      "P": 8,
+      "W": 6,
       "D": 1,
       "L": 1,
-      "GF": 16,
+      "GF": 17,
       "GA": 7,
-      "GD": 9,
-      "Pts": 16,
+      "GD": 10,
+      "Pts": 19,
       "position": 1,
       "originalPosition": 2,
       "positionChange": 1
@@ -365,6 +365,21 @@
       "positionChange": 2
     },
     {
+      "id": 94,
+      "name": "Villarreal",
+      "P": 8,
+      "W": 2,
+      "D": 3,
+      "L": 3,
+      "GF": 13,
+      "GA": 12,
+      "GD": 1,
+      "Pts": 9,
+      "position": 7,
+      "originalPosition": 9,
+      "positionChange": 2
+    },
+    {
       "id": 77,
       "name": "Athletic Club",
       "P": 5,
@@ -375,8 +390,8 @@
       "GA": 4,
       "GD": 3,
       "Pts": 8,
-      "position": 7,
-      "originalPosition": 10,
+      "position": 8,
+      "originalPosition": 11,
       "positionChange": 3
     },
     {
@@ -390,39 +405,9 @@
       "GA": 6,
       "GD": 2,
       "Pts": 8,
-      "position": 8,
-      "originalPosition": 9,
-      "positionChange": 1
-    },
-    {
-      "id": 94,
-      "name": "Villarreal",
-      "P": 7,
-      "W": 2,
-      "D": 2,
-      "L": 3,
-      "GF": 13,
-      "GA": 12,
-      "GD": 1,
-      "Pts": 8,
       "position": 9,
-      "originalPosition": 11,
-      "positionChange": 2
-    },
-    {
-      "id": 80,
-      "name": "Espanyol",
-      "P": 7,
-      "W": 2,
-      "D": 2,
-      "L": 3,
-      "GF": 10,
-      "GA": 9,
-      "GD": 1,
-      "Pts": 8,
-      "position": 10,
-      "originalPosition": 12,
-      "positionChange": 2
+      "originalPosition": 10,
+      "positionChange": 1
     },
     {
       "id": 87,
@@ -435,9 +420,24 @@
       "GA": 7,
       "GD": 1,
       "Pts": 8,
-      "position": 11,
+      "position": 10,
       "originalPosition": 13,
-      "positionChange": 2
+      "positionChange": 3
+    },
+    {
+      "id": 80,
+      "name": "Espanyol",
+      "P": 8,
+      "W": 2,
+      "D": 2,
+      "L": 4,
+      "GF": 10,
+      "GA": 10,
+      "GD": 0,
+      "Pts": 8,
+      "position": 11,
+      "originalPosition": 12,
+      "positionChange": 1
     },
     {
       "id": 82,
@@ -485,6 +485,21 @@
       "positionChange": 2
     },
     {
+      "id": 285,
+      "name": "Elche",
+      "P": 7,
+      "W": 1,
+      "D": 4,
+      "L": 2,
+      "GF": 9,
+      "GA": 9,
+      "GD": 0,
+      "Pts": 7,
+      "position": 15,
+      "originalPosition": 18,
+      "positionChange": 3
+    },
+    {
       "id": 88,
       "name": "Levante",
       "P": 7,
@@ -495,24 +510,9 @@
       "GA": 12,
       "GD": -2,
       "Pts": 7,
-      "position": 15,
-      "originalPosition": 17,
-      "positionChange": 2
-    },
-    {
-      "id": 285,
-      "name": "Elche",
-      "P": 6,
-      "W": 1,
-      "D": 3,
-      "L": 2,
-      "GF": 9,
-      "GA": 9,
-      "GD": 0,
-      "Pts": 6,
       "position": 16,
-      "originalPosition": 18,
-      "positionChange": 2
+      "originalPosition": 17,
+      "positionChange": 1
     },
     {
       "id": 95,
