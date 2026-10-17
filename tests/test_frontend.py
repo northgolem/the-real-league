@@ -32,6 +32,17 @@ class WebsiteTests(unittest.TestCase):
         self.assertIn("renderEnhancements(data,view)", html)
         self.assertTrue((ROOT / "public/enhance.js").is_file())
         self.assertTrue(any(l.get("rel") == "canonical" for l in parser.links))
+        self.assertTrue((ROOT / "public/design.css").is_file())
+        self.assertTrue((ROOT / "public/favicon.svg").is_file())
+        self.assertTrue((ROOT / "public/brand-lockup.svg").is_file())
+        self.assertIn('href="/design.css"', html)
+        self.assertIn('src="/usurper-logo.png"', html)
+        self.assertIn("brand-lockup.svg", html)  # Image fallback until owner uploads the final illustration
+        self.assertIn('id="archive"', html)
+        self.assertIn('id="how-it-works"', html)
+        self.assertNotIn('src="https://', html)  # No externally hosted photos or club badge images
+        self.assertLess(html.index('id="league-table"'), html.index('id="archive"'))
+        self.assertIn('id="site-title"', html)
 
 if __name__ == "__main__":
     unittest.main()
