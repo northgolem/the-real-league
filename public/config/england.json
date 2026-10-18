@@ -1,0 +1,51 @@
+{
+  "competition": "Premier League",
+  "edition": "The Usurper League — England",
+  "exclusionLabel": "Big Six",
+  "description": "An alternative Premier League without the Big Six; every fixture involving these clubs is deleted in full.",
+  "excludedClubs": [
+    {
+      "name": "Arsenal",
+      "id": 57,
+      "aliases": [
+        "Arsenal FC"
+      ]
+    },
+    {
+      "name": "Chelsea",
+      "id": 61,
+      "aliases": [
+        "Chelsea FC"
+      ]
+    },
+    {
+      "name": "Liverpool",
+      "id": 64,
+      "aliases": [
+        "Liverpool FC"
+      ]
+    },
+    {
+      "name": "Manchester City",
+      "id": 65,
+      "aliases": [
+        "Manchester City FC"
+      ]
+    },
+    {
+      "name": "Manchester United",
+      "id": 66,
+      "aliases": [
+        "Manchester United FC"
+      ]
+    },
+    {
+      "name": "Tottenham Hotspur",
+      "id": 73,
+      "aliases": [
+        "Tottenham Hotspur FC"
+      ]
+    }
+  ],
+  "sourcePolicy": "Completed match scores from the public-domain footballcsv/england and openfootball/football.json archives; current scores from football-data.org. Change the excludedClubs list, re-run the two update workflows, then rebuild historical pages."
+}
