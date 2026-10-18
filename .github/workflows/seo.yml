@@ -6,6 +6,10 @@ on:
     branches: [main]
     paths:
       - 'scripts/build_seo.py'
+      - 'scripts/build_england_seo.py'
+      - 'public/config/england.json'
+      - 'public/england/history/index.json'
+      - 'public/england/history/seasons/**'
       - 'scripts/check_seo.py'
       - 'public/history/**'
       - '.github/workflows/seo.yml'
@@ -20,7 +24,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -34,5 +38,5 @@ jobs:
         run: |
           git config user.name 'usurper-league-bot'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git add -A public/la-liga public/sitemap.xml
+          git add -A public/la-liga public/england/history/index.html public/england/history/*/index.html public/sitemap.xml
           git diff --cached --quiet || (git commit -m 'Publish search-friendly historical football pages' && git push)
