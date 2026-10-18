@@ -1,6 +1,6 @@
 import unittest
 from scripts.build_england_history import (
-    load_rules, normalize, validate, calculate, year_id, source_info
+    load_rules, normalize, validate, calculate, source_info
 )
 
 
@@ -11,37 +11,42 @@ def complete(clubs):
 class EnglandHistoryTests(unittest.TestCase):
     def setUp(self):
         self.cfg,self.aliases=load_rules()
+        self.excluded=[x["name"] for x in self.cfg["excludedClubs"]]
+        self.n=len(self.excluded)
 
-    def test_all_six_excluded_when_in_league(self):
-        clubs=[x["name"] for x in self.cfg["excludedClubs"]]+[f"Club {i}" for i in range(14)]
+    def test_configured_clubs_all_excluded_when_in_league(self):
+        remaining=20-self.n
+        clubs=self.excluded+[f"Club {i}" for i in range(remaining)]
         data=calculate(complete(clubs),2010,self.cfg,"sample","https://example.org")
         self.assertEqual(data["completedMatches"],380)
-        self.assertEqual(data["includedMatches"],182)
-        self.assertEqual(data["excludedMatches"],198)
-        self.assertEqual(len(data["alternativeTable"]),14)
-        self.assertEqual(sum(x["P"] for x in data["alternativeTable"]),364)
-        self.assertEqual(data["excludedInSeason"],[x["name"] for x in self.cfg["excludedClubs"]])
+        self.assertEqual(data["includedMatches"],remaining*(remaining-1))
+        self.assertEqual(data["excludedMatches"],380-remaining*(remaining-1))
+        self.assertEqual(len(data["alternativeTable"]),remaining)
+        self.assertEqual(sum(x["P"] for x in data["alternativeTable"]),2*data["includedMatches"])
+        self.assertEqual(data["excludedInSeason"],self.excluded)
 
-    def test_absent_big_six_members_do_not_become_ghost_clubs(self):
-        included=[x["name"] for x in self.cfg["excludedClubs"] if x["name"]!="Manchester City"]
-        clubs=included+[f"Club {i}" for i in range(15)]
+    def test_absent_excluded_club_does_not_become_a_ghost_club(self):
+        missing=self.excluded[0]
+        included=[x for x in self.excluded if x!=missing]
+        remaining=20-len(included)
+        clubs=included+[f"Club {i}" for i in range(remaining)]
         data=calculate(complete(clubs),2001,self.cfg,"sample","https://example.org")
-        self.assertEqual(len(data["alternativeTable"]),15)
-        self.assertEqual(data["excludedMatches"],170)
-        self.assertNotIn("Manchester City",data["excludedInSeason"])
-        self.assertEqual(data["includedMatches"],210)
+        self.assertEqual(len(data["alternativeTable"]),remaining)
+        self.assertEqual(data["excludedMatches"],380-remaining*(remaining-1))
+        self.assertNotIn(missing,data["excludedInSeason"])
+        self.assertEqual(data["includedMatches"],remaining*(remaining-1))
 
     def test_1992_22_club_league(self):
-        included=[x["name"] for x in self.cfg["excludedClubs"]]
-        clubs=included+[f"Club {i}" for i in range(16)]
+        remaining=22-self.n
+        clubs=self.excluded+[f"Club {i}" for i in range(remaining)]
         data=calculate(complete(clubs),1992,self.cfg,"sample","https://example.org")
         self.assertEqual(data["completedMatches"],462)
-        self.assertEqual(len(data["alternativeTable"]),16)
-        self.assertEqual(data["includedMatches"],240)
+        self.assertEqual(len(data["alternativeTable"]),remaining)
+        self.assertEqual(data["includedMatches"],remaining*(remaining-1))
         self.assertEqual(data["pointsPerWin"],3)
 
     def test_reject_missing_and_duplicate_fixture(self):
-        clubs=[x["name"] for x in self.cfg["excludedClubs"]]+[f"Club {i}" for i in range(14)]
+        clubs=self.excluded+[f"Club {i}" for i in range(20-self.n)]
         full=complete(clubs)
         with self.assertRaisesRegex(ValueError,"games"):
             validate(full[:-1],2010)
@@ -58,6 +63,7 @@ class EnglandHistoryTests(unittest.TestCase):
         self.assertEqual(normalize("Wimbledon FC",self.aliases),"Wimbledon")
         self.assertIn("footballcsv/england",source_info(1992)[0])
         self.assertIn("openfootball/football.json",source_info(2025)[0])
+
 
 if __name__=="__main__":
     unittest.main()
