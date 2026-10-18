@@ -4,7 +4,7 @@
   const translations = {
     en: {
       masthead: 'NO GODS. <span>JUST FOOTBALL.</span>',
-      eyebrow: season => 'SPAIN / LA LIGA DE LOS MORTALES / ' + season,
+      eyebrow: season => 'THE USURPER LEAGUE / SPAIN / ' + season,
       slogan1: 'Let the rich kids keep the sandpit.',
       heroTitle1: 'Same game.',
       heroTitle2: 'Different favourites.',
@@ -74,7 +74,7 @@
     },
     es: {
       masthead: 'SIN DIOSES. <span>SOLO FÚTBOL.</span>',
-      eyebrow: season => 'ESPAÑA / LA LIGA DE LOS MORTALES / ' + season,
+      eyebrow: season => 'THE USURPER LEAGUE / ESPAÑA / ' + season,
       slogan1: 'Que los niños ricos se queden con su patio.',
       heroTitle1: 'El mismo fútbol.',
       heroTitle2: 'Otros favoritos.',
@@ -190,11 +190,11 @@
     document.documentElement.lang = language;
     document.title = historical
       ? (language === 'es'
-          ? 'La Liga ' + season + ' sin Madrid ni Barça | The Usurper League'
-          : 'La Liga ' + season + ' Without Real Madrid & Barcelona | The Usurper League')
+          ? 'The Usurper League — España | La Liga ' + season + ' sin Madrid ni Barça'
+          : 'The Usurper League — Spain | La Liga ' + season + ' Without Madrid & Barcelona')
       : (language === 'es'
-          ? 'La Liga sin Real Madrid ni Barcelona | The Usurper League'
-          : 'La Liga Without Real Madrid & Barcelona | The Usurper League');
+          ? 'The Usurper League — España | La Liga sin Madrid ni Barcelona'
+          : 'The Usurper League — Spain | La Liga Without Madrid & Barcelona');
     const description = language === 'es'
       ? 'La Liga sin Real Madrid ni Barcelona. Clasificaciones recalculadas y casi un siglo de campeones alternativos. Fútbol real, distintos ganadores.'
       : 'La Liga without Real Madrid or Barcelona: recalculated standings and 94 seasons of alternative champions. Same matches, different winners.';
