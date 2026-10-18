@@ -214,7 +214,7 @@
         json("/data/premier-league.json")
       ]);
       if(!config?.excludedClubs?.length || !Array.isArray(index.seasons) ||
-          index.seasons.length!==34 || live.mode!=="live" || live.competitionCode!=="PL" ||
+          index.seasons.length<34 || live.mode!=="live" || live.competitionCode!=="PL" ||
           live.exclusionGroup!==config.exclusionLabel ||
           live.excludedIds.join(",")!==config.excludedClubs.map(x=>x.id).sort((a,b)=>a-b).join(",") ||
           index.excluded.join(",")!==config.excludedClubs.map(x=>x.name).join(","))
