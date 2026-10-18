@@ -9,6 +9,7 @@ on:
       - 'public/config/england.json'
       - '.github/workflows/england-history.yml'
       - 'tests/test_england_history.py'
+      - 'scripts/check_england_history.py'
 
 permissions:
   contents: write
