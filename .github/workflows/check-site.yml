@@ -51,5 +51,12 @@ jobs:
           curl -fsSL --max-time 15 https://usurperleague.com/ | grep -q 'id="england-card"' && echo "Brand page has England choice"
           curl -fsSL --max-time 15 https://usurperleague.com/spain/ | grep -q 'id="league-table"' && echo "Spain page keeps working standings"
           curl -fsSL --max-time 15 https://usurperleague.com/england/ | grep -q 'id="premier-rows"' && echo "England page keeps working standings"
+          echo "ENGLAND HISTORICAL ARCHIVE"
+          curl -sSL -o /dev/null -w "english-history HTTP=%{http_code} dest=%{url_effective}\\n" --max-time 15 https://usurperleague.com/england/history/
+          curl -sSL -o /dev/null -w "1992-93 HTTP=%{http_code} dest=%{url_effective}\\n" --max-time 15 https://usurperleague.com/england/history/1992-93/
+          curl -sSL -o /dev/null -w "2015-16 HTTP=%{http_code} dest=%{url_effective}\\n" --max-time 15 https://usurperleague.com/england/history/2015-16/
+          curl -sSL -o /dev/null -w "england-config HTTP=%{http_code} dest=%{url_effective}\\n" --max-time 15 https://usurperleague.com/config/england.json
+          curl -fsSL --max-time 15 https://usurperleague.com/england/history/ | grep -q 'Norwich City' && echo "English honours board contains genuine historic clubs"
+          curl -fsSL --max-time 15 https://usurperleague.com/england/history/1992-93/ | grep -q 'Norwich City' && echo "1992/93 English historical table is published"
           echo "BASELINE HTTPS"
           curl -sSL -o /dev/null -w "HTTP status=%{http_code}\n" --max-time 10 https://example.com/ || true
