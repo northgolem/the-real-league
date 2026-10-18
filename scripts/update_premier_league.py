@@ -97,7 +97,7 @@ def completed_fixtures(matches, calculated):
     if len(fixtures) != calculated["completedMatches"]:
         raise ValueError("Match export disagrees with verified Premier League totals")
     converted = [
-        {"homeTeam": {"id": h}, "awayTeam": {"id": a}, "status": "FINISHED",
+        {"homeTeam": {"id": h, "shortName": known[h]}, "awayTeam": {"id": a, "shortName": known[a]}, "status": "FINISHED",
          "score": {"fullTime": {"home": hg, "away": ag}}}
         for h,a,hg,ag in fixtures
     ]
