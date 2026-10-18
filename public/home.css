@@ -1,0 +1,62 @@
+/* The Usurper League — a two-country front door. Original CSS, no external imagery. */
+:root{--green:#102f25;--green2:#1c4938;--gold:#bb954f;--cream:#f9f6eb;--paper:#f1ecdd;--ink:#183529;--line:#d8cfb7}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:Georgia,'Times New Roman',serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button{font:inherit;cursor:pointer}
+.site-inner{max-width:1190px;margin:auto;padding:0 30px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.site-top{background:var(--green);color:#f8f0db;border-bottom:2px solid var(--gold)}
+.site-top .site-inner{min-height:70px;display:flex;align-items:center;gap:20px;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;font-size:17px;font-weight:bold;letter-spacing:-.015em;text-decoration:none}
+.brand img{width:27px;height:27px;border-radius:5px}
+.right-menu{display:flex;align-items:center;gap:25px}
+.right-menu a{font:750 11px system-ui,sans-serif;text-transform:uppercase;letter-spacing:.08em;text-decoration:none}
+.right-menu a:hover{text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:6px}
+.lang{display:flex;border:1px solid #6c7b64;border-radius:3px;overflow:hidden}
+.lang button{border:0;background:none;color:#d5d3bb;padding:8px 11px;font:750 10px system-ui,sans-serif}
+.lang button[aria-pressed="true"]{background:#d1b16e;color:var(--green)}
+.hero{position:relative;overflow:hidden;text-align:center;padding:58px 24px 61px;background:radial-gradient(circle at 18% 65%,#eae4d4,transparent 50%),var(--cream);border-bottom:1px solid var(--line)}
+.hero:before,.hero:after{position:absolute;top:38px;bottom:34px;width:1px;background:#d6c8aa;content:'';opacity:.65}
+.hero:before{left:max(28px,calc((100% - 1180px)/2))}
+.hero:after{right:max(28px,calc((100% - 1180px)/2))}
+.kicker{font:800 10px/1.45 system-ui,sans-serif;letter-spacing:.21em;color:#96723b;text-transform:uppercase}
+.logo-wrap{display:flex;align-items:center;justify-content:center;margin:3px auto 2px;width:min(620px,94%)}
+.main-logo{display:block;width:100%;height:auto;mix-blend-mode:multiply}
+.logo-fallback{font:700 clamp(46px,8vw,86px)/1 Georgia,serif;text-align:center;color:var(--green)}
+.logo-fallback[hidden]{display:none}
+.crest-rule{display:flex;align-items:center;justify-content:center;gap:16px;color:#ae813c;margin:0 0 8px;font-size:21px}
+.crest-rule:before,.crest-rule:after{content:'';width:70px;height:1px;background:#c9b482}
+.hero-claim{font-size:clamp(24px,3vw,38px);line-height:1.16;letter-spacing:-.027em;margin:0 auto 14px;font-weight:600;max-width:840px}
+.hero-claim em{font-weight:500;color:#ae823b}
+.hero-deck{font:15px/1.65 system-ui,sans-serif;color:#52604d;max-width:610px;margin:auto}
+.choices{padding:38px 0 28px}
+.section-kicker{display:flex;align-items:center;justify-content:center;gap:17px;margin:0 0 22px}
+.section-kicker:before,.section-kicker:after{height:1px;content:'';background:#cfc5b1;flex:1}
+.section-kicker span{font:850 11px system-ui,sans-serif;color:#996d31;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
+.country-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.edition{display:flex;flex-direction:column;min-height:360px;background:#fffcf2;border:1px solid #d4ccb8;text-decoration:none;box-shadow:5px 6px 0 #ece3d1;transition:transform .16s ease,box-shadow .16s ease;position:relative}
+.edition:hover{transform:translateY(-3px);box-shadow:5px 9px 0 #e3d3b7}
+.edition:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
+.edition-head{padding:24px 29px 18px;background:var(--green);color:#f6efda;border-bottom:3px solid var(--gold)}
+.edition-country{display:flex;justify-content:space-between;align-items:center;font:800 11px system-ui,sans-serif;letter-spacing:.15em;color:#dfc996}
+.edition-country span:last-child{font-size:11px;color:#bcbda6}
+.edition h2{font-size:clamp(36px,4vw,55px);margin:9px 0 0;letter-spacing:-.04em;line-height:1}
+.edition-body{padding:27px 30px 23px;flex:1;display:flex;flex-direction:column}
+.edition-subtitle{font-size:clamp(21px,2.4vw,27px);line-height:1.2;font-style:italic;color:#a77b36;margin:0 0 15px}
+.edition-desc{font:14px/1.6 system-ui,sans-serif;color:#475848;margin:0;max-width:400px}
+.edition-now{margin-top:25px;padding:14px 0;border-top:1px solid #ded6c6;font:12px/1.55 system-ui,sans-serif;color:#536351}
+.edition-now .now-head{font-size:10px;letter-spacing:.12em;font-weight:800;color:#8a7044;text-transform:uppercase;display:block;margin-bottom:4px}
+.edition-now .now-value{font-weight:750;color:#153e2b;font-size:14px}
+.edition-link{display:flex;justify-content:space-between;align-items:center;font:850 11px system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;border-top:1px solid var(--line);padding:17px 30px;background:#f0e9d8;color:#20442f}
+.edition-link span:last-child{font-size:18px}
+.editorial-bottom{max-width:760px;text-align:center;margin:29px auto 43px;padding:0 20px}
+.editorial-bottom h2{font-size:26px;margin:10px 0}
+.editorial-bottom p{font:14px/1.65 system-ui,sans-serif;color:#5a6555;margin:0}
+.site-footer{background:var(--green);border-top:3px solid var(--gold);color:#d8d7c5}
+.footer-content{padding-top:23px;padding-bottom:25px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;font:12px/1.65 system-ui,sans-serif}
+.site-footer a{color:#f2ddb0}
+@media(max-width:780px){.site-inner{padding:0 19px}.site-top .site-inner{flex-wrap:wrap;padding-top:14px;padding-bottom:12px;gap:11px}.right-menu{margin-left:auto;gap:12px}.right-menu a{font-size:10px}.hero{padding:39px 16px 46px}.hero:before,.hero:after{display:none}.logo-wrap{width:min(570px,100%)}.hero-claim{font-size:26px}.country-grid{grid-template-columns:1fr;gap:20px}.edition{min-height:315px}.edition h2{font-size:45px}.choices{padding-top:26px}.editorial-bottom{margin:27px auto 40px}}
+@media(max-width:430px){.brand{font-size:14px}.right-menu{gap:9px}.right-menu a{font-size:9px}.lang button{padding:7px}.edition-head{padding:22px 23px}.edition-body{padding:24px 23px}.edition-link{padding:15px 23px}.edition{min-height:0}}
+@media(prefers-reduced-motion:reduce){.edition{transition:none}html{scroll-behavior:auto}}
