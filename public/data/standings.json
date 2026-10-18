@@ -2,8 +2,8 @@
   "mode": "live",
   "competition": "La Liga de los Mortales",
   "season": "2026/27",
-  "generatedAt": "2026-10-18T10:35:52+00:00",
-  "latestResultAt": "2026-10-17T19:00:00Z",
+  "generatedAt": "2026-10-18T18:22:23+00:00",
+  "latestResultAt": "2026-10-18T14:15:00Z",
   "excluded": [
     "Real Madrid",
     "FC Barcelona"
@@ -12,9 +12,9 @@
     81,
     86
   ],
-  "completedMatches": 83,
+  "completedMatches": 85,
   "excludedMatches": 17,
-  "includedMatches": 66,
+  "includedMatches": 68,
   "officialTableApproximation": [
     {
       "id": 81,
@@ -97,15 +97,28 @@
     {
       "id": 263,
       "name": "Alavés",
-      "P": 8,
+      "P": 9,
       "W": 3,
       "D": 2,
-      "L": 3,
-      "GF": 12,
-      "GA": 8,
-      "GD": 4,
+      "L": 4,
+      "GF": 13,
+      "GA": 10,
+      "GD": 3,
       "Pts": 11,
       "position": 7
+    },
+    {
+      "id": 558,
+      "name": "Celta Vigo",
+      "P": 9,
+      "W": 2,
+      "D": 5,
+      "L": 2,
+      "GF": 10,
+      "GA": 7,
+      "GD": 3,
+      "Pts": 11,
+      "position": 8
     },
     {
       "id": 560,
@@ -118,7 +131,20 @@
       "GA": 12,
       "GD": 1,
       "Pts": 11,
-      "position": 8
+      "position": 9
+    },
+    {
+      "id": 79,
+      "name": "Osasuna",
+      "P": 9,
+      "W": 3,
+      "D": 2,
+      "L": 4,
+      "GF": 10,
+      "GA": 18,
+      "GD": -8,
+      "Pts": 11,
+      "position": 10
     },
     {
       "id": 77,
@@ -131,7 +157,7 @@
       "GA": 6,
       "GD": 1,
       "Pts": 9,
-      "position": 9
+      "position": 11
     },
     {
       "id": 94,
@@ -144,20 +170,7 @@
       "GA": 13,
       "GD": 0,
       "Pts": 9,
-      "position": 10
-    },
-    {
-      "id": 558,
-      "name": "Celta Vigo",
-      "P": 8,
-      "W": 1,
-      "D": 5,
-      "L": 2,
-      "GF": 8,
-      "GA": 6,
-      "GD": 2,
-      "Pts": 8,
-      "position": 11
+      "position": 12
     },
     {
       "id": 80,
@@ -170,7 +183,7 @@
       "GA": 12,
       "GD": -1,
       "Pts": 8,
-      "position": 12
+      "position": 13
     },
     {
       "id": 87,
@@ -183,7 +196,7 @@
       "GA": 16,
       "GD": -5,
       "Pts": 8,
-      "position": 13
+      "position": 14
     },
     {
       "id": 82,
@@ -196,31 +209,18 @@
       "GA": 10,
       "GD": -6,
       "Pts": 8,
-      "position": 14
+      "position": 15
     },
     {
       "id": 5335,
       "name": "Racing Santander",
-      "P": 8,
+      "P": 9,
       "W": 2,
       "D": 2,
-      "L": 4,
+      "L": 5,
       "GF": 13,
-      "GA": 23,
-      "GD": -10,
-      "Pts": 8,
-      "position": 15
-    },
-    {
-      "id": 79,
-      "name": "Osasuna",
-      "P": 8,
-      "W": 2,
-      "D": 2,
-      "L": 4,
-      "GF": 8,
-      "GA": 18,
-      "GD": -10,
+      "GA": 25,
+      "GD": -12,
       "Pts": 8,
       "position": 16
     },
@@ -341,16 +341,31 @@
     {
       "id": 263,
       "name": "Alavés",
-      "P": 8,
+      "P": 9,
       "W": 3,
       "D": 2,
-      "L": 3,
-      "GF": 12,
-      "GA": 8,
-      "GD": 4,
+      "L": 4,
+      "GF": 13,
+      "GA": 10,
+      "GD": 3,
       "Pts": 11,
       "position": 5,
       "originalPosition": 7,
+      "positionChange": 2
+    },
+    {
+      "id": 558,
+      "name": "Celta Vigo",
+      "P": 9,
+      "W": 2,
+      "D": 5,
+      "L": 2,
+      "GF": 10,
+      "GA": 7,
+      "GD": 3,
+      "Pts": 11,
+      "position": 6,
+      "originalPosition": 8,
       "positionChange": 2
     },
     {
@@ -364,8 +379,23 @@
       "GA": 12,
       "GD": 1,
       "Pts": 11,
-      "position": 6,
-      "originalPosition": 8,
+      "position": 7,
+      "originalPosition": 9,
+      "positionChange": 2
+    },
+    {
+      "id": 79,
+      "name": "Osasuna",
+      "P": 9,
+      "W": 3,
+      "D": 2,
+      "L": 4,
+      "GF": 10,
+      "GA": 18,
+      "GD": -8,
+      "Pts": 11,
+      "position": 8,
+      "originalPosition": 10,
       "positionChange": 2
     },
     {
@@ -379,8 +409,8 @@
       "GA": 4,
       "GD": 3,
       "Pts": 9,
-      "position": 7,
-      "originalPosition": 9,
+      "position": 9,
+      "originalPosition": 11,
       "positionChange": 2
     },
     {
@@ -394,23 +424,8 @@
       "GA": 12,
       "GD": 1,
       "Pts": 9,
-      "position": 8,
-      "originalPosition": 10,
-      "positionChange": 2
-    },
-    {
-      "id": 558,
-      "name": "Celta Vigo",
-      "P": 8,
-      "W": 1,
-      "D": 5,
-      "L": 2,
-      "GF": 8,
-      "GA": 6,
-      "GD": 2,
-      "Pts": 8,
-      "position": 9,
-      "originalPosition": 11,
+      "position": 10,
+      "originalPosition": 12,
       "positionChange": 2
     },
     {
@@ -424,8 +439,8 @@
       "GA": 7,
       "GD": 1,
       "Pts": 8,
-      "position": 10,
-      "originalPosition": 13,
+      "position": 11,
+      "originalPosition": 14,
       "positionChange": 3
     },
     {
@@ -439,8 +454,8 @@
       "GA": 10,
       "GD": 0,
       "Pts": 8,
-      "position": 11,
-      "originalPosition": 12,
+      "position": 12,
+      "originalPosition": 13,
       "positionChange": 1
     },
     {
@@ -454,35 +469,20 @@
       "GA": 7,
       "GD": -3,
       "Pts": 8,
-      "position": 12,
-      "originalPosition": 14,
-      "positionChange": 2
-    },
-    {
-      "id": 5335,
-      "name": "Racing Santander",
-      "P": 7,
-      "W": 2,
-      "D": 2,
-      "L": 3,
-      "GF": 11,
-      "GA": 16,
-      "GD": -5,
-      "Pts": 8,
       "position": 13,
       "originalPosition": 15,
       "positionChange": 2
     },
     {
-      "id": 79,
-      "name": "Osasuna",
+      "id": 5335,
+      "name": "Racing Santander",
       "P": 8,
       "W": 2,
       "D": 2,
       "L": 4,
-      "GF": 8,
+      "GF": 11,
       "GA": 18,
-      "GD": -10,
+      "GD": -7,
       "Pts": 8,
       "position": 14,
       "originalPosition": 16,
