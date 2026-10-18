@@ -11,6 +11,7 @@ import json
 from pathlib import Path
 import re
 from xml.etree.ElementTree import Element, SubElement, ElementTree, indent
+from build_england_seo import build as build_england_pages
 
 ROOT = Path(__file__).resolve().parents[1]
 HISTORY = ROOT / "public/history"
@@ -218,12 +219,12 @@ def archive_index(archive):
                   breadcrumbs=[("The Usurper League", "/"), ("The Usurper League — Spain", "/spain/"), ("La Liga archive", "/la-liga/")])
 
 
-def sitemap(ids):
+def sitemap(ids, english_urls=()):
     # No lastmod: archival data is static, and rewriting the file should not
     # pretend all seasons have fresh content whenever this builder runs.
     ns = "http://www.sitemaps.org/schemas/sitemap/0.9"
     root = Element("urlset", xmlns=ns)
-    for url in [BASE + "/", BASE + "/spain/", BASE + "/england/", BASE + "/la-liga/"] + [f"{BASE}/la-liga/{x}/" for x in ids]:
+    for url in [BASE + "/", BASE + "/spain/", BASE + "/england/", BASE + "/la-liga/"] + [f"{BASE}/la-liga/{x}/" for x in ids] + [BASE+x for x in english_urls]:
         SubElement(SubElement(root, "url"), "loc").text = url
     indent(root)
     from io import BytesIO
@@ -264,8 +265,9 @@ def main():
             path.unlink()
             (OUT / stale).rmdir()
     write_if_changed(OUT / "index.html", archive_index(archive))
-    write_if_changed(SITEMAP, sitemap(ids))
-    print(f"Published {len(ids)} historical SEO pages, honours board and {len(ids)+4} sitemap URLs.")
+    english_urls = build_england_pages()
+    write_if_changed(SITEMAP, sitemap(ids, english_urls))
+    print(f"Published {len(ids)} historical SEO pages, honours board and {len(ids)+4+len(english_urls)} sitemap URLs.")
 
 
 if __name__ == "__main__":
