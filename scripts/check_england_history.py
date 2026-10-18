@@ -2,7 +2,7 @@
 """Check published English historical standings against untouched source fixtures."""
 import json
 from pathlib import Path
-from scripts.build_england_history import validate, calculate, year_id, source_info, load_rules
+from build_england_history import validate, calculate, year_id, source_info, load_rules
 
 ROOT=Path(__file__).resolve().parents[1]
 DATA=ROOT/"public/england/history"
