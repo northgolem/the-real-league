@@ -5,6 +5,7 @@ import vm from 'node:vm';
 const source=fs.readFileSync('public/home.js','utf8');
 const spain=JSON.parse(fs.readFileSync('public/data/standings.json','utf8'));
 const england=JSON.parse(fs.readFileSync('public/data/premier-league.json','utf8'));
+const rules=JSON.parse(fs.readFileSync('public/config/england.json','utf8'));
 
 function node(extra={}){
   const events=new Map();
@@ -27,12 +28,14 @@ async function load(es=false,spoof=false){
       search:es?'?lang=es':'',pathname:'/',hash:''},
     history:{replaceState(_a,_b,url){seen.push(url)}},
     fetch:async(path)=>{
+      if(path==='/config/england.json')return {ok:true,json:async()=>rules};
       if(path==='/data/standings.json')return {ok:true,json:async()=>spain};
       if(path==='/data/premier-league.json')return {ok:true,json:async()=>spoof?{...england,excludedIds:[1,2,3,4,5,6]}:england};
       throw Error('Unexpected request '+path);
     }
   };
   vm.runInNewContext(source,context,{filename:'home.js'});
+  await new Promise(resolve=>setImmediate(resolve));
   await new Promise(resolve=>setImmediate(resolve));
   return {get,doc,buttons,seen};
 }
