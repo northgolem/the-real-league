@@ -4,7 +4,9 @@ import vm from 'node:vm';
 
 const js = fs.readFileSync('public/premier-league/league.js', 'utf8');
 const results = JSON.parse(fs.readFileSync('public/data/premier-league.json', 'utf8'));
-const SIX = new Set([57, 61, 64, 65, 66, 73]);
+const config = JSON.parse(fs.readFileSync('public/config/england.json', 'utf8'));
+const SIX = new Set(config.excludedClubs.map(club=>club.id));
+const survivorCount = 20 - SIX.size;
 
 function node() {
   const callbacks = new Map();
@@ -28,7 +30,7 @@ async function load(dataset) {
   };
   const context = {
     document: { getElementById:get, createElement:()=>node() },
-    fetch: async () => ({ok:true, json:async()=>dataset}),
+    fetch: async (path) => ({ok:true, json:async()=>path==='/config/england.json'?config:dataset}),
     Date,
   };
   vm.runInNewContext(js, context, {filename:'league.js'});
@@ -38,7 +40,7 @@ async function load(dataset) {
 
 const get = await load(results);
 const alt = get('premier-rows');
-assert.equal(alt.children.length,14,'A 14-club alternative table must be visible');
+assert.equal(alt.children.length,survivorCount,'All surviving clubs must be visible');
 assert.equal(get('no-big-six').attrs['aria-pressed'],'true');
 assert.equal(get('matches-kept').textContent,results.includedMatches);
 assert.equal(get('matches-removed').textContent,results.excludedMatches);
@@ -46,12 +48,14 @@ assert.equal(alt.children[0].children[1].textContent,results.alternativeTable[0]
 assert.equal(alt.children[0].children[7].textContent,String(results.alternativeTable[0].Pts));
 assert(!results.alternativeTable.some(x=>SIX.has(x.id)),'No Big Six club can slip into table');
 assert.equal(get('story-title').textContent,results.alternativeTable[0].name+' are top. Well, well.');
+assert.equal(get('excluded-list').children.length,config.excludedClubs.length);
+assert.equal(get('no-big-six').textContent,'No '+config.exclusionLabel);
 
 get('all-teams').click();
 assert.equal(alt.children.length,20,'Full comparison must show all 20 clubs');
 assert.equal(get('all-teams').attrs['aria-pressed'],'true');
 get('no-big-six').click();
-assert.equal(alt.children.length,14,'Toggle back must show just 14 clubs');
+assert.equal(alt.children.length,survivorCount,'Toggle back must show all surviving clubs');
 
 const fake = JSON.parse(JSON.stringify(results));
 fake.alternativeTable[0].Pts += 9; // corrupt data must fail validation
