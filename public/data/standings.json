@@ -2,15 +2,15 @@
   "mode": "live",
   "competition": "La Liga de los Mortales",
   "season": "2026/27",
-  "generatedAt": "2026-10-17T20:30:56+00:00",
-  "latestResultAt": "2026-10-17T16:30:00Z",
+  "generatedAt": "2026-10-18T08:39:06+00:00",
+  "latestResultAt": "2026-10-17T19:00:00Z",
   "excluded": [
     "Real Madrid",
     "FC Barcelona"
   ],
-  "completedMatches": 82,
+  "completedMatches": 83,
   "excludedMatches": 17,
-  "includedMatches": 65,
+  "includedMatches": 66,
   "officialTableApproximation": [
     {
       "id": 81,
@@ -117,6 +117,19 @@
       "position": 8
     },
     {
+      "id": 77,
+      "name": "Athletic Club",
+      "P": 7,
+      "W": 2,
+      "D": 3,
+      "L": 2,
+      "GF": 7,
+      "GA": 6,
+      "GD": 1,
+      "Pts": 9,
+      "position": 9
+    },
+    {
       "id": 94,
       "name": "Villarreal",
       "P": 9,
@@ -127,7 +140,7 @@
       "GA": 13,
       "GD": 0,
       "Pts": 9,
-      "position": 9
+      "position": 10
     },
     {
       "id": 558,
@@ -139,19 +152,6 @@
       "GF": 8,
       "GA": 6,
       "GD": 2,
-      "Pts": 8,
-      "position": 10
-    },
-    {
-      "id": 77,
-      "name": "Athletic Club",
-      "P": 6,
-      "W": 2,
-      "D": 2,
-      "L": 2,
-      "GF": 7,
-      "GA": 6,
-      "GD": 1,
       "Pts": 8,
       "position": 11
     },
@@ -249,14 +249,14 @@
     {
       "id": 95,
       "name": "Valencia",
-      "P": 8,
+      "P": 9,
       "W": 1,
-      "D": 2,
+      "D": 3,
       "L": 5,
       "GF": 6,
       "GA": 15,
       "GD": -9,
-      "Pts": 5,
+      "Pts": 6,
       "position": 19
     },
     {
@@ -365,6 +365,21 @@
       "positionChange": 2
     },
     {
+      "id": 77,
+      "name": "Athletic Club",
+      "P": 6,
+      "W": 2,
+      "D": 3,
+      "L": 1,
+      "GF": 7,
+      "GA": 4,
+      "GD": 3,
+      "Pts": 9,
+      "position": 7,
+      "originalPosition": 9,
+      "positionChange": 2
+    },
+    {
       "id": 94,
       "name": "Villarreal",
       "P": 8,
@@ -375,24 +390,9 @@
       "GA": 12,
       "GD": 1,
       "Pts": 9,
-      "position": 7,
-      "originalPosition": 9,
-      "positionChange": 2
-    },
-    {
-      "id": 77,
-      "name": "Athletic Club",
-      "P": 5,
-      "W": 2,
-      "D": 2,
-      "L": 1,
-      "GF": 7,
-      "GA": 4,
-      "GD": 3,
-      "Pts": 8,
       "position": 8,
-      "originalPosition": 11,
-      "positionChange": 3
+      "originalPosition": 10,
+      "positionChange": 2
     },
     {
       "id": 558,
@@ -406,8 +406,8 @@
       "GD": 2,
       "Pts": 8,
       "position": 9,
-      "originalPosition": 10,
-      "positionChange": 1
+      "originalPosition": 11,
+      "positionChange": 2
     },
     {
       "id": 87,
@@ -517,14 +517,14 @@
     {
       "id": 95,
       "name": "Valencia",
-      "P": 7,
+      "P": 8,
       "W": 1,
-      "D": 2,
+      "D": 3,
       "L": 4,
       "GF": 6,
       "GA": 10,
       "GD": -4,
-      "Pts": 5,
+      "Pts": 6,
       "position": 17,
       "originalPosition": 19,
       "positionChange": 2
