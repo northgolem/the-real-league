@@ -10,7 +10,10 @@ import os
 from pathlib import Path
 from urllib.request import Request, urlopen
 
-from update import compute
+try:
+    from .update import compute  # Imported by unit tests
+except ImportError:
+    from update import compute   # Executed as a standalone script
 
 SEASON = int(os.getenv("SEASON", "2026"))
 OUT = Path(__file__).resolve().parents[1] / "public/data/premier-league.json"
