@@ -39,6 +39,7 @@
   const language = new URLSearchParams(location.search).get('lang') === 'es' ? 'es' : 'en';
   let activeLanguage = language;
   const leaders = { spain: null, england: null };
+  let englandRules = null;
   function setText(id, text) { const el = $(id); if (el) el.textContent = text; }
   function languageToPage(lang) {
     activeLanguage = lang;
@@ -50,6 +51,16 @@
     setText('topSpain',t.topSpain); setText('topEngland',t.topEngland);
     setText('spain-label',t.labels[0]); setText('england-label',t.labels[1]);
     setText('spain-enter',t.enterSpain); setText('england-enter',t.enterEngland);
+    if (englandRules) {
+      setText('englandSub',lang === 'es'
+        ? 'Sin los '+englandRules.exclusionLabel+'. Sin problema.'
+        : 'No '+englandRules.exclusionLabel+'. No problem.');
+      if (englandRules.exclusionLabel !== 'Big Six') {
+        setText('englandDesc',lang === 'es'
+          ? 'Los clubes excluidos pueden jugar en su propio patio. Los demás conservan sus resultados y tienen una liga de la que disfrutar.'
+          : 'The excluded clubs can keep the VIP lounge. The rest keep their games, their goals and a title race worth playing.');
+      }
+    }
     document.querySelectorAll('.lang button').forEach(button => {
       button.setAttribute('aria-pressed',String(button.dataset.lang===lang));
     });
@@ -72,10 +83,12 @@
 
   function validLead(data, kind) {
     if (!data || data.mode !== 'live' ||
-        !Array.isArray(data.alternativeTable) || data.alternativeTable.length !== (kind==='england'?14:18) ||
+        !Array.isArray(data.alternativeTable) || data.alternativeTable.length !== (kind==='england'?(englandRules?20-englandRules.excludedClubs.length:-1):18) ||
         !Number.isInteger(data.completedMatches) || data.completedMatches<=0) return null;
-    if (kind === 'england' && (data.competitionCode !== 'PL' ||
-        !Array.isArray(data.excludedIds) || data.excludedIds.join(',') !== '57,61,64,65,66,73'))
+    if (kind === 'england' && (!englandRules || data.competitionCode !== 'PL' ||
+        data.exclusionGroup !== englandRules.exclusionLabel ||
+        !Array.isArray(data.excludedIds) ||
+        data.excludedIds.join(',') !== englandRules.excludedClubs.map(x=>x.id).sort((a,b)=>a-b).join(',')))
       return null;
     if (kind === 'spain' && !(Array.isArray(data.excluded) &&
         data.excluded.includes('Real Madrid') && data.excluded.includes('FC Barcelona'))) return null;
@@ -97,5 +110,14 @@
     }
   }
   load('spain','/data/standings.json');
-  load('england','/data/premier-league.json');
+  fetch('/config/england.json',{cache:'no-store'}).then(r=>{
+    if(!r.ok) throw Error('England rules unavailable');
+    return r.json();
+  }).then(config=>{
+    if(!Array.isArray(config.excludedClubs)||config.excludedClubs.length<1 ||
+       typeof config.exclusionLabel!=='string') return;
+    englandRules=config;
+    languageToPage(activeLanguage);
+    load('england','/data/premier-league.json');
+  }).catch(()=>{ /* No unverified English leader without its exclusion rules. */ });
 })();
