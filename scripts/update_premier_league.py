@@ -17,6 +17,7 @@ except ImportError:
 
 SEASON = int(os.getenv("SEASON", "2026"))
 OUT = Path(__file__).resolve().parents[1] / "public/data/premier-league.json"
+MATCH_OUT = OUT.with_name("premier-league-matches.json")
 CONFIG_PATH = Path(__file__).resolve().parents[1] / "public/config/england.json"
 
 
@@ -76,6 +77,52 @@ def calculate(matches, season=SEASON, generated_at=None):
     result["exclusionGroup"] = config["exclusionLabel"]
     return result
 
+def completed_fixtures(matches, calculated):
+    """Export only real finished fixtures and independently verify tables."""
+    known = {r["id"]: r["name"] for r in calculated["officialTableApproximation"]}
+    fixtures, seen = [], set()
+    for m in matches:
+        if m.get("status") != "FINISHED":
+            continue
+        h = (m.get("homeTeam") or {}).get("id")
+        a = (m.get("awayTeam") or {}).get("id")
+        score = (m.get("score") or {}).get("fullTime") or {}
+        hg, ag = score.get("home"), score.get("away")
+        if h not in known or a not in known or type(hg) is not int or type(ag) is not int:
+            continue
+        if h == a or hg < 0 or ag < 0 or (h, a) in seen:
+            raise ValueError("Duplicate or invalid finished fixture in PL source")
+        seen.add((h, a))
+        fixtures.append([h, a, hg, ag])
+    if len(fixtures) != calculated["completedMatches"]:
+        raise ValueError("Match export disagrees with verified Premier League totals")
+    converted = [
+        {"homeTeam": {"id": h}, "awayTeam": {"id": a}, "status": "FINISHED",
+         "score": {"fullTime": {"home": hg, "away": ag}}}
+        for h,a,hg,ag in fixtures
+    ]
+    check = calculate(converted)
+    for key in ("alternativeTable","officialTableApproximation","completedMatches",
+                "excludedMatches","includedMatches"):
+        if check[key] != calculated[key]:
+            raise ValueError("Fixture validation disagrees on " + key)
+    return {"competitionCode": "PL", "season": calculated["season"],
+            "source": "football-data.org", "completedMatches": len(fixtures),
+            "clubs": [{"id": k, "name": v} for k,v in sorted(known.items())],
+            "matches": fixtures}
+
+
+def write_if_changed(path, data):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    payload = json.dumps(data, ensure_ascii=False, indent=2) + "\n"
+    if path.exists() and path.read_text(encoding="utf8") == payload:
+        return False
+    temp = path.with_suffix(".json.tmp")
+    temp.write_text(payload, encoding="utf8")
+    temp.replace(path)
+    return True
+
+
 def main():
     token = os.environ.get("FOOTBALL_DATA_TOKEN", "").strip()
     if not token:
@@ -95,18 +142,16 @@ def main():
     result = calculate(payload["matches"])
     if result["completedMatches"] == 0:
         raise ValueError("No completed Premier League matches, refusing to publish")
-    if OUT.exists():
-        old = json.loads(OUT.read_text(encoding="utf8"))
-        keys = ("completedMatches", "latestResultAt", "alternativeTable", "officialTableApproximation", "excluded", "excludedIds", "exclusionGroup")
-        if all(old.get(key) == result.get(key) for key in keys):
-            print("Premier League results unchanged")
-            return
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    tmp = OUT.with_suffix(".json.tmp")
-    tmp.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
-    tmp.replace(OUT)
+    fixtures = completed_fixtures(payload["matches"], result)
+    fixture_updated = write_if_changed(MATCH_OUT, fixtures)
+    old = json.loads(OUT.read_text(encoding="utf8")) if OUT.exists() else None
+    keys = ("completedMatches","latestResultAt","alternativeTable","officialTableApproximation","excluded","excludedIds","exclusionGroup")
+    if old is not None and all(old.get(k) == result.get(k) for k in keys):
+        print("Premier League unchanged" + ("; match export updated" if fixture_updated else ""))
+        return
+    write_if_changed(OUT, result)
     print(f"Premier League: {result['includedMatches']} games retained, "
-          f"{result['excludedMatches']} excluded; {len(result['alternativeTable'])} clubs.")
+          f"{result['excludedMatches']} excluded; {len(fixtures['matches'])} real results stored.")
 
 
 if __name__ == "__main__":
