@@ -69,3 +69,32 @@ body{background:var(--paper)}
 .english-history-teaser p{font-size:14px;color:#485b48;line-height:1.65;margin:0;max-width:670px}
 .english-history-teaser .primary-link{flex-shrink:0;margin:0;white-space:nowrap}
 @media(max-width:780px){.english-history-teaser{flex-direction:column;align-items:stretch;padding:24px 20px;gap:20px}.english-history-teaser .primary-link{width:fit-content}.english-history-link{display:block;margin:16px 0 0}}
+
+/* THE USURPER LEAGUE · THE GUEST LIST · INTERACTIVE LAB */
+.custom-lab{border:1px solid #d2c2a0;background:#f5efdf;padding:27px 30px 22px;margin-bottom:17px;box-shadow:5px 6px 0 #e5dcc5}
+.lab-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(190px,270px);gap:30px;align-items:start}
+.lab-head h3{font-size:clamp(27px,3vw,37px);letter-spacing:-.02em;margin:7px 0 9px;color:#173d2b}
+.lab-head p{max-width:650px;font-size:14px;line-height:1.65;color:#4e624f;margin:0 0 13px}
+.lab-season label{display:block;font:800 11px system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#826c43;margin-bottom:8px}
+.lab-season select{display:block;width:100%;padding:12px 30px 12px 12px;font:750 14px system-ui,sans-serif;background:#fffdf6;color:#1b422f;border:1px solid #bcb091;border-radius:3px;cursor:pointer}
+.lab-season select:focus-visible,.club-switch:focus-within,.lab-actions button:focus-visible{outline:3px solid #b38a3f;outline-offset:3px}
+.club-picker{border:0;padding:0;margin:13px 0 20px;min-width:0}
+.club-picker legend{font:800 12px system-ui,sans-serif;text-transform:uppercase;letter-spacing:.08em;padding:0;margin:0 0 13px;color:#52644a}
+.club-picker legend span{display:inline-block;background:#123e2a;color:#f7e9ba;font:800 11px system-ui,sans-serif;border-radius:3px;padding:3px 8px;margin-left:9px;letter-spacing:0;text-transform:none}
+.club-picker-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.club-switch{display:flex;align-items:center;gap:10px;min-height:51px;padding:11px 12px;background:#fffcf2;border:1px solid #d4c6ac;cursor:pointer;font:750 13px/1.4 system-ui,sans-serif;color:#224733;transition:border-color .12s,background .12s}
+.club-switch:has(input:checked){background:#deead7;border-color:#70947c}
+.club-switch:has(input:not(:checked)){color:#757669;background:#f9f6ea}
+.club-switch input{accent-color:#1d6545;width:18px;height:18px;flex:0 0 18px;cursor:pointer}
+.lab-actions{display:flex;justify-content:space-between;gap:14px;align-items:center;flex-wrap:wrap;border-top:1px solid #d8ccb5;padding-top:17px}
+.lab-actions button{padding:11px 15px;font:800 12px system-ui,sans-serif;border-radius:3px;min-height:42px;cursor:pointer}
+.lab-actions button:disabled{opacity:.48;cursor:wait}
+.lab-presets{display:flex;gap:7px}
+.lab-presets button{border:1px solid #bcae90;background:#fcf9ee;color:#25513a}
+.lab-presets button[aria-pressed=true]{background:#153f2c;color:#f8f0dc;border-color:#153f2c}
+.lab-actions .share-league{background:#163f2e;border:1px solid #163f2e;color:#fff8e5}
+.lab-actions .share-league:hover{background:#275942}
+.lab-feedback{font:12px/1.5 system-ui,sans-serif;color:#6b6757;margin:14px 0 0}
+.custom-hint{font:12px/1.5 system-ui,sans-serif!important;color:#697360!important}
+@media(max-width:830px){.club-picker-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.lab-head{grid-template-columns:1fr;gap:14px}.lab-season{max-width:320px}}
+@media(max-width:480px){.custom-lab{padding:19px 16px}.lab-season{max-width:none}.club-picker-grid{grid-template-columns:1fr 1fr;gap:7px}.club-switch{font-size:11px;padding:9px 8px;gap:6px;min-height:54px}.club-switch input{width:16px;height:16px;flex-basis:16px}.lab-actions{align-items:stretch}.lab-presets{width:100%}.lab-presets button{flex:1;padding:10px 8px}.lab-actions .share-league{width:100%}}
