@@ -29,6 +29,8 @@ jobs:
         run: node --check public/enhance.js
       - name: Check bilingual table behavior
         run: node tests/test_browser.mjs
+      - name: Check new homepage language, current leaders and invalid data
+        run: node tests/test_home.mjs
       - name: Check historical navigation syntax
         run: node --check public/history.js
       - name: Validate historical tables
