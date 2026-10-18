@@ -83,7 +83,11 @@ class PremierLeagueTests(unittest.TestCase):
     def test_premier_league_page_has_no_placeholder_score(self):
         html = (ROOT / "public/england/index.html").read_text(encoding="utf-8")
         javascript = (ROOT / "public/premier-league/league.js").read_text(encoding="utf-8")
-        self.assertIn('src="/premier-league/league.js"', html)
+        self.assertIn('src="/premier-league/core.js"', html)
+        self.assertIn('src="/premier-league/customizer.js"', html)
+        self.assertIn('id="custom-checks"', html)
+        self.assertIn('id="custom-season"', html)
+        self.assertIn('id="custom-share"', html)
         self.assertIn('href="/premier-league/league.css"', html)
         self.assertIn('href="https://usurperleague.com/england/"', html)
         self.assertIn('id="no-big-six"', html)
