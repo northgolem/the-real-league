@@ -17,16 +17,24 @@ except ImportError:
 
 SEASON = int(os.getenv("SEASON", "2026"))
 OUT = Path(__file__).resolve().parents[1] / "public/data/premier-league.json"
+CONFIG_PATH = Path(__file__).resolve().parents[1] / "public/config/england.json"
+
+
+def load_config():
+    """One editable list drives both the live and historical English competitions."""
+    config = json.loads(CONFIG_PATH.read_text(encoding="utf8"))
+    clubs = config["excludedClubs"]
+    ids = [club["id"] for club in clubs]
+    names = [club["name"] for club in clubs]
+    if not ids or len(ids) != len(set(ids)) or len(names) != len(set(names)):
+        raise ValueError("Excluded-club configuration must contain unique clubs")
+    return config
+
+# Retained for backwards compatibility with the published regression tests.
+
 
 # football-data.org's stable team IDs — verify presence of all six every run.
-BIG_SIX = {
-    57: "Arsenal",
-    61: "Chelsea",
-    64: "Liverpool",
-    65: "Manchester City",
-    66: "Manchester United",
-    73: "Tottenham Hotspur",
-}
+BIG_SIX = {club["id"]:club["name"] for club in load_config()["excludedClubs"]}
 # Public-facing names, never crests, registered team marks or third-party images.
 DISPLAY_NAMES = {
     57: "Arsenal", 61: "Chelsea", 64: "Liverpool",
@@ -38,35 +46,35 @@ DISPLAY_NAMES = {
     341: "Leeds United", 351: "Nottingham Forest", 563: "West Ham United",
 }
 
-METHODOLOGY = (
-    "An independent alternative Premier League, not the official standings. "
-    "Every fixture involving Arsenal, Chelsea, Liverpool, Manchester City, "
-    "Manchester United or Tottenham Hotspur is excluded in full. "
-    "Rankings use points, goal difference and goals scored; official further "
-    "tiebreaks, deductions and disciplinary rulings may differ."
-)
-
-
 def calculate(matches, season=SEASON, generated_at=None):
+    config = load_config()
+    excluded = config["excludedClubs"]
+    ids = {club["id"] for club in excluded}
+    names = [club["name"] for club in excluded]
+    display_names = {**DISPLAY_NAMES, **{club["id"]: club["name"] for club in excluded}}
+    methodology = (
+        "An independent alternative Premier League, not the official standings. "
+        "Every fixture involving " + ", ".join(names) + " is removed in full. "
+        "Rankings use points, goal difference and goals scored. "
+        "Official further tiebreaks, disciplinary rulings and deductions may differ."
+    )
     result = compute(
         matches, season=season, generated_at=generated_at,
-        excluded_ids=set(BIG_SIX),
-        excluded_names=list(BIG_SIX.values()),
-        display_names=DISPLAY_NAMES,
-        competition="The Other Premier League",
-        methodology=METHODOLOGY
+        excluded_ids=ids,
+        excluded_names=names,
+        display_names=display_names,
+        competition="The Usurper League — England",
+        methodology=methodology
     )
-    # Fail closed: publish nothing if the feed is incomplete or out of scope.
     if len(result["officialTableApproximation"]) != 20:
         raise ValueError("Expected exactly 20 Premier League clubs in API match feed")
-    if len(result["alternativeTable"]) != 14:
-        raise ValueError("Expected 14 clubs after removing the Big Six")
+    if len(result["alternativeTable"]) != 20-len(ids):
+        raise ValueError("Wrong number of clubs after English exclusions")
     if result["completedMatches"] != result["includedMatches"] + result["excludedMatches"]:
         raise ValueError("Finished-match accounting inconsistent")
     result["competitionCode"] = "PL"
-    result["exclusionGroup"] = "Big Six"
+    result["exclusionGroup"] = config["exclusionLabel"]
     return result
-
 
 def main():
     token = os.environ.get("FOOTBALL_DATA_TOKEN", "").strip()
@@ -89,7 +97,7 @@ def main():
         raise ValueError("No completed Premier League matches, refusing to publish")
     if OUT.exists():
         old = json.loads(OUT.read_text(encoding="utf8"))
-        keys = ("completedMatches", "latestResultAt", "alternativeTable", "officialTableApproximation")
+        keys = ("completedMatches", "latestResultAt", "alternativeTable", "officialTableApproximation", "excluded", "excludedIds", "exclusionGroup")
         if all(old.get(key) == result.get(key) for key in keys):
             print("Premier League results unchanged")
             return
