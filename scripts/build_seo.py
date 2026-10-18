@@ -73,7 +73,7 @@ def chrome(title, description, canonical, body, *, breadcrumbs=(), jsonld=None):
 <header class="site-header">
   <div class="page-width header-flex">
     <a class="site-brand" href="/" aria-label="The Usurper League homepage"><img src="/favicon.svg" width="35" height="35" alt=""> THE USURPER LEAGUE</a>
-    <nav aria-label="Site navigation"><a href="/">Current table</a><a href="/la-liga/">The archive</a><a href="/#how-it-works">How it works</a></nav>
+    <nav aria-label="Site navigation"><a href="/">Spain</a><a href="/premier-league/">England</a><a href="/la-liga/">The archive</a></nav>
   </div>
 </header>
 <main class="page-width">
@@ -223,7 +223,7 @@ def sitemap(ids):
     # pretend all seasons have fresh content whenever this builder runs.
     ns = "http://www.sitemaps.org/schemas/sitemap/0.9"
     root = Element("urlset", xmlns=ns)
-    for url in [BASE + "/", BASE + "/la-liga/"] + [f"{BASE}/la-liga/{x}/" for x in ids]:
+    for url in [BASE + "/", BASE + "/premier-league/", BASE + "/la-liga/"] + [f"{BASE}/la-liga/{x}/" for x in ids]:
         SubElement(SubElement(root, "url"), "loc").text = url
     indent(root)
     from io import BytesIO
