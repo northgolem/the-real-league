@@ -20,21 +20,34 @@ DISPLAY_NAMES = {
     81: "FC Barcelona",
 }
 
-def compute(matches, season=SEASON, generated_at=None):
+def compute(matches, season=SEASON, generated_at=None, *, excluded_ids=None,
+            display_names=None, competition="La Liga de los Mortales",
+            excluded_names=None, methodology=None):
+    """Recalculate a league after removing every fixture involving chosen clubs.
+
+    All six/both excluded clubs must be in the feed. No standings are invented.
+    With no options, preserve Spain's existing behavior and published format.
+    """
+    excluded_ids = set(EXCLUDED_IDS if excluded_ids is None else excluded_ids)
+    display_names = DISPLAY_NAMES if display_names is None else display_names
+    if not excluded_ids:
+        raise ValueError("At least one excluded club is required")
     clubs = {}
     for m in matches:
         for side in ("homeTeam", "awayTeam"):
             t = m.get(side) or {}
             if t.get("id") is not None:
-                clubs[t["id"]] = {"id": t["id"], "name": DISPLAY_NAMES.get(t["id"], t.get("shortName") or t.get("name") or str(t["id"]))}
-    if not EXCLUDED_IDS.issubset(clubs):
-        raise ValueError("Missing Barcelona or Real Madrid in feed")
+                clubs[t["id"]] = {"id": t["id"], "name": display_names.get(t["id"], t.get("shortName") or t.get("name") or str(t["id"]))}
+    if not excluded_ids.issubset(clubs):
+        raise ValueError("Missing excluded clubs in feed: " + repr(sorted(excluded_ids - clubs.keys())))
+    if len(excluded_ids) >= len(clubs):
+        raise ValueError("Not enough clubs remain after exclusions")
 
     def blank(t):
         return dict(id=t["id"], name=t["name"], P=0, W=0, D=0, L=0, GF=0, GA=0, GD=0, Pts=0)
 
     full = {k: blank(v) for k, v in clubs.items()}
-    alternative = {k: blank(v) for k, v in clubs.items() if k not in EXCLUDED_IDS}
+    alternative = {k: blank(v) for k, v in clubs.items() if k not in excluded_ids}
     completed = removed = included = 0
     latest = None
 
@@ -65,7 +78,7 @@ def compute(matches, season=SEASON, generated_at=None):
                 x["D"] += 1; y["D"] += 1; x["Pts"] += 1; y["Pts"] += 1
 
         record(full)
-        if h in EXCLUDED_IDS or a in EXCLUDED_IDS:
+        if h in excluded_ids or a in excluded_ids:
             removed += 1
         else:
             record(alternative)
@@ -88,17 +101,18 @@ def compute(matches, season=SEASON, generated_at=None):
         r["positionChange"] = r["originalPosition"] - r["position"]
     return {
         "mode": "live",
-        "competition": "La Liga de los Mortales",
+        "competition": competition,
         "season": f"{season}/{str(season + 1)[2:]}",
         "generatedAt": generated_at or dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
         "latestResultAt": latest,
-        "excluded": ["Real Madrid", "FC Barcelona"],
+        "excluded": excluded_names if excluded_names is not None else ["Real Madrid", "FC Barcelona"],
+        "excludedIds": sorted(excluded_ids),
         "completedMatches": completed,
         "excludedMatches": removed,
         "includedMatches": included,
         "officialTableApproximation": full_rows,
         "alternativeTable": alt_rows,
-        "methodology": "All matches involving Real Madrid or Barcelona excluded. Points, goal difference and goals scored used for provisional order; La Liga head-to-head rules not modelled.",
+        "methodology": methodology or "All matches involving Real Madrid or Barcelona excluded. Points, goal difference and goals scored used for provisional order; La Liga head-to-head rules not modelled.",
         "source": "football-data.org"
     }
 
