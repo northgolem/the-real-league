@@ -40,5 +40,16 @@ jobs:
           curl -sSL -o /dev/null -w "premier data HTTP=%{http_code} dest=%{url_effective}\\n" --max-time 15 https://usurperleague.com/data/premier-league.json
           echo "PREMIER LEAGUE JS"
           curl -sSL -o /dev/null -w "premier JS HTTP=%{http_code}\\n" --max-time 15 https://usurperleague.com/premier-league/league.js
+          echo "BRAND HOME AND COUNTRY EDITIONS"
+          curl -sSL -o /dev/null -w "brand HTTP=%{http_code} dest=%{url_effective}\\n" --max-time 15 https://usurperleague.com/
+          curl -sSL -o /dev/null -w "spain HTTP=%{http_code} dest=%{url_effective}\\n" --max-time 15 https://usurperleague.com/spain/
+          curl -sSL -o /dev/null -w "england HTTP=%{http_code} dest=%{url_effective}\\n" --max-time 15 https://usurperleague.com/england/
+          curl -sSL -o /dev/null -w "legacy-english HTTP=%{http_code} dest=%{url_effective}\\n" --max-time 15 https://usurperleague.com/premier-league/
+          curl -sSL -o /dev/null -w "home JS HTTP=%{http_code}\\n" --max-time 15 https://usurperleague.com/home.js
+          curl -sSL -o /dev/null -w "spain results HTTP=%{http_code}\\n" --max-time 15 https://usurperleague.com/data/standings.json
+          curl -sSL -o /dev/null -w "england results HTTP=%{http_code}\\n" --max-time 15 https://usurperleague.com/data/premier-league.json
+          curl -fsSL --max-time 15 https://usurperleague.com/ | grep -q 'id="england-card"' && echo "Brand page has England choice"
+          curl -fsSL --max-time 15 https://usurperleague.com/spain/ | grep -q 'id="league-table"' && echo "Spain page keeps working standings"
+          curl -fsSL --max-time 15 https://usurperleague.com/england/ | grep -q 'id="premier-rows"' && echo "England page keeps working standings"
           echo "BASELINE HTTPS"
           curl -sSL -o /dev/null -w "HTTP status=%{http_code}\n" --max-time 10 https://example.com/ || true
