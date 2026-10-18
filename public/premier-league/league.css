@@ -1,0 +1,63 @@
+/* The Other Premier League: bespoke editorial layout, no external assets */
+:root{--deep:#102e25;--dark:#18362b;--gold:#b38a3f;--paper:#faf8ee;--line:#d8d0bd}
+body{background:var(--paper)}
+.site-header nav a[aria-current="page"]{color:#f4cf86;border-bottom:1px solid #d5b568}
+.hero-england{background:var(--paper);padding:64px 0 53px;border-bottom:1px solid var(--line);position:relative}
+.england-hero-layout{display:grid;grid-template-columns:1.35fr .65fr;gap:45px;align-items:center}
+.hero-england h1{font-size:clamp(46px,5.8vw,74px);line-height:1.02;margin:13px 0 23px}
+.hero-england h1 em{color:var(--gold);font-style:normal}
+.england-intro{max-width:610px;font-size:19px!important;color:#394d3d!important;line-height:1.55}
+.england-lead{font:700 italic 24px/1.25 Georgia,serif;margin:21px 0 0;color:#29543c}
+.hero-england p{font-size:15px;line-height:1.72;color:#475b49}
+.big-six-paper{border:1px solid #d6c7a7;background:#f5eedc;padding:25px 27px;transform:rotate(1deg);box-shadow:8px 8px 0 #e8dec5}
+.big-six-paper .scribble{font:700 italic 18px/1.4 Georgia,serif;color:#b2813a;margin-top:15px}
+.big-six-paper ul{list-style:none;padding:0;margin:16px 0 0}
+.big-six-paper li{padding:7px 0;border-bottom:1px solid #e3d7c2;font:700 14px system-ui,sans-serif}
+.big-six-paper li:last-child{border-bottom:0}
+.england-cta{margin-top:25px}
+.league-current{margin:38px auto 22px}
+.league-intro{display:flex;justify-content:space-between;gap:24px;align-items:end;margin-bottom:24px}
+.league-intro h2{font-size:clamp(28px,3vw,42px);margin:7px 0}
+.league-intro p{color:#5a6251;margin:0;font-size:14px}
+.section-marker{font:800 11px system-ui,sans-serif;text-transform:uppercase;letter-spacing:.15em;color:#aa7d35}
+.results-status{display:flex;gap:13px;align-items:center;justify-content:space-between;border:1px solid #d7ccaf;background:#f0ead8;padding:13px 19px;font:700 12px/1.5 system-ui,sans-serif;flex-wrap:wrap}
+.results-status span+span{font-weight:500;color:#5e674f}
+.english-table{margin-top:0;overflow:hidden}
+.english-table .panel-intro{padding-bottom:14px}
+.english-table .panel-intro h3{font-size:27px;margin:8px 0}
+.english-table .panel-intro p{font-size:13px;max-width:690px}
+.mode-buttons{display:flex;gap:6px;background:#eee6d6;border:1px solid #d6cbb5;border-radius:4px;padding:5px;width:fit-content;margin-top:17px}
+.mode-buttons button{padding:11px 16px;border:0;border-radius:3px;background:transparent;color:#53604f;cursor:pointer;font:700 12px system-ui,sans-serif}
+.mode-buttons button[aria-pressed="true"]{background:#153e2d;color:#f8f3dc}
+.mode-buttons button:focus-visible{outline:3px solid var(--gold)}
+.english-table th:nth-child(2),.english-table td:nth-child(2){text-align:left}
+.english-table tbody tr:first-child{background:#dce8d7}
+.english-table .points{font-weight:800}
+.english-table .position{color:#876522;font-size:11px}
+.table-notice{padding:28px 25px;background:#fffcf4;border-top:1px solid #e6decc;color:#385542}
+.table-notice strong{display:block;font-size:21px;font-family:Georgia,serif}
+.table-notice p{max-width:680px;margin:8px 0 0;font-size:14px}
+#premier-rows:empty + .table-notice{display:block}
+#premier-rows:not(:empty) + .table-notice{display:none}
+#premier-rows:empty{display:none}
+.table-scroll:has(#premier-rows:empty) thead{display:none}
+.england-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;background:var(--deep);color:#f3edda;border-top:3px solid #b18c47;margin-top:18px}
+.england-stats>div{padding:25px 28px;border-right:1px solid #526e56}
+.england-stats>div:last-child{border-right:0}
+.england-stats strong{display:block;font:600 45px/1.15 Georgia,serif;margin:8px 0 5px}
+.england-stats span{font:800 10px/1.4 system-ui,sans-serif;color:#c9ad75;letter-spacing:.09em;text-transform:uppercase}
+.england-stats small{font:12px/1.4 system-ui,sans-serif;color:#d3dbcc}
+.editorial-note{border-left:3px solid var(--gold);background:#f0eada;margin:32px 0;padding:25px 31px}
+.editorial-note h2{font-size:29px;margin:8px 0}
+.editorial-note p{max-width:770px;color:#4a5c47;font-size:15px}
+.england-about{margin:42px 0 58px}
+.england-about>h2{font-size:36px}
+.england-explain{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid #d8cfba}
+.england-explain article{padding:25px 26px;border-right:1px solid #d8cfba;background:#fffcf4}
+.england-explain article:last-child{border-right:0}
+.england-explain h3{font-size:21px;line-height:1.25;margin:11px 0 9px}
+.england-explain p{font-size:14px;color:#51624f;margin:0}
+.england-disclaimer{margin:30px 0 65px;font:12px/1.7 system-ui,sans-serif;color:#666956;max-width:850px}
+.page-width{max-width:1140px}
+@media(max-width:800px){.england-hero-layout{grid-template-columns:1fr}.hero-england{padding:37px 0 42px}.big-six-paper{transform:none}.league-intro{flex-direction:column;align-items:flex-start}.england-stats{grid-template-columns:1fr}.england-stats>div{border-right:0;border-bottom:1px solid #526e56}.england-explain{grid-template-columns:1fr}.england-explain article{border-right:0;border-bottom:1px solid #d8cfba}}
+@media(max-width:480px){.hero-england h1{font-size:42px}.england-intro{font-size:17px!important}.league-intro h2{font-size:29px}.results-status{gap:4px}.mode-buttons{width:100%}.mode-buttons button{flex:1;padding:10px 7px}.english-table td,.english-table th{padding:11px 8px;font-size:12px}.english-table .mobile-hide{display:none}.england-stats strong{font-size:39px}}
