@@ -1,0 +1,40 @@
+name: Build England historical league archive
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/build_england_history.py'
+      - 'public/config/england.json'
+      - '.github/workflows/england-history.yml'
+      - 'tests/test_england_history.py'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: england-history-build
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test historical football arithmetic, normalization and data protections
+        run: python -m unittest discover -s tests -p 'test_england_history.py'
+      - name: Fetch CC0 historical fixtures and calculate new league tables
+        run: python scripts/build_england_history.py
+      - name: Check archive season integrity
+        run: python scripts/check_england_history.py
+      - name: Publish original fixtures and calculated England seasons
+        run: |
+          git config user.name 'usurper-league-bot'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add -A public/england/history
+          git diff --cached --quiet || (git commit -m 'Publish verified historical Premier League seasons' && git push)
