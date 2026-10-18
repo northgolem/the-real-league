@@ -58,5 +58,13 @@ jobs:
           curl -sSL -o /dev/null -w "england-config HTTP=%{http_code} dest=%{url_effective}\\n" --max-time 15 https://usurperleague.com/config/england.json
           curl -fsSL --max-time 15 https://usurperleague.com/england/history/ | grep -q 'Norwich City' && echo "English honours board contains genuine historic clubs"
           curl -fsSL --max-time 15 https://usurperleague.com/england/history/1992-93/ | grep -q 'Norwich City' && echo "1992/93 English historical table is published"
+          echo "INTERACTIVE ENGLISH LEAGUE"
+          curl -sSL -o /dev/null -w "core math HTTP=%{http_code}\\n" --max-time 15 https://usurperleague.com/premier-league/core.js
+          curl -sSL -o /dev/null -w "club toggles HTTP=%{http_code}\\n" --max-time 15 https://usurperleague.com/premier-league/customizer.js
+          curl -sSL -o /dev/null -w "current match scores HTTP=%{http_code}\\n" --max-time 15 https://usurperleague.com/data/premier-league-matches.json
+          curl -sSL -o /dev/null -w "historical match scores HTTP=%{http_code}\\n" --max-time 15 https://usurperleague.com/england/history/matches/1992-93.json
+          curl -fsSL --max-time 15 https://usurperleague.com/england/ | grep -q 'id="custom-season"' && echo "Season selector is deployed"
+          curl -fsSL --max-time 15 https://usurperleague.com/england/ | grep -q 'id="custom-checks"' && echo "Excluded-club selector is deployed"
+          curl -fsSL --max-time 15 https://usurperleague.com/england/history/1992-93/ | grep -q 'season=1992-93' && echo "Historic season links to its interactive view"
           echo "BASELINE HTTPS"
           curl -sSL -o /dev/null -w "HTTP status=%{http_code}\n" --max-time 10 https://example.com/ || true
