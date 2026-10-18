@@ -73,7 +73,7 @@ def chrome(title, description, canonical, body, *, breadcrumbs=(), jsonld=None):
 <header class="site-header">
   <div class="page-width header-flex">
     <a class="site-brand" href="/" aria-label="The Usurper League homepage"><img src="/favicon.svg" width="35" height="35" alt=""> THE USURPER LEAGUE</a>
-    <nav aria-label="Site navigation"><a href="/">Spain</a><a href="/premier-league/">England</a><a href="/la-liga/">The archive</a></nav>
+    <nav aria-label="Site navigation"><a href="/">Home</a><a href="/spain/">Spain</a><a href="/england/">England</a><a href="/la-liga/">The archive</a></nav>
   </div>
 </header>
 <main class="page-width">
@@ -169,7 +169,7 @@ def year_page(data, prev_season, next_season):
 </section>
 {next_prev}
 """
-    breadcrumbs = [("The Usurper League", "/"), ("La Liga archive", "/la-liga/"), (label, f"/la-liga/{season_id}/")]
+    breadcrumbs = [("The Usurper League", "/"), ("The Usurper League — Spain", "/spain/"), ("La Liga archive", "/la-liga/"), (label, f"/la-liga/{season_id}/")]
     return chrome(title, desc, canonical, body, breadcrumbs=breadcrumbs,
                   jsonld={"@context":"https://schema.org", "@type":"WebPage",
                           "name": title, "url": canonical, "inLanguage":"en"})
@@ -203,7 +203,7 @@ def archive_index(archive):
   <h1>Spanish football.<br><em>A few different champions.</em></h1>
   <p class="standfirst">{len(seasons)} completed seasons recalculated without Real Madrid or FC Barcelona. The same real games, minus the fixtures involving either club.</p>
   <p>Who wins when the usual winners sit this one out? Quite a few clubs, as it turns out. Pick a season for every result, or see which clubs collect the most alternative titles.</p>
-  <a class="primary-link" href="/">See this season's live table ↗</a>
+  <a class="primary-link" href="/spain/">See Spain's current table ↗</a>
 </section>
 <section class="split">
   <div class="panel"><div class="panel-intro"><span class="kicker">THE ALTERNATIVE HONOURS BOARD</span><h2>Who gets the silverware?</h2><p>Number of first-place finishes across the {len(seasons)} validated historical seasons in this archive. Imaginary trophies; actual match results.</p></div>
@@ -215,7 +215,7 @@ def archive_index(archive):
     return chrome("La Liga Without Real Madrid & Barcelona: 94 Seasons | The Usurper League",
                   f"Explore {len(seasons)} recalculated La Liga seasons without Real Madrid and Barcelona. Find each alternative champion, full standings and the historical honours board.",
                   f"{BASE}/la-liga/", body,
-                  breadcrumbs=[("The Usurper League", "/"), ("La Liga archive", "/la-liga/")])
+                  breadcrumbs=[("The Usurper League", "/"), ("The Usurper League — Spain", "/spain/"), ("La Liga archive", "/la-liga/")])
 
 
 def sitemap(ids):
@@ -223,7 +223,7 @@ def sitemap(ids):
     # pretend all seasons have fresh content whenever this builder runs.
     ns = "http://www.sitemaps.org/schemas/sitemap/0.9"
     root = Element("urlset", xmlns=ns)
-    for url in [BASE + "/", BASE + "/premier-league/", BASE + "/la-liga/"] + [f"{BASE}/la-liga/{x}/" for x in ids]:
+    for url in [BASE + "/", BASE + "/spain/", BASE + "/england/", BASE + "/la-liga/"] + [f"{BASE}/la-liga/{x}/" for x in ids]:
         SubElement(SubElement(root, "url"), "loc").text = url
     indent(root)
     from io import BytesIO
@@ -265,7 +265,7 @@ def main():
             (OUT / stale).rmdir()
     write_if_changed(OUT / "index.html", archive_index(archive))
     write_if_changed(SITEMAP, sitemap(ids))
-    print(f"Published {len(ids)} historical SEO pages, honours board and {len(ids)+2} sitemap URLs.")
+    print(f"Published {len(ids)} historical SEO pages, honours board and {len(ids)+4} sitemap URLs.")
 
 
 if __name__ == "__main__":
