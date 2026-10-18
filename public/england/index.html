@@ -17,7 +17,8 @@
 <link rel="stylesheet" href="/archive.css">
 <link rel="stylesheet" href="/premier-league/league.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"The Usurper League — England | Premier League Without the Big Six","url":"https://usurperleague.com/england/","inLanguage":"en"}</script>
-<script defer src="/premier-league/league.js"></script>
+<script defer src="/premier-league/core.js"></script>
+<script defer src="/premier-league/customizer.js"></script>
 </head>
 <body>
 <header class="site-header"><div class="page-width header-flex">
@@ -59,18 +60,40 @@
       <div class="league-intro">
         <div><span class="section-marker">THE TABLE, RECONSIDERED</span>
         <h2 id="table-title">Fourteen clubs. An actual title race.</h2>
-        <p>Every score is real. Every match involving the six is gone.</p></div>
+        <p>Every score is real. You decide who gets to stay.</p></div>
       </div>
+      <section id="usurper-customizer" class="custom-lab" aria-labelledby="lab-heading">
+        <div class="lab-head">
+          <div><span class="kicker">THE GUEST LIST IS YOURS</span>
+          <h3 id="lab-heading">Who gets kicked out?</h3>
+          <p>Tick the clubs you want out. Every match they played disappears. Untick one and they're back. Real results, instant arguments.</p></div>
+          <div class="lab-season">
+            <label for="custom-season">Choose a season</label>
+            <select id="custom-season" disabled aria-label="Season to recalculate">
+              <option>Loading verified seasons…</option>
+            </select>
+          </div>
+        </div>
+        <fieldset id="custom-clubs" class="club-picker" disabled>
+          <legend>Excluded clubs <span id="custom-count">6 out</span></legend>
+          <div id="custom-checks" class="club-picker-grid"></div>
+        </fieldset>
+        <div class="lab-actions">
+          <div class="lab-presets" role="group" aria-label="Quick selections">
+            <button type="button" id="no-big-six" aria-pressed="true" disabled>Kick out the Big Six</button>
+            <button type="button" id="all-teams" aria-pressed="false" disabled>Let everyone play</button>
+          </div>
+          <button type="button" id="custom-share" class="share-league" disabled>Copy my league link <span aria-hidden="true">↗</span></button>
+        </div>
+        <p id="custom-feedback" class="lab-feedback" role="status" aria-live="polite">Loading the real match results…</p>
+      </section>
       <div class="results-status" role="status" aria-live="polite"><span id="results-status">Checking the verified results feed…</span><span id="results-updated">2026/27 · updated daily when data is available</span></div>
       <div class="panel english-table">
         <div class="panel-intro">
           <span class="kicker" id="table-kicker">THE OTHER PREMIER LEAGUE</span>
           <h3 id="table-heading">No Big Six. No problem.</h3>
           <p id="match-info">All completed Premier League matches involving Arsenal, Chelsea, Liverpool, Manchester City, Manchester United and Tottenham are excluded.</p>
-          <div class="mode-buttons" role="group" aria-label="Which table should be displayed?">
-            <button type="button" id="no-big-six" aria-pressed="true">No Big Six</button>
-            <button type="button" id="all-teams" aria-pressed="false">With Everyone</button>
-          </div>
+          <p class="custom-hint">Personalised league · only actual, completed fixtures count.</p>
         </div>
         <div class="table-scroll">
           <table aria-label="Premier League alternative standings">
