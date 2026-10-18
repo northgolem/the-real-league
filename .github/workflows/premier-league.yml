@@ -40,6 +40,8 @@ jobs:
           node --check public/premier-league/league.js
       - name: Verify current scores, all 34 archives and all 64 Big Six combinations
         run: node tests/test_custom_core.mjs
+      - name: Test guest-list clicks, historical picker and shareable URLs
+        run: node tests/test_custom_browser.mjs
       - name: Exercise the English page with real saved data and a corrupt-data fallback
         run: node tests/test_premier_browser.mjs
       - name: Fetch and calculate verified Premier League matches
