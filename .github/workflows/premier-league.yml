@@ -33,8 +33,13 @@ jobs:
           python-version: '3.12'
       - name: Validate original Spanish and new Premier League arithmetic
         run: python -m unittest discover -s tests -p 'test_*.py'
-      - name: Validate English frontend JavaScript
-        run: node --check public/premier-league/league.js
+      - name: Validate English guest-list JavaScript syntax
+        run: |
+          node --check public/premier-league/core.js
+          node --check public/premier-league/customizer.js
+          node --check public/premier-league/league.js
+      - name: Verify current scores, all 34 archives and all 64 Big Six combinations
+        run: node tests/test_custom_core.mjs
       - name: Exercise the English page with real saved data and a corrupt-data fallback
         run: node tests/test_premier_browser.mjs
       - name: Fetch and calculate verified Premier League matches
