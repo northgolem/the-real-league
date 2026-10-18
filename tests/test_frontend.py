@@ -21,7 +21,7 @@ class TagInspector(HTMLParser):
 
 class WebsiteTests(unittest.TestCase):
     def test_site_assets_and_translation_controls(self):
-        html = (ROOT / "public/index.html").read_text(encoding="utf8")
+        html = (ROOT / "public/spain/index.html").read_text(encoding="utf8")
         parser = TagInspector()
         parser.feed(html)
         for required in ("rows", "alternative", "original", "race-value", "slayers-value",
@@ -43,6 +43,22 @@ class WebsiteTests(unittest.TestCase):
         self.assertNotIn('src="https://', html)  # No externally hosted photos or club badge images
         self.assertLess(html.index('id="league-table"'), html.index('id="archive"'))
         self.assertIn('id="site-title"', html)
+        self.assertIn('href="https://usurperleague.com/spain/"', html)
+        self.assertIn("fetch('/data/standings.json'", html)
+
+    def test_brand_landing_has_both_editions(self):
+        html = (ROOT / "public/index.html").read_text(encoding="utf8")
+        parser = TagInspector()
+        parser.feed(html)
+        self.assertIn("spain-card", parser.ids)
+        self.assertIn("england-card", parser.ids)
+        self.assertIn("/home.js", parser.scripts)
+        self.assertIn('href="/home.css"', html)
+        self.assertIn('href="https://usurperleague.com/"', html)
+        self.assertIn('/spain/', html)
+        self.assertIn('/england/', html)
+        self.assertNotIn('src="https://', html)
+        self.assertIn("legacy.get('season')", html)
 
 if __name__ == "__main__":
     unittest.main()
