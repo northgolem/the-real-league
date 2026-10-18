@@ -33,6 +33,8 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_*.py'
       - name: Validate English frontend JavaScript
         run: node --check public/premier-league/league.js
+      - name: Exercise the English page with real saved data and a corrupt-data fallback
+        run: node tests/test_premier_browser.mjs
       - name: Fetch and calculate verified Premier League matches
         env:
           FOOTBALL_DATA_TOKEN: ${{ secrets.FOOTBALL_DATA_TOKEN }}
