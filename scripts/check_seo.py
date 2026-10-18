@@ -17,7 +17,24 @@ locs = [x.text for x in sitemap.findall(".//{*}loc")]
 expected = ["https://usurperleague.com/", "https://usurperleague.com/spain/", "https://usurperleague.com/england/", "https://usurperleague.com/la-liga/"] + [
     f"https://usurperleague.com/la-liga/{x}/" for x in ids
 ]
-assert locs == expected, "Sitemap must list exactly the real season pages"
+english_index = root / "england/history/index.json"
+if english_index.exists():
+    england = json.loads(english_index.read_text(encoding="utf8"))
+    english_seasons = england["seasons"]
+    assert len(english_seasons) >= 24
+    expected += ["https://usurperleague.com/england/history/"] + [
+        f"https://usurperleague.com/england/history/{row['id']}/" for row in english_seasons
+    ]
+    all_english = (root / "england/history/index.html").read_text(encoding="utf8")
+    assert "alternative" in all_english.lower() and "2025/26" in all_english
+    for entry in english_seasons:
+        sid = entry["id"]
+        html = (root / "england/history" / sid / "index.html").read_text(encoding="utf8")
+        assert f'https://usurperleague.com/england/history/{sid}/' in html
+        assert entry["champion"] in html
+        assert str(entry["points"]) in html
+        assert "CC0" in html and 'name="description"' in html
+assert locs == expected, "Sitemap must list exactly the real Spanish and English season pages"
 for id in ids:
     data = json.loads((root / "history" / (id + ".json")).read_text(encoding="utf-8"))
     html = (root / "la-liga" / id / "index.html").read_text(encoding="utf-8")
