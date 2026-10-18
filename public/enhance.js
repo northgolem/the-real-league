@@ -8,7 +8,7 @@
       slogan1: 'Let the rich kids keep the sandpit.',
       heroTitle1: 'Same game.',
       heroTitle2: 'Different favourites.',
-      navStandings: 'Standings', navArchive: 'The archive', navHow: 'How it works', heroCta: 'View the standings ↗',
+      navStandings: 'Spain · Standings', navEngland: 'England · Premier League', navArchive: 'The archive', navHow: 'How it works', heroCta: 'View the standings ↗',
       slogan2: 'We’re having a league.',
       intro: "Yes, yes. Real Madrid and Barcelona are very good at football. We've all noticed.",
       sandpit: 'They can go and play in their own sandpit.',
@@ -78,7 +78,7 @@
       slogan1: 'Que los niños ricos se queden con su patio.',
       heroTitle1: 'El mismo fútbol.',
       heroTitle2: 'Otros favoritos.',
-      navStandings: 'Clasificación', navArchive: 'El archivo', navHow: 'Cómo funciona', heroCta: 'Ver la clasificación ↗',
+      navStandings: 'España · Clasificación', navEngland: 'Inglaterra · Premier League', navArchive: 'El archivo', navHow: 'Cómo funciona', heroCta: 'Ver la clasificación ↗',
       slogan2: 'Nosotros montamos nuestra liga.',
       intro: 'Sí, sí. El Real Madrid y el Barça juegan muy bien al fútbol. Ya nos hemos enterado.',
       sandpit: 'Que se vayan a jugar a su propio patio.',
@@ -216,6 +216,7 @@
     set('.hero-headline-second', tr.heroTitle2);
     set('#nav-standings', tr.navStandings);
     set('#nav-archive', tr.navArchive);
+    set('#nav-england', tr.navEngland);
     set('#nav-how', tr.navHow);
     set('#hero-cta', tr.heroCta);
     set('#hero-about-link', tr.navHow);
