@@ -95,7 +95,8 @@ assert.equal(selectors.get('.hero-slogan .line1').textContent,'Que los niños ri
 assert.equal(selectors.get('.hero-slogan .line2').textContent,'Nosotros montamos nuestra liga.');
 assert.equal(selectors.get('.hero-headline-first').textContent,'El mismo fútbol.');
 assert.equal(selectors.get('.hero-headline-second').textContent,'Otros favoritos.');
-assert.equal(doc.getElementById('nav-standings').textContent,'Clasificación');
+assert.equal(doc.getElementById('nav-standings').textContent,'España · Clasificación');
+assert.equal(doc.getElementById('nav-england').textContent,'Inglaterra · Premier League');
 assert.match(selectors.get('.hero-explainer').textContent,/El Real Madrid y el Barça/);
 assert.equal(selectors.get('.hero-sandpit').textContent,'Que se vayan a jugar a su propio patio.');
 assert.match(selectors.get('.hero-method').textContent,/hemos quitado todos los partidos/);
