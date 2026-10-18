@@ -34,5 +34,11 @@ jobs:
           curl -sSL -o /dev/null -w "2023-24 HTTP=%{http_code} dest=%{url_effective}\\n" --max-time 15 https://usurperleague.com/la-liga/2023-24/ || true
           echo "NEW DOMAIN LIVE SITEMAP"
           curl -sSL -o /dev/null -w "sitemap HTTP=%{http_code} dest=%{url_effective}\\n" --max-time 15 https://usurperleague.com/sitemap.xml || true
+          echo "PREMIER LEAGUE PUBLIC PAGE"
+          curl -sSL -o /dev/null -w "premier page HTTP=%{http_code} dest=%{url_effective}\\n" --max-time 15 https://usurperleague.com/premier-league/
+          echo "PREMIER LEAGUE VERIFIED JSON"
+          curl -sSL -o /dev/null -w "premier data HTTP=%{http_code} dest=%{url_effective}\\n" --max-time 15 https://usurperleague.com/data/premier-league.json
+          echo "PREMIER LEAGUE JS"
+          curl -sSL -o /dev/null -w "premier JS HTTP=%{http_code}\\n" --max-time 15 https://usurperleague.com/premier-league/league.js
           echo "BASELINE HTTPS"
           curl -sSL -o /dev/null -w "HTTP status=%{http_code}\n" --max-time 10 https://example.com/ || true
