@@ -14,7 +14,7 @@ assert len(ids) >= 90, "Unexpectedly few validated historical seasons"
 assert len(pages) == len(ids), "Missing or extraneous SEO season pages"
 sitemap = ET.parse(root / "sitemap.xml")
 locs = [x.text for x in sitemap.findall(".//{*}loc")]
-expected = ["https://usurperleague.com/", "https://usurperleague.com/la-liga/"] + [
+expected = ["https://usurperleague.com/", "https://usurperleague.com/premier-league/", "https://usurperleague.com/la-liga/"] + [
     f"https://usurperleague.com/la-liga/{x}/" for x in ids
 ]
 assert locs == expected, "Sitemap must list exactly the real season pages"
@@ -40,3 +40,7 @@ robots = (root / "robots.txt").read_text(encoding="utf-8")
 assert "Sitemap: https://usurperleague.com/sitemap.xml" in robots
 assert "the-real-league.pages.dev" not in robots
 print(f"Verified {len(ids)} historical pages, 1 honours board, {len(locs)} sitemap URLs and sources.")
+
+pl = (root / "premier-league/index.html").read_text(encoding="utf-8")
+assert "Premier League Without the Big Six" in pl
+assert "href=\"https://usurperleague.com/premier-league/\"" in pl
