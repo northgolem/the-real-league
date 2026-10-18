@@ -1,0 +1,46 @@
+name: Refresh The Other Premier League
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/update.py'
+      - 'scripts/update_premier_league.py'
+      - 'tests/test_premier_league.py'
+      - 'public/premier-league/**'
+      - '.github/workflows/premier-league.yml'
+  schedule:
+    - cron: '37 8 * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: premier-league-update
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate original Spanish and new Premier League arithmetic
+        run: python -m unittest discover -s tests -p 'test_*.py'
+      - name: Validate English frontend JavaScript
+        run: node --check public/premier-league/league.js
+      - name: Fetch and calculate verified Premier League matches
+        env:
+          FOOTBALL_DATA_TOKEN: ${{ secrets.FOOTBALL_DATA_TOKEN }}
+          SEASON: '2026'
+        run: python scripts/update_premier_league.py
+      - name: Publish Premier League standings only if changed
+        run: |
+          git config user.name 'usurper-league-bot'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add public/data/premier-league.json
+          git diff --cached --quiet || (git commit -m 'Refresh Premier League alternative standings' && git push)
