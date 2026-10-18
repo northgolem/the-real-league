@@ -104,6 +104,7 @@ def year_page(data,index,p,i,cfg):
   <h1>Premier League {e(season)}.<br><em>A different title race.</em></h1>
   <p class="standfirst"><strong>{e(champion["name"])}</strong> win our alternative {e(season)} Premier League with <strong>{pts} points</strong> from {champion["P"]} matches. The usual suspects have been excused.</p>
   <p>We removed every fixture involving the clubs on our exclusion list <em>who actually played in the Premier League that year</em>. We kept all other scores unchanged. That's {data["includedMatches"]} real matches and {n} competing clubs.</p>
+  <p><a class="primary-link" href="/england/?season={e(sid)}#the-table">Disagree? Pick your own excluded clubs for {e(season)} ↗</a></p>
   <div class="facts">
     <div><span>Our champion</span><strong>{e(champion["name"])}</strong></div>
     <div><span>Points</span><strong>{pts}</strong></div>
