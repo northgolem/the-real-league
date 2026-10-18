@@ -121,3 +121,11 @@ footer .container{font-size:11px;line-height:1.8}footer a{color:#f0dda8}
 }
 
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* A friendly bridge between the leagues. */
+.sister-league{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:18px 0 0;padding:10px 14px;border-left:2px solid var(--gold);background:#f2ead9;max-width:540px}
+.sister-league .eyebrow{font-size:10px;color:#a57c33}
+.sister-league a{color:#1b4d35;font:750 12px system-ui,sans-serif;text-decoration:none;border-bottom:1px solid #ad904d}
+.sister-league a:hover{text-decoration:underline}
+@media(max-width:1010px){.site-nav{gap:10px}.site-nav a{font-size:10px;letter-spacing:.065em}}
+@media(max-width:760px){.site-nav{gap:4px;flex-wrap:wrap}.site-nav a{font-size:9px;letter-spacing:.01em}.sister-league{gap:6px}}
