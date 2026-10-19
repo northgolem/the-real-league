@@ -11,6 +11,9 @@ on:
       - 'tests/test_premier_browser.mjs'
       - 'tests/test_premier_league.py'
       - 'public/premier-league/**'
+      - 'lib/**'
+      - 'functions/share/**'
+      - 'tests/test_social_share.mjs'
       - '.github/workflows/premier-league.yml'
   schedule:
     - cron: '37 8 * * *'
@@ -40,6 +43,8 @@ jobs:
           node --check public/premier-league/league.js
       - name: Verify current scores, all 34 archives and all 64 Big Six combinations
         run: node tests/test_custom_core.mjs
+      - name: Verify personalised social metadata and rendered preview cards
+        run: node tests/test_social_share.mjs
       - name: Test guest-list clicks, historical picker and shareable URLs
         run: node tests/test_custom_browser.mjs
       - name: Exercise the English page with real saved data and a corrupt-data fallback
