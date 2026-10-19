@@ -89,7 +89,12 @@ assert(app.links.at(-1).includes('season=1992-93'));
 app.get('custom-share').click();
 await app.settle();
 assert(app.copied().includes('season=1992-93'));
-assert(app.copied().includes('https://usurperleague.com/england/'));
+assert(app.copied().includes('https://usurperleague.com/share/england'));
+assert.equal(app.get('custom-native-share').disabled,false,'Native share control must be enabled');
+assert.match(app.get('share-pitch').textContent,/CHALLENGE YOUR MATES/);
+app.get('custom-native-share').click();
+await app.settle();
+assert(app.copied().includes('/share/england'),'Fallback native share must copy the social preview URL');
 
 app=await load('?season=2015-16&out=none');
 assert.equal(app.get('premier-rows').children.length,20,'Deep link includes every club when out=none');
