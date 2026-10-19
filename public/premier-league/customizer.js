@@ -57,7 +57,7 @@
     return {season, selected:new Set(tokens.map(x=>bySlug.get(x)))};
   }
   function shareURL() {
-    const url=new URL("/england/",location.origin);
+    const url=new URL("/share/england",location.origin);
     if(state.season!==state.current.id) url.searchParams.set("season",state.season);
     if(!fullChoice()) {
       const chosen=selectedNames().map(slug);
@@ -67,7 +67,7 @@
   }
   function updateURL() {
     const url=shareURL();
-    history.replaceState(null,"",new URL(url).pathname+new URL(url).search);
+    history.replaceState(null,"","/england/"+new URL(url).search);
   }
   function setFeedback(message) { $("custom-feedback").textContent=message; }
   function tickedUI() {
@@ -107,6 +107,7 @@
       fullChoice()?"No "+state.config.exclusionLabel+". No problem.":"Your league. Your exclusions.";
     if(Number.isInteger(remaining)) $("table-title").textContent=remaining+" clubs. An actual title race.";
     $("custom-share").disabled=!state.games;
+    $("custom-native-share").disabled=!state.games;
     $("custom-season").value=state.season;
     setFeedback(state.games?"Tick a club to change the table. Copy the link to start an argument.":"Checking real match results…");
   }
@@ -146,6 +147,12 @@
     $("results-updated").textContent=seasonLabel()+
       (state.season===state.current.id?" · current season (not live scores)":" · complete historical season");
     $("story-title").textContent=leader.name+" are top. Well, well.";
+    const out=selectedNames();
+    const sentence=out.length?"I kicked out "+out.join(", ")+".":
+      "I let all the clubs play.";
+    $("share-pitch").textContent="CHALLENGE YOUR MATES: "+leader.name+
+      " lead my "+seasonLabel()+" Premier League on "+leader.Pts+" points. "+
+      sentence+" Could you do better?";
     $("story-copy").textContent=leader.name+" lead your "+seasonLabel()+" league with "+
       leader.Pts+" points from "+leader.P+" games. You've kept "+calculated.clubsRemaining+
       " clubs and removed "+calculated.removed+" actual fixtures. The trophy, regrettably, is imaginary.";
@@ -240,11 +247,31 @@
         try {
           if(navigator.clipboard?.writeText) {
             await navigator.clipboard.writeText(url);
-            setFeedback("Link copied. Now send it to someone who disagrees.");
+            setFeedback("Challenge link copied. Pick a football friend who'll disagree.");
           } else {
-            setFeedback("Copy this URL from your address bar: "+url);
+            setFeedback("Copy this challenge link: "+url);
           }
-        } catch(_) {setFeedback("Copy this URL from your address bar: "+url);}
+        } catch(_) {setFeedback("Copy this challenge link: "+url);}
+      });
+      $("custom-native-share").addEventListener("click",async()=>{
+        const url=shareURL();
+        const leader=state.games?core.calculate(state.games.clubs,state.games.matches,
+          selectedNames().filter(n=>state.games.clubs.some(c=>c.name===n))).rows[0]:null;
+        if(!leader)return;
+        try {
+          if(navigator.share){
+            await navigator.share({
+              title:leader.name+" top my "+seasonLabel()+" Premier League | The Usurper League",
+              text:"Who would you kick out? I've made my own Premier League. Beat my table.",
+              url
+            });
+          } else if(navigator.clipboard?.writeText){
+            await navigator.clipboard.writeText(url);
+            setFeedback("Challenge link copied. Paste it into your football group.");
+          } else setFeedback("Your challenge URL: "+url);
+        } catch(e) {
+          if(e?.name!=="AbortError")setFeedback("Share couldn't open. Try Copy Link instead.");
+        }
       });
       window.addEventListener("popstate",()=>{
         const next=urlChoice();state.selected=next.selected;
