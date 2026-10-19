@@ -83,7 +83,14 @@
             <button type="button" id="no-big-six" aria-pressed="true" disabled>Kick out the Big Six</button>
             <button type="button" id="all-teams" aria-pressed="false" disabled>Let everyone play</button>
           </div>
-          <button type="button" id="custom-share" class="share-league" disabled>Copy my league link <span aria-hidden="true">↗</span></button>
+          <div class="share-buttons">
+            <button type="button" id="custom-native-share" class="share-league" disabled>Share my league <span aria-hidden="true">↗</span></button>
+            <button type="button" id="custom-share" class="copy-league" disabled>Copy link <span aria-hidden="true">⧉</span></button>
+          </div>
+        </div>
+        <div class="share-challenge">
+          <span class="kicker">GIVE THEM SOMETHING TO ARGUE ABOUT</span>
+          <p id="share-pitch">Choose your clubs and season. We'll generate your challenge using actual football results.</p>
         </div>
         <p id="custom-feedback" class="lab-feedback" role="status" aria-live="polite">Loading the real match results…</p>
       </section>
