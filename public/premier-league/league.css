@@ -98,3 +98,12 @@ body{background:var(--paper)}
 .custom-hint{font:12px/1.5 system-ui,sans-serif!important;color:#697360!important}
 @media(max-width:830px){.club-picker-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.lab-head{grid-template-columns:1fr;gap:14px}.lab-season{max-width:320px}}
 @media(max-width:480px){.custom-lab{padding:19px 16px}.lab-season{max-width:none}.club-picker-grid{grid-template-columns:1fr 1fr;gap:7px}.club-switch{font-size:11px;padding:9px 8px;gap:6px;min-height:54px}.club-switch input{width:16px;height:16px;flex-basis:16px}.lab-actions{align-items:stretch}.lab-presets{width:100%}.lab-presets button{flex:1;padding:10px 8px}.lab-actions .share-league{width:100%}}
+
+/* Football supporters' personalised challenge and native sharing controls */
+.share-buttons{display:flex;align-items:stretch;gap:8px;flex-wrap:wrap}
+.share-buttons button{white-space:nowrap}
+.lab-actions .copy-league{background:#fffcf2;border:1px solid #b6a67f;color:#23422d}
+.lab-actions .copy-league:hover{background:#eee7d4}
+.share-challenge{margin-top:15px;padding:15px 17px;background:#fdfaf0;border-left:3px solid #b38a3f}
+.share-challenge p{font:700 13px/1.6 system-ui,sans-serif;color:#294733;margin:7px 0 0}
+@media(max-width:580px){.share-buttons{width:100%}.share-buttons .share-league{flex:1}.share-buttons .copy-league{flex:1}}
