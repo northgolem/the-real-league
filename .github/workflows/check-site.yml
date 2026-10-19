@@ -66,5 +66,22 @@ jobs:
           curl -fsSL --max-time 15 https://usurperleague.com/england/ | grep -q 'id="custom-season"' && echo "Season selector is deployed"
           curl -fsSL --max-time 15 https://usurperleague.com/england/ | grep -q 'id="custom-checks"' && echo "Excluded-club selector is deployed"
           curl -fsSL --max-time 15 https://usurperleague.com/england/history/1992-93/ | grep -q 'season=1992-93' && echo "Historic season links to its interactive view"
+          echo "PERSONALISED SOCIAL LINK PREVIEW"
+          curl -fsS --max-time 20 'https://usurperleague.com/share/england?season=1992-93&out=chelsea,manchester-city' > /tmp/usurper-share.html
+          grep -q 'og:image' /tmp/usurper-share.html
+          grep -q 'og:title' /tmp/usurper-share.html
+          grep -q '1992/93' /tmp/usurper-share.html
+          grep -q 'Chelsea' /tmp/usurper-share.html
+          grep -q 'location.replace' /tmp/usurper-share.html
+          curl -fsS --max-time 30 'https://usurperleague.com/share/image?season=1992-93&out=chelsea,manchester-city' > /tmp/usurper-social.png
+          file /tmp/usurper-social.png
+          python - <<'PY'
+          from pathlib import Path
+          import struct
+          p=Path('/tmp/usurper-social.png').read_bytes()
+          assert p[:8]==b'\\x89PNG\\r\\n\\x1a\\n', 'Preview is not a PNG'
+          assert struct.unpack('>II',p[16:24])==(1200,630)
+          print('Live share preview: personalised HTML + valid 1200x630 PNG')
+          PY
           echo "BASELINE HTTPS"
           curl -sSL -o /dev/null -w "HTTP status=%{http_code}\n" --max-time 10 https://example.com/ || true
