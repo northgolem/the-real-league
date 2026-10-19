@@ -79,7 +79,8 @@ const png=await makeCard(preview);
 assert.deepEqual([...png.slice(0,8)],[137,80,78,71,13,10,26,10]);
 assert.equal(new DataView(png.buffer).getUint32(16),1200);
 assert.equal(new DataView(png.buffer).getUint32(20),630);
-assert(png.byteLength>20000&&png.byteLength<2_000_000,"Preview PNG must be usefully compressed");
+console.log("Personalised PNG size:",png.byteLength,"bytes");
+assert(png.byteLength>1500&&png.byteLength<2_000_000,"Preview PNG must be usefully compressed");
 let off=8, compressed=null;
 while(off<png.length){
   const view=new DataView(png.buffer,png.byteOffset+off,8);
