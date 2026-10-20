@@ -2,8 +2,8 @@
   "mode": "live",
   "competition": "La Liga de los Mortales",
   "season": "2026/27",
-  "generatedAt": "2026-10-19T06:47:41+00:00",
-  "latestResultAt": "2026-10-18T19:00:00Z",
+  "generatedAt": "2026-10-20T08:43:52+00:00",
+  "latestResultAt": "2026-10-19T19:00:00Z",
   "excluded": [
     "Real Madrid",
     "FC Barcelona"
@@ -12,9 +12,9 @@
     81,
     86
   ],
-  "completedMatches": 87,
+  "completedMatches": 88,
   "excludedMatches": 18,
-  "includedMatches": 69,
+  "includedMatches": 70,
   "officialTableApproximation": [
     {
       "id": 81,
@@ -173,6 +173,32 @@
       "position": 12
     },
     {
+      "id": 87,
+      "name": "Rayo Vallecano",
+      "P": 8,
+      "W": 2,
+      "D": 3,
+      "L": 3,
+      "GF": 12,
+      "GA": 17,
+      "GD": -5,
+      "Pts": 9,
+      "position": 13
+    },
+    {
+      "id": 82,
+      "name": "Getafe",
+      "P": 9,
+      "W": 2,
+      "D": 3,
+      "L": 4,
+      "GF": 5,
+      "GA": 11,
+      "GD": -6,
+      "Pts": 9,
+      "position": 14
+    },
+    {
       "id": 80,
       "name": "Espanyol",
       "P": 9,
@@ -182,32 +208,6 @@
       "GF": 11,
       "GA": 12,
       "GD": -1,
-      "Pts": 8,
-      "position": 13
-    },
-    {
-      "id": 87,
-      "name": "Rayo Vallecano",
-      "P": 7,
-      "W": 2,
-      "D": 2,
-      "L": 3,
-      "GF": 11,
-      "GA": 16,
-      "GD": -5,
-      "Pts": 8,
-      "position": 14
-    },
-    {
-      "id": 82,
-      "name": "Getafe",
-      "P": 8,
-      "W": 2,
-      "D": 2,
-      "L": 4,
-      "GF": 4,
-      "GA": 10,
-      "GD": -6,
       "Pts": 8,
       "position": 15
     },
@@ -431,17 +431,32 @@
     {
       "id": 87,
       "name": "Rayo Vallecano",
-      "P": 5,
+      "P": 6,
       "W": 2,
-      "D": 2,
+      "D": 3,
       "L": 1,
-      "GF": 8,
-      "GA": 7,
+      "GF": 9,
+      "GA": 8,
       "GD": 1,
-      "Pts": 8,
+      "Pts": 9,
       "position": 11,
+      "originalPosition": 13,
+      "positionChange": 2
+    },
+    {
+      "id": 82,
+      "name": "Getafe",
+      "P": 8,
+      "W": 2,
+      "D": 3,
+      "L": 3,
+      "GF": 5,
+      "GA": 8,
+      "GD": -3,
+      "Pts": 9,
+      "position": 12,
       "originalPosition": 14,
-      "positionChange": 3
+      "positionChange": 2
     },
     {
       "id": 80,
@@ -453,21 +468,6 @@
       "GF": 10,
       "GA": 10,
       "GD": 0,
-      "Pts": 8,
-      "position": 12,
-      "originalPosition": 13,
-      "positionChange": 1
-    },
-    {
-      "id": 82,
-      "name": "Getafe",
-      "P": 7,
-      "W": 2,
-      "D": 2,
-      "L": 3,
-      "GF": 4,
-      "GA": 7,
-      "GD": -3,
       "Pts": 8,
       "position": 13,
       "originalPosition": 15,
