@@ -2,8 +2,8 @@
   "mode": "live",
   "competition": "The Usurper League — England",
   "season": "2026/27",
-  "generatedAt": "2026-10-18T18:16:40+00:00",
-  "latestResultAt": "2026-10-18T15:30:00Z",
+  "generatedAt": "2026-10-20T09:08:42+00:00",
+  "latestResultAt": "2026-10-19T19:00:00Z",
   "excluded": [
     "Arsenal",
     "Chelsea",
@@ -20,8 +20,8 @@
     66,
     73
   ],
-  "completedMatches": 69,
-  "excludedMatches": 37,
+  "completedMatches": 70,
+  "excludedMatches": 38,
   "includedMatches": 32,
   "officialTableApproximation": [
     {
@@ -220,17 +220,30 @@
       "position": 15
     },
     {
-      "id": 1076,
-      "name": "Coventry City",
-      "P": 6,
-      "W": 2,
-      "D": 0,
-      "L": 4,
-      "GF": 5,
-      "GA": 11,
-      "GD": -6,
+      "id": 73,
+      "name": "Tottenham Hotspur",
+      "P": 7,
+      "W": 1,
+      "D": 3,
+      "L": 3,
+      "GF": 6,
+      "GA": 10,
+      "GD": -4,
       "Pts": 6,
       "position": 16
+    },
+    {
+      "id": 1076,
+      "name": "Coventry City",
+      "P": 7,
+      "W": 2,
+      "D": 0,
+      "L": 5,
+      "GF": 6,
+      "GA": 14,
+      "GD": -8,
+      "Pts": 6,
+      "position": 17
     },
     {
       "id": 63,
@@ -243,7 +256,7 @@
       "GA": 10,
       "GD": -3,
       "Pts": 5,
-      "position": 17
+      "position": 18
     },
     {
       "id": 351,
@@ -256,7 +269,7 @@
       "GA": 9,
       "GD": -4,
       "Pts": 5,
-      "position": 18
+      "position": 19
     },
     {
       "id": 71,
@@ -269,19 +282,6 @@
       "GA": 14,
       "GD": -8,
       "Pts": 4,
-      "position": 19
-    },
-    {
-      "id": 73,
-      "name": "Tottenham Hotspur",
-      "P": 6,
-      "W": 0,
-      "D": 3,
-      "L": 3,
-      "GF": 3,
-      "GA": 9,
-      "GD": -6,
-      "Pts": 3,
       "position": 20
     }
   ],
@@ -388,8 +388,8 @@
       "GD": -2,
       "Pts": 6,
       "position": 7,
-      "originalPosition": 16,
-      "positionChange": 9
+      "originalPosition": 17,
+      "positionChange": 10
     },
     {
       "id": 322,
@@ -448,8 +448,8 @@
       "GD": -4,
       "Pts": 4,
       "position": 11,
-      "originalPosition": 19,
-      "positionChange": 8
+      "originalPosition": 20,
+      "positionChange": 9
     },
     {
       "id": 67,
@@ -478,8 +478,8 @@
       "GD": -2,
       "Pts": 3,
       "position": 13,
-      "originalPosition": 17,
-      "positionChange": 4
+      "originalPosition": 18,
+      "positionChange": 5
     },
     {
       "id": 351,
@@ -493,8 +493,8 @@
       "GD": -3,
       "Pts": 3,
       "position": 14,
-      "originalPosition": 18,
-      "positionChange": 4
+      "originalPosition": 19,
+      "positionChange": 5
     }
   ],
   "methodology": "An independent alternative Premier League, not the official standings. Every fixture involving Arsenal, Chelsea, Liverpool, Manchester City, Manchester United, Tottenham Hotspur is removed in full. Rankings use points, goal difference and goals scored. Official further tiebreaks, disciplinary rulings and deductions may differ.",
