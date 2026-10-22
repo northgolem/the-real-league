@@ -5,32 +5,32 @@
     en: {
       topSpain: 'Spain', topEngland: 'England', kicker:'NO GODS. JUST FOOTBALL.',
       title1:'Let the rich kids keep the sandpit.', title2:"We're having a league.",
-      deck:"Football's usual winners have had plenty of fun. We've taken their fixtures away. Pick a country and see what happens when everyone else gets a turn.",
+      deck:"We rebuild football league tables using real results. Exclude the biggest clubs and every match they played, then see who comes out on top. Choose Spain or England to try it.",
       choose:'CHOOSE YOUR LEAGUE', spainTitle:'Spain', englandTitle:'England',
       spainSub:'No Madrid. No Barça.', englandSub:'No Big Six. No problem.',
-      spainDesc:'Yes, yes. They’re very good at football. We’ve noticed. The other clubs have a league to get on with — and almost a century of different champions.',
-      englandDesc:'Six clubs can have their own private party. We’ve kept the matches between everyone else. Including, regrettably for them, no Tottenham.',
+      spainDesc:'We remove Real Madrid, Barcelona and every match involving either club. Then we recalculate La Liga using only the real results between the teams left — season by season.',
+      englandDesc:'You choose which of the Big Six to kick out — any, all or none. We remove their matches and rebuild the Premier League table from real results. Every season since 1992/93.',
       label:'CURRENT ALTERNATIVE LEADERS', pending:'See the recalculated table →',
       leaders:(name,points)=>name+' · '+points+' pts',
       enterSpain:'ENTER SPAIN', enterEngland:'ENTER ENGLAND',
-      why:'Same matches. Different title races.',
-      whyBody:'No imaginary scores. No adjusted results. We simply remove every fixture involving the excluded clubs, recalculate the standings and let everyone else enjoy themselves.',
+      why:'Real matches. New league tables.',
+      whyBody:'Exclude a club, and all its matches disappear — for both teams. No fantasy scores, no redistributed points. Only completed games between the remaining clubs count.',
       footer:'An independent football thought experiment. Unaffiliated with the leagues or clubs.',
       labels: ['THE USURPER LEAGUE / SPAIN','THE USURPER LEAGUE / ENGLAND']
     },
     es: {
       topSpain:'España',topEngland:'Inglaterra',kicker:'SIN DIOSES. SOLO FÚTBOL.',
       title1:'Que los niños ricos se queden con su patio.',title2:'Nosotros montamos nuestra liga.',
-      deck:'Los ganadores de siempre ya se han divertido bastante. Hemos quitado sus partidos. Elige país y descubre qué pasa cuando les toca a los demás.',
+      deck:'Recalculamos las ligas utilizando resultados reales. Excluimos a los clubes más poderosos y todos sus partidos para descubrir quién termina arriba. Elige España o Inglaterra.',
       choose:'ELIGE TU LIGA',spainTitle:'España',englandTitle:'Inglaterra',
       spainSub:'Sin Madrid. Sin Barça.',englandSub:'Sin los seis grandes. Sin problema.',
-      spainDesc:'Sí, sí. Juegan muy bien. Ya nos hemos enterado. Ahora los demás tienen su propia liga y casi un siglo de campeones alternativos.',
-      englandDesc:'Los seis grandes pueden celebrar su fiesta privada. Los otros clubes siguen jugando. Sin el Tottenham tampoco, por supuesto.',
+      spainDesc:'Quitamos al Real Madrid, al Barcelona y todos sus partidos. Después recalculamos La Liga usando únicamente los resultados reales entre los demás equipos.',
+      englandDesc:'Tú eliges cuáles de los seis grandes quedan fuera: algunos, todos o ninguno. Borramos sus partidos y recalculamos la Premier League con resultados reales desde 1992/93.',
       label:'LÍDERES DE LA TABLA ALTERNATIVA',pending:'Ver la clasificación →',
       leaders:(name,points)=>name+' · '+points+' puntos',
       enterSpain:'ENTRAR A ESPAÑA',enterEngland:'ENTRAR A INGLATERRA',
-      why:'Los mismos partidos. Otra lucha por el título.',
-      whyBody:'Ni un marcador inventado. Ni un resultado alterado. Quitamos todos los encuentros de los clubes excluidos, recalculamos la clasificación y dejamos que los demás disfruten.',
+      why:'Partidos reales. Una clasificación diferente.',
+      whyBody:'Cuando excluyes a un club, desaparecen todos sus partidos, para ambos equipos. Sin marcadores inventados ni puntos redistribuidos: solo cuentan los partidos entre los clubes restantes.',
       footer:'Un experimento futbolístico independiente, sin relación con las ligas ni los clubes.',
       labels:['THE USURPER LEAGUE / ESPAÑA','THE USURPER LEAGUE / INGLATERRA']
     }
@@ -57,8 +57,8 @@
         : 'No '+englandRules.exclusionLabel+'. No problem.');
       if (englandRules.exclusionLabel !== 'Big Six') {
         setText('englandDesc',lang === 'es'
-          ? 'Los clubes excluidos pueden jugar en su propio patio. Los demás conservan sus resultados y tienen una liga de la que disfrutar.'
-          : 'The excluded clubs can keep the VIP lounge. The rest keep their games, their goals and a title race worth playing.');
+          ? 'Elige qué clubes excluir. Eliminamos todos sus partidos y recalculamos la clasificación con los resultados reales entre los demás equipos.'
+          : 'Choose which clubs to exclude. We remove all their matches and recalculate the table from real results between the teams left.');
       }
     }
     document.querySelectorAll('.lang button').forEach(button => {
