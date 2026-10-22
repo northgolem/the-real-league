@@ -5,6 +5,7 @@
   const core = window.UsurperLeagueCore;
   const $ = id => document.getElementById(id);
   const cache = new Map();
+  const badges = new Map();
   const state = { config:null, index:null, current:null, liveGames:null,
                   season:"", selected:new Set(), games:null, generation:0 };
   const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
@@ -72,11 +73,14 @@
   function setFeedback(message) { $("custom-feedback").textContent=message; }
   function tickedUI() {
     const labels=names();
-    $("custom-count").textContent=state.selected.size+" out";
+    $("custom-count").textContent=state.selected.size+" selected to remove";
     $("no-big-six").setAttribute("aria-pressed",String(fullChoice()));
     $("all-teams").setAttribute("aria-pressed",String(state.selected.size===0));
     for(const input of $("custom-checks").querySelectorAll("input")) {
-      input.checked=state.selected.has(input.value);
+      const out=state.selected.has(input.value);
+      input.checked=out;
+      const badge=badges.get(input.value);
+      if(badge) badge.textContent=out?"OUT":"IN";
     }
     const list=$("excluded-list");
     if(list) {
@@ -89,27 +93,27 @@
       }
     }
     const remaining=state.games?.clubs.filter(c=>!state.selected.has(c.name)).length;
-    const label=selectedNames().length===labels.length ? state.config.exclusionLabel :
-      state.selected.size ? "your selection" : "nobody";
     $("england-opening").textContent=state.selected.size===0
-      ? "Very generous. You've let everybody back in."
-      : "Yes, yes. They're terribly important. We've all noticed.";
-    $("england-method").textContent=state.selected.size
-      ? "You're excluding "+selectedNames().join(", ")+". All their matches, goals and points disappear. The rest are real results."
-      : "Nobody is excluded. All completed Premier League matches count.";
+      ? "Everyone is back in. You're seeing a table with no clubs removed."
+      : fullChoice()
+        ? "All "+labels.length+" are out by default. You can bring any of them back below."
+        : "You're removing "+state.selected.size+" of the "+labels.length+" clubs. Change the selection below.";
+    // The core explanation above must stay the same as people change selections:
+    // only real results between remaining teams count, whichever clubs they choose.
     $("excluded-joke").textContent=state.selected.has("Tottenham Hotspur")
       ? "Tottenham have been excused. Again. It's the principle of the thing."
       : "You've made your own rules. Arguments can begin whenever you're ready.";
     $("table-kicker").textContent=state.season===state.current.id?
       "CURRENT SEASON / YOUR PREMIER LEAGUE":"HISTORICAL SEASON / YOUR PREMIER LEAGUE";
     $("no-big-six").textContent="Kick out the "+state.config.exclusionLabel;
-    $("table-heading").textContent=state.selected.size===0?"Everybody's invited.":
-      fullChoice()?"No "+state.config.exclusionLabel+". No problem.":"Your league. Your exclusions.";
-    if(Number.isInteger(remaining)) $("table-title").textContent=remaining+" clubs. An actual title race.";
+    $("table-heading").textContent=state.selected.size===0
+      ? "All clubs included — the full results table"
+      : "Your alternative Premier League table";
+    if(Number.isInteger(remaining)) $("table-title").textContent=remaining+" clubs remain. Here's their league.";
     $("custom-share").disabled=!state.games;
     $("custom-native-share").disabled=!state.games;
     $("custom-season").value=state.season;
-    setFeedback(state.games?"Tick a club to change the table. Copy the link to start an argument.":"Checking real match results…");
+    setFeedback(state.games?"Tick = OUT. Untick = IN. The table below updates instantly.":"Checking real match results…");
   }
   function tableCell(tr,value,heading=false) {
     const el=document.createElement(heading?"th":"td");
@@ -141,8 +145,10 @@
     $("matches-kept").textContent=calculated.kept;
     $("matches-removed").textContent=calculated.removed;
     $("clubs-left").textContent=calculated.clubsRemaining;
-    $("match-info").textContent=calculated.kept+" finished fixtures count. "+
-      calculated.removed+" finished fixtures removed. No reallocated points.";
+    $("match-info").textContent=state.selected.size
+      ? calculated.kept+" real, completed matches between the clubs still in your league. "+
+        calculated.removed+" matches involving excluded clubs have been removed for BOTH teams."
+      : "No clubs removed. All "+calculated.kept+" completed matches count; no scores or points have been altered.";
     $("results-status").textContent="Verified full-time results · personalised table";
     $("results-updated").textContent=seasonLabel()+
       (state.season===state.current.id?" · current season (not live scores)":" · complete historical season");
@@ -156,7 +162,7 @@
     $("story-copy").textContent=leader.name+" lead your "+seasonLabel()+" league with "+
       leader.Pts+" points from "+leader.P+" games. You've kept "+calculated.clubsRemaining+
       " clubs and removed "+calculated.removed+" actual fixtures. The trophy, regrettably, is imaginary.";
-    $("table-title").textContent=calculated.clubsRemaining+" clubs. An actual title race.";
+    $("table-title").textContent=calculated.clubsRemaining+" clubs remain. Here's their league.";
   }
   function fail(message) {
     $("premier-rows").replaceChildren();
@@ -208,7 +214,9 @@
         changedSelection(next);
       });
       const name=document.createElement("span");name.textContent=club.name;
-      lbl.appendChild(input);lbl.appendChild(name);dest.appendChild(lbl);
+      const status=document.createElement("span");status.className="club-state";
+      status.textContent="OUT";badges.set(club.name,status);
+      lbl.appendChild(input);lbl.appendChild(name);lbl.appendChild(status);dest.appendChild(lbl);
     }
     $("custom-clubs").disabled=false;
     $("no-big-six").disabled=false;
