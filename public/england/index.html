@@ -6,13 +6,13 @@
 <meta name="theme-color" content="#102e25">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <title>The Usurper League — England | Premier League Without the Big Six</title>
-<meta name="description" content="What happens to the Premier League without Arsenal, Chelsea, Liverpool, Man City, Man United and Tottenham? Real matches. Recalculated standings. Different title race.">
+<meta name="description" content="Create your own Premier League without any, some or all of the Big Six. Remove the clubs and every match they played, then see the table recalculated from real results.">
 <link rel="canonical" href="https://usurperleague.com/england/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="The Usurper League">
 <meta property="og:url" content="https://usurperleague.com/england/">
-<meta property="og:title" content="The Usurper League — England | No Big Six">
-<meta property="og:description" content="The Big Six can keep the VIP lounge. We've got a league. See the Premier League recalculated without their matches.">
+<meta property="og:title" content="Build Your Own Premier League Without the Big Six | The Usurper League">
+<meta property="og:description" content="Choose which of the Big Six to kick out. Every match they played disappears. Watch real results between the remaining clubs create a new league.">
 <meta name="twitter:card" content="summary">
 <link rel="stylesheet" href="/archive.css">
 <link rel="stylesheet" href="/premier-league/league.css">
@@ -34,14 +34,15 @@
     <div class="page-width england-hero-layout">
       <div>
         <div class="kicker">THE USURPER LEAGUE / ENGLAND / 2026–27</div>
-        <h1>The Premier League.<br><em>Minus the VIP lounge.</em></h1>
-        <p class="england-intro" id="england-opening">Yes, yes. The Big Six are terribly important. We've all noticed.</p>
-        <p class="england-lead">They can keep their playground.<br>We're having a league.</p>
-        <p id="england-method">We take every match involving the Big Six out of the Premier League — points, goals, the lot. The other fourteen clubs keep their actual results. What happens next is entirely up to them.</p>
-        <a class="primary-link england-cta" href="#the-table">See the new table ↗</a> <a class="english-history-link" href="/england/history/">Explore 34 seasons of alternative champions ↗</a>
+        <h1>What if the Big Six<br><em>weren't in the league?</em></h1>
+        <p class="england-intro">Build your own Premier League. Choose which of the Big Six you want to kick out.</p>
+        <p class="england-explainer" id="england-method"><strong>We remove those clubs and every match they played.</strong> Then we recalculate the table using only real results between the teams left.</p>
+        <p class="england-opening" id="england-opening">All six are out by default. Bring any back—or invite everyone.</p>
+        <a class="primary-link england-cta" href="#the-table">Make your league ↓</a>
+        <a class="english-history-link" href="/england/history/">Or explore 34 seasons of alternative champions ↗</a>
       </div>
       <aside class="big-six-paper" aria-label="Clubs currently excluded from your alternative league">
-        <span class="kicker">NOT INVITED / WITH LOVE</span>
+        <span class="kicker">YOUR EXCLUDED CLUBS / CURRENT SELECTION</span>
         <ul id="excluded-list">
           <li>Arsenal</li>
           <li>Chelsea</li>
@@ -50,23 +51,40 @@
           <li>Manchester United</li>
           <li>Tottenham Hotspur</li>
         </ul>
-        <p class="scribble" id="excluded-joke">Of course Tottenham are on the list. It's the principle of the thing.</p>
+        <p class="scribble" id="excluded-joke">Even Tottenham. It's the principle of the thing.</p>
       </aside>
     </div>
   </section>
 
   <div class="page-width">
+    <section class="how-it-works-fast" aria-labelledby="how-it-works-fast-title">
+      <div class="rule-intro">
+        <span class="kicker">THE RULES. REALLY SIMPLE.</span>
+        <h2 id="how-it-works-fast-title">Kick a club out. Their matches go too.</h2>
+      </div>
+      <div class="example-fixtures">
+        <div class="example-fixture">
+          <span class="example-mark gone">REMOVED</span>
+          <div><strong>Arsenal vs Everton</strong><small>If Arsenal are out, this match disappears for both teams.</small></div>
+        </div>
+        <div class="example-fixture">
+          <span class="example-mark kept">KEPT</span>
+          <div><strong>Everton vs Aston Villa</strong><small>Still counts if both teams are in your league.</small></div>
+        </div>
+      </div>
+      <p class="rule-disclaimer">Illustrative fixtures—not invented scores. We use only actual, completed matches. No points are handed out or reassigned.</p>
+    </section>
     <section class="league-current" id="the-table" aria-labelledby="table-title">
       <div class="league-intro">
-        <div><span class="section-marker">THE TABLE, RECONSIDERED</span>
-        <h2 id="table-title">Fourteen clubs. An actual title race.</h2>
-        <p>Every score is real. You decide who gets to stay.</p></div>
+        <div><span class="section-marker">YOUR VERSION OF THE PREMIER LEAGUE</span>
+        <h2 id="table-title">14 clubs remain. Here's their league.</h2>
+        <p>The table below changes whenever you change the exclusions.</p></div>
       </div>
       <section id="usurper-customizer" class="custom-lab" aria-labelledby="lab-heading">
         <div class="lab-head">
-          <div><span class="kicker">THE GUEST LIST IS YOURS</span>
-          <h3 id="lab-heading">Who gets kicked out?</h3>
-          <p>Tick the clubs you want out. Every match they played disappears. Untick one and they're back. Real results, instant arguments.</p></div>
+          <div><span class="kicker">YOU SET THE RULES</span>
+          <h3 id="lab-heading">Make your own Premier League.</h3>
+          <p>1. Choose a season. 2. Tick the Big Six clubs to <strong>remove</strong>. 3. See the recalculated table below. Untick a club to put it back.</p></div>
           <div class="lab-season">
             <label for="custom-season">Choose a season</label>
             <select id="custom-season" disabled aria-label="Season to recalculate">
@@ -75,7 +93,8 @@
           </div>
         </div>
         <fieldset id="custom-clubs" class="club-picker" disabled>
-          <legend>Excluded clubs <span id="custom-count">6 out</span></legend>
+          <legend>Which clubs should be <strong>OUT</strong>? <span id="custom-count">6 out</span></legend>
+          <p class="checkbox-instruction">✓ Checked = club OUT, with <strong>all its matches removed</strong>. Unchecked = club IN.</p>
           <div id="custom-checks" class="club-picker-grid"></div>
         </fieldset>
         <div class="lab-actions">
@@ -98,9 +117,9 @@
       <div class="panel english-table">
         <div class="panel-intro">
           <span class="kicker" id="table-kicker">THE OTHER PREMIER LEAGUE</span>
-          <h3 id="table-heading">No Big Six. No problem.</h3>
+          <h3 id="table-heading">Your alternative Premier League table</h3>
           <p id="match-info">All completed Premier League matches involving Arsenal, Chelsea, Liverpool, Manchester City, Manchester United and Tottenham are excluded.</p>
-          <p class="custom-hint">Personalised league · only actual, completed fixtures count.</p>
+          <p class="custom-hint">We don't guess what would have happened. We only count completed matches between the clubs you kept.</p>
         </div>
         <div class="table-scroll">
           <table aria-label="Premier League alternative standings">
