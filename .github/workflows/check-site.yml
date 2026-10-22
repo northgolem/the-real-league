@@ -83,5 +83,14 @@ jobs:
           assert struct.unpack('>II',p[16:24])==(1200,630)
           print('Live share preview: personalised HTML + valid 1200x630 PNG')
           PY
+          echo "CLEAR ENGLISH ONBOARDING"
+          curl -fsSL --max-time 20 https://usurperleague.com/england/ > /tmp/usurper-england.html
+          grep -q 'What if the Big Six' /tmp/usurper-england.html
+          grep -q 'We remove those clubs and every match they played' /tmp/usurper-england.html
+          grep -q 'If Arsenal are out, this match disappears for both teams' /tmp/usurper-england.html
+          grep -q 'Checked = club OUT' /tmp/usurper-england.html
+          curl -fsSL --max-time 20 https://usurperleague.com/premier-league/customizer.js > /tmp/usurper-custom.js
+          grep -q 'selected to remove' /tmp/usurper-custom.js
+          echo "Live England page clearly explains exclusion rules and checked state"
           echo "BASELINE HTTPS"
           curl -sSL -o /dev/null -w "HTTP status=%{http_code}\n" --max-time 10 https://example.com/ || true
