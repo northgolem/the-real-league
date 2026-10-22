@@ -7,7 +7,7 @@
       title1:'Let the rich kids keep the sandpit.', title2:"We're having a league.",
       deck:"We rebuild football league tables using real results. Exclude the biggest clubs and every match they played, then see who comes out on top. Choose Spain or England to try it.",
       choose:'CHOOSE YOUR LEAGUE', spainTitle:'Spain', englandTitle:'England',
-      spainSub:'No Madrid. No Barça.', englandSub:'No Big Six. No problem.',
+      spainSub:'No Madrid. No Barça.', englandSub:'Big Six? You decide who goes.',
       spainDesc:'We remove Real Madrid, Barcelona and every match involving either club. Then we recalculate La Liga using only the real results between the teams left — season by season.',
       englandDesc:'You choose which of the Big Six to kick out — any, all or none. We remove their matches and rebuild the Premier League table from real results. Every season since 1992/93.',
       label:'CURRENT ALTERNATIVE LEADERS', pending:'See the recalculated table →',
@@ -23,7 +23,7 @@
       title1:'Que los niños ricos se queden con su patio.',title2:'Nosotros montamos nuestra liga.',
       deck:'Recalculamos las ligas utilizando resultados reales. Excluimos a los clubes más poderosos y todos sus partidos para descubrir quién termina arriba. Elige España o Inglaterra.',
       choose:'ELIGE TU LIGA',spainTitle:'España',englandTitle:'Inglaterra',
-      spainSub:'Sin Madrid. Sin Barça.',englandSub:'Sin los seis grandes. Sin problema.',
+      spainSub:'Sin Madrid. Sin Barça.',englandSub:'¿Los seis grandes? Tú decides.',
       spainDesc:'Quitamos al Real Madrid, al Barcelona y todos sus partidos. Después recalculamos La Liga usando únicamente los resultados reales entre los demás equipos.',
       englandDesc:'Tú eliges cuáles de los seis grandes quedan fuera: algunos, todos o ninguno. Borramos sus partidos y recalculamos la Premier League con resultados reales desde 1992/93.',
       label:'LÍDERES DE LA TABLA ALTERNATIVA',pending:'Ver la clasificación →',
@@ -53,8 +53,8 @@
     setText('spain-enter',t.enterSpain); setText('england-enter',t.enterEngland);
     if (englandRules) {
       setText('englandSub',lang === 'es'
-        ? 'Sin los '+englandRules.exclusionLabel+'. Sin problema.'
-        : 'No '+englandRules.exclusionLabel+'. No problem.');
+        ? '¿Quién queda fuera? Tú decides.'
+        : 'Who gets kicked out? You decide.');
       if (englandRules.exclusionLabel !== 'Big Six') {
         setText('englandDesc',lang === 'es'
           ? 'Elige qué clubes excluir. Eliminamos todos sus partidos y recalculamos la clasificación con los resultados reales entre los demás equipos.'
