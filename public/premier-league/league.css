@@ -119,13 +119,14 @@ body{background:var(--paper)}
 .big-six-paper .kicker{line-height:1.6}
 .how-it-works-fast{margin:27px auto 29px;padding:25px 28px 20px;border:1px solid #d5c8a9;background:#f2eada}
 .how-it-works-fast .rule-intro h2{font:700 clamp(24px,2.8vw,33px)/1.2 Georgia,serif;margin:9px 0 17px;color:#173b2a}
+.fixture-example-intro{font:14px/1.55 system-ui,sans-serif;color:#51634e;margin:0 0 16px}
 .example-fixtures{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .example-fixture{display:flex;align-items:center;gap:17px;background:#fffdf7;border:1px solid #d8d0bb;padding:15px 17px}
 .example-fixture>div{min-width:0}
 .example-fixture strong{display:block;font:750 15px/1.35 system-ui,sans-serif;color:#233d30}
 .example-fixture small{display:block;font:12px/1.5 system-ui,sans-serif;color:#596552;margin-top:4px}
-.example-mark{flex:0 0 80px;padding:7px 5px;font:850 10px/1.3 system-ui,sans-serif;text-align:center;letter-spacing:.065em;border-radius:2px}
-.example-mark.gone{color:#8c3f34;background:#f6e5df;text-decoration:line-through}
+.example-mark{flex:0 0 105px;padding:7px 5px;font:850 10px/1.3 system-ui,sans-serif;text-align:center;letter-spacing:.065em;border-radius:2px}
+.example-mark.gone{color:#8c3f34;background:#f6e5df}
 .example-mark.kept{color:#2d6c42;background:#dfebd9}
 .how-it-works-fast .rule-disclaimer{font:12px/1.55 system-ui,sans-serif;color:#626a54;margin:15px 0 0}
 .league-current{margin-top:30px}
@@ -141,7 +142,7 @@ body{background:var(--paper)}
   .hero-england .england-explainer{font-size:15px}
   .how-it-works-fast{padding:19px 16px}
   .example-fixture{gap:12px;padding:11px 12px}
-  .example-mark{flex-basis:70px;font-size:9px}
+  .example-mark{flex-basis:92px;font-size:9px}
   .club-switch{flex-wrap:wrap}
   .club-switch span:not(.club-state){flex:1 1 auto}
   .club-state{margin-left:auto;padding:5px}
