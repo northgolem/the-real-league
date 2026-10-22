@@ -96,6 +96,16 @@ class PremierLeagueTests(unittest.TestCase):
         self.assertIn('"/data/premier-league.json"', javascript)
         self.assertIn("if (!correctData(data))", javascript)
         self.assertIn('No imaginary scores', html)
+        self.assertIn("What if the Big Six", html)
+        self.assertIn("We remove those clubs and every match they played.", html)
+        self.assertIn("If Arsenal are out, this match disappears for both teams.", html)
+        self.assertIn("Checked = club OUT", html)
+        self.assertIn("Unchecked = club IN", html)
+        self.assertIn("No points are handed out or reassigned.", html)
+        self.assertIn("Your alternative Premier League table", html)
+        custom_js = (ROOT / "public/premier-league/customizer.js").read_text(encoding="utf-8")
+        self.assertNotIn('$("england-method").textContent=', custom_js)
+        self.assertIn('status.textContent="OUT"', custom_js)
         self.assertNotIn('<img src="https://', html)
 
 
