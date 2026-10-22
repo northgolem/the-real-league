@@ -65,17 +65,23 @@ assert.equal(app.get('custom-season').children.length,35,'All 34 historical seas
 assert.equal(app.get('custom-season').disabled,false);
 assert.equal(app.get('custom-checks').children.length,6);
 assert.equal(app.get('premier-rows').children.length,14,'Default keeps the Big Six excluded');
+assert.equal(app.get('custom-count').textContent,'6 selected to remove');
+assert(app.get('custom-checks').children.every(label=>label.children.at(-1).textContent==='OUT'),
+  'Every Big Six club is visibly OUT by default');
 assert.equal(Number(app.get('matches-kept').textContent),current.includedMatches);
 assert.match(app.get('story-title').textContent,/are top/);
 const inputs=app.get('custom-checks').querySelectorAll('input');
 const tottenham=inputs.find(x=>x.value==='Tottenham Hotspur');
 tottenham.checked=false;tottenham.change();
+assert.equal(app.get('custom-checks').children.at(-1).children.at(-1).textContent,'IN',
+  'Unselected clubs must clearly say IN');
 assert.equal(app.get('premier-rows').children.length,15,'Reinstating Spurs must instantly return a club');
 assert(app.links.at(-1).includes('out='),'Custom table must update shareable URL');
 assert(!app.links.at(-1).includes('tottenham-hotspur'));
 app.get('all-teams').click();
 assert.equal(app.get('premier-rows').children.length,20);
 assert.equal(Number(app.get('matches-removed').textContent),0);
+assert.match(app.get('match-info').textContent,/No clubs removed/);
 assert(app.links.at(-1).includes('out=none'));
 app.get('no-big-six').click();
 assert.equal(app.get('premier-rows').children.length,14);
@@ -102,5 +108,5 @@ assert.equal(app.get('story-title').textContent,'Leicester City are top. Well, w
 assert.equal(Number(app.get('matches-removed').textContent),0);
 app=await load('?season=1992-93&out=manchester-city,chelsea');
 assert.equal(app.get('premier-rows').children.length,20,'Deep-linked combination must exclude only those two teams');
-assert.equal(app.get('custom-count').textContent,'2 out');
+assert.equal(app.get('custom-count').textContent,'2 selected to remove');
 console.log('Custom England page tested: toggles, presets, all seasons, 1992/93, direct URLs, copy and no score fabrication.');
