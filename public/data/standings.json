@@ -2,8 +2,8 @@
   "mode": "live",
   "competition": "La Liga de los Mortales",
   "season": "2026/27",
-  "generatedAt": "2026-10-22T08:18:54+00:00",
-  "latestResultAt": "2026-10-21T18:00:00Z",
+  "generatedAt": "2026-10-24T08:40:42+00:00",
+  "latestResultAt": "2026-10-23T19:00:00Z",
   "excluded": [
     "Real Madrid",
     "FC Barcelona"
@@ -12,9 +12,9 @@
     81,
     86
   ],
-  "completedMatches": 89,
+  "completedMatches": 90,
   "excludedMatches": 18,
-  "includedMatches": 71,
+  "includedMatches": 72,
   "officialTableApproximation": [
     {
       "id": 81,
@@ -97,14 +97,14 @@
     {
       "id": 263,
       "name": "Alavés",
-      "P": 9,
+      "P": 10,
       "W": 3,
-      "D": 2,
+      "D": 3,
       "L": 4,
-      "GF": 13,
-      "GA": 10,
+      "GF": 14,
+      "GA": 11,
       "GD": 3,
-      "Pts": 11,
+      "Pts": 12,
       "position": 7
     },
     {
@@ -266,14 +266,14 @@
     {
       "id": 84,
       "name": "Málaga",
-      "P": 9,
+      "P": 10,
       "W": 0,
-      "D": 4,
+      "D": 5,
       "L": 5,
-      "GF": 6,
-      "GA": 18,
+      "GF": 7,
+      "GA": 19,
       "GD": -12,
-      "Pts": 4,
+      "Pts": 5,
       "position": 20
     }
   ],
@@ -341,14 +341,14 @@
     {
       "id": 263,
       "name": "Alavés",
-      "P": 9,
+      "P": 10,
       "W": 3,
-      "D": 2,
+      "D": 3,
       "L": 4,
-      "GF": 13,
-      "GA": 10,
+      "GF": 14,
+      "GA": 11,
       "GD": 3,
-      "Pts": 11,
+      "Pts": 12,
       "position": 5,
       "originalPosition": 7,
       "positionChange": 2
@@ -536,14 +536,14 @@
     {
       "id": 84,
       "name": "Málaga",
-      "P": 8,
+      "P": 9,
       "W": 0,
-      "D": 4,
+      "D": 5,
       "L": 4,
-      "GF": 6,
-      "GA": 14,
+      "GF": 7,
+      "GA": 15,
       "GD": -8,
-      "Pts": 4,
+      "Pts": 5,
       "position": 18,
       "originalPosition": 20,
       "positionChange": 2
