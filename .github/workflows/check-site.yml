@@ -117,5 +117,14 @@ jobs:
           grep -q 'Same leader. Different league.' /tmp/spanish-1995.html
           grep -q 'Three notes from this parallel universe' /tmp/spanish-1995.html
           echo "Live Spain navigation distinguishes the current table from individual history articles"
+          echo "CANONICAL SPANISH HISTORICAL NAVIGATION"
+          curl -fsSL --max-time 20 https://usurperleague.com/spain/ > /tmp/spain-static.html
+          grep -q 'href="/la-liga/" id="nav-archive"' /tmp/spain-static.html
+          grep -q 'href="/la-liga/1995-96/"' /tmp/spain-static.html
+          grep -q 'class="history-decade-grid"' /tmp/spain-static.html
+          if grep -q 'src="/history.js"' /tmp/spain-static.html; then echo "OUTDATED JS HISTORY PICKER"; exit 1; fi
+          curl -fsSL --max-time 20 https://usurperleague.com/la-liga/1995-96/ > /tmp/spain-article.html
+          grep -q 'Same leader. Different league.' /tmp/spain-article.html
+          echo "Spain archive menu and 1995/96 link serve the canonical new article"
           echo "BASELINE HTTPS"
           curl -sSL -o /dev/null -w "HTTP status=%{http_code}\n" --max-time 10 https://example.com/ || true
