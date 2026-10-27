@@ -3,6 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+// Historical URLs should always open the permanent season article, even if
+// an old share link contains the former in-page ?season= parameter.
+const oldSeason = new URLSearchParams(location.search).get('season');
+if (/^\\d{4}-\\d{2}$/.test(oldSeason || '') && oldSeason !== '2026-27') {
+  location.replace('/la-liga/' + oldSeason + '/');
+}
+</script>
 <meta name="theme-color" content="#102e25">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta name="description" content="La Liga without Real Madrid or Barcelona: explore today’s recalculated standings and 94 seasons of alternative Spanish champions. Same matches, different winners.">
@@ -50,7 +58,7 @@ a{color:inherit}button{font:inherit;cursor:pointer}.container{max-width:1060px;p
 <header class="masthead"><div class="container">
 <nav class="topbar" aria-label="Main navigation">
   <a class="brand" href="/"><img class="brand-mark" src="/favicon.svg" width="25" height="25" alt="" aria-hidden="true">The Usurper League</a>
-  <div class="site-nav"><a href="/" class="nav-home">Home</a><a href="/spain/#league-table" id="nav-standings">Spain · Standings</a><a href="/england/" id="nav-england">England · Premier League</a><a href="#archive" id="nav-archive">The archive</a><a href="#how-it-works" id="nav-how">How it works</a></div>
+  <div class="site-nav"><a href="/" class="nav-home">Home</a><a href="/spain/#league-table" id="nav-standings">Spain · Standings</a><a href="/england/" id="nav-england">England · Premier League</a><a href="/la-liga/" id="nav-archive">The archive</a><a href="#how-it-works" id="nav-how">How it works</a></div>
   <div class="topright">NO GODS. <span>JUST FOOTBALL.</span></div>
   <div class="language-picker" role="group" aria-label="Language / Idioma"><button class="lang-button active" type="button" data-lang="en" aria-pressed="true">EN</button><button class="lang-button" type="button" data-lang="es" aria-pressed="false">ES</button></div>
 </nav></div></header>
@@ -91,13 +99,162 @@ a{color:inherit}button{font:inherit;cursor:pointer}.container{max-width:1060px;p
     <article class="metric-card"><div class="metric-label" id="rebound-label">Goal difference restored</div><h3 class="metric-value" id="rebound-value">—</h3><p class="metric-explain" id="rebound-explain"></p></article>
   </div>
 </section>
-<section class="history-nav" id="archive" aria-label="Choose football season">
-  <div class="history-top"><div><div class="eyebrow" id="archive-kicker">ALMOST A CENTURY OF ALTERNATIVE ENDINGS</div><h2 class="history-heading" id="archive-heading">Apparently, other clubs can win things.</h2></div><span class="history-context" id="season-context">Current season · updated daily</span></div>
+<section class="history-nav" id="archive" aria-label="Historical La Liga seasons">
+  <div class="history-top"><div><div class="eyebrow" id="archive-kicker">ALMOST A CENTURY OF ALTERNATIVE ENDINGS</div><h2 class="history-heading" id="archive-heading">Apparently, other clubs can win things.</h2></div><span class="history-context">94 seasons · 1928/29–2025/26</span></div>
   <p class="history-picker-guide" id="history-picker-guide">The current season lives above. Pick any completed season below to open its full story, recalculated table and original match data.</p>
-  <div class="decade-links" id="decade-links" aria-label="Jump to decade"></div>
-  <div class="season-wrapper"><button type="button" class="season-arrow" id="season-left" aria-label="Earlier seasons">‹</button><div class="season-scroll" role="tablist" aria-label="La Liga season" id="season-tabs"><button class="season-tab active" role="tab" aria-selected="true" data-season="2026-27">2026/27</button></div><button type="button" class="season-arrow" id="season-right" aria-label="Later seasons">›</button></div>
-  <p id="season-alert" role="status" aria-live="polite"></p>
-  <p class="archive-search-link"><a href="/la-liga/" id="archive-all-link">Explore the alternative champions &amp; every historical table ↗</a></p>
+  <p class="archive-search-link archive-main-link"><a href="/la-liga/" id="archive-all-link">Explore all 94 historical seasons and alternative champions ↗</a></p>
+  <div class="history-decade-grid" aria-label="Select a decade and historical season">
+    <details class="history-decade" open>
+      <summary>2020s <span>6 seasons</span></summary>
+      <nav class="year-links" aria-label="2020s historical seasons">
+        <a href="/la-liga/2025-26/" aria-label="Read the 2025/26 alternative La Liga season story">2025/26</a>
+        <a href="/la-liga/2024-25/" aria-label="Read the 2024/25 alternative La Liga season story">2024/25</a>
+        <a href="/la-liga/2023-24/" aria-label="Read the 2023/24 alternative La Liga season story">2023/24</a>
+        <a href="/la-liga/2022-23/" aria-label="Read the 2022/23 alternative La Liga season story">2022/23</a>
+        <a href="/la-liga/2021-22/" aria-label="Read the 2021/22 alternative La Liga season story">2021/22</a>
+        <a href="/la-liga/2020-21/" aria-label="Read the 2020/21 alternative La Liga season story">2020/21</a>
+      </nav>
+    </details>
+    <details class="history-decade">
+      <summary>2010s <span>10 seasons</span></summary>
+      <nav class="year-links" aria-label="2010s historical seasons">
+        <a href="/la-liga/2019-20/" aria-label="Read the 2019/20 alternative La Liga season story">2019/20</a>
+        <a href="/la-liga/2018-19/" aria-label="Read the 2018/19 alternative La Liga season story">2018/19</a>
+        <a href="/la-liga/2017-18/" aria-label="Read the 2017/18 alternative La Liga season story">2017/18</a>
+        <a href="/la-liga/2016-17/" aria-label="Read the 2016/17 alternative La Liga season story">2016/17</a>
+        <a href="/la-liga/2015-16/" aria-label="Read the 2015/16 alternative La Liga season story">2015/16</a>
+        <a href="/la-liga/2014-15/" aria-label="Read the 2014/15 alternative La Liga season story">2014/15</a>
+        <a href="/la-liga/2013-14/" aria-label="Read the 2013/14 alternative La Liga season story">2013/14</a>
+        <a href="/la-liga/2012-13/" aria-label="Read the 2012/13 alternative La Liga season story">2012/13</a>
+        <a href="/la-liga/2011-12/" aria-label="Read the 2011/12 alternative La Liga season story">2011/12</a>
+        <a href="/la-liga/2010-11/" aria-label="Read the 2010/11 alternative La Liga season story">2010/11</a>
+      </nav>
+    </details>
+    <details class="history-decade">
+      <summary>2000s <span>10 seasons</span></summary>
+      <nav class="year-links" aria-label="2000s historical seasons">
+        <a href="/la-liga/2009-10/" aria-label="Read the 2009/10 alternative La Liga season story">2009/10</a>
+        <a href="/la-liga/2008-09/" aria-label="Read the 2008/09 alternative La Liga season story">2008/09</a>
+        <a href="/la-liga/2007-08/" aria-label="Read the 2007/08 alternative La Liga season story">2007/08</a>
+        <a href="/la-liga/2006-07/" aria-label="Read the 2006/07 alternative La Liga season story">2006/07</a>
+        <a href="/la-liga/2005-06/" aria-label="Read the 2005/06 alternative La Liga season story">2005/06</a>
+        <a href="/la-liga/2004-05/" aria-label="Read the 2004/05 alternative La Liga season story">2004/05</a>
+        <a href="/la-liga/2003-04/" aria-label="Read the 2003/04 alternative La Liga season story">2003/04</a>
+        <a href="/la-liga/2002-03/" aria-label="Read the 2002/03 alternative La Liga season story">2002/03</a>
+        <a href="/la-liga/2001-02/" aria-label="Read the 2001/02 alternative La Liga season story">2001/02</a>
+        <a href="/la-liga/2000-01/" aria-label="Read the 2000/01 alternative La Liga season story">2000/01</a>
+      </nav>
+    </details>
+    <details class="history-decade">
+      <summary>1990s <span>10 seasons</span></summary>
+      <nav class="year-links" aria-label="1990s historical seasons">
+        <a href="/la-liga/1999-00/" aria-label="Read the 1999/00 alternative La Liga season story">1999/00</a>
+        <a href="/la-liga/1998-99/" aria-label="Read the 1998/99 alternative La Liga season story">1998/99</a>
+        <a href="/la-liga/1997-98/" aria-label="Read the 1997/98 alternative La Liga season story">1997/98</a>
+        <a href="/la-liga/1996-97/" aria-label="Read the 1996/97 alternative La Liga season story">1996/97</a>
+        <a href="/la-liga/1995-96/" aria-label="Read the 1995/96 alternative La Liga season story">1995/96</a>
+        <a href="/la-liga/1994-95/" aria-label="Read the 1994/95 alternative La Liga season story">1994/95</a>
+        <a href="/la-liga/1993-94/" aria-label="Read the 1993/94 alternative La Liga season story">1993/94</a>
+        <a href="/la-liga/1992-93/" aria-label="Read the 1992/93 alternative La Liga season story">1992/93</a>
+        <a href="/la-liga/1991-92/" aria-label="Read the 1991/92 alternative La Liga season story">1991/92</a>
+        <a href="/la-liga/1990-91/" aria-label="Read the 1990/91 alternative La Liga season story">1990/91</a>
+      </nav>
+    </details>
+    <details class="history-decade">
+      <summary>1980s <span>10 seasons</span></summary>
+      <nav class="year-links" aria-label="1980s historical seasons">
+        <a href="/la-liga/1989-90/" aria-label="Read the 1989/90 alternative La Liga season story">1989/90</a>
+        <a href="/la-liga/1988-89/" aria-label="Read the 1988/89 alternative La Liga season story">1988/89</a>
+        <a href="/la-liga/1987-88/" aria-label="Read the 1987/88 alternative La Liga season story">1987/88</a>
+        <a href="/la-liga/1986-87/" aria-label="Read the 1986/87 alternative La Liga season story">1986/87</a>
+        <a href="/la-liga/1985-86/" aria-label="Read the 1985/86 alternative La Liga season story">1985/86</a>
+        <a href="/la-liga/1984-85/" aria-label="Read the 1984/85 alternative La Liga season story">1984/85</a>
+        <a href="/la-liga/1983-84/" aria-label="Read the 1983/84 alternative La Liga season story">1983/84</a>
+        <a href="/la-liga/1982-83/" aria-label="Read the 1982/83 alternative La Liga season story">1982/83</a>
+        <a href="/la-liga/1981-82/" aria-label="Read the 1981/82 alternative La Liga season story">1981/82</a>
+        <a href="/la-liga/1980-81/" aria-label="Read the 1980/81 alternative La Liga season story">1980/81</a>
+      </nav>
+    </details>
+    <details class="history-decade">
+      <summary>1970s <span>10 seasons</span></summary>
+      <nav class="year-links" aria-label="1970s historical seasons">
+        <a href="/la-liga/1979-80/" aria-label="Read the 1979/80 alternative La Liga season story">1979/80</a>
+        <a href="/la-liga/1978-79/" aria-label="Read the 1978/79 alternative La Liga season story">1978/79</a>
+        <a href="/la-liga/1977-78/" aria-label="Read the 1977/78 alternative La Liga season story">1977/78</a>
+        <a href="/la-liga/1976-77/" aria-label="Read the 1976/77 alternative La Liga season story">1976/77</a>
+        <a href="/la-liga/1975-76/" aria-label="Read the 1975/76 alternative La Liga season story">1975/76</a>
+        <a href="/la-liga/1974-75/" aria-label="Read the 1974/75 alternative La Liga season story">1974/75</a>
+        <a href="/la-liga/1973-74/" aria-label="Read the 1973/74 alternative La Liga season story">1973/74</a>
+        <a href="/la-liga/1972-73/" aria-label="Read the 1972/73 alternative La Liga season story">1972/73</a>
+        <a href="/la-liga/1971-72/" aria-label="Read the 1971/72 alternative La Liga season story">1971/72</a>
+        <a href="/la-liga/1970-71/" aria-label="Read the 1970/71 alternative La Liga season story">1970/71</a>
+      </nav>
+    </details>
+    <details class="history-decade">
+      <summary>1960s <span>9 seasons</span></summary>
+      <nav class="year-links" aria-label="1960s historical seasons">
+        <a href="/la-liga/1969-70/" aria-label="Read the 1969/70 alternative La Liga season story">1969/70</a>
+        <a href="/la-liga/1968-69/" aria-label="Read the 1968/69 alternative La Liga season story">1968/69</a>
+        <a href="/la-liga/1967-68/" aria-label="Read the 1967/68 alternative La Liga season story">1967/68</a>
+        <a href="/la-liga/1966-67/" aria-label="Read the 1966/67 alternative La Liga season story">1966/67</a>
+        <a href="/la-liga/1965-66/" aria-label="Read the 1965/66 alternative La Liga season story">1965/66</a>
+        <a href="/la-liga/1964-65/" aria-label="Read the 1964/65 alternative La Liga season story">1964/65</a>
+        <a href="/la-liga/1963-64/" aria-label="Read the 1963/64 alternative La Liga season story">1963/64</a>
+        <a href="/la-liga/1961-62/" aria-label="Read the 1961/62 alternative La Liga season story">1961/62</a>
+        <a href="/la-liga/1960-61/" aria-label="Read the 1960/61 alternative La Liga season story">1960/61</a>
+      </nav>
+    </details>
+    <details class="history-decade">
+      <summary>1950s <span>10 seasons</span></summary>
+      <nav class="year-links" aria-label="1950s historical seasons">
+        <a href="/la-liga/1959-60/" aria-label="Read the 1959/60 alternative La Liga season story">1959/60</a>
+        <a href="/la-liga/1958-59/" aria-label="Read the 1958/59 alternative La Liga season story">1958/59</a>
+        <a href="/la-liga/1957-58/" aria-label="Read the 1957/58 alternative La Liga season story">1957/58</a>
+        <a href="/la-liga/1956-57/" aria-label="Read the 1956/57 alternative La Liga season story">1956/57</a>
+        <a href="/la-liga/1955-56/" aria-label="Read the 1955/56 alternative La Liga season story">1955/56</a>
+        <a href="/la-liga/1954-55/" aria-label="Read the 1954/55 alternative La Liga season story">1954/55</a>
+        <a href="/la-liga/1953-54/" aria-label="Read the 1953/54 alternative La Liga season story">1953/54</a>
+        <a href="/la-liga/1952-53/" aria-label="Read the 1952/53 alternative La Liga season story">1952/53</a>
+        <a href="/la-liga/1951-52/" aria-label="Read the 1951/52 alternative La Liga season story">1951/52</a>
+        <a href="/la-liga/1950-51/" aria-label="Read the 1950/51 alternative La Liga season story">1950/51</a>
+      </nav>
+    </details>
+    <details class="history-decade">
+      <summary>1940s <span>10 seasons</span></summary>
+      <nav class="year-links" aria-label="1940s historical seasons">
+        <a href="/la-liga/1949-50/" aria-label="Read the 1949/50 alternative La Liga season story">1949/50</a>
+        <a href="/la-liga/1948-49/" aria-label="Read the 1948/49 alternative La Liga season story">1948/49</a>
+        <a href="/la-liga/1947-48/" aria-label="Read the 1947/48 alternative La Liga season story">1947/48</a>
+        <a href="/la-liga/1946-47/" aria-label="Read the 1946/47 alternative La Liga season story">1946/47</a>
+        <a href="/la-liga/1945-46/" aria-label="Read the 1945/46 alternative La Liga season story">1945/46</a>
+        <a href="/la-liga/1944-45/" aria-label="Read the 1944/45 alternative La Liga season story">1944/45</a>
+        <a href="/la-liga/1943-44/" aria-label="Read the 1943/44 alternative La Liga season story">1943/44</a>
+        <a href="/la-liga/1942-43/" aria-label="Read the 1942/43 alternative La Liga season story">1942/43</a>
+        <a href="/la-liga/1941-42/" aria-label="Read the 1941/42 alternative La Liga season story">1941/42</a>
+        <a href="/la-liga/1940-41/" aria-label="Read the 1940/41 alternative La Liga season story">1940/41</a>
+      </nav>
+    </details>
+    <details class="history-decade">
+      <summary>1930s <span>7 seasons</span></summary>
+      <nav class="year-links" aria-label="1930s historical seasons">
+        <a href="/la-liga/1939-40/" aria-label="Read the 1939/40 alternative La Liga season story">1939/40</a>
+        <a href="/la-liga/1935-36/" aria-label="Read the 1935/36 alternative La Liga season story">1935/36</a>
+        <a href="/la-liga/1934-35/" aria-label="Read the 1934/35 alternative La Liga season story">1934/35</a>
+        <a href="/la-liga/1933-34/" aria-label="Read the 1933/34 alternative La Liga season story">1933/34</a>
+        <a href="/la-liga/1932-33/" aria-label="Read the 1932/33 alternative La Liga season story">1932/33</a>
+        <a href="/la-liga/1931-32/" aria-label="Read the 1931/32 alternative La Liga season story">1931/32</a>
+        <a href="/la-liga/1930-31/" aria-label="Read the 1930/31 alternative La Liga season story">1930/31</a>
+      </nav>
+    </details>
+    <details class="history-decade">
+      <summary>1920s <span>2 seasons</span></summary>
+      <nav class="year-links" aria-label="1920s historical seasons">
+        <a href="/la-liga/1929-30/" aria-label="Read the 1929/30 alternative La Liga season story">1929/30</a>
+        <a href="/la-liga/1928-29/" aria-label="Read the 1928/29 alternative La Liga season story">1928/29</a>
+      </nav>
+    </details>
+  </div>
+  <p class="archive-context-small">Each year opens its own article. No second, confusing version of the table. Football is complicated enough.</p>
 </section>
 <div class="sectionhead" id="how-it-works"><h2>How we stole the league</h2></div><section class="rules"><div class="rule"><span>01 / THE EXITS</span><b>Two clubs. One polite goodbye.</b><p>Real Madrid and Barcelona have their own table. This one is for everyone else.</p></div><div class="rule"><span>02 / THE ERASER</span><b>Their results go with them.</b><p>Every fixture against either club disappears. Points, goals, games played. We don’t do half-measures.</p></div><div class="rule"><span>03 / THE FUN</span><b>Then things get interesting.</b><p>Everyone else keeps their actual results. No invented scores, no fantasy transfers. Just a different champion.</p></div></section>
 <div class="actionrow"><button class="primary" id="share">Share the table ↗</button><button class="secondary" id="copy">Copy link</button><span class="notification" id="notice" role="status" aria-live="polite"></span></div>
@@ -126,5 +283,5 @@ $('year').textContent=new Date().getFullYear();
 fetch('/data/standings.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('No standings data');return r.json()}).then(d=>{if(window.normalizeClubNames)window.normalizeClubNames(d);if(window.setCurrentSeasonData)window.setCurrentSeasonData(d);else {data=d;render()}}).catch(()=>{notify(window.getNotice?window.getNotice('resultsError'):'Results file unavailable; the site is in preview mode.');render()});
 </script>
 <script src="/enhance.js"></script>
-<script src="/history.js"></script>
+
 </body></html>
