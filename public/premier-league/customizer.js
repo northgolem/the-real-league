@@ -7,7 +7,7 @@
   const cache = new Map();
   const badges = new Map();
   const state = { config:null, index:null, current:null, liveGames:null,
-                  season:"", selected:new Set(), games:null, generation:0 };
+                  season:"", selected:new Set(), games:null, generation:0, tableMode:"custom" };
   const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
   const currentId = season => season.replace("/", "-");
   const names = () => state.config.excludedClubs.map(x=>x.name);
@@ -112,6 +112,13 @@
     if(Number.isInteger(remaining)) $("table-title").textContent=remaining+" clubs remain. Here's their league.";
     $("custom-share").disabled=!state.games;
     $("custom-native-share").disabled=!state.games;
+    $("custom-table-mode").disabled=!state.games;
+    $("full-table-mode").disabled=!state.games;
+    $("mobile-show-table").disabled=!state.games;
+    $("custom-table-mode").setAttribute("aria-pressed",String(state.tableMode==="custom"));
+    $("full-table-mode").setAttribute("aria-pressed",String(state.tableMode==="full"));
+    $("mobile-table-summary").textContent=Number.isInteger(remaining)
+      ? remaining+" clubs left" : "Checking results…";
     $("custom-season").value=state.season;
     setFeedback(state.games?"Tick = OUT. Untick = IN. The table below updates instantly.":"Checking real match results…");
   }
@@ -126,44 +133,73 @@
     if(!state.games) return;
     const survivors=state.games.clubs.filter(x=>!state.selected.has(x.name)).length;
     const excluded=selectedNames().filter(n=>state.games.clubs.some(x=>x.name===n));
+    // Both versions use the same verified fixture file. The all-club
+    // comparison is NOT passed off as the official Premier League table.
     const calculated=core.calculate(state.games.clubs,state.games.matches,excluded);
+    const full=core.calculate(state.games.clubs,state.games.matches,[]);
     if(calculated.clubsRemaining!==survivors ||
-        calculated.kept+calculated.removed!==state.games.matches.length)
-      throw Error("Personalised table failed its fixture accounting check");
+       calculated.kept+calculated.removed!==state.games.matches.length ||
+       full.kept!==state.games.matches.length || full.removed!==0)
+      throw Error("Table comparison failed its verified fixture accounting check");
+    const showingFull=state.tableMode==="full";
+    const selected=showingFull?full:calculated;
     const rows=$("premier-rows");rows.replaceChildren();
-    for(const team of calculated.rows) {
+    for(const team of selected.rows) {
       const tr=document.createElement("tr");
       tableCell(tr,team.position,true);tableCell(tr,team.name);tableCell(tr,team.P);
-      for(const name of ["W","D","L"]){
+      for(const name of ["W","D","L"]) {
         const td=tableCell(tr,team[name]);td.classList.add("mobile-hide");
       }
       tableCell(tr,team.GD>0?"+"+team.GD:team.GD);
       tableCell(tr,team.Pts).classList.add("points");
       rows.appendChild(tr);
     }
-    const leader=calculated.rows[0];
+    $("premier-standings").setAttribute("aria-label",showingFull
+      ?"Calculated Premier League standings with all clubs, not an official table"
+      :"Your alternative Premier League standings using verified match results");
+    $("table-heading").textContent=showingFull
+      ?"All clubs — our calculated comparison"
+      :calculated.clubsRemaining+" clubs. Your alternative Premier League.";
+    $("table-kicker").textContent=showingFull
+      ?"COMPARISON / EVERY CLUB & COMPLETED MATCH"
+      :(state.season===state.current.id?"CURRENT SEASON / YOUR PREMIER LEAGUE"
+       :"HISTORICAL SEASON / YOUR PREMIER LEAGUE");
+    const originalLeader=full.rows[0];
+    const myLeader=calculated.rows[0];
+    const leadsSame=originalLeader.name===myLeader.name;
+    $("table-comparison").textContent=showingFull
+      ? "All "+full.clubsRemaining+" clubs and "+full.kept+" finished matches. This is our points, goal-difference and goals-scored calculation — not an official league table."
+      : excluded.length
+        ? "Your leader: "+myLeader.name+". With everybody included: "+originalLeader.name+
+          ". "+(leadsSame?"Same leader, different number of games.":"A different leader. That's the whole experiment.")+
+          " Switch views to compare the same real results."
+        : "No clubs excluded. Both views use exactly the same completed match results.";
     $("matches-kept").textContent=calculated.kept;
     $("matches-removed").textContent=calculated.removed;
     $("clubs-left").textContent=calculated.clubsRemaining;
-    $("match-info").textContent=state.selected.size
-      ? calculated.kept+" real, completed matches between the clubs still in your league. "+
-        calculated.removed+" matches involving excluded clubs have been removed for BOTH teams."
-      : "No clubs removed. All "+calculated.kept+" completed matches count; no scores or points have been altered.";
-    $("results-status").textContent="Verified full-time results · personalised table";
+    $("match-info").textContent=showingFull
+      ? "All "+full.kept+" finished games count in this comparison. Your excluded-club choices are still saved above — switch to My league to see them applied."
+      : excluded.length
+        ? calculated.kept+" real, completed matches between the clubs still in your league. "+
+          calculated.removed+" matches involving excluded clubs have been removed for BOTH teams."
+        : "No clubs removed. All "+calculated.kept+" completed matches count; no scores or points have been altered.";
+    $("results-status").textContent="Verified full-time results · independent calculation";
     $("results-updated").textContent=seasonLabel()+
       (state.season===state.current.id?" · current season (not live scores)":" · complete historical season");
-    $("story-title").textContent=leader.name+" are top. Well, well.";
+    $("story-title").textContent=myLeader.name+" are top. Well, well.";
     const out=selectedNames();
-    const sentence=out.length?"I kicked out "+out.join(", ")+".":
-      "I let all the clubs play.";
-    $("share-pitch").textContent="CHALLENGE YOUR MATES: "+leader.name+
-      " lead my "+seasonLabel()+" Premier League on "+leader.Pts+" points. "+
+    const sentence=out.length?"I kicked out "+out.join(", ")+".":"I let all the clubs play.";
+    $("share-pitch").textContent="CHALLENGE YOUR MATES: "+myLeader.name+
+      " lead my "+seasonLabel()+" Premier League on "+myLeader.Pts+" points. "+
       sentence+" Could you do better?";
-    $("story-copy").textContent=leader.name+" lead your "+seasonLabel()+" league with "+
-      leader.Pts+" points from "+leader.P+" games. You've kept "+calculated.clubsRemaining+
+    $("story-copy").textContent=myLeader.name+" lead your "+seasonLabel()+" league with "+
+      myLeader.Pts+" points from "+myLeader.P+" games. You've kept "+calculated.clubsRemaining+
       " clubs and removed "+calculated.removed+" actual fixtures. The trophy, regrettably, is imaginary.";
     $("table-title").textContent=calculated.clubsRemaining+" clubs remain. Here's their league.";
+    $("custom-table-mode").setAttribute("aria-pressed",String(!showingFull));
+    $("full-table-mode").setAttribute("aria-pressed",String(showingFull));
   }
+
   function fail(message) {
     $("premier-rows").replaceChildren();
     $("results-status").textContent="This season's results could not be verified";
@@ -172,10 +208,14 @@
     $("story-title").textContent="We're not inventing a table.";
     $("story-copy").textContent="The match feed needs checking before a personalised league can be calculated.";
     $("custom-share").disabled=true;
+    $("custom-native-share").disabled=true;
+    $("custom-table-mode").disabled=true;
+    $("full-table-mode").disabled=true;
+    $("mobile-show-table").disabled=true;
     setFeedback(message);
   }
   async function selectSeason(season,replaceURL) {
-    state.season=season;state.games=null;
+    state.season=season;state.games=null;state.tableMode="custom";
     const generation=++state.generation;
     $("custom-season").value=season;
     tickedUI();
@@ -197,6 +237,7 @@
   }
   function changedSelection(next) {
     state.selected=next;
+    state.tableMode="custom";
     updateURL();
     try {render()} catch(e){fail("Couldn't verify this combination. Please choose another season.");}
   }
@@ -250,6 +291,20 @@
       picker.addEventListener("change",()=>selectSeason(picker.value,true));
       $("no-big-six").addEventListener("click",()=>changedSelection(defaultSelected()));
       $("all-teams").addEventListener("click",()=>changedSelection(new Set()));
+      $("custom-table-mode").addEventListener("click",()=>{
+        if(!state.games)return;
+        state.tableMode="custom";render();
+      });
+      $("full-table-mode").addEventListener("click",()=>{
+        if(!state.games)return;
+        state.tableMode="full";render();
+      });
+      $("mobile-show-table").addEventListener("click",()=>{
+        if(!state.games)return;
+        $("premier-table").scrollIntoView?.({behavior:"smooth",block:"start"});
+        // Let keyboard users read the newly reached table heading.
+        $("table-heading").focus?.({preventScroll:true});
+      });
       $("custom-share").addEventListener("click",async()=>{
         const url=shareURL();
         try {
