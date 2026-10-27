@@ -25,6 +25,7 @@
       archiveKicker: 'ALMOST A CENTURY OF ALTERNATIVE ENDINGS',
       archiveHeading: 'Apparently, other clubs can win things.',
       archiveAll: 'Explore the alternative champions & every historical table ↗',
+      archiveGuide: 'The current season lives above. Pick any completed season below to open its full story, recalculated table and original match data.',
       oldSeason: season => 'The ' + season + ' season · archives',
       oldHeadline: name => name + ' were champions. In this version.',
       oldStory: (leader, season, pts) => "Remove Madrid and Barça's fixtures from " + season + " and " + leader.name + " finish top on " + leader.Pts + " points. That's " + pts + " points per win, as the rules required. The scores are real. The trophy, regrettably, is not.",
@@ -95,6 +96,7 @@
       archiveKicker: 'CASI UN SIGLO DE FINALES ALTERNATIVOS',
       archiveHeading: 'Resulta que los demás también saben ganar.',
       archiveAll: 'Ver los campeones alternativos y todas las temporadas ↗',
+      archiveGuide: 'Arriba está la temporada actual. Elige cualquier temporada anterior para ver su historia, clasificación alternativa y fuente de resultados.',
       oldSeason: season => 'Temporada ' + season + ' · archivo',
       oldHeadline: name => name + ' fue campeón. Aquí, al menos.',
       oldStory: (leader, season, pts) => 'Si quitamos los partidos del Madrid y del Barça en ' + season + ', ' + leader.name + ' termina primero con ' + leader.Pts + ' puntos. ' + pts + ' puntos por victoria, como mandaba el reglamento. Los resultados son reales. La copa, por desgracia, no.',
@@ -211,6 +213,7 @@
     if (masthead) masthead.innerHTML = tr.masthead;
     set('#competition-kicker', tr.eyebrow(season));
     set('#archive-all-link', tr.archiveAll);
+    set('#history-picker-guide', tr.archiveGuide);
     set('.hero-slogan .line1', tr.slogan1);
     set('.hero-headline-first', tr.heroTitle1);
     set('.hero-headline-second', tr.heroTitle2);
