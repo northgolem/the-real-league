@@ -34,6 +34,12 @@ if english_index.exists():
         assert entry["champion"] in html
         assert str(entry["points"]) in html
         assert "CC0" in html and 'name="description"' in html
+        assert 'class="season-duel"' in html, f"Missing England story comparison {sid}"
+        assert 'class="season-findings"' in html, f"Missing England season insights {sid}"
+        assert "THE RULES" in html.upper() or "The rules" in html
+        assert f'/england/?season={sid}#the-table' in html, f"No live customiser link {sid}"
+        assert '/la-liga/' in html, f"No Spain discovery route {sid}"
+        assert 'NOT THE OFFICIAL TABLE' in html
 assert locs == expected, "Sitemap must list exactly the real Spanish and English season pages"
 for id in ids:
     data = json.loads((root / "history" / (id + ".json")).read_text(encoding="utf-8"))
@@ -42,9 +48,20 @@ for id in ids:
     assert data["alternativeTable"][0]["name"] in html
     assert str(data["alternativeTable"][0]["Pts"]) in html
     assert 'official LaLiga standings' in html
+    assert 'class="season-duel"' in html, f"Missing Spanish season comparison {id}"
+    assert 'class="season-findings"' in html, f"Missing Spanish story insights {id}"
+    assert 'Take Madrid and Barça out' in html
+    assert 'No invented wins, no donated points' in html
+    assert 'href="/england/"' in html, f"No cross-league discovery {id}"
+    assert 'rather than first.' not in html
+    assert 'class="discovery-cta"' in html
     assert data["sourceUrl"] in html
     assert 'name="description"' in html
     assert not re.search(r'<img[^>]+(?:src="https?://|src="/club)',html), "Unlicensed images in generated page"
+# Audit two representative Google-entry pages, including a season whose
+# full-league leader remains the same after exclusion.
+assert "Same leader. Different league." in (root / "la-liga/1995-96/index.html").read_text(encoding="utf-8")
+assert "A different name at the top." in (root / "la-liga/1960-61/index.html").read_text(encoding="utf-8")
 assert "2</strong>" in (root / "la-liga/1994-95/index.html").read_text(encoding="utf-8"), "Historic two-point scoring missing"
 assert "3</strong>" in (root / "la-liga/1995-96/index.html").read_text(encoding="utf-8"), "Three-point scoring missing"
 index = (root / "la-liga/index.html").read_text(encoding="utf-8")
