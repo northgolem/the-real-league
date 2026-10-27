@@ -20,10 +20,10 @@
 <link rel="stylesheet" href="/home.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"The Usurper League","url":"https://usurperleague.com/","description":"Independent recalculated football tables for Spain without Madrid or Barcelona and England without the Big Six.","inLanguage":["en","es"]}</script>
 <script>
-// Preserve older links to the former Spanish homepage's season picker.
+// Older historical season links now point to their actual standalone articles.
 const legacy=new URLSearchParams(location.search);
 if(/^\d{4}-\d{2}$/.test(legacy.get('season')||'')) {
-  location.replace('/spain/'+location.search+location.hash);
+  location.replace('/la-liga/'+legacy.get('season')+'/');
 }
 </script>
 <script defer src="/home.js"></script>
