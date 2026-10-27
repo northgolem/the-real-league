@@ -5,6 +5,7 @@ Called by scripts/build_seo.py so both leagues share a single sitemap.
 No network calls, generated sports photographs, crests or manually typed scores.
 """
 from collections import Counter
+from season_story import season_facts
 from html import escape
 from pathlib import Path
 import json
@@ -70,73 +71,138 @@ def table(data,heading):
             "".join(rows)+'</tbody></table></div>')
 
 
-def year_page(data,index,p,i,cfg):
-    season=data["season"]
-    sid=data["seasonId"]
-    champion=data["alternativeTable"][0]
-    full_leader=data["officialTableApproximation"][0]
-    excluded=data["excludedInSeason"]
-    exclusions=", ".join(excluded)
-    label=cfg["exclusionLabel"]
-    n=len(data["alternativeTable"])
-    pts=champion["Pts"]
-    url=f"{BASE}/england/history/{sid}/"
-    title=f"Premier League {season} Without the {label} | {champion['name']} Win"
-    desc=f"Recalculated Premier League {season} without the {label}: {champion['name']} lead on {pts} points. Full real-match table, surviving clubs and the original results source."
-    missing=sorted(set(data["excluded"])-set(excluded))
-    if missing:
-        missing_text='<p><b>Historical footnote:</b> ' + e(", ".join(missing)) + (
-            " were not in the top flight that season, so naturally no matches involving "
-            "those clubs were removed.</p>")
+def year_page(data, index, p, i, cfg):
+    season = data["season"]
+    sid = data["seasonId"]
+    facts = season_facts(data)
+    champion, runner = facts["winner"], facts["runner"]
+    full_leader = facts["full_leader"]
+    label = cfg["exclusionLabel"]
+    excluded = data["excludedInSeason"]
+    missing = sorted(set(data["excluded"]) - set(excluded))
+    url = f"{BASE}/england/history/{sid}/"
+    title = f"Premier League {season} Without the {label} | {champion['name']} Win"
+    desc = (f"Premier League {season} recalculated without the {label}: "
+            f"{champion['name']} finish first on {champion['Pts']} points, "
+            f"{facts['margin']} ahead of {runner['name']}. "
+            f"{facts['removed']} real fixtures removed.")
+
+    if facts["same_champion"]:
+        shift_title = "Even without the usual suspects, the leader stays put."
+        comparison = (
+            f"<strong>{e(champion['name'])}</strong> led our calculation with all clubs "
+            "included too. The guest list changes. The first name on the table doesn't. "
+            "That happens. We don't fiddle with the results to make a better punchline."
+        )
     else:
-        missing_text=""
-    prev=index[i+1]["id"] if i+1<len(index) else None
-    next=index[i-1]["id"] if i>0 else None
-    season_links=f'''<nav class="season-siblings">
-<a href="/england/history/{e(prev)}/" {'hidden' if not prev else ''}>← Earlier season</a>
-<a href="/england/history/">Every season ↑</a>
-<a href="/england/history/{e(next)}/" {'hidden' if not next else ''}>Later season →</a>
-</nav>''' if prev and next else '<nav class="season-siblings"><a href="/england/history/">All historical seasons ↗</a></nav>'
-    content=f"""
+        shift_title = f"{e(champion['name'])} take the lead. Different company."
+        comparison = (
+            f"<strong>{e(full_leader['name'])}</strong> led the all-club calculation. "
+            f"Remove the {e(label)} and all the fixtures they played, and "
+            f"<strong>{e(champion['name'])}</strong> top the table instead."
+        )
+    lead = facts["margin"]
+    if lead:
+        race = (f"<strong>{e(champion['name'])}</strong> finish {lead} points ahead "
+                f"of <strong>{e(runner['name'])}</strong>, who have {runner['Pts']}. "
+                + ("Not much room for complacency." if lead <= 2 else
+                   "A healthier lead than the arguments in the comments, probably."))
+    else:
+        race = (
+            f"<strong>{e(champion['name'])}</strong> and <strong>{e(runner['name'])}</strong> "
+            f"finish level on {champion['Pts']} points. "
+            "Goal difference and then goals scored decide our ordering."
+        )
+    biggest = facts["biggest_gain"]
+    if biggest:
+        gain, team, before, after = biggest
+        moving = (
+            f"<strong>{e(team['name'])}</strong> make the biggest climb among the "
+            f"clubs still in the division: from {before} to {after}, up {gain} "
+            f"{'place' if gain == 1 else 'places'}. "
+            "That's a comparison against the same surviving teams, not a free jump "
+            "just because we deleted six names."
+        )
+    else:
+        moving = (
+            "The surviving clubs finish in the same relative order as in our "
+            "all-club calculation. Points and games change. The pecking order doesn't. "
+            "We promise not to fake a twist."
+        )
+    if missing:
+        phrase = "wasn't" if len(missing)==1 else "weren't"
+        missing_text = (
+            f"<aside class=\"notice\"><strong>Not in the division:</strong> "
+            f"{e(', '.join(missing))} {phrase} playing in the Premier League "
+            "that year. So there were no fixtures involving those clubs to remove.</aside>"
+        )
+    else:
+        missing_text = ""
+    prev = index[i + 1]["id"] if i + 1 < len(index) else None
+    next = index[i - 1]["id"] if i > 0 else None
+    season_links = '<nav class="season-siblings" aria-label="Other seasons">'
+    season_links += (f'<a href="/england/history/{e(prev)}/">← {e(prev.replace("-", "/"))}</a>'
+                     if prev else '<span></span>')
+    season_links += '<a href="/england/history/">All English seasons ↑</a>'
+    season_links += (f'<a href="/england/history/{e(next)}/">{e(next.replace("-", "/"))} →</a>'
+                     if next else '<span></span>')
+    season_links += '</nav>'
+    content = f"""
 <div class="breadcrumbs"><a href="/">Home</a> / <a href="/england/">England</a> / <a href="/england/history/">Premier League archive</a> / {e(season)}</div>
-<section class="page-hero">
-  <div class="kicker">THE USURPER LEAGUE / ENGLAND / {e(season)}</div>
-  <h1>Premier League {e(season)}.<br><em>A different title race.</em></h1>
-  <p class="standfirst"><strong>{e(champion["name"])}</strong> win our alternative {e(season)} Premier League with <strong>{pts} points</strong> from {champion["P"]} matches. The usual suspects have been excused.</p>
-  <p>We removed every fixture involving the clubs on our exclusion list <em>who actually played in the Premier League that year</em>. We kept all other scores unchanged. That's {data["includedMatches"]} real matches and {n} competing clubs.</p>
-  <p><a class="primary-link" href="/england/?season={e(sid)}#the-table">Disagree? Pick your own excluded clubs for {e(season)} ↗</a></p>
+<section class="page-hero season-story-hero">
+  <div class="kicker">THE USURPER LEAGUE / ENGLAND / {e(season)} / NOT THE OFFICIAL TABLE</div>
+  <h1>Premier League {e(season)}.<br><em>Minus the {e(label)}.</em></h1>
+  <p class="season-rule"><strong>The rules:</strong> We take the excluded clubs out <em>and delete every match they played</em>. Then we recalculate the standings from actual results between the clubs left. No extra points for beating nobody.</p>
+  <p class="standfirst"><strong>{e(champion['name'])}</strong> win our alternative {e(season)} Premier League on <strong>{champion['Pts']} points</strong> from {champion['P']} matches. <strong>{e(runner['name'])}</strong> finish second on {runner['Pts']}. It's a thought experiment, not a forgotten trophy.</p>
+  <div class="season-duel" aria-label="Full and alternative league leaders">
+    <div class="duel-card"><span class="kicker">ALL CLUBS INCLUDED / CALCULATED LEADER</span><strong>{e(full_leader["name"])}</strong><span>{full_leader["Pts"]} pts · {full_leader["P"]} matches</span></div>
+    <div class="duel-card alternative"><span class="kicker">WITHOUT THE {e(label.upper())} / OUR CHAMPION</span><strong>{e(champion["name"])}</strong><span>{champion["Pts"]} pts · {champion["P"]} matches</span></div>
+  </div>
+  <p class="duel-note">These tables contain different numbers of games; compare the leaders, not the points as though they're the same competition.</p>
+  <p class="season-result"><strong>{shift_title}</strong> {comparison}</p>
+  <div class="season-hero-links"><a class="primary-link" href="#historic-table">Read the alternative table ↓</a>
+    <a class="secondary-link" href="/england/?season={e(sid)}#the-table">Change who's excluded in {e(season)} ↗</a>
+  </div>
   <div class="facts">
-    <div><span>Our champion</span><strong>{e(champion["name"])}</strong></div>
-    <div><span>Points</span><strong>{pts}</strong></div>
-    <div><span>Teams competing</span><strong>{n}</strong></div>
-    <div><span>Matches kept</span><strong>{data["includedMatches"]}</strong></div>
+    <div><span>Our champion</span><strong>{e(champion['name'])}</strong></div>
+    <div><span>Points</span><strong>{champion['Pts']}</strong></div>
+    <div><span>Clubs remaining</span><strong>{len(data['alternativeTable'])}</strong></div>
+    <div><span>Matches kept</span><strong>{facts["kept"]}</strong></div>
   </div>
 </section>
-<section class="panel">
-  <div class="panel-intro"><span class="kicker">{e(label.upper())} EXCLUDED</span>
-  <h2>The new {e(season)} table</h2>
-  <p>No imaginary fixtures. No points generously handed out. The other clubs keep their results against one another.</p></div>
+<section class="panel" aria-labelledby="historic-table">
+  <div class="panel-intro"><span class="kicker">{e(label.upper())} EXCLUDED / {e(season)}</span>
+    <h2 id="historic-table">The alternative Premier League table</h2>
+    <p>Every match involving an excluded club vanishes for both teams. These are the real results between the clubs still playing.</p></div>
   {table(data["alternativeTable"], f"Premier League {season} without the {label}")}
 </section>
-<section class="explain">
-  <div><span class="kicker">THE ORIGINAL COMPETITION, RECALCULATED</span><h2>How the table changes</h2>
-    <p>With everybody participating, <b>{e(full_leader["name"])}</b> lead our all-club calculation. Removing {e(label)} fixtures puts <b>{e(champion["name"])}</b> first in the alternative league.</p>
-  </div>
-  <div><span class="kicker">THE RULES</span><h2>Who's been excused?</h2>
-    <p>Excluded clubs present in {e(season)}: <b>{e(exclusions) if excluded else "None"}</b>. We removed {data["excludedMatches"]} fixtures, along with every point and goal from those matches.</p>
-    {missing_text}
+<section class="season-findings" aria-labelledby="season-findings-heading">
+  <div class="findings-head"><span class="kicker">THREE THINGS FROM {e(season)}</span>
+    <h2 id="season-findings-heading">What actually changed?</h2>
+    <p>These observations come from the standings for this season. No alternate-universe scorelines required.</p></div>
+  <div class="findings-grid">
+    <article class="finding"><span class="finding-index">01 / THE TITLE RACE</span><h3>{e(champion['name'])} vs {e(runner['name'])}</h3><p>{race}</p></article>
+    <article class="finding"><span class="finding-index">02 / WHO MOVED?</span><h3>The biggest climb</h3><p>{moving}</p></article>
+    <article class="finding"><span class="finding-index">03 / THE MISSING MATCHES</span><h3>{facts["removed"]} fixtures deleted</h3>
+      <p>We kept {facts["kept"]} of the {data["completedMatches"]} real results. {e(champion['name'])} had {facts["winner_full_points"]} points with everybody included; {facts["winner_excluded_points"]} came from matches we've now removed. Nobody inherited them.</p></article>
   </div>
 </section>
-<details class="panel comparison"><summary>See the all-club calculated table for comparison</summary>
+{missing_text}
+<details class="panel comparison"><summary>See our calculated all-club table for {e(season)}</summary>
 {table(data["officialTableApproximation"], f"Full league comparison for {season}")}</details>
 <section class="sources"><h2>About the numbers</h2>
-<p>This is <b>not</b> an official Premier League table. We use real results to calculate an alternative competition. Wins earn three points; ties are ordered by goal difference and goals scored. This does not attempt every official historical disciplinary deduction or tiebreaker.</p>
-<p>Original historical match results: <a href="{e(data["sourceUrl"])}" rel="noopener noreferrer">{e(data["source"])}</a>, CC0 public-domain licensed. Each source season was validated as a complete home-and-away league before inclusion.</p>
-<p>That trophy never existed. The argument about who deserves it absolutely can.</p>
-</section>
+<p>These are <b>not official Premier League standings</b>. Wins earn three points; ties are ranked by goal difference and goals scored. Historic official deductions and further tiebreakers aren't necessarily reproduced.</p>
+<p>Original completed results: <a href="{e(data['sourceUrl'])}" rel="noopener noreferrer">{e(data['source'])}</a>, CC0-licensed data. The exclusion rule applies only to clubs actually in the top division for that season.</p>
+<p>If you'd have kicked someone else out, good news: that's now an option.</p></section>
+<aside class="discovery-cta" aria-label="Make your own league">
+  <div><span class="kicker">THE RULES ARE YOURS NOW</span><h2>Think we've kicked out the wrong clubs?</h2>
+    <p>Choose any, all or none of the Big Six. Watch the {e(season)} league rebuild from the same real match results and send your version to a friend who disagrees.</p></div>
+  <div class="discovery-links"><a class="primary-link" href="/england/?season={e(sid)}#the-table">Build your own {e(season)} league ↗</a>
+    <a href="/la-liga/">Or explore 94 seasons of Spain →</a></div>
+</aside>
 {season_links}
 """
-    return html_page(title,desc,url,content)
+    return html_page(title, desc, url, content)
 
 
 def index_page(rows,cfg):
