@@ -12,7 +12,9 @@
       englandDesc:'You choose which of the Big Six to kick out — any, all or none. We remove their matches and rebuild the Premier League table from real results. Every season since 1992/93.',
       label:'CURRENT ALTERNATIVE LEADERS', pending:'See the recalculated table →',
       leaders:(name,points)=>name+' · '+points+' pts',
-      enterSpain:'ENTER SPAIN', enterEngland:'ENTER ENGLAND',
+      enterSpain:'SEE CURRENT SPAIN', enterEngland:'ENTER ENGLAND',
+      historyIntro:'Looking for a particular old season?',
+      historySpain:'Spain · 94 historical seasons ↗', historyEngland:'England · 34 historical seasons ↗',
       why:'Real matches. New league tables.',
       whyBody:'Exclude a club, and all its matches disappear — for both teams. No fantasy scores, no redistributed points. Only completed games between the remaining clubs count.',
       footer:'An independent football thought experiment. Unaffiliated with the leagues or clubs.',
@@ -28,7 +30,9 @@
       englandDesc:'Tú eliges cuáles de los seis grandes quedan fuera: algunos, todos o ninguno. Borramos sus partidos y recalculamos la Premier League con resultados reales desde 1992/93.',
       label:'LÍDERES DE LA TABLA ALTERNATIVA',pending:'Ver la clasificación →',
       leaders:(name,points)=>name+' · '+points+' puntos',
-      enterSpain:'ENTRAR A ESPAÑA',enterEngland:'ENTRAR A INGLATERRA',
+      enterSpain:'VER ESPAÑA ACTUAL',enterEngland:'ENTRAR A INGLATERRA',
+      historyIntro:'¿Buscas una temporada antigua?',
+      historySpain:'España · 94 temporadas históricas ↗',historyEngland:'Inglaterra · 34 temporadas históricas ↗',
       why:'Partidos reales. Una clasificación diferente.',
       whyBody:'Cuando excluyes a un club, desaparecen todos sus partidos, para ambos equipos. Sin marcadores inventados ni puntos redistribuidos: solo cuentan los partidos entre los clubes restantes.',
       footer:'Un experimento futbolístico independiente, sin relación con las ligas ni los clubes.',
@@ -51,6 +55,9 @@
     setText('topSpain',t.topSpain); setText('topEngland',t.topEngland);
     setText('spain-label',t.labels[0]); setText('england-label',t.labels[1]);
     setText('spain-enter',t.enterSpain); setText('england-enter',t.enterEngland);
+    setText('history-shortcut-intro',t.historyIntro);
+    setText('history-shortcut-spain',t.historySpain);
+    setText('history-shortcut-england',t.historyEngland);
     if (englandRules) {
       setText('englandSub',lang === 'es'
         ? '¿Quién queda fuera? Tú decides.'
