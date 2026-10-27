@@ -2,8 +2,8 @@
   "mode": "live",
   "competition": "The Usurper League — England",
   "season": "2026/27",
-  "generatedAt": "2026-10-25T09:01:10+00:00",
-  "latestResultAt": "2026-10-24T16:30:00Z",
+  "generatedAt": "2026-10-27T08:19:13+00:00",
+  "latestResultAt": "2026-10-25T16:30:00Z",
   "excluded": [
     "Arsenal",
     "Chelsea",
@@ -20,9 +20,9 @@
     66,
     73
   ],
-  "completedMatches": 75,
-  "excludedMatches": 41,
-  "includedMatches": 34,
+  "completedMatches": 80,
+  "excludedMatches": 43,
+  "includedMatches": 37,
   "officialTableApproximation": [
     {
       "id": 65,
@@ -53,15 +53,28 @@
     {
       "id": 397,
       "name": "Brighton & Hove Albion",
-      "P": 7,
+      "P": 8,
       "W": 5,
       "D": 1,
-      "L": 1,
+      "L": 2,
       "GF": 23,
-      "GA": 5,
-      "GD": 18,
+      "GA": 7,
+      "GD": 16,
       "Pts": 16,
       "position": 3
+    },
+    {
+      "id": 64,
+      "name": "Liverpool",
+      "P": 8,
+      "W": 4,
+      "D": 3,
+      "L": 1,
+      "GF": 11,
+      "GA": 8,
+      "GD": 3,
+      "Pts": 15,
+      "position": 4
     },
     {
       "id": 61,
@@ -74,20 +87,46 @@
       "GA": 15,
       "GD": 2,
       "Pts": 13,
-      "position": 4
+      "position": 5
     },
     {
-      "id": 64,
-      "name": "Liverpool",
-      "P": 7,
-      "W": 3,
-      "D": 3,
+      "id": 402,
+      "name": "Brentford",
+      "P": 8,
+      "W": 2,
+      "D": 5,
+      "L": 1,
+      "GF": 14,
+      "GA": 9,
+      "GD": 5,
+      "Pts": 11,
+      "position": 6
+    },
+    {
+      "id": 341,
+      "name": "Leeds United",
+      "P": 8,
+      "W": 2,
+      "D": 5,
       "L": 1,
       "GF": 9,
-      "GA": 8,
-      "GD": 1,
-      "Pts": 12,
-      "position": 5
+      "GA": 6,
+      "GD": 3,
+      "Pts": 11,
+      "position": 7
+    },
+    {
+      "id": 67,
+      "name": "Newcastle United",
+      "P": 8,
+      "W": 3,
+      "D": 2,
+      "L": 3,
+      "GF": 12,
+      "GA": 14,
+      "GD": -2,
+      "Pts": 11,
+      "position": 8
     },
     {
       "id": 58,
@@ -100,33 +139,20 @@
       "GA": 12,
       "GD": -3,
       "Pts": 11,
-      "position": 6
+      "position": 9
     },
     {
-      "id": 402,
-      "name": "Brentford",
-      "P": 7,
+      "id": 322,
+      "name": "Hull City",
+      "P": 8,
       "W": 2,
       "D": 4,
-      "L": 1,
-      "GF": 13,
-      "GA": 8,
-      "GD": 5,
-      "Pts": 10,
-      "position": 7
-    },
-    {
-      "id": 341,
-      "name": "Leeds United",
-      "P": 7,
-      "W": 2,
-      "D": 4,
-      "L": 1,
+      "L": 2,
       "GF": 9,
-      "GA": 6,
-      "GD": 3,
+      "GA": 8,
+      "GD": 1,
       "Pts": 10,
-      "position": 8
+      "position": 10
     },
     {
       "id": 62,
@@ -139,7 +165,7 @@
       "GA": 9,
       "GD": -1,
       "Pts": 10,
-      "position": 9
+      "position": 11
     },
     {
       "id": 349,
@@ -152,20 +178,20 @@
       "GA": 16,
       "GD": -4,
       "Pts": 10,
-      "position": 10
+      "position": 12
     },
     {
-      "id": 322,
-      "name": "Hull City",
-      "P": 7,
+      "id": 1044,
+      "name": "AFC Bournemouth",
+      "P": 8,
       "W": 2,
       "D": 3,
-      "L": 2,
-      "GF": 8,
-      "GA": 7,
-      "GD": 1,
+      "L": 3,
+      "GF": 12,
+      "GA": 13,
+      "GD": -1,
       "Pts": 9,
-      "position": 11
+      "position": 13
     },
     {
       "id": 73,
@@ -178,7 +204,7 @@
       "GA": 10,
       "GD": -2,
       "Pts": 9,
-      "position": 12
+      "position": 14
     },
     {
       "id": 63,
@@ -191,58 +217,32 @@
       "GA": 10,
       "GD": -2,
       "Pts": 8,
-      "position": 13
-    },
-    {
-      "id": 67,
-      "name": "Newcastle United",
-      "P": 7,
-      "W": 2,
-      "D": 2,
-      "L": 3,
-      "GF": 10,
-      "GA": 14,
-      "GD": -4,
-      "Pts": 8,
-      "position": 14
+      "position": 15
     },
     {
       "id": 66,
       "name": "Manchester United",
-      "P": 7,
+      "P": 8,
       "W": 1,
       "D": 4,
-      "L": 2,
+      "L": 3,
       "GF": 10,
-      "GA": 10,
-      "GD": 0,
-      "Pts": 7,
-      "position": 15
-    },
-    {
-      "id": 354,
-      "name": "Crystal Palace",
-      "P": 7,
-      "W": 2,
-      "D": 1,
-      "L": 4,
-      "GF": 9,
-      "GA": 17,
-      "GD": -8,
+      "GA": 13,
+      "GD": -3,
       "Pts": 7,
       "position": 16
     },
     {
-      "id": 1044,
-      "name": "AFC Bournemouth",
-      "P": 7,
-      "W": 1,
-      "D": 3,
-      "L": 3,
+      "id": 354,
+      "name": "Crystal Palace",
+      "P": 8,
+      "W": 2,
+      "D": 1,
+      "L": 5,
       "GF": 9,
-      "GA": 13,
-      "GD": -4,
-      "Pts": 6,
+      "GA": 19,
+      "GD": -10,
+      "Pts": 7,
       "position": 17
     },
     {
@@ -274,14 +274,14 @@
     {
       "id": 71,
       "name": "Sunderland",
-      "P": 7,
+      "P": 8,
       "W": 1,
-      "D": 1,
+      "D": 2,
       "L": 5,
       "GF": 6,
       "GA": 14,
       "GD": -8,
-      "Pts": 4,
+      "Pts": 5,
       "position": 20
     }
   ],
@@ -302,6 +302,21 @@
       "positionChange": 2
     },
     {
+      "id": 341,
+      "name": "Leeds United",
+      "P": 6,
+      "W": 2,
+      "D": 4,
+      "L": 0,
+      "GF": 7,
+      "GA": 3,
+      "GD": 4,
+      "Pts": 10,
+      "position": 2,
+      "originalPosition": 7,
+      "positionChange": 5
+    },
+    {
       "id": 349,
       "name": "Ipswich Town",
       "P": 5,
@@ -312,24 +327,9 @@
       "GA": 6,
       "GD": 2,
       "Pts": 10,
-      "position": 2,
-      "originalPosition": 10,
-      "positionChange": 8
-    },
-    {
-      "id": 341,
-      "name": "Leeds United",
-      "P": 5,
-      "W": 2,
-      "D": 3,
-      "L": 0,
-      "GF": 7,
-      "GA": 3,
-      "GD": 4,
-      "Pts": 9,
       "position": 3,
-      "originalPosition": 8,
-      "positionChange": 5
+      "originalPosition": 12,
+      "positionChange": 9
     },
     {
       "id": 62,
@@ -343,22 +343,37 @@
       "GD": 3,
       "Pts": 8,
       "position": 4,
-      "originalPosition": 9,
-      "positionChange": 5
+      "originalPosition": 11,
+      "positionChange": 7
     },
     {
-      "id": 354,
-      "name": "Crystal Palace",
+      "id": 67,
+      "name": "Newcastle United",
       "P": 6,
       "W": 2,
       "D": 1,
       "L": 3,
       "GF": 8,
-      "GA": 13,
-      "GD": -5,
+      "GA": 12,
+      "GD": -4,
       "Pts": 7,
       "position": 5,
-      "originalPosition": 16,
+      "originalPosition": 8,
+      "positionChange": 3
+    },
+    {
+      "id": 354,
+      "name": "Crystal Palace",
+      "P": 7,
+      "W": 2,
+      "D": 1,
+      "L": 4,
+      "GF": 8,
+      "GA": 15,
+      "GD": -7,
+      "Pts": 7,
+      "position": 6,
+      "originalPosition": 17,
       "positionChange": 11
     },
     {
@@ -372,9 +387,9 @@
       "GA": 5,
       "GD": 2,
       "Pts": 6,
-      "position": 6,
-      "originalPosition": 17,
-      "positionChange": 11
+      "position": 7,
+      "originalPosition": 13,
+      "positionChange": 6
     },
     {
       "id": 63,
@@ -387,9 +402,24 @@
       "GA": 6,
       "GD": -1,
       "Pts": 6,
-      "position": 7,
-      "originalPosition": 13,
-      "positionChange": 6
+      "position": 8,
+      "originalPosition": 15,
+      "positionChange": 7
+    },
+    {
+      "id": 322,
+      "name": "Hull City",
+      "P": 6,
+      "W": 1,
+      "D": 3,
+      "L": 2,
+      "GF": 5,
+      "GA": 6,
+      "GD": -1,
+      "Pts": 6,
+      "position": 9,
+      "originalPosition": 10,
+      "positionChange": 1
     },
     {
       "id": 1076,
@@ -402,24 +432,24 @@
       "GA": 8,
       "GD": -3,
       "Pts": 6,
-      "position": 8,
+      "position": 10,
       "originalPosition": 19,
-      "positionChange": 11
+      "positionChange": 9
     },
     {
-      "id": 322,
-      "name": "Hull City",
+      "id": 402,
+      "name": "Brentford",
       "P": 5,
-      "W": 1,
-      "D": 2,
-      "L": 2,
-      "GF": 4,
-      "GA": 5,
-      "GD": -1,
+      "W": 0,
+      "D": 5,
+      "L": 0,
+      "GF": 7,
+      "GA": 7,
+      "GD": 0,
       "Pts": 5,
-      "position": 9,
-      "originalPosition": 11,
-      "positionChange": 2
+      "position": 11,
+      "originalPosition": 6,
+      "positionChange": -5
     },
     {
       "id": 58,
@@ -432,24 +462,24 @@
       "GA": 8,
       "GD": -4,
       "Pts": 5,
-      "position": 10,
-      "originalPosition": 6,
-      "positionChange": -4
+      "position": 12,
+      "originalPosition": 9,
+      "positionChange": -3
     },
     {
-      "id": 402,
-      "name": "Brentford",
-      "P": 4,
-      "W": 0,
-      "D": 4,
-      "L": 0,
-      "GF": 6,
-      "GA": 6,
-      "GD": 0,
-      "Pts": 4,
-      "position": 11,
-      "originalPosition": 7,
-      "positionChange": -4
+      "id": 71,
+      "name": "Sunderland",
+      "P": 6,
+      "W": 1,
+      "D": 2,
+      "L": 3,
+      "GF": 3,
+      "GA": 7,
+      "GD": -4,
+      "Pts": 5,
+      "position": 13,
+      "originalPosition": 20,
+      "positionChange": 7
     },
     {
       "id": 351,
@@ -462,39 +492,9 @@
       "GA": 7,
       "GD": -3,
       "Pts": 4,
-      "position": 12,
-      "originalPosition": 18,
-      "positionChange": 6
-    },
-    {
-      "id": 71,
-      "name": "Sunderland",
-      "P": 5,
-      "W": 1,
-      "D": 1,
-      "L": 3,
-      "GF": 3,
-      "GA": 7,
-      "GD": -4,
-      "Pts": 4,
-      "position": 13,
-      "originalPosition": 20,
-      "positionChange": 7
-    },
-    {
-      "id": 67,
-      "name": "Newcastle United",
-      "P": 5,
-      "W": 1,
-      "D": 1,
-      "L": 3,
-      "GF": 6,
-      "GA": 12,
-      "GD": -6,
-      "Pts": 4,
       "position": 14,
-      "originalPosition": 14,
-      "positionChange": 0
+      "originalPosition": 18,
+      "positionChange": 4
     }
   ],
   "methodology": "An independent alternative Premier League, not the official standings. Every fixture involving Arsenal, Chelsea, Liverpool, Manchester City, Manchester United, Tottenham Hotspur is removed in full. Rankings use points, goal difference and goals scored. Official further tiebreaks, disciplinary rulings and deductions may differ.",
