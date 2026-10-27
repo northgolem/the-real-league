@@ -39,6 +39,11 @@ class WebsiteTests(unittest.TestCase):
         self.assertIn('src="/usurper-logo.png"', html)
         self.assertIn("brand-lockup.svg", html)  # Image fallback until owner uploads the final illustration
         self.assertIn('id="archive"', html)
+        self.assertIn('href="/la-liga/" id="nav-archive"', html)
+        self.assertIn('href="/la-liga/1995-96/"', html)
+        self.assertIn('class="history-decade-grid"', html)
+        self.assertNotIn('src="/history.js"', html)
+        self.assertNotIn('id="season-tabs"', html)
         self.assertIn('id="how-it-works"', html)
         self.assertNotIn('src="https://', html)  # No externally hosted photos or club badge images
         self.assertLess(html.index('id="league-table"'), html.index('id="archive"'))
