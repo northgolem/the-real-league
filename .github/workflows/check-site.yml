@@ -105,5 +105,17 @@ jobs:
           grep -q 'Make your own Premier League' /tmp/spain-story.html
           grep -q 'Build your own 2011/12 league' /tmp/england-story.html
           echo "All live season stories, comparisons and discovery links are deployed"
+          echo "SPAIN ARCHIVE NAVIGATION"
+          curl -fsSL --max-time 20 https://usurperleague.com/ > /tmp/landing.html
+          curl -fsSL --max-time 20 https://usurperleague.com/spain/ > /tmp/spain-main.html
+          curl -fsSL --max-time 20 https://usurperleague.com/history.js > /tmp/spain-picker.js
+          curl -fsSL --max-time 20 https://usurperleague.com/la-liga/1995-96/ > /tmp/spanish-1995.html
+          grep -q 'history-shortcut-spain' /tmp/landing.html
+          grep -q 'history-picker-guide' /tmp/spain-main.html
+          grep -q 'location.assign' /tmp/spain-picker.js
+          grep -q 'encodeURIComponent(season)' /tmp/spain-picker.js
+          grep -q 'Same leader. Different league.' /tmp/spanish-1995.html
+          grep -q 'Three notes from this parallel universe' /tmp/spanish-1995.html
+          echo "Live Spain navigation distinguishes the current table from individual history articles"
           echo "BASELINE HTTPS"
           curl -sSL -o /dev/null -w "HTTP status=%{http_code}\n" --max-time 10 https://example.com/ || true
