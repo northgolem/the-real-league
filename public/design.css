@@ -132,3 +132,20 @@ footer .container{font-size:11px;line-height:1.8}footer a{color:#f0dda8}
 
 /* Clarify that Spain's historic season selector opens dedicated articles. */
 .history-picker-guide{font:14px/1.6 system-ui,-apple-system,sans-serif;color:#4a5e50;max-width:720px;margin:8px 0 15px}
+
+/* Historic Spain links: the article URL is in the HTML, never hidden in JS. */
+.archive-main-link{margin:10px 0 22px}
+.archive-main-link a{display:inline-block;border:1px solid #244c37;background:#1d4b35;color:#fffef1!important;padding:11px 16px;font:800 12px/1.5 system-ui,sans-serif;text-decoration:none;letter-spacing:.02em}
+.archive-main-link a:hover{background:#316145}
+.history-decade-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px}
+.history-decade{min-width:0;border:1px solid #d5c8a8;background:#fffbf1}
+.history-decade summary{display:flex;justify-content:space-between;align-items:center;cursor:pointer;padding:13px 15px;gap:12px;font:800 14px/1.4 system-ui,sans-serif;color:#1d4934;list-style-position:inside}
+.history-decade summary span{font:650 11px system-ui,sans-serif;color:#7c7e6f;white-space:nowrap}
+.history-decade[open] summary{background:#e7eada;border-bottom:1px solid #d5c8a8}
+.history-decade summary:focus-visible,.year-links a:focus-visible{outline:3px solid #b58d49;outline-offset:3px}
+.year-links{padding:12px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.year-links a{display:block;background:#f2eee3;border:1px solid #e1d6bc;color:#26513a;text-decoration:none;text-align:center;padding:8px 6px;font:750 12px/1.5 system-ui,sans-serif;white-space:nowrap}
+.year-links a:hover{background:#e0e9d7;border-color:#91a588}
+.archive-context-small{font:12px/1.6 system-ui,sans-serif;color:#717663;margin:18px 0 0}
+@media(max-width:820px){.history-decade-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.history-decade-grid{grid-template-columns:1fr 1fr;gap:9px}.history-decade summary{padding:11px;font-size:12px}.history-decade summary span{font-size:9px}.year-links{grid-template-columns:1fr;padding:9px}.year-links a{padding:8px 5px}}
