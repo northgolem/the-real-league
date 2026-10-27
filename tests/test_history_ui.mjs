@@ -2,83 +2,43 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 
-const js = fs.readFileSync('public/history.js', 'utf8');
-const archiveIndex = JSON.parse(fs.readFileSync('public/history/index.json','utf8'));
-const full = JSON.parse(fs.readFileSync('public/data/standings.json','utf8'));
-const elements = new Map();
-class FakeClassList {
-  constructor() { this.set = new Set(); }
-  toggle(name, active) { if (active) this.set.add(name); else this.set.delete(name); }
-  contains(name) { return this.set.has(name); }
-}
-function el() {
-  const listeners = {};
-  return {
-    children: [], dataset: {}, textContent: '', attributes:{},
-    classList: new FakeClassList(),
-    replaceChildren(...children) { this.children = children; },
-    addEventListener(event, fn) { listeners[event] = fn; },
-    click() { listeners.click?.(); },
-    scrollIntoView() {}, scrollBy() {}, focus() {},
-    setAttribute(key,value) { this.attributes[key]=value; },
-    querySelectorAll(selector) {
-      return selector === '.season-tab' ? this.children.filter(x=>x.className==='season-tab') : [];
-    }
-  };
-}
-function byId(id) { if (!elements.has(id)) elements.set(id,el()); return elements.get(id); }
-const doc = {
-  documentElement:{lang:'en'},
-  getElementById:byId,
-  createElement:()=>el(),
-  querySelector(selector) {
-    if(selector==='.season-tab.active')
-      return byId('season-tabs').children.find(tab=>tab.classList.contains('active')) || null;
-    return null;
-  },
-  querySelectorAll(selector) {
-    if(selector==='.season-tab') return byId('season-tabs').children;
-    return [];
-  }
-};
-const visited = [];
-const ctx = {
-  document: doc,
-  window: {addEventListener() {}, normalizeClubNames() {}},
-  location: {
-    href:'https://usurperleague.com/spain/?season=1994-95',
-    search:'?season=1994-95', pathname:'/spain/', hash:'',
-    assign(path) { visited.push(path); }
-  },
-  history: {pushState(_s,_t,url) {ctx.location.href='https://usurperleague.com'+url;}},
-  URL, URLSearchParams, console,
-  data:null,
-  render() {ctx.renders++;},
-  renders:0,
-  fetch:async url=>{
-    if(url!=='/history/index.json') return {ok:false,status:404};
-    return {ok:true,json:async()=>structuredClone(archiveIndex)};
-  }
-};
+const page=fs.readFileSync('public/spain/index.html','utf8');
+const index=JSON.parse(fs.readFileSync('public/history/index.json','utf8'));
 
-vm.runInNewContext(js, ctx, {filename:'history.js'});
-ctx.window.setCurrentSeasonData(full);
-const settle = async()=>{
-  await new Promise(resolve=>setImmediate(resolve));
-  await new Promise(resolve=>setImmediate(resolve));
-};
-await settle();
-assert.equal(ctx.data.mode,'live','The Spain homepage only displays the current-season table');
-assert.equal(visited.at(-1),'/la-liga/1994-95/','Legacy deep links must open the new season story');
-assert.equal(byId('season-tabs').children.length,archiveIndex.seasons.length+1);
-assert(byId('decade-links').children.length>=9);
-byId('season-tabs').children.find(t=>t.dataset.season==='1928-29').click();
-assert.equal(visited.at(-1),'/la-liga/1928-29/','Selecting an old year opens its canonical article');
-byId('season-tabs').children.find(t=>t.dataset.season==='1995-96').click();
-assert.equal(visited.at(-1),'/la-liga/1995-96/','Selecting 1995/96 opens the new article');
-byId('season-tabs').children[0].click();
-await settle();
-assert.equal(ctx.data.mode,'live');
-assert.equal(ctx.window.historySeasonSelected,'2026-27');
-assert(ctx.renders>=1);
-console.log('Season navigation verified: current table, canonical historic links and legacy URLs.');
+assert.equal(index.seasons.length,94);
+assert.match(page, /id="nav-archive"[^>]*href="\/la-liga\/"/);
+assert.match(page, /href="\/la-liga\/" id="archive-all-link"/);
+assert(!page.includes('<script src="/history.js">'),
+  'Obsolete JS picker must not be loaded by Spain');
+assert(!page.includes('role="tablist"'), 'Historical navigation is links, not interactive tabs');
+assert(!page.includes('id="season-tabs"'), 'No duplicate in-place historical table');
+
+const hrefs=[...page.matchAll(/<a href="\/la-liga\/(\d{4}-\d{2})\/" aria-label="Read the /g)].map(m=>m[1]);
+assert.equal(hrefs.length,94,'Every validated historical season should have a direct article link');
+assert.equal(new Set(hrefs).size,94,'No duplicate archive links');
+assert.deepEqual([...hrefs].sort(),index.seasons.map(x=>x.id).sort());
+for(const season of hrefs){
+  assert(fs.existsSync('public/la-liga/'+season+'/index.html'),
+    'Historical link missing its article: '+season);
+}
+assert(page.includes('href="/la-liga/1995-96/"'),
+  '1995/96 must link to the improved article');
+assert(page.includes('<summary>1990s '),
+  'Decade browsing should work with native disclosure HTML');
+
+const script=page.match(/<script>([\s\S]*?)<\/script>/)?.[1];
+assert(script&&script.includes("location.replace"),
+  'Legacy season URL redirect should not require a cached external script');
+function destination(query){
+  let result=null;
+  const location={search:query,replace(path){result=path}};
+  vm.runInNewContext(script,{location,URLSearchParams});
+  return result;
+}
+assert.equal(destination('?season=1995-96'),'/la-liga/1995-96/');
+assert.equal(destination('?season=1928-29&lang=es'),'/la-liga/1928-29/');
+assert.equal(destination('?season=2026-27'),null,'Current season remains on Spain homepage');
+assert.equal(destination('?season=bad'),null,'Invalid dates should never redirect');
+assert.equal(destination(''),null);
+
+console.log('Spain navigation verified: 94 direct historical links, decade groups, legacy URL redirects, no stale JS picker.');
