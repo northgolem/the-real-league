@@ -147,3 +147,32 @@ body{background:var(--paper)}
   .club-switch span:not(.club-state){flex:1 1 auto}
   .club-state{margin-left:auto;padding:5px}
 }
+
+/* Sprint 1: fast mobile table navigation and faithful all-clubs comparison. */
+.table-mode-switch{display:flex;gap:5px;background:#eee7d7;border:1px solid #d3c6ac;border-radius:4px;padding:5px;width:fit-content;max-width:100%;margin:16px 0 10px}
+.table-mode-switch button{border:0;border-radius:3px;background:transparent;color:#3c5947;cursor:pointer;min-height:42px;padding:11px 16px;font:800 12px/1.35 system-ui,sans-serif}
+.table-mode-switch button[aria-pressed="true"]{background:#163f2e;color:#fbf6e5}
+.table-mode-switch button:disabled{opacity:.5;cursor:wait}
+.table-mode-switch button:focus-visible,#mobile-show-table:focus-visible{outline:3px solid #b38a3f;outline-offset:3px}
+.english-table .panel-intro .table-comparison{max-width:800px;font:13px/1.65 system-ui,sans-serif;color:#5b6655;margin:7px 0 14px}
+#premier-table{scroll-margin-top:16px}
+#table-heading:focus{outline:none}
+#table-heading:focus-visible{outline:3px solid #b38a3f;outline-offset:4px}
+.mobile-table-shortcut{display:none}
+@media(max-width:650px){
+  .table-mode-switch{width:100%}
+  .table-mode-switch button{flex:1;padding:12px 7px;font-size:11px}
+  .custom-lab{position:relative}
+  .mobile-table-shortcut{
+    position:sticky;bottom:10px;z-index:8;
+    display:flex;align-items:center;justify-content:space-between;
+    gap:10px;width:100%;min-height:49px;margin-top:18px;
+    padding:12px 16px;background:#153e2d;color:#fff6da;
+    border:2px solid #d8b975;border-radius:4px;
+    box-shadow:0 4px 12px #102e2540;
+    font:800 14px/1.35 system-ui,sans-serif;cursor:pointer;
+  }
+  .mobile-table-shortcut span{font:700 11px/1.35 system-ui,sans-serif;color:#e0d0a5}
+  .mobile-table-shortcut:disabled{opacity:.56;cursor:wait}
+}
+@media(prefers-reduced-motion:reduce){html:focus-within{scroll-behavior:auto}}
