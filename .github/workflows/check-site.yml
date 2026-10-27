@@ -92,5 +92,16 @@ jobs:
           curl -fsSL --max-time 20 https://usurperleague.com/premier-league/customizer.js > /tmp/usurper-custom.js
           grep -q 'selected to remove' /tmp/usurper-custom.js
           echo "Live England page clearly explains exclusion rules and checked state"
+          echo "LIVE HISTORICAL STORY PAGES"
+          curl -fsSL --max-time 20 https://usurperleague.com/la-liga/1960-61/ > /tmp/spain-story.html
+          curl -fsSL --max-time 20 https://usurperleague.com/la-liga/1995-96/ > /tmp/spain-same.html
+          curl -fsSL --max-time 20 https://usurperleague.com/england/history/2011-12/ > /tmp/england-story.html
+          grep -q 'A different name at the top.' /tmp/spain-story.html
+          grep -q 'Same leader. Different league.' /tmp/spain-same.html
+          grep -q 'Newcastle United take the lead' /tmp/england-story.html
+          grep -q 'season-findings' /tmp/spain-story.html
+          grep -q 'Make your own Premier League' /tmp/spain-story.html
+          grep -q 'Build your own 2011/12 league' /tmp/england-story.html
+          echo "All live season stories, comparisons and discovery links are deployed"
           echo "BASELINE HTTPS"
           curl -sSL -o /dev/null -w "HTTP status=%{http_code}\n" --max-time 10 https://example.com/ || true
