@@ -126,5 +126,16 @@ jobs:
           curl -fsSL --max-time 20 https://usurperleague.com/la-liga/1995-96/ > /tmp/spain-article.html
           grep -q 'Same leader. Different league.' /tmp/spain-article.html
           echo "Spain archive menu and 1995/96 link serve the canonical new article"
+          echo "ENGLAND SPRINT 1: MOBILE TABLE AND COMPARISON"
+          curl -fsSL --max-time 20 https://usurperleague.com/england/ > /tmp/england-sprint1.html
+          curl -fsSL --max-time 20 https://usurperleague.com/premier-league/customizer.js > /tmp/customizer-sprint1.js
+          curl -fsSL --max-time 20 https://usurperleague.com/premier-league/league.css > /tmp/england-sprint1.css
+          grep -q 'id="mobile-show-table"' /tmp/england-sprint1.html
+          grep -q 'id="full-table-mode"' /tmp/england-sprint1.html
+          grep -q 'id="custom-table-mode"' /tmp/england-sprint1.html
+          grep -q 'All clubs — our calculated comparison' /tmp/customizer-sprint1.js
+          grep -q 'premier-table' /tmp/customizer-sprint1.js
+          grep -q 'position:sticky' /tmp/england-sprint1.css
+          echo "Sprint 1 controls published: mobile jump and independently calculated comparisons"
           echo "BASELINE HTTPS"
           curl -sSL -o /dev/null -w "HTTP status=%{http_code}\n" --max-time 10 https://example.com/ || true
