@@ -85,7 +85,7 @@ assert.equal(app.get('full-table-mode').attrs['aria-pressed'],'true');
 assert.equal(app.get('custom-table-mode').attrs['aria-pressed'],'false');
 assert.match(app.get('table-heading').textContent,/All clubs/);
 assert.match(app.get('table-comparison').textContent,/not an official league table/i);
-assert.equal(app.get('matches-kept').textContent,String(current.includedMatches),
+assert.equal(Number(app.get('matches-kept').textContent),current.includedMatches,
   'Comparison must not mutate the personal league');
 app.get('custom-table-mode').click();
 assert.equal(app.get('premier-rows').children.length,14,'Toggle returns to the customised league');
