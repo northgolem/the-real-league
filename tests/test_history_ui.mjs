@@ -6,7 +6,7 @@ const page=fs.readFileSync('public/spain/index.html','utf8');
 const index=JSON.parse(fs.readFileSync('public/history/index.json','utf8'));
 
 assert.equal(index.seasons.length,94);
-assert.match(page, /id="nav-archive"[^>]*href="\/la-liga\/"/);
+assert.match(page, /href="\/la-liga\/" id="nav-archive"/);
 assert.match(page, /href="\/la-liga\/" id="archive-all-link"/);
 assert(!page.includes('<script src="/history.js">'),
   'Obsolete JS picker must not be loaded by Spain');
