@@ -113,17 +113,23 @@
           <p id="share-pitch">Choose your clubs and season. We'll generate your challenge using actual football results.</p>
         </div>
         <p id="custom-feedback" class="lab-feedback" role="status" aria-live="polite">Loading the real match results…</p>
+        <button type="button" id="mobile-show-table" class="mobile-table-shortcut" disabled aria-controls="premier-table">See your table ↓ <span id="mobile-table-summary">14 clubs left</span></button>
       </section>
       <div class="results-status" role="status" aria-live="polite"><span id="results-status">Checking the verified results feed…</span><span id="results-updated">2026/27 · updated daily when data is available</span></div>
-      <div class="panel english-table">
+      <div class="panel english-table" id="premier-table">
         <div class="panel-intro">
           <span class="kicker" id="table-kicker">THE OTHER PREMIER LEAGUE</span>
-          <h3 id="table-heading">Your alternative Premier League table</h3>
+          <h3 id="table-heading" tabindex="-1">Your alternative Premier League table</h3>
+          <div class="table-mode-switch" role="group" aria-label="Compare the two calculated standings">
+            <button type="button" id="custom-table-mode" aria-pressed="true" disabled>My league</button>
+            <button type="button" id="full-table-mode" aria-pressed="false" disabled>All clubs · comparison</button>
+          </div>
+          <p id="table-comparison" class="table-comparison" role="status" aria-live="polite">Both tables use real match results. This is an independent calculation, not the Premier League's official table.</p>
           <p id="match-info">All completed Premier League matches involving Arsenal, Chelsea, Liverpool, Manchester City, Manchester United and Tottenham are excluded.</p>
           <p class="custom-hint">We don't guess what would have happened. We only count completed matches between the clubs you kept.</p>
         </div>
         <div class="table-scroll">
-          <table aria-label="Premier League alternative standings">
+          <table id="premier-standings" aria-label="Your alternative Premier League standings">
             <thead><tr><th scope="col">#</th><th scope="col">Club</th><th scope="col">P</th><th scope="col" class="mobile-hide">W</th><th scope="col" class="mobile-hide">D</th><th scope="col" class="mobile-hide">L</th><th scope="col">GD</th><th scope="col">Pts</th></tr></thead>
             <tbody id="premier-rows"></tbody>
           </table>
