@@ -7,6 +7,8 @@ on:
     paths:
       - 'scripts/build_seo.py'
       - 'scripts/build_england_seo.py'
+      - 'scripts/season_story.py'
+      - 'tests/test_season_story.py'
       - 'public/config/england.json'
       - 'public/england/history/index.json'
       - 'public/england/history/seasons/**'
@@ -30,6 +32,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Verify season-specific insights from every archived table
+        run: python -m unittest discover -s tests -p 'test_season_story.py'
       - name: Build static historical league pages, honours board and sitemap
         run: python scripts/build_seo.py
       - name: Verify actual archived data, links and search metadata
