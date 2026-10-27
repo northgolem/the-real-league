@@ -1,9 +1,9 @@
-/* Season picker: the live table and validated static historical seasons. */
+/* Current-season table and direct links to the verified historical articles. */
 (() => {
   'use strict';
   const LIVE = '2026-27';
   const params = new URLSearchParams(location.search);
-  let desired = params.get('season') || LIVE;
+  const desired = params.get('season') || LIVE;
   let liveData = null;
   let available = [{id:LIVE,label:'2026/27'}];
   let selected = LIVE;
@@ -60,42 +60,24 @@
     else url.searchParams.set('season',season);
     history.pushState({season},'',url.pathname+url.search+url.hash);
   }
-  async function choose(season, updateURL = true) {
-    if (!available.some(row=>row.id===season)) return;
-    selected = season;
-    window.historySeasonSelected = season;
-    if(updateURL) setQuery(season);
-    paintSelection();
-    setMessage('');
-    if (season === LIVE) {
-      if (liveData) {
-        data = liveData;
-        render();
-        paintSelection();
-        if (updateURL) $('league-table')?.scrollIntoView?.({behavior:'smooth',block:'start'});
-      }
+  function choose(season, updateURL = true) {
+    if (!available.some(row => row.id === season)) return;
+    if (season !== LIVE) {
+      // There is ONE public historical season page. The old interactive
+      // table silently duplicated it and hid the editorial season story.
+      location.assign('/la-liga/' + encodeURIComponent(season) + '/');
       return;
     }
-    setMessage(document.documentElement.lang === 'es' ? 'Desenterrando la temporada…' : 'Digging out the season…');
-    try {
-      const response = await fetch('/history/'+encodeURIComponent(season)+'.json');
-      if (!response.ok) throw new Error('HTTP '+response.status);
-      const archive = await response.json();
-      if (archive.seasonId !== season || archive.mode !== 'historical'
-          || !Array.isArray(archive.alternativeTable) || !archive.alternativeTable.length)
-        throw new Error('Invalid historical table');
-      if (selected !== season) return;
-      data = archive;
-      if (window.normalizeClubNames) window.normalizeClubNames(data);
+    selected = LIVE;
+    window.historySeasonSelected = LIVE;
+    if (updateURL) setQuery(LIVE);
+    paintSelection();
+    setMessage('');
+    if (liveData) {
+      data = liveData;
       render();
       paintSelection();
-      setMessage('');
       if (updateURL) $('league-table')?.scrollIntoView?.({behavior:'smooth',block:'start'});
-    } catch (error) {
-      if (selected !== season) return;
-      setMessage(document.documentElement.lang === 'es'
-        ? 'Este año se nos resiste. Prueba otra vez.'
-        : 'That season is being difficult. Try again.');
     }
   }
 
@@ -106,7 +88,8 @@
     button.className = 'season-tab';
     button.dataset.season = season.id;
     button.textContent = season.label;
-    button.setAttribute('aria-controls','league-table');
+    if (season.id === LIVE) button.setAttribute('aria-controls','league-table');
+    else button.setAttribute('aria-label','Read the '+season.label+' historical La Liga season story');
     button.addEventListener('click',()=>choose(season.id));
     return button;
   }
