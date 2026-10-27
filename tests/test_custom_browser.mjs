@@ -13,7 +13,9 @@ function element(tag='div') {
   const events=new Map();
   const node={
     tagName:tag.toUpperCase(),textContent:'',value:'',checked:false,disabled:false,
-    className:'',children:[],attrs:{},type:'',
+    className:'',children:[],attrs:{},type:'',scrollCalls:0,focusCalls:0,
+    scrollIntoView(){this.scrollCalls++;},
+    focus(){this.focusCalls++;},
     classList:{add(){}},
     setAttribute(k,v){this.attrs[k]=String(v);},
     appendChild(el){this.children.push(el);return el;},
@@ -69,6 +71,25 @@ assert.equal(app.get('custom-count').textContent,'6 selected to remove');
 assert(app.get('custom-checks').children.every(label=>label.children.at(-1).textContent==='OUT'),
   'Every Big Six club is visibly OUT by default');
 assert.equal(Number(app.get('matches-kept').textContent),current.includedMatches);
+assert.equal(app.get('custom-table-mode').attrs['aria-pressed'],'true');
+assert.equal(app.get('full-table-mode').attrs['aria-pressed'],'false');
+assert.equal(app.get('mobile-show-table').disabled,false);
+app.get('mobile-show-table').click();
+assert.equal(app.get('premier-table').scrollCalls,1,'Mobile shortcut must scroll to the result');
+assert.equal(app.get('table-heading').focusCalls,1,'Table heading must receive keyboard focus');
+const originalShare=app.get('custom-share').disabled;
+assert.equal(originalShare,false);
+app.get('full-table-mode').click();
+assert.equal(app.get('premier-rows').children.length,20,'All-club comparison shows 20 sides');
+assert.equal(app.get('full-table-mode').attrs['aria-pressed'],'true');
+assert.equal(app.get('custom-table-mode').attrs['aria-pressed'],'false');
+assert.match(app.get('table-heading').textContent,/All clubs/);
+assert.match(app.get('table-comparison').textContent,/not an official league table/i);
+assert.equal(app.get('matches-kept').textContent,String(current.includedMatches),
+  'Comparison must not mutate the personal league');
+app.get('custom-table-mode').click();
+assert.equal(app.get('premier-rows').children.length,14,'Toggle returns to the customised league');
+assert.equal(app.get('custom-table-mode').attrs['aria-pressed'],'true');
 assert.match(app.get('story-title').textContent,/are top/);
 const inputs=app.get('custom-checks').querySelectorAll('input');
 const tottenham=inputs.find(x=>x.value==='Tottenham Hotspur');
@@ -76,6 +97,13 @@ tottenham.checked=false;tottenham.change();
 assert.equal(app.get('custom-checks').children.at(-1).children.at(-1).textContent,'IN',
   'Unselected clubs must clearly say IN');
 assert.equal(app.get('premier-rows').children.length,15,'Reinstating Spurs must instantly return a club');
+app.get('full-table-mode').click();
+assert.equal(app.get('premier-rows').children.length,20);
+tottenham.checked=true;tottenham.change();
+assert.equal(app.get('premier-rows').children.length,14,'Changing exclusions returns to personalised view');
+assert.equal(app.get('custom-table-mode').attrs['aria-pressed'],'true');
+tottenham.checked=false;tottenham.change();
+assert.equal(app.get('premier-rows').children.length,15);
 assert(app.links.at(-1).includes('out='),'Custom table must update shareable URL');
 assert(!app.links.at(-1).includes('tottenham-hotspur'));
 app.get('all-teams').click();
@@ -89,6 +117,10 @@ app.get('custom-season').value='1992-93';
 app.get('custom-season').change();
 await app.settle();
 assert.equal(app.get('premier-rows').children.length,16,'1992/93 had 22 clubs before exclusions');
+app.get('full-table-mode').click();
+assert.equal(app.get('premier-rows').children.length,22,'Full 1992/93 league had 22 clubs');
+app.get('custom-table-mode').click();
+assert.equal(app.get('premier-rows').children.length,16);
 assert.equal(Number(app.get('matches-kept').textContent),240);
 assert.equal(app.get('story-title').textContent,'Norwich City are top. Well, well.');
 assert(app.links.at(-1).includes('season=1992-93'));
@@ -109,4 +141,4 @@ assert.equal(Number(app.get('matches-removed').textContent),0);
 app=await load('?season=1992-93&out=manchester-city,chelsea');
 assert.equal(app.get('premier-rows').children.length,20,'Deep-linked combination must exclude only those two teams');
 assert.equal(app.get('custom-count').textContent,'2 selected to remove');
-console.log('Custom England page tested: toggles, presets, all seasons, 1992/93, direct URLs, copy and no score fabrication.');
+console.log('Custom England page tested: verified full-vs-custom comparison, mobile jump, 34 seasons, share links and 64-subset arithmetic.');
