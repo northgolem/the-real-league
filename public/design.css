@@ -129,3 +129,6 @@ footer .container{font-size:11px;line-height:1.8}footer a{color:#f0dda8}
 .sister-league a:hover{text-decoration:underline}
 @media(max-width:1010px){.site-nav{gap:10px}.site-nav a{font-size:10px;letter-spacing:.065em}}
 @media(max-width:760px){.site-nav{gap:4px;flex-wrap:wrap}.site-nav a{font-size:9px;letter-spacing:.01em}.sister-league{gap:6px}}
+
+/* Clarify that Spain's historic season selector opens dedicated articles. */
+.history-picker-guide{font:14px/1.6 system-ui,-apple-system,sans-serif;color:#4a5e50;max-width:720px;margin:8px 0 15px}
