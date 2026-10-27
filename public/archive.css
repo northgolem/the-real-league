@@ -89,3 +89,52 @@ tbody tr:hover{background:#f5ecca}
  .decade-section table td,.decade-section table th{padding:10px}
  .season-siblings{font-size:11px;gap:7px}
 }
+
+/* Season discoveries: clearer than a database, still with our dry little grin. */
+.season-story-hero{max-width:1100px;padding-top:25px;padding-bottom:33px}
+.season-story-hero h1{margin-bottom:20px}
+.season-story-hero .season-rule{max-width:860px;border-left:4px solid var(--gold);padding:13px 20px;margin:0 0 27px;background:#f2ecda;font:15px/1.65 system-ui,-apple-system,sans-serif;color:#284432}
+.season-story-hero .season-rule strong{color:#173b2b}
+.season-story-hero .standfirst{max-width:890px;margin-bottom:24px}
+.season-duel{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:1000px}
+.duel-card{border:1px solid #d4cab4;border-top:4px solid #c1b697;padding:23px 24px 22px;background:#fffdf6;display:flex;flex-direction:column;gap:9px;min-width:0}
+.duel-card.alternative{background:#e3ebde;border-top-color:#235b3f;border-color:#bbcfb9}
+.duel-card .kicker{color:#776f55;letter-spacing:.075em;font-size:10px}
+.duel-card strong{font:700 clamp(23px,3vw,36px)/1.2 Georgia,serif;letter-spacing:-.025em;overflow-wrap:anywhere}
+.duel-card>span:last-child{font:700 13px/1.45 system-ui,sans-serif;color:#4f674f}
+.season-story-hero .duel-note{font:12px/1.5 system-ui,sans-serif;color:#69715b;margin:13px 0 17px;max-width:900px}
+.season-story-hero .season-result{font:15px/1.7 system-ui,sans-serif;color:#344937;max-width:890px;margin-bottom:15px}
+.season-hero-links{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.secondary-link{font:800 12px/1.5 system-ui,sans-serif;color:#27563d;text-underline-offset:5px}
+.season-story-hero .facts{margin-top:21px}
+.season-findings{margin:37px 0 43px}
+.findings-head h2{font-size:clamp(27px,3.4vw,38px);letter-spacing:-.03em;line-height:1.17;margin:8px 0 9px}
+.findings-head>p{font:14px/1.6 system-ui,sans-serif;color:#586452;margin:0 0 19px}
+.findings-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.finding{border:1px solid #ddd4bc;background:#f5efdf;padding:24px 22px 21px}
+.finding:nth-child(2){background:#eef1e7}
+.finding-index{font:800 10px/1.5 system-ui,sans-serif;color:#98753d;letter-spacing:.1em}
+.finding h3{font-size:clamp(21px,2.1vw,27px);letter-spacing:-.025em;line-height:1.24;margin:12px 0}
+.finding p{font:14px/1.67 system-ui,sans-serif;color:#415444;margin:0}
+.discovery-cta{display:flex;justify-content:space-between;gap:30px;align-items:center;padding:29px 31px;background:#143c2b;color:#f7efd9;border-top:4px solid var(--gold);margin:20px 0 32px}
+.discovery-cta .kicker{color:#e4c482}
+.discovery-cta h2{font:700 clamp(25px,3vw,35px)/1.2 Georgia,serif;letter-spacing:-.025em;color:#f7efd9;margin:9px 0 12px}
+.discovery-cta p{font:14px/1.65 system-ui,sans-serif;color:#d9e0cf;max-width:600px;margin:0}
+.discovery-links{flex:0 0 260px;display:flex;flex-direction:column;align-items:flex-start;gap:11px}
+.discovery-links .primary-link{background:#e5c386;color:#19392b;margin:0;padding:14px 17px}
+.discovery-links .primary-link:hover{background:#f4dca4;color:#102e25}
+.discovery-links>a:last-child{font:750 12px/1.5 system-ui,sans-serif;color:#e3d7bb;text-underline-offset:4px}
+@media(max-width:850px){
+ .findings-grid{grid-template-columns:1fr}
+ .finding{padding:20px 21px}
+ .discovery-cta{flex-direction:column;align-items:flex-start;gap:21px}
+ .discovery-links{flex:none;width:100%}
+}
+@media(max-width:620px){
+ .season-duel{grid-template-columns:1fr;gap:10px}
+ .duel-card{padding:17px}
+ .season-story-hero .season-rule{padding:12px 14px;font-size:14px}
+ .discovery-cta{padding:23px 19px}
+ .season-hero-links{align-items:flex-start;flex-direction:column;gap:12px}
+ .season-hero-links .primary-link{margin-bottom:0}
+}
