@@ -60,3 +60,10 @@ button{font:inherit;cursor:pointer}
 @media(max-width:780px){.site-inner{padding:0 19px}.site-top .site-inner{flex-wrap:wrap;padding-top:14px;padding-bottom:12px;gap:11px}.right-menu{margin-left:auto;gap:12px}.right-menu a{font-size:10px}.hero{padding:39px 16px 46px}.hero:before,.hero:after{display:none}.logo-wrap{width:min(570px,100%)}.hero-claim{font-size:26px}.country-grid{grid-template-columns:1fr;gap:20px}.edition{min-height:315px}.edition h2{font-size:45px}.choices{padding-top:26px}.editorial-bottom{margin:27px auto 40px}}
 @media(max-width:430px){.brand{font-size:14px}.right-menu{gap:9px}.right-menu a{font-size:9px}.lang button{padding:7px}.edition-head{padding:22px 23px}.edition-body{padding:24px 23px}.edition-link{padding:15px 23px}.edition{min-height:0}}
 @media(prefers-reduced-motion:reduce){.edition{transition:none}html{scroll-behavior:auto}}
+
+/* Visible shortcuts distinguish the live league from our canonical history articles. */
+.history-shortcuts{display:flex;justify-content:center;align-items:center;gap:15px 25px;flex-wrap:wrap;margin:29px auto 0;font:750 12px/1.6 system-ui,sans-serif;color:#586451}
+.history-shortcuts span{font-weight:650}
+.history-shortcuts a{color:#174a33;text-underline-offset:5px;text-decoration-thickness:1px}
+.history-shortcuts a:hover{color:#a17333}
+@media(max-width:530px){.history-shortcuts{flex-direction:column;align-items:center;gap:10px;margin-top:24px}}
