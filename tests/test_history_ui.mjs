@@ -4,8 +4,6 @@ import vm from 'node:vm';
 
 const js = fs.readFileSync('public/history.js', 'utf8');
 const archiveIndex = JSON.parse(fs.readFileSync('public/history/index.json','utf8'));
-const sample = JSON.parse(fs.readFileSync('public/history/1928-29.json','utf8'));
-const sample2 = JSON.parse(fs.readFileSync('public/history/1994-95.json','utf8'));
 const full = JSON.parse(fs.readFileSync('public/data/standings.json','utf8'));
 const elements = new Map();
 class FakeClassList {
@@ -43,40 +41,44 @@ const doc = {
     return [];
   }
 };
+const visited = [];
 const ctx = {
   document: doc,
-  window: {addEventListener() {},normalizeClubNames() {}},
-  location: {href:'https://the-real-league.pages.dev/?season=1994-95',search:'?season=1994-95',pathname:'/',hash:''},
-  history: {pushState(_s,_t,url) {ctx.location.href='https://the-real-league.pages.dev'+url;}},
+  window: {addEventListener() {}, normalizeClubNames() {}},
+  location: {
+    href:'https://usurperleague.com/spain/?season=1994-95',
+    search:'?season=1994-95', pathname:'/spain/', hash:'',
+    assign(path) { visited.push(path); }
+  },
+  history: {pushState(_s,_t,url) {ctx.location.href='https://usurperleague.com'+url;}},
   URL, URLSearchParams, console,
-  data: null,
+  data:null,
   render() {ctx.renders++;},
-  renders: 0,
+  renders:0,
   fetch:async url=>{
-    const value = url==='/history/index.json' ? archiveIndex :
-      url==='/history/1994-95.json'?sample2 :
-      url==='/history/1928-29.json'?sample : null;
-    if(!value) return {ok:false,status:404};
-    return {ok:true,json:async()=>structuredClone(value)};
+    if(url!=='/history/index.json') return {ok:false,status:404};
+    return {ok:true,json:async()=>structuredClone(archiveIndex)};
   }
 };
+
 vm.runInNewContext(js, ctx, {filename:'history.js'});
 ctx.window.setCurrentSeasonData(full);
-const settle = async()=>{await new Promise(resolve=>setImmediate(resolve));await new Promise(resolve=>setImmediate(resolve));};
+const settle = async()=>{
+  await new Promise(resolve=>setImmediate(resolve));
+  await new Promise(resolve=>setImmediate(resolve));
+};
 await settle();
-assert.equal(ctx.data.mode,'historical');
-assert.equal(ctx.data.seasonId,'1994-95');
-assert.equal(ctx.window.historySeasonSelected,'1994-95');
+assert.equal(ctx.data.mode,'live','The Spain homepage only displays the current-season table');
+assert.equal(visited.at(-1),'/la-liga/1994-95/','Legacy deep links must open the new season story');
 assert.equal(byId('season-tabs').children.length,archiveIndex.seasons.length+1);
-assert.equal(byId('season-tabs').children.filter(tab=>tab.classList.contains('active')).length,1);
 assert(byId('decade-links').children.length>=9);
 byId('season-tabs').children.find(t=>t.dataset.season==='1928-29').click();
-await settle();
-assert.equal(ctx.data.seasonId,'1928-29');
-assert.equal(ctx.data.pointsPerWin,2);
+assert.equal(visited.at(-1),'/la-liga/1928-29/','Selecting an old year opens its canonical article');
+byId('season-tabs').children.find(t=>t.dataset.season==='1995-96').click();
+assert.equal(visited.at(-1),'/la-liga/1995-96/','Selecting 1995/96 opens the new article');
 byId('season-tabs').children[0].click();
 await settle();
 assert.equal(ctx.data.mode,'live');
 assert.equal(ctx.window.historySeasonSelected,'2026-27');
-assert(ctx.renders>=3);
-console.log('Season navigation smoke test passed for 1928/29, 1994/95, and current season.');
+assert(ctx.renders>=1);
+console.log('Season navigation verified: current table, canonical historic links and legacy URLs.');
