@@ -37,7 +37,7 @@ def write_if_changed(path, content):
         path.write_text(content, encoding="utf-8")
 
 
-def chrome(title, description, canonical, body, *, breadcrumbs=(), jsonld=None):
+def chrome(title, description, canonical, body, *, breadcrumbs=(), jsonld=None, season_toggle=False):
     structured = []
     if breadcrumbs:
         elements = [
@@ -69,6 +69,7 @@ def chrome(title, description, canonical, body, *, breadcrumbs=(), jsonld=None):
 <meta property="og:url" content="{e(canonical)}">
 <meta name="twitter:card" content="summary">
 <link rel="stylesheet" href="/archive.css">
+{'<script defer src="/la-liga/season-compare.js"></script>' if season_toggle else ''}
 {scripts}
 </head>
 <body>
@@ -198,10 +199,24 @@ def year_page(data, prev_season, next_season):
     <div><span>Points for a win</span><strong>{ppw}</strong></div>
   </div>
 </section>
-<section class="panel" aria-labelledby="our-table">
-  <div class="panel-intro"><span class="kicker">THE ALTERNATIVE STANDINGS / {e(label)}</span><h2 id="our-table">The league when the usual two sit this one out.</h2>
-    <p>Every fixture involving Madrid or Barça disappears for both teams. All the other scores stay exactly as they were.</p></div>
-  {table(data["alternativeTable"], f"Alternative La Liga table for {label}")}
+<section class="panel season-table-panel" aria-labelledby="our-table">
+  <div class="panel-intro">
+    <span class="kicker">TWO VERSIONS OF LA LIGA / {e(label)}</span>
+    <h2 id="our-table">The league when the usual two sit this one out.</h2>
+    <p>Same real football. A different guest list. Switch between the recalculated Usurper League and our all-club comparison.</p>
+    <div class="season-table-switch" role="group" aria-label="Compare La Liga standings for {e(label)}">
+      <button type="button" data-season-view="usurper" aria-controls="spanish-usurper-table" aria-pressed="true" disabled>Without Madrid &amp; Barça</button>
+      <button type="button" data-season-view="everyone" aria-controls="spanish-everyone-table" aria-pressed="false" disabled>With everyone</button>
+    </div>
+    <p class="season-view-explainer" id="season-view-explainer" role="status" aria-live="polite">Our alternative: {facts["number_remaining"]} clubs, {facts["kept"]} completed fixtures. All {facts["removed"]} matches involving Madrid or Barça are removed for both teams.</p>
+  </div>
+  <div class="season-table-view" id="spanish-usurper-table">
+    {table(data["alternativeTable"], f"Alternative La Liga table for {label}")}
+  </div>
+  <div class="season-table-view" id="spanish-everyone-table" hidden>
+    {table(data["officialTableApproximation"], f"All-club La Liga calculation for {label}")}
+  </div>
+  <p class="season-table-caveat">Both tables are independent calculations, not official LaLiga standings. Historic deductions and head-to-head tiebreakers may differ from the published records.</p>
 </section>
 <section class="season-findings" aria-labelledby="season-findings-heading">
   <div class="findings-head"><span class="kicker">THINGS THAT ACTUALLY CHANGED / {e(label)}</span><h2 id="season-findings-heading">Three notes from this parallel universe.</h2>
@@ -213,8 +228,6 @@ def year_page(data, prev_season, next_season):
   </div>
 </section>
 {special_note}
-<details class="panel comparison"><summary>Compare with our all-club calculation for {e(label)}</summary>
-{table(data["officialTableApproximation"], f"All-club La Liga calculation for {label}")}</details>
 <section class="sources">
   <h2>And just to be clear about the numbers…</h2>
   <p>These are <strong>independent recalculations, not official LaLiga standings</strong>. We order teams by points, goal difference and goals scored; historic points deductions and official head-to-head tiebreakers aren't all recreated.</p>
@@ -233,7 +246,8 @@ def year_page(data, prev_season, next_season):
                    ("La Liga archive", "/la-liga/"), (label, f"/la-liga/{season_id}/")]
     return chrome(title, desc, canonical, body, breadcrumbs=breadcrumbs,
                   jsonld={"@context":"https://schema.org", "@type":"WebPage",
-                          "name":title, "url":canonical, "inLanguage":"en"})
+                          "name":title, "url":canonical, "inLanguage":"en"},
+                  season_toggle=True)
 
 
 def archive_index(archive):
