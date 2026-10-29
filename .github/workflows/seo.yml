@@ -8,6 +8,8 @@ on:
       - 'scripts/build_seo.py'
       - 'scripts/build_england_seo.py'
       - 'scripts/season_story.py'
+      - 'scripts/verified_spain.py'
+      - 'public/official/spain/**'
       - 'tests/test_season_story.py'
       - 'public/config/england.json'
       - 'public/england/history/index.json'
