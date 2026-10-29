@@ -1,5 +1,5 @@
 import unittest
-from scripts.update import compute
+from scripts.update import compute, verify_published_standings
 
 def match(h, a, hg, ag):
     names = {81:"Barça",86:"Real Madrid",78:"Atleti",77:"Athletic",560:"Deportivo",558:"Celta",5335:"Santander",1:"Atletico",2:"Sevilla",3:"Betis"}
@@ -40,6 +40,45 @@ class StandingsTests(unittest.TestCase):
         self.assertEqual(result["excludedMatches"],3)
         self.assertEqual(result["includedMatches"],2)
         self.assertEqual({r["name"]:r["Pts"] for r in result["alternativeTable"]},{"Atletico":3,"Sevilla":1,"Betis":1})
+
+class OfficialCurrentTableTests(unittest.TestCase):
+    @staticmethod
+    def candidate():
+        calculated=compute([match(81,1,1,0),match(86,2,1,0),match(1,2,0,0)],generated_at="test")
+        rows=calculated["officialTableApproximation"]
+        # The provider may rank tied clubs differently; we respect the
+        # published ranking once every match statistic agrees.
+        tied=[r for r in rows if r["Pts"]==1 and r["id"] in (1,2)]
+        reordered=[r for r in rows if r not in tied]+list(reversed(tied))
+        feed={"competition":{"code":"PD"},"standings":[{"type":"TOTAL","table":[]}]}
+        for i,t in enumerate(reordered,1):
+            feed["standings"][0]["table"].append({"position":i,"team":{"id":t["id"]},
+               "playedGames":t["P"],"won":t["W"],"draw":t["D"],"lost":t["L"],
+               "goalsFor":t["GF"],"goalsAgainst":t["GA"],"goalDifference":t["GD"],
+               "points":t["Pts"]})
+        return calculated,feed,reordered
+
+    def test_published_order_is_used_not_goal_difference(self):
+        calculation,feed,expected=self.candidate()
+        verified=verify_published_standings(feed,calculation)
+        self.assertEqual([x["id"] for x in verified],[x["id"] for x in expected])
+        self.assertEqual([r["position"] for r in verified],list(range(1,len(expected)+1)))
+
+    def test_wrong_points_are_rejected(self):
+        calculation,feed,_=self.candidate()
+        feed["standings"][0]["table"][0]["points"]+=1
+        with self.assertRaises(ValueError):verify_published_standings(feed,calculation)
+
+    def test_mismatched_match_stat_is_rejected(self):
+        calculation,feed,_=self.candidate()
+        feed["standings"][0]["table"][0]["goalsAgainst"]+=1
+        with self.assertRaises(ValueError):verify_published_standings(feed,calculation)
+
+    def test_missing_club_is_rejected(self):
+        calculation,feed,_=self.candidate()
+        feed["standings"][0]["table"].pop()
+        with self.assertRaises(ValueError):verify_published_standings(feed,calculation)
+
 
 if __name__=="__main__":
     unittest.main()
