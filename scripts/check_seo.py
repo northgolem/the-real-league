@@ -5,6 +5,7 @@ from pathlib import Path
 import re
 from urllib.parse import urlparse
 from xml.etree import ElementTree as ET
+from verified_spain import verified_final_table
 
 root = Path(__file__).resolve().parents[1] / "public"
 archive = json.loads((root / "history/index.json").read_text(encoding="utf-8"))
@@ -50,15 +51,24 @@ for id in ids:
     assert 'official LaLiga standings' in html
     assert 'class="season-duel"' in html, f"Missing Spanish season comparison {id}"
     assert 'class="season-findings"' in html, f"Missing Spanish story insights {id}"
-    assert 'src="/la-liga/season-compare.js"' in html, f"No Spanish comparison controls for {id}"
-    assert 'data-season-view="usurper"' in html and 'data-season-view="everyone"' in html, f"Missing toggle buttons for {id}"
-    assert 'id="spanish-usurper-table"' in html and 'id="spanish-everyone-table" hidden' in html, f"Missing both pre-rendered tables for {id}"
-    assert html.count('<table aria-label=') == 2, f"Expected two verifiable standings for {id}"
+    ref = verified_final_table(data)
+    assert 'id="spanish-usurper-table"' in html
     assert f'data-alt-matches="{data["includedMatches"]}"' in html
     assert f'data-full-matches="{data["completedMatches"]}"' in html
     assert f'data-removed="{data["excludedMatches"]}"' in html
-    assert 'class="panel comparison"' not in html, f"Obsolete distant comparison remains on {id}"
-    assert data["officialTableApproximation"][0]["name"] in html, f"Full league leader missing from {id}"
+    assert 'class="panel comparison"' not in html
+    if ref:
+        assert 'src="/la-liga/season-compare.js"' in html, f"No verified comparison for {id}"
+        assert 'data-season-view="usurper"' in html and 'data-season-view="everyone"' in html
+        assert 'id="spanish-everyone-table" hidden' in html
+        assert html.count('<table aria-label=') == 2
+        assert ref["table"][0]["name"] in html
+        assert 'RSSSF historical final table' in html
+    else:
+        assert 'data-season-view="everyone"' not in html, f"Unverified season must not show a full table: {id}"
+        assert 'id="spanish-everyone-table"' not in html
+        assert 'not yet verified' in html
+        assert html.count('<table aria-label=') == 1
     assert 'Take Madrid and Barça out' in html
     assert 'No invented wins, no donated points' in html
     assert 'href="/england/"' in html, f"No cross-league discovery {id}"
