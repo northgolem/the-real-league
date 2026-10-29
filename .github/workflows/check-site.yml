@@ -137,5 +137,18 @@ jobs:
           grep -q 'premier-table' /tmp/customizer-sprint1.js
           grep -q 'position:sticky' /tmp/england-sprint1.css
           echo "Sprint 1 controls published: mobile jump and independently calculated comparisons"
+          echo "SPANISH HISTORICAL COMPARISON"
+          curl -fsSL --max-time 20 https://usurperleague.com/la-liga/2023-24/ > /tmp/la-liga-2023.html
+          curl -fsSL --max-time 20 https://usurperleague.com/la-liga/1995-96/ > /tmp/la-liga-1995.html
+          curl -fsSL --max-time 20 https://usurperleague.com/la-liga/season-compare.js > /tmp/la-liga-compare.js
+          grep -q 'data-season-view="usurper"' /tmp/la-liga-2023.html
+          grep -q 'data-season-view="everyone"' /tmp/la-liga-2023.html
+          grep -q 'id="spanish-everyone-table" hidden' /tmp/la-liga-2023.html
+          grep -q 'data-alt-matches="306"' /tmp/la-liga-2023.html
+          grep -q 'data-full-matches="380"' /tmp/la-liga-2023.html
+          grep -q 'id="spanish-everyone-table" hidden' /tmp/la-liga-1995.html
+          grep -q 'choose("usurper")' /tmp/la-liga-compare.js
+          if grep -q 'class="panel comparison"' /tmp/la-liga-2023.html; then echo "Obsolete lower comparison found"; exit 1; fi
+          echo "Both Spanish historical standings are now available at the top of the table"
           echo "BASELINE HTTPS"
           curl -sSL -o /dev/null -w "HTTP status=%{http_code}\n" --max-time 10 https://example.com/ || true
