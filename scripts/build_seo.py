@@ -13,6 +13,7 @@ import re
 from xml.etree.ElementTree import Element, SubElement, ElementTree, indent
 from build_england_seo import build as build_england_pages
 from season_story import season_facts
+from verified_spain import verified_final_table
 
 ROOT = Path(__file__).resolve().parents[1]
 HISTORY = ROOT / "public/history"
@@ -111,8 +112,10 @@ def year_page(data, prev_season, next_season):
     season_id = data["seasonId"]
     label = data["season"]
     facts = season_facts(data)
+    verified = verified_final_table(data)
+    full_rows = verified["table"] if verified else None
     winner, runner = facts["winner"], facts["runner"]
-    full_leader = facts["full_leader"]
+    full_leader = full_rows[0] if full_rows else None
     lead = facts["margin"]
     ppw = data["pointsPerWin"]
     original_rank = facts["winner_original_position"]
@@ -121,25 +124,33 @@ def year_page(data, prev_season, next_season):
     desc = (f"The {label} La Liga title race without Madrid and Barça: "
             f"{winner['name']} finish top on {winner['Pts']} points, "
             f"{lead} ahead of {runner['name']}. Real results, {facts['removed']} fixtures removed.")
-    if facts["same_champion"]:
-        comparison = (
-            f"<strong>{e(winner['name'])}</strong> also led our all-club calculation. "
-            "So the champion doesn't change this time. We aren't going to manufacture a surprise."
-        )
+    if not verified:
+        result_title = "The alternative league is ready."
+        comparison = ("We're still checking the published final standings with all clubs "
+                      "included for this season. We won't guess the true finishing order.")
+    elif full_leader["name"] == winner["name"]:
+        comparison = (f"<strong>{e(winner['name'])}</strong> led the published all-club table "
+                      "as well. No change in the leader. We aren't going to invent a surprise.")
         result_title = "Same leader. Different league."
     else:
-        comparison = (
-            f"<strong>{e(full_leader['name'])}</strong> led the all-club calculation. "
-            f"Remove Madrid, Barça and all their fixtures, and the lead belongs to "
-            f"<strong>{e(winner['name'])}</strong> instead."
-        )
+        comparison = (f"<strong>{e(full_leader['name'])}</strong> topped the published "
+                      f"all-club standings. Remove Madrid, Barça and their fixtures, and "
+                      f"<strong>{e(winner['name'])}</strong> lead our alternative table instead.")
         result_title = "A different name at the top."
-    winner_comparison = (
-        f"<strong>{e(winner['name'])}</strong> ranked {original_rank}{ordinal(original_rank)} "
-        f"in the all-club calculation, with {facts['winner_full_points']} points. "
-        f"After removing fixtures involving Madrid or Barça, they have {winner['Pts']} "
-        f"points from {winner['P']} matches."
-    )
+    if verified:
+        original = next(x for x in full_rows if x["name"] == winner["name"])
+        winner_comparison = (
+            f"<strong>{e(winner['name'])}</strong> ranked {original['position']}"
+            f"{ordinal(original['position'])} in the published complete table with "
+            f"{original['Pts']} points. Remove Madrid and Barça fixtures and "
+            f"they finish with {winner['Pts']} from {winner['P']} matches."
+        )
+    else:
+        winner_comparison = (
+            f"<strong>{e(winner['name'])}</strong> have {winner['Pts']} points from "
+            f"{winner['P']} matches in our alternative table. We won't present "
+            "an unverified full-league ranking as the real one."
+        )
     if lead:
         race = (f"<strong>{e(winner['name'])}</strong> finish {lead} points ahead of "
                 f"<strong>{e(runner['name'])}</strong> ({runner['Pts']} points). "
@@ -178,6 +189,37 @@ def year_page(data, prev_season, next_season):
         f'<a href="/la-liga/{e(next_season)}/">{e(next_season.replace("-", "/"))} →</a>' if next_season else '<span></span>'
     ]
     next_prev = '<nav class="season-siblings" aria-label="Other seasons">' + "".join(nav_parts) + '</nav>'
+    if verified:
+        full_card = (f'<div class="duel-card"><span class="kicker">PUBLISHED FULL LEAGUE / VERIFIED AGAINST RESULTS</span>'
+                     f'<strong>{e(full_leader["name"])}</strong><span>{full_leader["Pts"]} pts · '
+                     f'{full_leader["P"]} matches</span></div>')
+        toggle_html = (
+            '<div class="season-table-switch" role="group" aria-label="Compare La Liga standings">'
+            '<button type="button" data-season-view="usurper" aria-controls="spanish-usurper-table" aria-pressed="true" disabled>Without Madrid &amp; Barça</button>'
+            '<button type="button" data-season-view="everyone" aria-controls="spanish-everyone-table" aria-pressed="false" disabled>With everyone</button></div>'
+        )
+        full_html = (f'<div class="season-table-view" id="spanish-everyone-table" hidden>'
+                     f'{table(full_rows, f"Published final La Liga standings for {label}")}</div>')
+        source_note = (f'<p>The complete standings follow the '
+                       f'<a href="{e(verified["sourceUrl"])}" rel="noopener noreferrer">'
+                       'RSSSF historical final table</a>; every club\'s matches and goals '
+                       'have been cross-checked against our fixture archive. '
+                       'RSSSF is an independent historical source, not LaLiga itself.</p>')
+        caveat = ("<strong>With everyone</strong> follows the published final order, "
+                  "including any recorded point adjustments. The <strong>Usurper League</strong> "
+                  "is our independent alternative calculation.")
+    else:
+        full_card = ('<div class="duel-card"><span class="kicker">ALL-CLUB HISTORICAL TABLE</span>'
+                     '<strong>Still verifying</strong><span>We refuse to guess the official order.</span></div>')
+        toggle_html = ('<p class="unverified-full-note" role="status"><strong>With everyone: '
+                       'not yet verified.</strong> We have deliberately withheld the full-league '
+                       'table for this season rather than display a potentially incorrect ranking.</p>')
+        full_html = ""
+        source_note = ("<p>This season's published complete classification has not yet "
+                       "passed our independent match-statistics check, so we don't show "
+                       "a supposed real full-league table.</p>")
+        caveat = ("The alternative standings are based on real archived match results. "
+                  "We have not verified an all-club historical reference for this season yet.")
     body = f"""
 <div class="breadcrumbs"><a href="/">Home</a> / <a href="/spain/">Spain</a> / <a href="/la-liga/">La Liga archive</a> / {e(label)}</div>
 <section class="page-hero season-story-hero">
@@ -186,10 +228,10 @@ def year_page(data, prev_season, next_season):
   <p class="season-rule"><strong>Here's the idea:</strong> We remove Real Madrid, Barcelona <em>and every match either played</em>. Then we recalculate the league using only the actual results between the clubs left. No invented wins, no donated points.</p>
   <p class="standfirst">{first_paragraph}</p>
   <div class="season-duel" aria-label="All-club and alternative leaders compared">
-    <div class="duel-card"><span class="kicker">ALL CLUBS INCLUDED / CALCULATED LEADER</span><strong>{e(full_leader["name"])}</strong><span>{full_leader["Pts"]} pts · {full_leader["P"]} matches</span></div>
+    {full_card}
     <div class="duel-card alternative"><span class="kicker">WITHOUT MADRID &amp; BARÇA / OUR CHAMPION</span><strong>{e(winner["name"])}</strong><span>{winner["Pts"]} pts · {winner["P"]} matches</span></div>
   </div>
-  <p class="duel-note">Different numbers of matches; don't compare these point totals directly. It's the <em>leader in each set of rules</em> that matters.</p>
+  <p class="duel-note">Different numbers of matches: compare the finishing positions, not the points as though this were the same competition.</p>
   <p class="season-result"><strong>{result_title}</strong> {comparison}</p>
   <a class="primary-link" href="#our-table">See the recalculated table ↓</a>
   <div class="facts">
@@ -203,20 +245,15 @@ def year_page(data, prev_season, next_season):
   <div class="panel-intro">
     <span class="kicker">TWO VERSIONS OF LA LIGA / {e(label)}</span>
     <h2 id="our-table">The league when the usual two sit this one out.</h2>
-    <p>Same real football. A different guest list. Switch between the recalculated Usurper League and our all-club comparison.</p>
-    <div class="season-table-switch" role="group" aria-label="Compare La Liga standings for {e(label)}">
-      <button type="button" data-season-view="usurper" aria-controls="spanish-usurper-table" aria-pressed="true" disabled>Without Madrid &amp; Barça</button>
-      <button type="button" data-season-view="everyone" aria-controls="spanish-everyone-table" aria-pressed="false" disabled>With everyone</button>
-    </div>
+    <p>Same real football. A different guest list. Compare our alternative with a verified published final table wherever available.</p>
+    {toggle_html}
     <p class="season-view-explainer" id="season-view-explainer" role="status" aria-live="polite">Our alternative: {facts["number_remaining"]} clubs, {facts["kept"]} completed fixtures. All {facts["removed"]} matches involving Madrid or Barça are removed for both teams.</p>
   </div>
   <div class="season-table-view" id="spanish-usurper-table">
     {table(data["alternativeTable"], f"Alternative La Liga table for {label}")}
   </div>
-  <div class="season-table-view" id="spanish-everyone-table" hidden>
-    {table(data["officialTableApproximation"], f"All-club La Liga calculation for {label}")}
-  </div>
-  <p class="season-table-caveat">Both tables are independent calculations, not official LaLiga standings. Historic deductions and head-to-head tiebreakers may differ from the published records.</p>
+  {full_html}
+  <p class="season-table-caveat">{caveat}</p>
 </section>
 <section class="season-findings" aria-labelledby="season-findings-heading">
   <div class="findings-head"><span class="kicker">THINGS THAT ACTUALLY CHANGED / {e(label)}</span><h2 id="season-findings-heading">Three notes from this parallel universe.</h2>
@@ -230,7 +267,8 @@ def year_page(data, prev_season, next_season):
 {special_note}
 <section class="sources">
   <h2>And just to be clear about the numbers…</h2>
-  <p>These are <strong>independent recalculations, not official LaLiga standings</strong>. We order teams by points, goal difference and goals scored; historic points deductions and official head-to-head tiebreakers aren't all recreated.</p>
+  <p>Our alternative standings are <strong>independent recalculations</strong>, not official LaLiga standings. Historic head-to-head tiebreakers are not all recreated in our alternative.</p>
+  {source_note}
   <p>Actual match data: <a href="{e(data['sourceUrl'])}" rel="noopener noreferrer">{e(data['source'])}</a> (CC0 archive). The {facts["removed"]} removed fixtures are not reassigned to anyone. It's football history with a different guest list.</p>
 </section>
 <aside class="discovery-cta" aria-label="Explore more alternative football leagues">
@@ -247,7 +285,7 @@ def year_page(data, prev_season, next_season):
     return chrome(title, desc, canonical, body, breadcrumbs=breadcrumbs,
                   jsonld={"@context":"https://schema.org", "@type":"WebPage",
                           "name":title, "url":canonical, "inLanguage":"en"},
-                  season_toggle=True)
+                  season_toggle=bool(verified))
 
 
 def archive_index(archive):
