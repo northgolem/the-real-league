@@ -13,6 +13,8 @@ on:
       - 'public/england/history/index.json'
       - 'public/england/history/seasons/**'
       - 'scripts/check_seo.py'
+      - 'tests/test_spanish_season_compare.mjs'
+      - 'public/la-liga/season-compare.js'
       - 'public/history/**'
       - '.github/workflows/seo.yml'
 
@@ -38,6 +40,10 @@ jobs:
         run: python scripts/build_seo.py
       - name: Verify actual archived data, links and search metadata
         run: python scripts/check_seo.py
+      - name: Test Spanish historical toggle on all 94 years
+        run: |
+          node --check public/la-liga/season-compare.js
+          node tests/test_spanish_season_compare.mjs
       - name: Publish generated historical pages and sitemap
         run: |
           git config user.name 'usurper-league-bot'
