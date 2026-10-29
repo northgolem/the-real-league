@@ -1,0 +1,30 @@
+name: Verify Spanish historical full-league tables
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/import_official_spain.py'
+      - '.github/workflows/verify-spain-official.yml'
+permissions:
+  contents: write
+concurrency:
+  group: official-spain-reference
+  cancel-in-progress: false
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Import only independently verified final standings
+        run: python scripts/import_official_spain.py
+      - name: Commit authenticated historical standings separately from match calculations
+        run: |
+          git config user.name 'usurper-league-bot'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add -A public/official/spain
+          git diff --cached --quiet || (git commit -m 'Save independently verified historical Spanish full-league standings' && git push)
