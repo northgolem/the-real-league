@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['scripts/diagnose_official_spain.py', '.github/workflows/official-diagnostic.yml']
+    paths: ['scripts/import_official_spain.py', '.github/workflows/official-diagnostic.yml']
 permissions:
   contents: read
 jobs:
@@ -15,4 +15,4 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python scripts/diagnose_official_spain.py
+      - run: python scripts/import_official_spain.py --dry-run --seasons 2023-24 1995-96 1928-29 1979-80
