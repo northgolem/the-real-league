@@ -17,7 +17,7 @@ function makeElement(id,properties={}){
 function testOnce(season){
   const year=JSON.parse(fs.readFileSync("public/history/"+season+".json","utf8"));
   const html=fs.readFileSync("public/la-liga/"+season+"/index.html","utf8");
-  assert.match(html,/class="season-table-panel"/);
+  assert.match(html,/class="panel season-table-panel"/);
   assert.match(html,/data-season-view="everyone"/);
   assert.match(html,/id="spanish-everyone-table" hidden/);
   assert.match(html,/src="\/la-liga\/season-compare.js"/);
