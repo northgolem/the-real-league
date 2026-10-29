@@ -150,5 +150,26 @@ jobs:
           grep -q 'choose("usurper")' /tmp/la-liga-compare.js
           if grep -q 'class="panel comparison"' /tmp/la-liga-2023.html; then echo "Obsolete lower comparison found"; exit 1; fi
           echo "Both Spanish historical standings are now available at the top of the table"
+          echo "SPANISH PUBLISHED FULL STANDINGS"
+          curl -fsSL --max-time 20 https://usurperleague.com/la-liga/2023-24/ > /tmp/verified-laliga-2023.html
+          curl -fsSL --max-time 20 https://usurperleague.com/la-liga/1979-80/ > /tmp/unverified-laliga-1979.html
+          curl -fsSL --max-time 20 https://usurperleague.com/data/standings.json > /tmp/verified-live-spain.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          ref=Path("/tmp/verified-laliga-2023.html").read_text()
+          assert 'RSSSF historical final table' in ref
+          assert 'Published final La Liga standings for 2023/24' in ref
+          actual=ref.split('id="spanish-everyone-table" hidden>',1)[1]
+          assert actual.index('<td>Celta Vigo</td>') < actual.index('<td>Sevilla FC</td>'), "Wrong historical 2023/24 ranking"
+          withheld=Path("/tmp/unverified-laliga-1979.html").read_text()
+          assert 'not yet verified' in withheld
+          assert 'id="spanish-everyone-table"' not in withheld
+          live=json.loads(Path("/tmp/verified-live-spain.json").read_text())
+          assert len(live["officialTable"])==20
+          assert live["officialStandingsSource"].startswith("football-data.org")
+          assert {r['id'] for r in live["officialTable"]}=={r['id'] for r in live["officialTableApproximation"]}
+          print("Verified: live published source, correct Celta-Sevilla order, unsafe history hidden")
+          PY
           echo "BASELINE HTTPS"
           curl -sSL -o /dev/null -w "HTTP status=%{http_code}\n" --max-time 10 https://example.com/ || true
