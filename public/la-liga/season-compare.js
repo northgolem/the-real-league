@@ -23,7 +23,7 @@
     heading.textContent=withEveryone?"All clubs. Our calculated comparison.":altHeading;
     description.textContent=withEveryone
       ?"All "+panel.dataset.fullClubs+" clubs and "+panel.dataset.fullMatches+
-        " finished matches. Our calculation with everybody included — not an official LaLiga table."
+        " finished matches. Published historical final standings, independently verified against the complete fixture archive."
       :"Our alternative: "+panel.dataset.altClubs+" clubs, "+panel.dataset.altMatches+
         " completed fixtures. All "+panel.dataset.removed+
         " matches involving Madrid or Barça are removed for both teams.";
