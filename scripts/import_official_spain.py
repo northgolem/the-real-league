@@ -31,7 +31,8 @@ def urls(year):
         end=1939 if code==1928 else code+10
         return [f"{BASE_URL}spanhist{str(code)[-2:]}{str(end)[-2:]}.html",
                 f"{BASE_URL}span{str(year+1)[-2:]}.html"]
-    return [f"{BASE_URL}span{str(year+1)[-2:]}.html"]
+    return [f"{BASE_URL}span{str(year+1)[-2:]}.html",
+            f"{BASE_URL}span{year+1}.html"]
 def fetch(url):
     if url in FETCHED:return FETCHED[url]
     request=urllib.request.Request(url,headers={"User-Agent":"Mozilla/5.0 (compatible; UsurperLeague/1.0; historical stats reference)"})
