@@ -116,6 +116,41 @@ def compute(matches, season=SEASON, generated_at=None, *, excluded_ids=None,
         "source": "football-data.org"
     }
 
+def verify_published_standings(payload, recalculated):
+    """Accept a published La Liga ranking only when every match stat agrees."""
+    if (payload.get("competition") or {}).get("code")!="PD":
+        raise ValueError("Wrong league in published standings")
+    totals=[s for s in payload.get("standings",[]) if s.get("type")=="TOTAL"]
+    if len(totals)!=1:raise ValueError("Missing or duplicate league table")
+    expected={r["id"]:r for r in recalculated["officialTableApproximation"]}
+    entries=totals[0].get("table",[])
+    if len(entries)!=len(expected):raise ValueError("Incomplete published table")
+    seen=set();verified=[]
+    for i,row in enumerate(entries,1):
+        club=(row.get("team") or {}).get("id")
+        if club not in expected or club in seen or row.get("position")!=i:
+            raise ValueError("Unverifiable published position or club")
+        seen.add(club)
+        old=expected[club]
+        for their,our in (("playedGames","P"),("won","W"),("draw","D"),("lost","L"),
+                          ("goalsFor","GF"),("goalsAgainst","GA"),("goalDifference","GD")):
+            if row.get(their)!=old[our]:
+                raise ValueError("Provider and match scores disagree: "+old["name"]+" "+their)
+        points=row.get("points")
+        if type(points) is not int or points<0 or points>old["Pts"]:
+            raise ValueError("Invalid published points for "+old["name"])
+        verified.append({**old,"Pts":points,"position":i})
+    return verified
+
+
+def fetch_published_standings(token):
+    req=Request(f"https://api.football-data.org/v4/competitions/PD/standings?season={SEASON}",
+                headers={"X-Auth-Token":token,"User-Agent":"TheUsurperLeague/1.0"})
+    with urlopen(req,timeout=25) as result:
+        if result.status!=200:raise ValueError("Published standings unavailable")
+        return json.load(result)
+
+
 def main():
     token = os.environ.get("FOOTBALL_DATA_TOKEN", "").strip()
     if not token:
@@ -129,12 +164,21 @@ def main():
             raise RuntimeError(f"API HTTP {res.status}")
         data = json.load(res)
     result = compute(data.get("matches", []))
+    try:
+        verified=verify_published_standings(fetch_published_standings(token),result)
+        result["officialTable"]=verified
+        result["officialStandingsSource"]="football-data.org published La Liga standings"
+        print("Published current table verified against completed match results")
+    except Exception as error:
+        # Never pass off the old approximation as the real table.
+        print("Full-club comparison withheld: "+str(error)[:180])
     if result["completedMatches"] == 0:
         raise ValueError("No finished matches; refusing to replace data")
     if OUT.exists():
         previous = json.loads(OUT.read_text(encoding="utf-8"))
-        keys = ["completedMatches", "latestResultAt", "alternativeTable", "officialTableApproximation"]
-        if previous.get("mode") == "live" and all(previous.get(k) == result[k] for k in keys):
+        keys = ["completedMatches", "latestResultAt", "alternativeTable",
+                "officialTableApproximation", "officialTable"]
+        if previous.get("mode") == "live" and all(previous.get(k) == result.get(k) for k in keys):
             print("Standings unchanged")
             return
     OUT.parent.mkdir(parents=True, exist_ok=True)
