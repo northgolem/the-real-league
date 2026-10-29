@@ -138,3 +138,19 @@ tbody tr:hover{background:#f5ecca}
  .season-hero-links{align-items:flex-start;flex-direction:column;gap:12px}
  .season-hero-links .primary-link{margin-bottom:0}
 }
+
+/* The Spanish archive's historic table comparison belongs right beside the table. */
+.season-table-panel .panel-intro{padding-bottom:17px}
+.season-table-switch{display:inline-flex;align-items:stretch;gap:4px;padding:5px;margin:17px 0 9px;background:#efeadb;border:1px solid #d7c8a9;border-radius:5px;max-width:100%}
+.season-table-switch button{background:transparent;color:#47644f;border:0;border-radius:3px;padding:13px 17px;font:800 13px/1.35 system-ui,sans-serif;cursor:pointer}
+.season-table-switch button[aria-pressed="true"]{background:#133f2c;color:#fffaf0}
+.season-table-switch button:disabled{opacity:.6;cursor:wait}
+.season-table-switch button:focus-visible{outline:3px solid #b38a3f;outline-offset:3px}
+.season-table-panel .season-view-explainer{font:13px/1.6 system-ui,sans-serif;color:#53634f;margin:7px 0 4px;max-width:810px}
+.season-table-panel .season-table-caveat{font:12px/1.55 system-ui,sans-serif;color:#606b5e;border-top:1px solid #e1d9c7;padding:12px 22px 14px;margin:0}
+.season-table-panel .season-table-view[hidden]{display:none!important}
+@media(max-width:560px){
+  .season-table-switch{display:flex;width:100%;gap:3px}
+  .season-table-switch button{flex:1;min-height:49px;padding:10px 7px;font-size:12px}
+  .season-table-panel .season-view-explainer{font-size:12px}
+}
