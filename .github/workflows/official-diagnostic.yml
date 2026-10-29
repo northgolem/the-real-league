@@ -15,4 +15,4 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python scripts/import_official_spain.py --dry-run --seasons 2023-24 1995-96 1928-29 1979-80
+      - run: python scripts/import_official_spain.py --dry-run --seasons 2023-24 1979-80
