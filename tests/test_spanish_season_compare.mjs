@@ -18,11 +18,23 @@ function testOnce(season){
   const year=JSON.parse(fs.readFileSync("public/history/"+season+".json","utf8"));
   const html=fs.readFileSync("public/la-liga/"+season+"/index.html","utf8");
   assert.match(html,/class="panel season-table-panel"/);
+  const officialFile="public/official/spain/"+season+".json";
+  if(!fs.existsSync(officialFile)){
+    assert(!html.includes('data-season-view="everyone"'),
+      "Unverified historical seasons must never offer an unverified real table");
+    assert(!html.includes('id="spanish-everyone-table"'));
+    assert.match(html,/not yet verified/);
+    assert.equal((html.match(/<table aria-label=/g)||[]).length,1);
+    return false;
+  }
+  const official=JSON.parse(fs.readFileSync(officialFile,"utf8"));
   assert.match(html,/data-season-view="everyone"/);
   assert.match(html,/id="spanish-everyone-table" hidden/);
   assert.match(html,/src="\/la-liga\/season-compare.js"/);
-  assert.match(html,/All-club La Liga calculation for/);
+  assert.match(html,/Published final La Liga standings for/);
   assert.equal((html.match(/<table aria-label=/g)||[]).length,2);
+  assert(html.includes(official.table[0].name));
+  assert(html.includes('RSSSF historical final table'));
   const heading=makeElement("our-table",{textContent:"The league when the usual two sit this one out."});
   const description=makeElement("season-view-explainer");
   const alt=makeElement("spanish-usurper-table",{table:makeElement("table")});
@@ -54,16 +66,19 @@ function testOnce(season){
   assert.equal(everyone.attrs["aria-pressed"],"true");
   assert.equal(usurper.attrs["aria-pressed"],"false");
   assert(description.textContent.includes(String(year.completedMatches)));
-  assert.match(description.textContent,/not an official LaLiga table/);
+  assert.match(description.textContent,/Published historical final standings/);
   usurper.click();
   assert.equal(alt.hidden,false);
   assert.equal(full.hidden,true);
   assert.equal(heading.textContent,"The league when the usual two sit this one out.");
   assert(description.textContent.includes(String(year.excludedMatches)));
+  return true;
 }
 const index=JSON.parse(fs.readFileSync("public/history/index.json","utf8"));
 assert.equal(index.seasons.length,94);
-for(const row of index.seasons)testOnce(row.id);
+let checked=0;
+for(const row of index.seasons)if(testOnce(row.id))checked++;
+assert.equal(checked,90,"Every verified season gets both tables; none of the other four does");
 const england=fs.readFileSync("public/england/history/2011-12/index.html","utf8");
 assert(!england.includes("season-compare.js"),"English history must remain unchanged");
-console.log("All 94 historical Spanish seasons passed table toggle, counts, keyboard-ready states and no-English-change checks.");
+console.log("Spain: 90 published full tables compared, four safely withheld; all 94 alternative seasons and English history untouched.");
