@@ -164,7 +164,7 @@
 
   function normalizeClubNames(dataset) {
     if (!dataset || typeof dataset !== 'object') return;
-    for (const table of [dataset.alternativeTable, dataset.officialTableApproximation]) {
+    for (const table of [dataset.alternativeTable, dataset.officialTableApproximation, dataset.officialTable]) {
       for (const club of table || []) {
         const preferredNames = {
           78: 'Atlético Madrid',
@@ -254,7 +254,11 @@
     set('#empty p', tr.emptyBody);
     const footnote = document.getElementById('disclaimer');
     if (footnote) {
-      footnote.textContent = tr.footerNote;
+      footnote.textContent = !alt && Array.isArray(dataset?.officialTable)
+        ? (language === 'es'
+            ? 'Clasificación completa publicada por football-data.org, verificada con los resultados de los partidos. La tabla Usurper se calcula por separado. Datos: '
+            : 'Full-club standings as published by football-data.org and independently checked against the finished match results. The Usurper table is calculated separately. Data: ')
+        : tr.footerNote;
       const attribution = document.createElement('a');
       attribution.href = historical ? dataset.sourceUrl : 'https://www.football-data.org/';
       attribution.rel = 'noopener';
