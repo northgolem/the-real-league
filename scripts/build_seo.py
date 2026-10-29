@@ -199,7 +199,7 @@ def year_page(data, prev_season, next_season):
     <div><span>Points for a win</span><strong>{ppw}</strong></div>
   </div>
 </section>
-<section class="panel season-table-panel" aria-labelledby="our-table">
+<section class="panel season-table-panel" aria-labelledby="our-table" data-alt-clubs="{facts["number_remaining"]}" data-alt-matches="{facts["kept"]}" data-removed="{facts["removed"]}" data-full-clubs="{len(data["officialTableApproximation"])}" data-full-matches="{data["completedMatches"]}">
   <div class="panel-intro">
     <span class="kicker">TWO VERSIONS OF LA LIGA / {e(label)}</span>
     <h2 id="our-table">The league when the usual two sit this one out.</h2>
