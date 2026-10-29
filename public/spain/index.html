@@ -86,7 +86,7 @@ a{color:inherit}button{font:inherit;cursor:pointer}.container{max-width:1060px;p
 <main class="container content">
 
 <div class="meta"><div class="tag"><span class="dot"></span> <span id="status">Preview mode · waiting for results</span></div><div class="tag" id="updated">Season 2026/27</div></div>
-<section class="card" id="league-table" aria-label="League table"><div class="cardhead"><div><div class="eyebrow">The standings</div><h2>Someone else gets a go.</h2><p id="matchinfo">The table recalculates automatically once a results feed is connected.</p></div><div class="switch" aria-label="Table selection"><button class="active" id="alternative" aria-pressed="true">No Gods</button><button id="original" aria-pressed="false">All Teams</button></div></div>
+<section class="card" id="league-table" aria-label="League table"><div class="cardhead"><div><div class="eyebrow">The standings</div><h2>Someone else gets a go.</h2><p id="matchinfo">The table recalculates automatically once a results feed is connected.</p></div><div class="switch" aria-label="Table selection"><button class="active" id="alternative" aria-pressed="true">No Gods</button><button id="original" aria-pressed="false" disabled title="Waiting for a verified published full-league table">With Everyone</button></div></div>
 <div class="tablewrap"><table><thead><tr><th>#</th><th>Club</th><th>P</th><th class="hidden-mobile">W</th><th class="hidden-mobile">D</th><th class="hidden-mobile">L</th><th>GD</th><th>Pts</th></tr></thead><tbody id="rows"></tbody></table><div class="empty" id="empty"><strong>The mortals are warming up.</strong><p>The standings will appear after the results feed completes its first update.</p></div></div>
 <div class="footnote" id="disclaimer">Provisional table: ranking by points, goal difference, then goals scored. Spanish head-to-head tiebreakers may change the official order. Source: <a href="https://www.football-data.org/" rel="noopener">Football-Data.org API</a>.</div>
 </section>
@@ -263,7 +263,14 @@ a{color:inherit}button{font:inherit;cursor:pointer}.container{max-width:1060px;p
 <script>
 let data=null,view='alternative';const $=id=>document.getElementById(id);
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-function render(){const live=data&&(data.mode==='live'||data.mode==='historical');const alt=view==='alternative';$('alternative').classList.toggle('active',alt);$('original').classList.toggle('active',!alt);$('alternative').setAttribute('aria-pressed',String(alt));$('original').setAttribute('aria-pressed',String(!alt));const table=live?(alt?data.alternativeTable:data.officialTableApproximation):[];
+function render(){const live=data&&(data.mode==='live'||data.mode==='historical');
+const hasPublished=Boolean(live&&Array.isArray(data.officialTable)&&
+  data.officialTable.length===data.officialTableApproximation.length&&data.officialStandingsSource);
+$('original').disabled=!hasPublished;
+$('original').title=hasPublished?'Published La Liga table verified against the real match results':
+  'Published complete table unavailable or not verified yet. We do not show a guessed version.';
+if(view==='original'&&!hasPublished)view='alternative';
+const alt=view==='alternative';$('alternative').classList.toggle('active',alt);$('original').classList.toggle('active',!alt);$('alternative').setAttribute('aria-pressed',String(alt));$('original').setAttribute('aria-pressed',String(!alt));const table=live?(alt?data.alternativeTable:data.officialTable):[];
 $('rows').replaceChildren();$('empty').hidden=table.length>0;
 for(let i=0;i<table.length;i++){const t=table[i];const tr=document.createElement('tr');const cls=i===0?'top':i>=table.length-3?'bottom':'';const change=alt&&t.positionChange?` <span class="delta ${t.positionChange>0?'positive':'negative'}" title="Position compared with the full table">${t.positionChange>0?'↑':'↓'}${Math.abs(t.positionChange)}</span>`:'';
 tr.innerHTML=`<td><span class="pos ${cls}">${i+1}</span></td><td>${escapeHtml(t.name)}${change}</td><td>${t.P}</td><td class="hidden-mobile">${t.W}</td><td class="hidden-mobile">${t.D}</td><td class="hidden-mobile">${t.L}</td><td>${t.GD>0?'+':''}${t.GD}</td><td class="points">${t.Pts}</td>`;$('rows').append(tr)}
@@ -275,7 +282,11 @@ const leader=data?.alternativeTable?.[0];$('headline').textContent=live&&leader?
 $('storytext').textContent=live&&leader?`Remove every match involving Madrid or Barça and ${leader.name} lead on ${leader.Pts} points. The rest of Spain seems to be coping.`:'The other clubs still have to play the football. We simply took the usual winners out of the equation.';
 if (typeof window.renderEnhancements === 'function') window.renderEnhancements(data,view);
 }
-$('alternative').addEventListener('click',()=>{view='alternative';render()});$('original').addEventListener('click',()=>{view='original';render()});
+$('alternative').addEventListener('click',()=>{view='alternative';render()});
+$('original').addEventListener('click',()=>{
+ if($('original').disabled){notify('The published full-league table is not verified yet. We will not guess.');return;}
+ view='original';render();
+});
 function notify(s){$('notice').textContent=s}
 $('copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(location.href);notify(window.getNotice?window.getNotice('copied'):'Link copied.')}catch(e){notify(window.getNotice?window.getNotice('copyFallback'):'Copy the address from your browser.')}});
 $('share').addEventListener('click',async()=>{const payload=window.getSharePayload?window.getSharePayload():{title:'The Usurper League — Football for the Rest of Us',text:'The money clubs can sod off. We’re having a league. Same football. Much more interesting.',url:location.href};try{if(navigator.share)await navigator.share(payload);else{await navigator.clipboard.writeText(`${payload.text} ${payload.url}`);notify(window.getNotice?window.getNotice('shareCopied'):'Share text copied.')}}catch(e){if(e.name!=='AbortError')notify(window.getNotice?window.getNotice('shareError'):'You can copy the link instead.')}});
