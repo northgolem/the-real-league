@@ -50,6 +50,15 @@ for id in ids:
     assert 'official LaLiga standings' in html
     assert 'class="season-duel"' in html, f"Missing Spanish season comparison {id}"
     assert 'class="season-findings"' in html, f"Missing Spanish story insights {id}"
+    assert 'src="/la-liga/season-compare.js"' in html, f"No Spanish comparison controls for {id}"
+    assert 'data-season-view="usurper"' in html and 'data-season-view="everyone"' in html, f"Missing toggle buttons for {id}"
+    assert 'id="spanish-usurper-table"' in html and 'id="spanish-everyone-table" hidden' in html, f"Missing both pre-rendered tables for {id}"
+    assert html.count('<table aria-label=') == 2, f"Expected two verifiable standings for {id}"
+    assert f'data-alt-matches="{data["includedMatches"]}"' in html
+    assert f'data-full-matches="{data["completedMatches"]}"' in html
+    assert f'data-removed="{data["excludedMatches"]}"' in html
+    assert 'class="panel comparison"' not in html, f"Obsolete distant comparison remains on {id}"
+    assert data["officialTableApproximation"][0]["name"] in html, f"Full league leader missing from {id}"
     assert 'Take Madrid and Barça out' in html
     assert 'No invented wins, no donated points' in html
     assert 'href="/england/"' in html, f"No cross-league discovery {id}"
