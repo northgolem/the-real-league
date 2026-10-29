@@ -120,7 +120,8 @@ def import_one(season,write=True):
             try:
                 rows=reconcile(candidate,expected)
             except ValueError as e:
-                reason=str(e)
+                if season in ('2023-24','1979-80'):
+                    print('  REJECT',season,url,'rows',len(candidate),'reason',str(e)[:180],flush=True)
                 continue
             record={"seasonId":season,"source":"RSSSF historical final table",
                     "sourceUrl":url,"verification":"All clubs' played, won, drawn, lost, goals for and goals against match our independently calculated full-season fixtures.",
