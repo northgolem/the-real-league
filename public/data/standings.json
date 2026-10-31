@@ -2,8 +2,8 @@
   "mode": "live",
   "competition": "La Liga de los Mortales",
   "season": "2026/27",
-  "generatedAt": "2026-10-29T21:00:05+00:00",
-  "latestResultAt": "2026-10-26T20:00:00Z",
+  "generatedAt": "2026-10-31T08:49:59+00:00",
+  "latestResultAt": "2026-10-30T20:00:00Z",
   "excluded": [
     "Real Madrid",
     "FC Barcelona"
@@ -12,9 +12,9 @@
     81,
     86
   ],
-  "completedMatches": 99,
+  "completedMatches": 100,
   "excludedMatches": 19,
-  "includedMatches": 80,
+  "includedMatches": 81,
   "officialTableApproximation": [
     {
       "id": 81,
@@ -136,13 +136,13 @@
     {
       "id": 94,
       "name": "Villarreal",
-      "P": 10,
+      "P": 11,
       "W": 3,
       "D": 3,
-      "L": 4,
+      "L": 5,
       "GF": 15,
-      "GA": 14,
-      "GD": 1,
+      "GA": 15,
+      "GD": 0,
       "Pts": 12,
       "position": 10
     },
@@ -160,6 +160,19 @@
       "position": 11
     },
     {
+      "id": 80,
+      "name": "Espanyol",
+      "P": 11,
+      "W": 3,
+      "D": 2,
+      "L": 6,
+      "GF": 13,
+      "GA": 14,
+      "GD": -1,
+      "Pts": 11,
+      "position": 12
+    },
+    {
       "id": 79,
       "name": "Osasuna",
       "P": 10,
@@ -170,7 +183,7 @@
       "GA": 20,
       "GD": -10,
       "Pts": 11,
-      "position": 12
+      "position": 13
     },
     {
       "id": 5335,
@@ -183,7 +196,7 @@
       "GA": 26,
       "GD": -11,
       "Pts": 11,
-      "position": 13
+      "position": 14
     },
     {
       "id": 88,
@@ -196,7 +209,7 @@
       "GA": 19,
       "GD": -3,
       "Pts": 10,
-      "position": 14
+      "position": 15
     },
     {
       "id": 285,
@@ -209,7 +222,7 @@
       "GA": 17,
       "GD": -3,
       "Pts": 10,
-      "position": 15
+      "position": 16
     },
     {
       "id": 87,
@@ -222,7 +235,7 @@
       "GA": 20,
       "GD": -8,
       "Pts": 9,
-      "position": 16
+      "position": 17
     },
     {
       "id": 82,
@@ -235,19 +248,6 @@
       "GA": 15,
       "GD": -10,
       "Pts": 9,
-      "position": 17
-    },
-    {
-      "id": 80,
-      "name": "Espanyol",
-      "P": 10,
-      "W": 2,
-      "D": 2,
-      "L": 6,
-      "GF": 12,
-      "GA": 14,
-      "GD": -2,
-      "Pts": 8,
       "position": 18
     },
     {
@@ -386,13 +386,13 @@
     {
       "id": 94,
       "name": "Villarreal",
-      "P": 9,
+      "P": 10,
       "W": 3,
       "D": 3,
-      "L": 3,
+      "L": 4,
       "GF": 15,
-      "GA": 13,
-      "GD": 2,
+      "GA": 14,
+      "GD": 1,
       "Pts": 12,
       "position": 8,
       "originalPosition": 10,
@@ -414,6 +414,21 @@
       "positionChange": 2
     },
     {
+      "id": 80,
+      "name": "Espanyol",
+      "P": 10,
+      "W": 3,
+      "D": 2,
+      "L": 5,
+      "GF": 12,
+      "GA": 12,
+      "GD": 0,
+      "Pts": 11,
+      "position": 10,
+      "originalPosition": 12,
+      "positionChange": 2
+    },
+    {
       "id": 5335,
       "name": "Racing Santander",
       "P": 9,
@@ -424,8 +439,8 @@
       "GA": 19,
       "GD": -6,
       "Pts": 11,
-      "position": 10,
-      "originalPosition": 13,
+      "position": 11,
+      "originalPosition": 14,
       "positionChange": 3
     },
     {
@@ -439,8 +454,8 @@
       "GA": 20,
       "GD": -10,
       "Pts": 11,
-      "position": 11,
-      "originalPosition": 12,
+      "position": 12,
+      "originalPosition": 13,
       "positionChange": 1
     },
     {
@@ -454,8 +469,8 @@
       "GA": 9,
       "GD": 3,
       "Pts": 10,
-      "position": 12,
-      "originalPosition": 15,
+      "position": 13,
+      "originalPosition": 16,
       "positionChange": 3
     },
     {
@@ -469,8 +484,8 @@
       "GA": 15,
       "GD": -1,
       "Pts": 10,
-      "position": 13,
-      "originalPosition": 14,
+      "position": 14,
+      "originalPosition": 15,
       "positionChange": 1
     },
     {
@@ -484,8 +499,8 @@
       "GA": 11,
       "GD": -2,
       "Pts": 9,
-      "position": 14,
-      "originalPosition": 16,
+      "position": 15,
+      "originalPosition": 17,
       "positionChange": 2
     },
     {
@@ -499,21 +514,6 @@
       "GA": 12,
       "GD": -7,
       "Pts": 9,
-      "position": 15,
-      "originalPosition": 17,
-      "positionChange": 2
-    },
-    {
-      "id": 80,
-      "name": "Espanyol",
-      "P": 9,
-      "W": 2,
-      "D": 2,
-      "L": 5,
-      "GF": 11,
-      "GA": 12,
-      "GD": -1,
-      "Pts": 8,
       "position": 16,
       "originalPosition": 18,
       "positionChange": 2
@@ -672,13 +672,13 @@
     {
       "id": 94,
       "name": "Villarreal",
-      "P": 10,
+      "P": 11,
       "W": 3,
       "D": 3,
-      "L": 4,
+      "L": 5,
       "GF": 15,
-      "GA": 14,
-      "GD": 1,
+      "GA": 15,
+      "GD": 0,
       "Pts": 12,
       "position": 10
     },
@@ -696,6 +696,19 @@
       "position": 11
     },
     {
+      "id": 80,
+      "name": "Espanyol",
+      "P": 11,
+      "W": 3,
+      "D": 2,
+      "L": 6,
+      "GF": 13,
+      "GA": 14,
+      "GD": -1,
+      "Pts": 11,
+      "position": 12
+    },
+    {
       "id": 79,
       "name": "Osasuna",
       "P": 10,
@@ -706,7 +719,7 @@
       "GA": 20,
       "GD": -10,
       "Pts": 11,
-      "position": 12
+      "position": 13
     },
     {
       "id": 5335,
@@ -719,7 +732,7 @@
       "GA": 26,
       "GD": -11,
       "Pts": 11,
-      "position": 13
+      "position": 14
     },
     {
       "id": 88,
@@ -732,7 +745,7 @@
       "GA": 19,
       "GD": -3,
       "Pts": 10,
-      "position": 14
+      "position": 15
     },
     {
       "id": 285,
@@ -745,7 +758,7 @@
       "GA": 17,
       "GD": -3,
       "Pts": 10,
-      "position": 15
+      "position": 16
     },
     {
       "id": 87,
@@ -758,7 +771,7 @@
       "GA": 20,
       "GD": -8,
       "Pts": 9,
-      "position": 16
+      "position": 17
     },
     {
       "id": 82,
@@ -771,19 +784,6 @@
       "GA": 15,
       "GD": -10,
       "Pts": 9,
-      "position": 17
-    },
-    {
-      "id": 80,
-      "name": "Espanyol",
-      "P": 10,
-      "W": 2,
-      "D": 2,
-      "L": 6,
-      "GF": 12,
-      "GA": 14,
-      "GD": -2,
-      "Pts": 8,
       "position": 18
     },
     {
