@@ -6,6 +6,7 @@ const config=JSON.parse(fs.readFileSync('public/config/england.json','utf8'));
 const current=JSON.parse(fs.readFileSync('public/data/premier-league.json','utf8'));
 const currentMatches=JSON.parse(fs.readFileSync('public/data/premier-league-matches.json','utf8'));
 const historicalIndex=JSON.parse(fs.readFileSync('public/england/history/index.json','utf8'));
+const publishedFinals=JSON.parse(fs.readFileSync('public/official/england/published-finals.json','utf8'));
 const coreJs=fs.readFileSync('public/premier-league/core.js','utf8');
 const customJs=fs.readFileSync('public/premier-league/customizer.js','utf8');
 
@@ -45,6 +46,7 @@ async function load(initial='') {
       '/england/history/index.json':historicalIndex,
       '/data/premier-league.json':current,
       '/data/premier-league-matches.json':currentMatches,
+      '/official/england/published-finals.json':publishedFinals,
     };
     let data=lookup[path];
     if(path.startsWith('/england/history/matches/'))data=JSON.parse(fs.readFileSync('public'+path,'utf8'));
@@ -134,6 +136,26 @@ app.get('custom-native-share').click();
 await app.settle();
 assert(app.copied().includes('/share/england'),'Fallback native share must copy the social preview URL');
 
+// The 2023/24 Premier League has actual deductions, unlike raw match arithmetic.
+app=await load('?season=2023-24&out=none');
+assert.equal(app.get('premier-rows').children.length,20);
+function browserRow(team) {
+  const row=app.get('premier-rows').children.find(tr=>tr.children[1].textContent===team);
+  return row&&{position:Number(row.children[0].textContent),points:Number(row.children.at(-1).textContent)};
+}
+assert.deepEqual(browserRow('Everton'),{position:15,points:40},
+  'Everton must show the published 8-point deduction, not 48 earned points');
+assert.deepEqual(browserRow('Nottingham Forest'),{position:17,points:32},
+  'Forest must show the published 4-point deduction');
+app.get('full-table-mode').click();
+assert.match(app.get('table-heading').textContent,/real Premier League/);
+assert.match(app.get('table-comparison').textContent,/published final Premier League/i);
+app=await load('?season=1996-97&out=none');
+assert.deepEqual(browserRow('Middlesbrough'),{position:19,points:39},
+  'The 1996/97 published PL table must include the three-point sanction');
+app=await load('?season=2009-10&out=none');
+assert.deepEqual(browserRow('Portsmouth'),{position:20,points:19},
+  'The 2009/10 published PL table must include the nine-point sanction');
 app=await load('?season=2015-16&out=none');
 assert.equal(app.get('premier-rows').children.length,20,'Deep link includes every club when out=none');
 assert.equal(app.get('story-title').textContent,'Leicester City are top. Well, well.');
