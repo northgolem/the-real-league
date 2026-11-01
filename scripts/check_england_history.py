@@ -3,6 +3,7 @@
 import json
 from pathlib import Path
 from build_england_history import validate, calculate, year_id, source_info, load_rules
+from verified_england import published_table
 
 ROOT=Path(__file__).resolve().parents[1]
 DATA=ROOT/"public/england/history"
@@ -28,6 +29,10 @@ def check():
         calculated=calculate(games,year,cfg,archive["source"],archive["sourceUrl"])
         for key in ("alternativeTable","officialTableApproximation","includedMatches","excludedMatches","excludedInSeason"):
             assert calculated[key]==archive[key],f"{sid}: incorrect {key}"
+        official, source, source_url = published_table(sid, archive["officialTableApproximation"])
+        assert len(official)==len(archive["officialTableApproximation"])
+        assert all(r["position"]==i for i,r in enumerate(official,1))
+        assert source and source_url
         assert row["champion"]==archive["alternativeTable"][0]["name"]
         assert row["points"]==archive["alternativeTable"][0]["Pts"]
         assert row["clubs"]==len(archive["alternativeTable"])

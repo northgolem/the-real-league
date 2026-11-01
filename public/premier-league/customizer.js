@@ -7,7 +7,7 @@
   const cache = new Map();
   const badges = new Map();
   const state = { config:null, index:null, current:null, liveGames:null,
-                  season:"", selected:new Set(), games:null, generation:0, tableMode:"custom" };
+                  season:"", selected:new Set(), games:null, published:null, generation:0, tableMode:"custom" };
   const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
   const currentId = season => season.replace("/", "-");
   const names = () => state.config.excludedClubs.map(x=>x.name);
@@ -22,6 +22,40 @@
     if(!res.ok) throw Error("Verified results not available ("+res.status+")");
     return res.json();
   }
+
+  // Final PL positions are independent published facts, never inferred from
+  // excluded fixtures. Cross-check every reference row against the CC0 games.
+  const historicalDeductions={
+    "1996-97":{"Middlesbrough":3},
+    "2009-10":{"Portsmouth":9},
+    "2023-24":{"Everton":8,"Nottingham Forest":4}
+  };
+  function officialHistorical(season,full) {
+    const record=state.published?.seasons?.[season];
+    if(state.published?.schemaVersion!==1||!record?.sourceUrl||
+       !Array.isArray(record.table)||record.table.length!==full.rows.length)
+      throw Error("Published Premier League final table missing");
+    const signature=r=>["P","W","D","L","GF","GA","GD"].map(k=>r[k]).join("|");
+    const matches=new Map(full.rows.map(row=>[signature(row),row]));
+    if(matches.size!==full.rows.length)throw Error("Ambiguous historical fixture totals");
+    const seen=new Set();
+    const rows=record.table.map((ref,i)=>{
+      const raw=matches.get(signature(ref));
+      if(!raw||seen.has(raw.name)||ref.position!==i+1||
+         ref.Pts!==raw.Pts-(historicalDeductions[season]?.[raw.name]||0))
+        throw Error("Published table conflicts with verified fixture archive");
+      seen.add(raw.name);
+      return {...raw,Pts:ref.Pts,position:ref.position};
+    });
+    if(seen.size!==full.rows.length||
+       rows.some((r,i)=>i>0&&
+         (rows[i-1].Pts<r.Pts||
+          (rows[i-1].Pts===r.Pts&&rows[i-1].GD<r.GD)||
+          (rows[i-1].Pts===r.Pts&&rows[i-1].GD===r.GD&&rows[i-1].GF<r.GF))))
+      throw Error("Historical reference ranking is inconsistent");
+    return {rows,source:record.source,sourceUrl:record.sourceUrl};
+  }
+
   function fixtureSource(season) {
     if(season===state.current.id) {
       return Promise.all([
@@ -41,6 +75,7 @@
         throw Error("Wrong historical season returned");
       const parsed=core.parseArchive(games);
       core.validateDefault(parsed,tab,names());
+      parsed.published=officialHistorical(season,parsed.full);
       return parsed;
     });
   }
@@ -142,7 +177,14 @@
        full.kept!==state.games.matches.length || full.removed!==0)
       throw Error("Table comparison failed its verified fixture accounting check");
     const showingFull=state.tableMode==="full";
-    const selected=showingFull?full:calculated;
+    const historic=state.season!==state.current.id;
+    const published=historic?state.games.published:null;
+    // Even if the user ticks no exclusions, every-club historical standings
+    // must be the real final table, not points independently summed from games.
+    const usePublished=historic&&(showingFull||excluded.length===0);
+    const selected=showingFull
+      ? {...full,rows:published?published.rows:full.rows}
+      : usePublished?{...calculated,rows:published.rows}:calculated;
     const rows=$("premier-rows");rows.replaceChildren();
     for(const team of selected.rows) {
       const tr=document.createElement("tr");
@@ -155,25 +197,32 @@
       rows.appendChild(tr);
     }
     $("premier-standings").setAttribute("aria-label",showingFull
-      ?"Calculated Premier League standings with all clubs, not an official table"
+      ?(historic?"Published Premier League final standings with all clubs":"Calculated current Premier League comparison, not an official table")
       :"Your alternative Premier League standings using verified match results");
     $("table-heading").textContent=showingFull
-      ?"All clubs — our calculated comparison"
+      ?(historic?"All clubs — the real Premier League final table":"All clubs — calculated current comparison")
+      :usePublished?"All "+full.clubsRemaining+" clubs — the published final Premier League table"
       :calculated.clubsRemaining+" clubs. Your alternative Premier League.";
     $("table-kicker").textContent=showingFull
-      ?"COMPARISON / EVERY CLUB & COMPLETED MATCH"
-      :(state.season===state.current.id?"CURRENT SEASON / YOUR PREMIER LEAGUE"
+      ?(historic?"PUBLISHED PREMIER LEAGUE FINAL STANDINGS":"COMPARISON / EVERY CLUB & COMPLETED MATCH")
+      :(usePublished?"PUBLISHED PREMIER LEAGUE FINAL STANDINGS"
+       :state.season===state.current.id?"CURRENT SEASON / YOUR PREMIER LEAGUE"
        :"HISTORICAL SEASON / YOUR PREMIER LEAGUE");
-    const originalLeader=full.rows[0];
+    const originalLeader=published?published.rows[0]:full.rows[0];
     const myLeader=calculated.rows[0];
     const leadsSame=originalLeader.name===myLeader.name;
     $("table-comparison").textContent=showingFull
-      ? "All "+full.clubsRemaining+" clubs and "+full.kept+" finished matches. This is our points, goal-difference and goals-scored calculation — not an official league table."
+      ?(historic
+          ?"The published final Premier League standings for "+seasonLabel()+
+            ", including official points deductions. Source: "+published.source+"."
+          :"All "+full.clubsRemaining+" clubs and "+full.kept+" finished matches. This is our points, goal-difference and goals-scored calculation — not an official league table.")
       : excluded.length
         ? "Your leader: "+myLeader.name+". With everybody included: "+originalLeader.name+
           ". "+(leadsSame?"Same leader, different number of games.":"A different leader. That's the whole experiment.")+
           " Switch views to compare the same real results."
-        : "No clubs excluded. Both views use exactly the same completed match results.";
+        : usePublished
+          ? "Nobody excluded. These are the real published Premier League final standings, with official deductions accounted for."
+          : "No clubs excluded. Both views use exactly the same completed match results.";
     $("matches-kept").textContent=calculated.kept;
     $("matches-removed").textContent=calculated.removed;
     $("clubs-left").textContent=calculated.clubsRemaining;
@@ -182,8 +231,12 @@
       : excluded.length
         ? calculated.kept+" real, completed matches between the clubs still in your league. "+
           calculated.removed+" matches involving excluded clubs have been removed for BOTH teams."
-        : "No clubs removed. All "+calculated.kept+" completed matches count; no scores or points have been altered.";
-    $("results-status").textContent="Verified full-time results · independent calculation";
+        : usePublished
+          ? "No clubs removed. All "+calculated.kept+" matches count. Any official Premier League points deductions are reflected in this published final table."
+          : "No clubs removed. All "+calculated.kept+" completed matches count; no scores or points have been altered.";
+    $("results-status").textContent=(historic&&(showingFull||usePublished))
+      ?"Published Premier League final standings · verified against full-time results"
+      :"Verified full-time results · independent calculation";
     $("results-updated").textContent=seasonLabel()+
       (state.season===state.current.id?" · current season (not live scores)":" · complete historical season");
     $("story-title").textContent=myLeader.name+" are top. Well, well.";
@@ -265,9 +318,9 @@
   }
   async function init() {
     try {
-      const [config,index,live]=await Promise.all([
+      const [config,index,live,published]=await Promise.all([
         json("/config/england.json"),json("/england/history/index.json"),
-        json("/data/premier-league.json")
+        json("/data/premier-league.json"),json("/official/england/published-finals.json")
       ]);
       if(!config?.excludedClubs?.length || !Array.isArray(index.seasons) ||
           index.seasons.length<34 || live.mode!=="live" || live.competitionCode!=="PL" ||
@@ -275,7 +328,7 @@
           live.excludedIds.join(",")!==config.excludedClubs.map(x=>x.id).sort((a,b)=>a-b).join(",") ||
           index.excluded.join(",")!==config.excludedClubs.map(x=>x.name).join(","))
         throw Error("Mismatch between source archive and editorial rules");
-      state.config=config;state.index=index;
+      state.config=config;state.index=index;state.published=published;
       state.current={id:currentId(live.season),data:live};
       const picker=$("custom-season");
       picker.replaceChildren();

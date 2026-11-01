@@ -1,0 +1,48 @@
+name: Verify England published historical finals
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/build_england_seo.py'
+      - 'scripts/verified_england.py'
+      - 'scripts/check_england_history.py'
+      - 'public/official/england/**'
+      - 'public/premier-league/**'
+      - 'tests/test_england_history.py'
+      - 'tests/test_custom_browser.mjs'
+      - '.github/workflows/verify-england-final.yml'
+  push:
+    branches:
+      - fix/england-real-final-standings-2026-11
+    paths:
+      - '.github/workflows/verify-england-final.yml'
+      - 'scripts/verified_england.py'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test historical calculations and all 34 published final tables
+        run: python -m unittest discover -s tests -p 'test_england_history.py'
+      - name: Validate archive and published final standings
+        run: python scripts/check_england_history.py
+      - name: Verify browser calculations, English customizer and syntax
+        run: |
+          node --check public/premier-league/customizer.js
+          node tests/test_custom_core.mjs
+          node tests/test_custom_browser.mjs
+      - name: Rebuild and audit SEO archive
+        run: |
+          python scripts/build_seo.py
+          python scripts/check_seo.py
