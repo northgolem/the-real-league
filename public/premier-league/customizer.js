@@ -201,10 +201,12 @@
       :"Your alternative Premier League standings using verified match results");
     $("table-heading").textContent=showingFull
       ?(historic?"All clubs — the real Premier League final table":"All clubs — calculated current comparison")
+      :usePublished?"All "+full.clubsRemaining+" clubs — the published final Premier League table"
       :calculated.clubsRemaining+" clubs. Your alternative Premier League.";
     $("table-kicker").textContent=showingFull
       ?(historic?"PUBLISHED PREMIER LEAGUE FINAL STANDINGS":"COMPARISON / EVERY CLUB & COMPLETED MATCH")
-      :(state.season===state.current.id?"CURRENT SEASON / YOUR PREMIER LEAGUE"
+      :(usePublished?"PUBLISHED PREMIER LEAGUE FINAL STANDINGS"
+       :state.season===state.current.id?"CURRENT SEASON / YOUR PREMIER LEAGUE"
        :"HISTORICAL SEASON / YOUR PREMIER LEAGUE");
     const originalLeader=published?published.rows[0]:full.rows[0];
     const myLeader=calculated.rows[0];
@@ -218,7 +220,9 @@
         ? "Your leader: "+myLeader.name+". With everybody included: "+originalLeader.name+
           ". "+(leadsSame?"Same leader, different number of games.":"A different leader. That's the whole experiment.")+
           " Switch views to compare the same real results."
-        : "No clubs excluded. Both views use exactly the same completed match results.";
+        : usePublished
+          ? "Nobody excluded. These are the real published Premier League final standings, with official deductions accounted for."
+          : "No clubs excluded. Both views use exactly the same completed match results.";
     $("matches-kept").textContent=calculated.kept;
     $("matches-removed").textContent=calculated.removed;
     $("clubs-left").textContent=calculated.clubsRemaining;
@@ -227,8 +231,12 @@
       : excluded.length
         ? calculated.kept+" real, completed matches between the clubs still in your league. "+
           calculated.removed+" matches involving excluded clubs have been removed for BOTH teams."
-        : "No clubs removed. All "+calculated.kept+" completed matches count; no scores or points have been altered.";
-    $("results-status").textContent="Verified full-time results · independent calculation";
+        : usePublished
+          ? "No clubs removed. All "+calculated.kept+" matches count. Any official Premier League points deductions are reflected in this published final table."
+          : "No clubs removed. All "+calculated.kept+" completed matches count; no scores or points have been altered.";
+    $("results-status").textContent=(historic&&(showingFull||usePublished))
+      ?"Published Premier League final standings · verified against full-time results"
+      :"Verified full-time results · independent calculation";
     $("results-updated").textContent=seasonLabel()+
       (state.season===state.current.id?" · current season (not live scores)":" · complete historical season");
     $("story-title").textContent=myLeader.name+" are top. Well, well.";
