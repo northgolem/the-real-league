@@ -14,6 +14,12 @@ on:
     branches:
       - fix/spanish-archive-language-2026-11
     paths:
+      - 'scripts/build_spanish_archive.py'
+      - 'scripts/build_seo.py'
+      - 'scripts/check_seo.py'
+      - 'public/enhance.js'
+      - 'public/spain/index.html'
+      - 'public/la-liga/season-compare.js'
       - '.github/workflows/verify-spanish-language.yml'
 
 permissions:
