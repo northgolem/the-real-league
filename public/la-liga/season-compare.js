@@ -3,6 +3,7 @@
  * If JavaScript is unavailable the default Usurper League still displays. */
 (() => {
   "use strict";
+  const spanish=(document.documentElement?.lang||"en").toLowerCase().startsWith("es");
   const panel=document.querySelector(".season-table-panel");
   if(!panel) return;
   const choices=[...panel.querySelectorAll("[data-season-view]")];
@@ -20,13 +21,22 @@
     alternative.hidden=withEveryone;
     everyone.hidden=!withEveryone;
     for(const button of choices)button.setAttribute("aria-pressed",String(button.dataset.seasonView===view));
-    heading.textContent=withEveryone?"All clubs. Our calculated comparison.":altHeading;
+    heading.textContent=withEveryone
+      ?(spanish?"Todos los equipos. Clasificación final publicada.":"All clubs. Published final standings.")
+      :altHeading;
     description.textContent=withEveryone
-      ?"All "+panel.dataset.fullClubs+" clubs and "+panel.dataset.fullMatches+
-        " finished matches. Published historical final standings, independently verified against the complete fixture archive."
-      :"Our alternative: "+panel.dataset.altClubs+" clubs, "+panel.dataset.altMatches+
-        " completed fixtures. All "+panel.dataset.removed+
-        " matches involving Madrid or Barça are removed for both teams.";
+      ?(spanish
+          ?"Los "+panel.dataset.fullClubs+" equipos y "+panel.dataset.fullMatches+
+           " partidos. Clasificación final publicada, verificada con los resultados reales."
+          :"All "+panel.dataset.fullClubs+" clubs and "+panel.dataset.fullMatches+
+           " finished matches. Published historical final standings, independently verified against the complete fixture archive.")
+      :(spanish
+          ?"Nuestra liga: "+panel.dataset.altClubs+" equipos y "+panel.dataset.altMatches+
+           " partidos. Quitamos los "+panel.dataset.removed+
+           " encuentros contra Madrid o Barça para ambos equipos."
+          :"Our alternative: "+panel.dataset.altClubs+" clubs, "+panel.dataset.altMatches+
+           " completed fixtures. All "+panel.dataset.removed+
+           " matches involving Madrid or Barça are removed for both teams.");
   }
   for(const button of choices){
     button.disabled=false;
