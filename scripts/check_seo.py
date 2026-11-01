@@ -11,8 +11,10 @@ root = Path(__file__).resolve().parents[1] / "public"
 archive = json.loads((root / "history/index.json").read_text(encoding="utf-8"))
 ids = [x["id"] for x in archive["seasons"]]
 pages = list((root / "la-liga").glob("????-??/index.html"))
+spanish_pages = list((root / "es/la-liga").glob("????-??/index.html"))
 assert len(ids) >= 90, "Unexpectedly few validated historical seasons"
 assert len(pages) == len(ids), "Missing or extraneous SEO season pages"
+assert len(spanish_pages) == len(ids), "Spanish-language historical pages missing"
 sitemap = ET.parse(root / "sitemap.xml")
 locs = [x.text for x in sitemap.findall(".//{*}loc")]
 expected = ["https://usurperleague.com/", "https://usurperleague.com/spain/", "https://usurperleague.com/england/", "https://usurperleague.com/la-liga/"] + [
@@ -41,11 +43,28 @@ if english_index.exists():
         assert f'/england/?season={sid}#the-table' in html, f"No live customiser link {sid}"
         assert '/la-liga/' in html, f"No Spain discovery route {sid}"
         assert 'NOT THE OFFICIAL TABLE' in html
+expected += ["https://usurperleague.com/es/la-liga/"] + [
+    f"https://usurperleague.com/es/la-liga/{x}/" for x in ids
+]
 assert locs == expected, "Sitemap must list exactly the real Spanish and English season pages"
+spanish_index = (root / "es/la-liga/index.html").read_text(encoding="utf-8")
+assert '<html lang="es">' in spanish_index
+assert 'El fútbol español' in spanish_index
+for entry in archive["seasons"]:
+    assert f'/es/la-liga/{entry["id"]}/' in spanish_index
 for id in ids:
     data = json.loads((root / "history" / (id + ".json")).read_text(encoding="utf-8"))
     html = (root / "la-liga" / id / "index.html").read_text(encoding="utf-8")
     assert f'https://usurperleague.com/la-liga/{id}/' in html
+    es_html = (root / "es/la-liga" / id / "index.html").read_text(encoding="utf-8")
+    assert '<html lang="es">' in es_html
+    assert f'https://usurperleague.com/es/la-liga/{id}/' in es_html
+    assert f'href="/la-liga/{id}/" lang="en"' in es_html
+    assert f'href="/es/la-liga/{id}/" lang="es"' in es_html
+    assert 'Sin Madrid ni Barça' in es_html
+    assert data["alternativeTable"][0]["name"] in es_html
+    assert 'id="spanish-usurper-table"' in es_html
+    assert data["sourceUrl"] in es_html
     assert data["alternativeTable"][0]["name"] in html
     assert str(data["alternativeTable"][0]["Pts"]) in html
     assert 'official LaLiga standings' in html
@@ -64,10 +83,14 @@ for id in ids:
         assert html.count('<table aria-label=') == 2
         assert ref["table"][0]["name"] in html
         assert 'RSSSF historical final table' in html
+        assert es_html.count('<table aria-label=') == 2
+        assert 'data-season-view="everyone"' in es_html
     else:
         assert 'data-season-view="everyone"' not in html, f"Unverified season must not show a full table: {id}"
         assert 'id="spanish-everyone-table"' not in html
         assert 'not yet verified' in html
+        assert es_html.count('<table aria-label=') == 1
+        assert 'data-season-view="everyone"' not in es_html
         assert html.count('<table aria-label=') == 1
     assert 'Take Madrid and Barça out' in html
     assert 'No invented wins, no donated points' in html
