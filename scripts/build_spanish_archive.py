@@ -47,7 +47,7 @@ def chrome(title, description, english_path, spanish_path, content, *, compare=F
 <meta property="og:url" content="{e(canonical)}">
 <meta name="twitter:card" content="summary">
 <link rel="stylesheet" href="/archive.css">
-<style>.archive-language{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:700}.archive-language a{padding:6px 9px;border:1px solid currentColor;border-radius:6px;text-decoration:none}.archive-language a[aria-current="true"]{background:#d8c38d;color:#172f28;border-color:#d8c38d}.header-flex{flex-wrap:wrap}</style>
+<style>.archive-language{{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:700}}.archive-language a{{padding:6px 9px;border:1px solid currentColor;border-radius:6px;text-decoration:none}}.archive-language a[aria-current="true"]{{background:#d8c38d;color:#172f28;border-color:#d8c38d}}.header-flex{{flex-wrap:wrap}}</style>
 {'<script defer src="/la-liga/season-compare.js"></script>' if compare else ''}
 </head>
 <body>
