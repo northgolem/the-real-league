@@ -7,6 +7,9 @@ on:
     paths:
       - 'scripts/build_seo.py'
       - 'scripts/build_england_seo.py'
+      - 'scripts/verified_england.py'
+      - 'public/official/england/**'
+      - 'tests/test_england_history.py'
       - 'scripts/season_story.py'
       - 'scripts/verified_spain.py'
       - 'public/official/spain/**'
