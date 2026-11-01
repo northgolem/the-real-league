@@ -115,7 +115,16 @@ def year_page(data, index, p, i, cfg):
             f"finish level on {champion['Pts']} points. "
             "Goal difference and then goals scored decide our ordering."
         )
-    biggest = facts["biggest_gain"]
+    # Historic position changes compare against the true final Premier League
+    # classification (including sanctions), never a raw, unsanctioned tally.
+    survivors = {row["name"] for row in data["alternativeTable"]}
+    previous = {row["name"]: rank for rank, row in
+                enumerate((row for row in published if row["name"] in survivors), 1)}
+    changes = sorted(((previous[row["name"]]-i, row, previous[row["name"]], i)
+                       for i, row in enumerate(data["alternativeTable"], 1)
+                       if previous[row["name"]] > i),
+                     key=lambda x: (-x[0], x[3], x[1]["name"]))
+    biggest = changes[0] if changes else None
     if biggest:
         gain, team, before, after = biggest
         moving = (
@@ -127,8 +136,8 @@ def year_page(data, index, p, i, cfg):
         )
     else:
         moving = (
-            "The surviving clubs finish in the same relative order as in our "
-            "all-club calculation. Points and games change. The pecking order doesn't. "
+            "The surviving clubs finish in the same relative order as in the "
+            "published Premier League final table. Points and games change. The pecking order doesn't. "
             "We promise not to fake a twist."
         )
     if missing:
