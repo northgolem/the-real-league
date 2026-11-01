@@ -6,6 +6,7 @@ No network calls, generated sports photographs, crests or manually typed scores.
 """
 from collections import Counter
 from season_story import season_facts
+from verified_england import published_table
 from html import escape
 from pathlib import Path
 import json
@@ -75,8 +76,9 @@ def year_page(data, index, p, i, cfg):
     season = data["season"]
     sid = data["seasonId"]
     facts = season_facts(data)
+    published, published_source, published_url = published_table(sid, data["officialTableApproximation"])
     champion, runner = facts["winner"], facts["runner"]
-    full_leader = facts["full_leader"]
+    full_leader = published[0]
     label = cfg["exclusionLabel"]
     excluded = data["excludedInSeason"]
     missing = sorted(set(data["excluded"]) - set(excluded))
@@ -90,14 +92,14 @@ def year_page(data, index, p, i, cfg):
     if facts["same_champion"]:
         shift_title = "Even without the usual suspects, the leader stays put."
         comparison = (
-            f"<strong>{e(champion['name'])}</strong> led our calculation with all clubs "
+            f"<strong>{e(champion['name'])}</strong> led the published Premier League table with all clubs "
             "included too. The guest list changes. The first name on the table doesn't. "
             "That happens. We don't fiddle with the results to make a better punchline."
         )
     else:
         shift_title = f"{e(champion['name'])} take the lead. Different company."
         comparison = (
-            f"<strong>{e(full_leader['name'])}</strong> led the all-club calculation. "
+            f"<strong>{e(full_leader['name'])}</strong> led the published final Premier League table. "
             f"Remove the {e(label)} and all the fixtures they played, and "
             f"<strong>{e(champion['name'])}</strong> top the table instead."
         )
@@ -155,7 +157,7 @@ def year_page(data, index, p, i, cfg):
   <p class="season-rule"><strong>The rules:</strong> We take the excluded clubs out <em>and delete every match they played</em>. Then we recalculate the standings from actual results between the clubs left. No extra points for beating nobody.</p>
   <p class="standfirst"><strong>{e(champion['name'])}</strong> win our alternative {e(season)} Premier League on <strong>{champion['Pts']} points</strong> from {champion['P']} matches. <strong>{e(runner['name'])}</strong> finish second on {runner['Pts']}. It's a thought experiment, not a forgotten trophy.</p>
   <div class="season-duel" aria-label="Full and alternative league leaders">
-    <div class="duel-card"><span class="kicker">ALL CLUBS INCLUDED / CALCULATED LEADER</span><strong>{e(full_leader["name"])}</strong><span>{full_leader["Pts"]} pts · {full_leader["P"]} matches</span></div>
+    <div class="duel-card"><span class="kicker">ALL CLUBS INCLUDED / PUBLISHED FINAL LEADER</span><strong>{e(full_leader["name"])}</strong><span>{full_leader["Pts"]} pts · {full_leader["P"]} matches</span></div>
     <div class="duel-card alternative"><span class="kicker">WITHOUT THE {e(label.upper())} / OUR CHAMPION</span><strong>{e(champion["name"])}</strong><span>{champion["Pts"]} pts · {champion["P"]} matches</span></div>
   </div>
   <p class="duel-note">These tables contain different numbers of games; compare the leaders, not the points as though they're the same competition.</p>
@@ -188,10 +190,11 @@ def year_page(data, index, p, i, cfg):
   </div>
 </section>
 {missing_text}
-<details class="panel comparison"><summary>See our calculated all-club table for {e(season)}</summary>
-{table(data["officialTableApproximation"], f"Full league comparison for {season}")}</details>
+<details class="panel comparison"><summary>See the real Premier League final table for {e(season)}</summary>
+{table(published, f"Published Premier League final table for {season}")}</details>
 <section class="sources"><h2>About the numbers</h2>
-<p>These are <b>not official Premier League standings</b>. Wins earn three points; ties are ranked by goal difference and goals scored. Historic official deductions and further tiebreakers aren't necessarily reproduced.</p>
+<p><b>Two different tables:</b> our alternative league is recalculated from actual match results and is not an official competition. The all-club comparison reproduces published final Premier League standings, including sanctioned points deductions. These sanctions are not applied to the imaginary alternative league.</p>
+<p>Published final standings: <a href="{e(published_url)}" rel="noopener noreferrer">{e(published_source)}</a>.</p>
 <p>Original completed results: <a href="{e(data['sourceUrl'])}" rel="noopener noreferrer">{e(data['source'])}</a>, CC0-licensed data. The exclusion rule applies only to clubs actually in the top division for that season.</p>
 <p>If you'd have kicked someone else out, good news: that's now an option.</p></section>
 <aside class="discovery-cta" aria-label="Make your own league">
