@@ -1,0 +1,66 @@
+name: Verify Spanish La Liga archive language
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/build_spanish_archive.py'
+      - 'scripts/build_seo.py'
+      - 'scripts/check_seo.py'
+      - 'public/enhance.js'
+      - 'public/spain/index.html'
+      - 'public/la-liga/season-compare.js'
+      - '.github/workflows/verify-spanish-language.yml'
+  push:
+    branches:
+      - fix/spanish-archive-language-2026-11
+    paths:
+      - 'scripts/build_spanish_archive.py'
+      - 'scripts/build_seo.py'
+      - 'scripts/check_seo.py'
+      - 'public/enhance.js'
+      - 'public/spain/index.html'
+      - 'public/la-liga/season-compare.js'
+      - '.github/workflows/verify-spanish-language.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Generate historic Spanish language articles and sitemap
+        run: python scripts/build_seo.py
+      - name: Check all 94 Spanish articles and both language archives
+        run: python scripts/check_seo.py
+      - name: Check bilingual table controls and all 94 English original stories
+        run: |
+          node --check public/enhance.js
+          node --check public/la-liga/season-compare.js
+          node tests/test_spanish_season_compare.mjs
+      - name: Confirm language paths and links
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          root=Path('public')
+          spanish=list((root/'es/la-liga').glob('????-??/index.html'))
+          assert len(spanish)==94
+          for f in spanish:
+              html=f.read_text(encoding='utf8')
+              sid=f.parent.name
+              assert f'href="/es/la-liga/{sid}/" lang="es"' in html
+              assert f'href="/la-liga/{sid}/" lang="en"' in html
+              assert 'Sin Madrid ni Barça' in html
+              assert '<html lang="es">' in html
+          assert '/es/la-liga/' in (root/'enhance.js').read_text(encoding='utf8')
+          print('Spanish landing and 94 historical articles have language-preserving links.')
+          PY

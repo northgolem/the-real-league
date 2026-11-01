@@ -8,7 +8,10 @@
 // an old share link contains the former in-page ?season= parameter.
 const oldSeason = new URLSearchParams(location.search).get('season');
 if (/^[0-9]{4}-[0-9]{2}$/.test(oldSeason || '') && oldSeason !== '2026-27') {
-  location.replace('/la-liga/' + oldSeason + '/');
+  const spanish = new URLSearchParams(location.search).get('lang') === 'es' ||
+    (!new URLSearchParams(location.search).has('lang') &&
+     (navigator.language || '').toLowerCase().startsWith('es'));
+  location.replace((spanish ? '/es/la-liga/' : '/la-liga/') + oldSeason + '/');
 }
 </script>
 <meta name="theme-color" content="#102e25">

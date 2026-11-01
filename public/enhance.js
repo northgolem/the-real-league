@@ -190,6 +190,17 @@
     const alt = view !== 'original';
     const season = dataset && dataset.season || '2026/27';
     document.documentElement.lang = language;
+    // The Spanish front page switches language in place. Historical links
+    // must lead to the corresponding *Spanish* pages instead of losing ES.
+    document.querySelectorAll('a[href^="/la-liga/"],a[href^="/es/la-liga/"]').forEach(link => {
+      const url = new URL(link.href, location.origin);
+      const spanish = url.pathname.startsWith('/es/la-liga/');
+      url.pathname = language === 'es'
+        ? (spanish ? url.pathname : '/es' + url.pathname)
+        : (spanish ? url.pathname.slice(3) : url.pathname);
+      link.setAttribute('href', url.pathname + url.search + url.hash);
+    });
+
     document.title = historical
       ? (language === 'es'
           ? 'The Usurper League — España | La Liga ' + season + ' sin Madrid ni Barça'
