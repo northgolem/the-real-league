@@ -1,4 +1,7 @@
 import unittest
+import json
+from pathlib import Path
+from scripts.verified_england import published_table
 from scripts.build_england_history import (
     load_rules, normalize, validate, calculate, source_info
 )
@@ -63,6 +66,47 @@ class EnglandHistoryTests(unittest.TestCase):
         self.assertEqual(normalize("Wimbledon FC",self.aliases),"Wimbledon")
         self.assertIn("footballcsv/england",source_info(1992)[0])
         self.assertIn("openfootball/football.json",source_info(2025)[0])
+
+
+    def test_published_final_rankings_across_every_historical_season(self):
+        base=Path(__file__).resolve().parents[1]/"public"/"england"/"history"/"seasons"
+        for year in range(1992,2026):
+            season=f"{year}-{(year+1)%100:02d}"
+            archive=json.loads((base/(season+".json")).read_text(encoding="utf8"))
+            with self.subTest(season=season):
+                real, source, url=published_table(season,archive["officialTableApproximation"])
+                self.assertEqual(len(real),len(archive["officialTableApproximation"]))
+                self.assertEqual([r["position"] for r in real],list(range(1,len(real)+1)))
+                self.assertTrue(source and url.startswith("https://"))
+
+    def test_real_deductions_but_never_alternative_deductions(self):
+        base=Path(__file__).resolve().parents[1]/"public"/"england"/"history"/"seasons"
+        cases=[
+            ("1996-97","Middlesbrough",19,39,3),
+            ("2009-10","Portsmouth",20,19,9),
+            ("2023-24","Everton",15,40,8),
+            ("2023-24","Nottingham Forest",17,32,4),
+        ]
+        for season,name,pos,points,deduction in cases:
+            archive=json.loads((base/(season+".json")).read_text(encoding="utf8"))
+            published,_,_=published_table(season,archive["officialTableApproximation"])
+            actual=next(r for r in published if r["name"]==name)
+            earned=next(r for r in archive["officialTableApproximation"] if r["name"]==name)
+            self.assertEqual((actual["position"],actual["Pts"]),(pos,points))
+            self.assertEqual(earned["Pts"]-actual["Pts"],deduction)
+            # The fantasy league has separate scoring derived only from actual matches.
+            remaining=next(r for r in archive["alternativeTable"] if r["name"]==name)
+            self.assertEqual(remaining["Pts"],3*remaining["W"]+remaining["D"])
+
+    def test_reject_changed_published_points(self):
+        base=Path(__file__).resolve().parents[1]/"public"/"england"/"history"/"seasons"
+        archive=json.loads((base/"2023-24.json").read_text(encoding="utf8"))
+        reference=json.loads(Path(__file__).resolve().parents[1].joinpath(
+            "public/official/england/published-finals.json").read_text(encoding="utf8"))
+        record=next(r for r in reference["seasons"]["2023-24"]["table"] if r["name"]=="Everton")
+        record["Pts"]+=1
+        with self.assertRaisesRegex(ValueError,"incorrect published points"):
+            published_table("2023-24",archive["officialTableApproximation"],reference)
 
 
 if __name__=="__main__":
