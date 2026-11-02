@@ -2,7 +2,7 @@
   "competitionCode": "PL",
   "season": "2026/27",
   "source": "football-data.org",
-  "completedMatches": 88,
+  "completedMatches": 89,
   "clubs": [
     {
       "id": 57,
@@ -612,6 +612,12 @@
       58,
       63,
       1,
+      1
+    ],
+    [
+      64,
+      57,
+      0,
       1
     ]
   ]

@@ -2,8 +2,8 @@
   "mode": "live",
   "competition": "The Usurper League — England",
   "season": "2026/27",
-  "generatedAt": "2026-11-01T09:18:06+00:00",
-  "latestResultAt": "2026-10-31T20:00:00Z",
+  "generatedAt": "2026-11-02T09:35:47+00:00",
+  "latestResultAt": "2026-11-01T16:30:00Z",
   "excluded": [
     "Arsenal",
     "Chelsea",
@@ -20,10 +20,23 @@
     66,
     73
   ],
-  "completedMatches": 88,
-  "excludedMatches": 46,
+  "completedMatches": 89,
+  "excludedMatches": 47,
   "includedMatches": 42,
   "officialTableApproximation": [
+    {
+      "id": 57,
+      "name": "Arsenal",
+      "P": 9,
+      "W": 8,
+      "D": 0,
+      "L": 1,
+      "GF": 14,
+      "GA": 5,
+      "GD": 9,
+      "Pts": 24,
+      "position": 1
+    },
     {
       "id": 65,
       "name": "Manchester City",
@@ -34,19 +47,6 @@
       "GF": 20,
       "GA": 10,
       "GD": 10,
-      "Pts": 21,
-      "position": 1
-    },
-    {
-      "id": 57,
-      "name": "Arsenal",
-      "P": 8,
-      "W": 7,
-      "D": 0,
-      "L": 1,
-      "GF": 13,
-      "GA": 5,
-      "GD": 8,
       "Pts": 21,
       "position": 2
     },
@@ -79,13 +79,13 @@
     {
       "id": 64,
       "name": "Liverpool",
-      "P": 8,
+      "P": 9,
       "W": 4,
       "D": 3,
-      "L": 1,
+      "L": 2,
       "GF": 11,
-      "GA": 8,
-      "GD": 3,
+      "GA": 9,
+      "GD": 2,
       "Pts": 15,
       "position": 5
     },
