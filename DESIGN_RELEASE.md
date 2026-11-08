@@ -13,3 +13,7 @@ Fixed existing history test harness to supply navigator.language and expect the 
 Legal: existing attribution and independent/official distinction retained. Open data-licensing questions are unchanged by this design release. No tracking, ads, email collection, subscriptions or new dependencies.
 
 Rollback: restore the changed presentation and test files from base commit bd1dc4ae47b410fcc23aedc7967c8ac9191a8b97 while preserving any newer data refresh commits.
+
+
+## Contact update — 2026-11-08
+Owner explicitly approved live contact link and requested invitations for improvements, error reports and general enquiries. Added mailto:hello@usurperleague.com on home, England and Spain landing pages; localized invitation in Spanish. Owner reported forwarding tested successfully. No new service, form, tracking or cost.

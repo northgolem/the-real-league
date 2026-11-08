@@ -300,6 +300,7 @@
     });
     set('#share', tr.shareButton);
     set('#copy', tr.copyButton);
+    set('#contactPrompt', language === 'es' ? '¿Ideas para mejorar, algún error o cualquier otra consulta? Escríbenos.' : 'Ideas for improvements, spotted an error, or anything else? Get in touch.');
     const footer = document.querySelector('footer .container span');
     if (footer) footer.textContent = tr.footer(String(new Date().getFullYear()));
     const footerSource = document.querySelector('footer .container span:last-child');

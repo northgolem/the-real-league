@@ -17,6 +17,7 @@
       historySpain:'Spain · 94 historical seasons ↗', historyEngland:'England · 34 historical seasons ↗',
       why:'Real matches. New league tables.',
       whyBody:'Exclude a club, and all its matches disappear — for both teams. No fantasy scores, no redistributed points. Only completed games between the remaining clubs count.',
+      contactPrompt:'Ideas for improvements, spotted an error, or anything else? Get in touch.',
       footer:'An independent football thought experiment. Unaffiliated with the leagues or clubs.',
       labels: ['THE USURPER LEAGUE / SPAIN','THE USURPER LEAGUE / ENGLAND']
     },
@@ -35,6 +36,7 @@
       historySpain:'España · 94 temporadas históricas ↗',historyEngland:'Inglaterra · 34 temporadas históricas ↗',
       why:'Partidos reales. Una clasificación diferente.',
       whyBody:'Cuando excluyes a un club, desaparecen todos sus partidos, para ambos equipos. Sin marcadores inventados ni puntos redistribuidos: solo cuentan los partidos entre los clubes restantes.',
+      contactPrompt:'¿Ideas para mejorar, algún error o cualquier otra consulta? Escríbenos.',
       footer:'Un experimento futbolístico independiente, sin relación con las ligas ni los clubes.',
       labels:['THE USURPER LEAGUE / ESPAÑA','THE USURPER LEAGUE / INGLATERRA']
     }
@@ -50,7 +52,7 @@
     document.documentElement.lang = lang;
     const t = strings[lang];
     const keys = ['kicker','title1','title2','deck','choose','spainTitle','englandTitle',
-      'spainSub','englandSub','spainDesc','englandDesc','why','whyBody','footer'];
+      'spainSub','englandSub','spainDesc','englandDesc','why','whyBody','footer','contactPrompt'];
     for (const key of keys) setText(key,t[key]);
     setText('topSpain',t.topSpain); setText('topEngland',t.topEngland);
     setText('spain-label',t.labels[0]); setText('england-label',t.labels[1]);
