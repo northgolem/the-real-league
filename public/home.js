@@ -42,7 +42,7 @@
     }
   };
   const $ = id => document.getElementById(id);
-  const language = new URLSearchParams(location.search).get('lang') === 'es' ? 'es' : 'en';
+  const language = (location.pathname === '/es/' || new URLSearchParams(location.search).get('lang') === 'es') ? 'es' : 'en';
   let activeLanguage = language;
   const leaders = { spain: null, england: null };
   let englandRules = null;

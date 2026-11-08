@@ -27,6 +27,8 @@ def persist(path, body):
 
 
 def chrome(title, description, english_path, spanish_path, content, *, compare=False):
+    if spanish_path == '/es/la-liga/1998-99/':
+        content += '<aside class="discovery-cta"><h2>En el Journal</h2><p><a href="/journal/espanyol-1998-99/">Espanyol: del séptimo puesto al primero</a></p></aside>'
     canonical = BASE + spanish_path
     return f"""<!doctype html>
 <html lang="es">

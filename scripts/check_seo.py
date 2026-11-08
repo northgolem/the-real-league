@@ -17,7 +17,7 @@ assert len(pages) == len(ids), "Missing or extraneous SEO season pages"
 assert len(spanish_pages) == len(ids), "Spanish-language historical pages missing"
 sitemap = ET.parse(root / "sitemap.xml")
 locs = [x.text for x in sitemap.findall(".//{*}loc")]
-expected = ["https://usurperleague.com/", "https://usurperleague.com/spain/", "https://usurperleague.com/england/", "https://usurperleague.com/la-liga/"] + [
+expected = ["https://usurperleague.com/", "https://usurperleague.com/es/", "https://usurperleague.com/spain/", "https://usurperleague.com/england/", "https://usurperleague.com/la-liga/"] + [
     f"https://usurperleague.com/la-liga/{x}/" for x in ids
 ]
 english_index = root / "england/history/index.json"

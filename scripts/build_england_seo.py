@@ -28,6 +28,8 @@ def write_if_changed(path,text):
 
 
 def html_page(title,description,canonical,body):
+    if canonical.endswith('/england/history/1992-93/'):
+        body += '<aside class="discovery-cta"><h2>From the journal</h2><p><a href="/journal/norwich-1992-93/">Norwich, QPR and a title race hiding inside 1992/93</a></p></aside>'
     return f"""<!doctype html>
 <html lang="en">
 <head>

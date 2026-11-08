@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#102f25">
+<meta name="description" content="Clasificaciones alternativas con resultados reales. La Liga sin Madrid ni Barcelona y la Premier League con los clubes que tú decidas excluir.">
+<title>The Usurper League | El fútbol sin los ganadores de siempre</title>
+<link rel="canonical" href="https://usurperleague.com/es/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Usurper League">
+<meta property="og:url" content="https://usurperleague.com/es/">
+<meta property="og:title" content="The Usurper League | El fútbol sin los ganadores de siempre">
+<meta property="og:description" content="Clasificaciones alternativas con resultados reales. La Liga sin Madrid ni Barcelona y la Premier League con los clubes que tú decidas excluir.">
+<meta property="og:image" content="https://usurperleague.com/social/league-es.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Usurper League | El fútbol sin los ganadores de siempre">
+<meta name="twitter:description" content="Clasificaciones alternativas con resultados reales. La Liga sin Madrid ni Barcelona y la Premier League con los clubes que tú decidas excluir.">
+<link rel="stylesheet" href="/home.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"The Usurper League","url":"https://usurperleague.com/","description":"Independent recalculated football tables for Spain without Madrid or Barcelona and England without the Big Six.","inLanguage":["en","es"]}</script>
+<script>
+// Older historical season links now point to their actual standalone articles.
+const legacy=new URLSearchParams(location.search);
+if(/^\d{4}-\d{2}$/.test(legacy.get('season')||'')) {
+  location.replace((legacy.get('lang') === 'es' || location.pathname === '/es/' ? '/es/la-liga/' : '/la-liga/')+legacy.get('season')+'/');
+} else if (legacy.get('lang') === 'es' && location.pathname !== '/es/') {
+  location.replace('/es/');
+}
+</script>
+<script defer src="/home.js"></script>
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:image" content="https://usurperleague.com/social/league-es.png">
+<link rel="alternate" hreflang="en" href="https://usurperleague.com/">
+<link rel="alternate" hreflang="es" href="https://usurperleague.com/es/">
+<link rel="alternate" hreflang="x-default" href="https://usurperleague.com/">
+</head>
+<body>
+<header class="site-top"><div class="site-inner">
+  <a class="brand" href="/"><img src="/favicon.svg" width="27" height="27" alt="">THE USURPER LEAGUE</a>
+  <nav class="right-menu" aria-label="Countries and language">
+    <a id="top-spain-link" href="/spain/?lang=es"><span id="topSpain">España</span></a>
+    <a href="/england/"><span id="topEngland">Inglaterra</span></a>
+    <div class="lang" role="group" aria-label="Language / Idioma">
+      <a href="/" lang="en" hreflang="en">EN</a>
+      <a href="/es/" lang="es" hreflang="es" aria-current="page">ES</a>
+    </div>
+  </nav>
+</div></header>
+<main>
+  <section class="hero" aria-labelledby="brand-title">
+    <div class="kicker" id="kicker">RESULTADOS REALES. LIGAS ALTERNATIVAS.</div>
+    <h1 class="sr-only" id="brand-title">The Usurper League</h1>
+    <div class="logo-wrap">
+      <img class="main-logo" src="/usurper-logo.png" width="1150" height="655" alt="The Usurper League — the crowned football logo" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
+      <span class="logo-fallback" hidden>THE USURPER LEAGUE</span>
+    </div>
+    <div class="crest-rule" aria-hidden="true">✳</div>
+    <h2 class="hero-claim"><span id="title1">El fútbol sin</span><br><em id="title2">los ganadores de siempre.</em></h2>
+    <p class="hero-deck" id="deck">Recalculamos las ligas utilizando resultados reales. Excluimos a los clubes más poderosos y todos sus partidos para descubrir quién termina arriba. Elige España o Inglaterra.</p>
+  </section>
+  <section class="site-inner choices" aria-labelledby="choose">
+    <div class="section-kicker"><span id="choose">LIGAS ACTUALES</span></div>
+    <div class="country-grid">
+      <a class="edition" id="spain-card" href="/spain/?lang=es" aria-label="Ver la liga de España sin Madrid ni Barcelona">
+        <div class="edition-head">
+          <div class="edition-country"><span id="spain-label">THE USURPER LEAGUE / ESPAÑA</span><span>01 / 02</span></div>
+          <h2 id="spainTitle">España</h2>
+        </div>
+        <div class="edition-body">
+          <p class="edition-subtitle" id="spainSub">Sin Madrid. Sin Barça.</p>
+          <p class="edition-desc" id="spainDesc">Quitamos al Real Madrid, al Barcelona y todos sus partidos. Después recalculamos La Liga usando únicamente los resultados reales entre los demás equipos.</p>
+          <div class="edition-now" aria-live="polite"><span class="now-head" id="spain-now-label">LÍDERES DE LA TABLA ALTERNATIVA</span><span class="now-value" id="spain-current">Ver la clasificación →</span><span class="feed-date" id="spain-date"></span></div>
+        </div>
+        <div class="edition-link"><span id="spain-enter">VER ESPAÑA ACTUAL</span><span aria-hidden="true">↗</span></div>
+      </a>
+      <a class="edition" id="england-card" href="/england/" aria-label="Ver la liga de Inglaterra (en inglés)">
+        <div class="edition-head">
+          <div class="edition-country"><span id="england-label">THE USURPER LEAGUE / INGLATERRA</span><span>02 / 02</span></div>
+          <h2 id="englandTitle">Inglaterra</h2>
+        </div>
+        <div class="edition-body">
+          <p class="edition-subtitle" id="englandSub">¿Los seis grandes? Tú decides.</p>
+          <p class="edition-desc" id="englandDesc">Tú eliges cuáles de los seis grandes quedan fuera: algunos, todos o ninguno. Borramos sus partidos y recalculamos la Premier League con resultados reales desde 1992/93.</p>
+          <div class="edition-now" aria-live="polite"><span class="now-head" id="england-now-label">LÍDERES DE LA TABLA ALTERNATIVA</span><span class="now-value" id="england-current">Ver la clasificación →</span><span class="feed-date" id="england-date"></span></div>
+        </div>
+        <div class="edition-link"><span id="england-enter">VER INGLATERRA · EN INGLÉS</span><span aria-hidden="true">↗</span></div>
+      </a>
+    </div>
+    <nav class="history-shortcuts" aria-label="Historical football seasons">
+      <span id="history-shortcut-intro">Explora temporadas anteriores</span>
+      <a href="/es/la-liga/" id="history-shortcut-spain">España · 94 temporadas históricas ↗</a>
+      <a href="/england/history/" id="history-shortcut-england">Inglaterra · 34 temporadas (en inglés) ↗</a>
+    </nav>
+  </section>
+  <section class="site-inner journal" aria-labelledby="journal-title">
+    <div class="section-kicker"><span id="journal-title">THE USURPER JOURNAL</span></div>
+    <p id="journal-intro">Historias del archivo. Los resultados son reales; los trofeos, hipotéticos.</p>
+    <div class="journal-grid">
+      <a href="/journal/norwich-1992-93/" class="journal-story"><span id="journal-one-tag">INGLATERRA · 1992/93</span><h2 id="journal-one-title">Norwich. Otro desenlace.</h2><p id="journal-one-copy">La primera Premier League, sin los partidos de los seis grandes. Artículo en inglés.</p></a>
+      <a href="/journal/espanyol-1998-99/" id="journal-spain" class="journal-story"><span id="journal-two-tag">ESPAÑA · 1998/99</span><h2 id="journal-two-title">Espanyol. Del séptimo al primero.</h2><p id="journal-two-copy">Empatado con el Mallorca a puntos y diferencia de goles. Así decide nuestra tabla.</p></a>
+      <a href="/journal/why-every-match-goes/" id="journal-rules" class="journal-story"><span id="journal-three-tag">LAS REGLAS</span><h2 id="journal-three-title">No puedes quedarte con medio partido.</h2><p id="journal-three-copy">Si excluyes un club, se eliminan todos sus partidos para ambos equipos. Artículo en inglés.</p></a>
+    </div>
+    <p><a href="/journal/">Journal · EN / ES →</a></p>
+  </section>
+  <section class="editorial-bottom">
+    <div class="kicker" id="how-kicker">CÓMO FUNCIONA</div>
+    <h2 id="why">Partidos reales. Una clasificación diferente.</h2>
+    <p id="whyBody">Cuando excluyes a un club, desaparecen todos sus partidos, para ambos equipos. Sin marcadores inventados ni puntos redistribuidos: solo cuentan los partidos entre los clubes restantes.</p>
+  </section>
+</main>
+<footer class="site-footer"><div class="site-inner footer-content">
+  <span>© <span id="year">2026</span> The Usurper League. <span id="footer">Un experimento futbolístico independiente, sin relación con las ligas ni los clubes.</span></span>
+  <span><a href="/spain/">Spain</a> · <a href="/england/">England</a> · <a href="/la-liga/">Spanish history</a> · <a href="/england/history/">English history</a></span>
+  <p style="flex-basis:100%;margin:0"><span id="contactPrompt">¿Ideas para mejorar, algún error o cualquier otra consulta? Escríbenos.</span> <a href="mailto:hello@usurperleague.com">hello@usurperleague.com</a></p>
+</div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body>
+</html>

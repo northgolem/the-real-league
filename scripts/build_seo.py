@@ -40,6 +40,8 @@ def write_if_changed(path, content):
 
 
 def chrome(title, description, canonical, body, *, breadcrumbs=(), jsonld=None, season_toggle=False):
+    if canonical.endswith('/la-liga/1998-99/'):
+        body += '<aside class="discovery-cta"><h2>From the journal · Español</h2><p><a href="/journal/espanyol-1998-99/" lang="es">Espanyol: del séptimo puesto al primero</a></p></aside>'
     structured = []
     if breadcrumbs:
         elements = [
@@ -337,7 +339,7 @@ def sitemap(ids, english_urls=(), spanish_urls=()):
     # pretend all seasons have fresh content whenever this builder runs.
     ns = "http://www.sitemaps.org/schemas/sitemap/0.9"
     root = Element("urlset", xmlns=ns)
-    for url in [BASE + "/", BASE + "/spain/", BASE + "/england/", BASE + "/la-liga/"] + [f"{BASE}/la-liga/{x}/" for x in ids] + [BASE+x for x in english_urls] + [BASE+x for x in spanish_urls]:
+    for url in [BASE + "/", BASE + "/es/", BASE + "/spain/", BASE + "/england/", BASE + "/la-liga/"] + [f"{BASE}/la-liga/{x}/" for x in ids] + [BASE+x for x in english_urls] + [BASE+x for x in spanish_urls]:
         SubElement(SubElement(root, "url"), "loc").text = url
     for page in sorted((ROOT / "public/journal").rglob("index.html")):
         url = BASE + "/" + str(page.parent.relative_to(ROOT / "public")) + "/"
