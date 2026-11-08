@@ -46,6 +46,7 @@ if english_index.exists():
 expected += ["https://usurperleague.com/es/la-liga/"] + [
     f"https://usurperleague.com/es/la-liga/{x}/" for x in ids
 ]
+expected += ["https://usurperleague.com/" + str(p.parent.relative_to(root)) + "/" for p in sorted((root / "journal").rglob("index.html"))]
 assert locs == expected, "Sitemap must list exactly the real Spanish and English season pages"
 spanish_index = (root / "es/la-liga/index.html").read_text(encoding="utf-8")
 assert '<html lang="es">' in spanish_index

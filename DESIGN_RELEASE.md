@@ -17,3 +17,7 @@ Rollback: restore the changed presentation and test files from base commit bd1dc
 
 ## Contact update — 2026-11-08
 Owner explicitly approved live contact link and requested invitations for improvements, error reports and general enquiries. Added mailto:hello@usurperleague.com on home, England and Spain landing pages; localized invitation in Spanish. Owner reported forwarding tested successfully. No new service, form, tracking or cost.
+
+
+## Journal release — 2026-11-08
+Owner approved publication of the drafted texts. Added Norwich 1992/93 (EN), Espanyol 1998/99 (ES), methodology (EN), journal index and homepage links. Independently recounted Espanyol/Mallorca from 380 raw results: both 60 pts/+17; goals scored 48/43. Sitemap generator and validation include journal pages. No outreach, tracking, service or spending added.

@@ -76,15 +76,15 @@
     const editorial = lang === 'es' ? {
       'journal-title':'THE USURPER JOURNAL','journal-intro':'Historias del archivo. Los resultados son reales; los trofeos, hipotéticos.',
       'journal-one-tag':'INGLATERRA · 1992/93','journal-one-title':'Norwich. Otro desenlace.','journal-one-copy':'La primera Premier League, sin los partidos de los seis grandes. Artículo en inglés.',
-      'journal-two-tag':'ESPAÑA · 1995/96','journal-two-title':'¿Cambia el campeón si quitamos a los favoritos?','journal-two-copy':'Compara la temporada alternativa con la clasificación final publicada y verificada.',
-      'journal-three-tag':'LAS REGLAS','journal-three-title':'No puedes quedarte con medio partido.','journal-three-copy':'Si excluyes un club, se eliminan todos sus partidos para ambos equipos.'
+      'journal-two-tag':'ESPAÑA · 1998/99','journal-two-title':'Espanyol. Del séptimo al primero.','journal-two-copy':'Empatado con el Mallorca a puntos y diferencia de goles. Así decide nuestra tabla.',
+      'journal-three-tag':'LAS REGLAS','journal-three-title':'No puedes quedarte con medio partido.','journal-three-copy':'Si excluyes un club, se eliminan todos sus partidos para ambos equipos. Artículo en inglés.'
     } : {'journal-title':'THE USURPER JOURNAL','journal-intro':'Stories from the archive. The results are real; the trophies are hypothetical.',
       'journal-one-tag':'ENGLAND · 1992/93','journal-one-title':'Norwich. A different ending.','journal-one-copy':'Revisit the first Premier League season with the Big Six fixtures removed.',
-      'journal-two-tag':'SPAIN · 1995/96','journal-two-title':'Does removing the favourites change the winner?','journal-two-copy':'Compare the alternative season with the verified published final table.',
+      'journal-two-tag':'SPAIN · 1998/99 · ESPAÑOL','journal-two-title':'Espanyol. From seventh to first.','journal-two-copy':'Level with Mallorca on points and goal difference. Read the story in Spanish.',
       'journal-three-tag':'THE RULEBOOK','journal-three-title':'You cannot keep half a match.','journal-three-copy':'When a club goes, every match it played goes too — for both teams.'};
     for (const [id, text] of Object.entries(editorial)) setText(id,text);
-    if ($('journal-spain')) $('journal-spain').href=lang==='es'?'/es/la-liga/1995-96/':'/la-liga/1995-96/';
-    if ($('journal-rules')) $('journal-rules').href=lang==='es'?'/spain/?lang=es#how-it-works':'/spain/#how-it-works';
+    if ($('journal-spain')) $('journal-spain').href='/journal/espanyol-1998-99/';
+    if ($('journal-rules')) $('journal-rules').href='/journal/why-every-match-goes/';
     if ($('history-shortcut-spain')) $('history-shortcut-spain').href=lang==='es'?'/es/la-liga/':'/la-liga/';
     if (lang==='es') setText('history-shortcut-england','Inglaterra · 34 temporadas (en inglés) ↗');
     if (lang==='es') setText('england-enter','VER INGLATERRA · EN INGLÉS');

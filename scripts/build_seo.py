@@ -339,6 +339,9 @@ def sitemap(ids, english_urls=(), spanish_urls=()):
     root = Element("urlset", xmlns=ns)
     for url in [BASE + "/", BASE + "/spain/", BASE + "/england/", BASE + "/la-liga/"] + [f"{BASE}/la-liga/{x}/" for x in ids] + [BASE+x for x in english_urls] + [BASE+x for x in spanish_urls]:
         SubElement(SubElement(root, "url"), "loc").text = url
+    for page in sorted((ROOT / "public/journal").rglob("index.html")):
+        url = BASE + "/" + str(page.parent.relative_to(ROOT / "public")) + "/"
+        SubElement(SubElement(root, "url"), "loc").text = url
     indent(root)
     from io import BytesIO
     file = BytesIO()
