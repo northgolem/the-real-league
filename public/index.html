@@ -42,18 +42,18 @@ if(/^\d{4}-\d{2}$/.test(legacy.get('season')||'')) {
 </div></header>
 <main>
   <section class="hero" aria-labelledby="brand-title">
-    <div class="kicker" id="kicker">NO GODS. JUST FOOTBALL.</div>
+    <div class="kicker" id="kicker">REAL RESULTS. ALTERNATIVE LEAGUES.</div>
     <h1 class="sr-only" id="brand-title">The Usurper League</h1>
     <div class="logo-wrap">
       <img class="main-logo" src="/usurper-logo.png" width="1150" height="655" alt="The Usurper League — the crowned football logo" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
       <span class="logo-fallback" hidden>THE USURPER LEAGUE</span>
     </div>
     <div class="crest-rule" aria-hidden="true">✳</div>
-    <h2 class="hero-claim"><span id="title1">Let the rich kids keep the sandpit.</span><br><em id="title2">We're having a league.</em></h2>
-    <p class="hero-deck" id="deck">We rebuild football league tables using real results. Exclude the biggest clubs and every match they played, then see who comes out on top. Choose Spain or England to try it.</p>
+    <h2 class="hero-claim"><span id="title1">Football without</span><br><em id="title2">the usual winners.</em></h2>
+    <p class="hero-deck" id="deck">Remove the biggest clubs and every match they played. See who leads with the real results that remain.</p>
   </section>
   <section class="site-inner choices" aria-labelledby="choose">
-    <div class="section-kicker"><span id="choose">CHOOSE YOUR LEAGUE</span></div>
+    <div class="section-kicker"><span id="choose">CURRENT LEAGUES</span></div>
     <div class="country-grid">
       <a class="edition" id="spain-card" href="/spain/" aria-label="Enter The Usurper League Spain — La Liga without Madrid or Barcelona">
         <div class="edition-head">
@@ -63,7 +63,7 @@ if(/^\d{4}-\d{2}$/.test(legacy.get('season')||'')) {
         <div class="edition-body">
           <p class="edition-subtitle" id="spainSub">No Madrid. No Barça.</p>
           <p class="edition-desc" id="spainDesc">We remove Real Madrid, Barcelona and every match involving either club. Then we recalculate La Liga using only the real results between the teams left — season by season.</p>
-          <div class="edition-now" aria-live="polite"><span class="now-head" id="spain-now-label">CURRENT ALTERNATIVE LEADERS</span><span class="now-value" id="spain-current">See the recalculated table →</span></div>
+          <div class="edition-now" aria-live="polite"><span class="now-head" id="spain-now-label">CURRENT ALTERNATIVE LEADERS</span><span class="now-value" id="spain-current">See the recalculated table →</span><span class="feed-date" id="spain-date"></span></div>
         </div>
         <div class="edition-link"><span id="spain-enter">ENTER SPAIN</span><span aria-hidden="true">↗</span></div>
       </a>
@@ -75,19 +75,28 @@ if(/^\d{4}-\d{2}$/.test(legacy.get('season')||'')) {
         <div class="edition-body">
           <p class="edition-subtitle" id="englandSub">Big Six? You decide who goes.</p>
           <p class="edition-desc" id="englandDesc">You choose which of the Big Six to kick out — any, all or none. We remove their matches and rebuild the Premier League table from real results. Every season since 1992/93.</p>
-          <div class="edition-now" aria-live="polite"><span class="now-head" id="england-now-label">CURRENT ALTERNATIVE LEADERS</span><span class="now-value" id="england-current">See the recalculated table →</span></div>
+          <div class="edition-now" aria-live="polite"><span class="now-head" id="england-now-label">CURRENT ALTERNATIVE LEADERS</span><span class="now-value" id="england-current">See the recalculated table →</span><span class="feed-date" id="england-date"></span></div>
         </div>
         <div class="edition-link"><span id="england-enter">ENTER ENGLAND</span><span aria-hidden="true">↗</span></div>
       </a>
     </div>
     <nav class="history-shortcuts" aria-label="Historical football seasons">
-      <span id="history-shortcut-intro">Looking for a particular old season?</span>
+      <span id="history-shortcut-intro">Explore past seasons</span>
       <a href="/la-liga/" id="history-shortcut-spain">Spain · 94 historical seasons ↗</a>
       <a href="/england/history/" id="history-shortcut-england">England · 34 historical seasons ↗</a>
     </nav>
   </section>
+  <section class="site-inner journal" aria-labelledby="journal-title">
+    <div class="section-kicker"><span id="journal-title">THE USURPER JOURNAL</span></div>
+    <p id="journal-intro">Stories from the archive. The results are real; the trophies are hypothetical.</p>
+    <div class="journal-grid">
+      <a href="/england/history/1992-93/" class="journal-story"><span id="journal-one-tag">ENGLAND · 1992/93</span><h2 id="journal-one-title">Norwich. A different ending.</h2><p id="journal-one-copy">Revisit the first Premier League season with the Big Six fixtures removed.</p></a>
+      <a href="/la-liga/1995-96/" id="journal-spain" class="journal-story"><span id="journal-two-tag">SPAIN · 1995/96</span><h2 id="journal-two-title">Does removing the favourites change the winner?</h2><p id="journal-two-copy">Compare the alternative season with the verified published final table.</p></a>
+      <a href="/spain/#how-it-works" id="journal-rules" class="journal-story"><span id="journal-three-tag">THE RULEBOOK</span><h2 id="journal-three-title">You cannot keep half a match.</h2><p id="journal-three-copy">When a club goes, every match it played goes too — for both teams.</p></a>
+    </div>
+  </section>
   <section class="editorial-bottom">
-    <div class="kicker">THE SMALL PRINT, ALMOST</div>
+    <div class="kicker" id="how-kicker">HOW IT WORKS</div>
     <h2 id="why">Real matches. New league tables.</h2>
     <p id="whyBody">Exclude a club, and all its matches disappear — for both teams. No fantasy scores, no redistributed points. Only completed games between the remaining clubs count.</p>
   </section>

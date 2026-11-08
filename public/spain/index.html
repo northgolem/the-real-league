@@ -55,6 +55,7 @@ a{color:inherit}button{font:inherit;cursor:pointer}.container{max-width:1060px;p
 @media(max-width:710px){.brand{font-size:11px;letter-spacing:.12em}.hero{padding:43px 0 49px}.hero .hero-explainer,.hero .hero-method{font-size:14px}.hero .hero-sandpit{font-size:19px}.hero-slogan{font-size:23px!important}}
 </style>
 <link rel="stylesheet" href="/design.css">
+<link rel="stylesheet" href="/refresh.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"The Usurper League — Spain","url":"https://usurperleague.com/spain/","description":"The recalculated Spanish La Liga without Real Madrid and FC Barcelona."}</script>
 </head>
 <body>
@@ -89,18 +90,9 @@ a{color:inherit}button{font:inherit;cursor:pointer}.container{max-width:1060px;p
 <main class="container content">
 
 <div class="meta"><div class="tag"><span class="dot"></span> <span id="status">Preview mode · waiting for results</span></div><div class="tag" id="updated">Season 2026/27</div></div>
-<section class="card" id="league-table" aria-label="League table"><div class="cardhead"><div><div class="eyebrow">The standings</div><h2>Someone else gets a go.</h2><p id="matchinfo">The table recalculates automatically once a results feed is connected.</p></div><div class="switch" aria-label="Table selection"><button class="active" id="alternative" aria-pressed="true">No Gods</button><button id="original" aria-pressed="false" disabled title="Waiting for a verified published full-league table">With Everyone</button></div></div>
+<section class="card" id="league-table" aria-label="League table"><div class="cardhead"><div><div class="eyebrow">The standings</div><h2>Someone else gets a go.</h2><p id="matchinfo">The table recalculates automatically once a results feed is connected.</p></div><div class="switch" aria-label="Table selection"><button class="active" id="alternative" aria-pressed="true">Usurper League</button><button id="original" aria-pressed="false" disabled title="Waiting for a verified published full-league table">All clubs</button></div></div>
 <div class="tablewrap"><table><thead><tr><th>#</th><th>Club</th><th>P</th><th class="hidden-mobile">W</th><th class="hidden-mobile">D</th><th class="hidden-mobile">L</th><th>GD</th><th>Pts</th></tr></thead><tbody id="rows"></tbody></table><div class="empty" id="empty"><strong>The mortals are warming up.</strong><p>The standings will appear after the results feed completes its first update.</p></div></div>
 <div class="footnote" id="disclaimer">Provisional table: ranking by points, goal difference, then goals scored. Spanish head-to-head tiebreakers may change the official order. Source: <a href="https://www.football-data.org/" rel="noopener">Football-Data.org API</a>.</div>
-</section>
-<section class="insight"><div class="story"><div class="eyebrow" style="color:#6d8a6f">As things stand</div><h3 id="headline">The gods have been excused.</h3><p id="storytext">The other clubs still have to play the football. We simply took the usual winners out of the equation.</p></div><div class="stats"><div class="eyebrow" style="color:#4f775c">Matches removed</div><div class="big" id="removed">—</div><div class="small">Completed matches involving Madrid or Barcelona that no longer count.</div></div></section>
-<section class="metrics-section" aria-labelledby="insights-heading">
-  <h2 id="insights-heading">Turns out they weren’t essential.</h2>
-  <div class="metrics-grid">
-    <article class="metric-card"><div class="metric-label" id="race-label">The title race</div><h3 class="metric-value" id="race-value">—</h3><p class="metric-explain" id="race-explain"></p></article>
-    <article class="metric-card"><div class="metric-label" id="slayers-label">Points quietly erased</div><h3 class="metric-value" id="slayers-value">—</h3><p class="metric-explain" id="slayers-explain"></p></article>
-    <article class="metric-card"><div class="metric-label" id="rebound-label">Goal difference restored</div><h3 class="metric-value" id="rebound-value">—</h3><p class="metric-explain" id="rebound-explain"></p></article>
-  </div>
 </section>
 <section class="history-nav" id="archive" aria-label="Historical La Liga seasons">
   <div class="history-top"><div><div class="eyebrow" id="archive-kicker">ALMOST A CENTURY OF ALTERNATIVE ENDINGS</div><h2 class="history-heading" id="archive-heading">Apparently, other clubs can win things.</h2></div><span class="history-context">94 seasons · 1928/29–2025/26</span></div>
@@ -258,6 +250,15 @@ a{color:inherit}button{font:inherit;cursor:pointer}.container{max-width:1060px;p
     </details>
   </div>
   <p class="archive-context-small">Each year opens its own article. No second, confusing version of the table. Football is complicated enough.</p>
+</section>
+<section class="insight"><div class="story"><div class="eyebrow" style="color:#6d8a6f">As things stand</div><h3 id="headline">The gods have been excused.</h3><p id="storytext">The other clubs still have to play the football. We simply took the usual winners out of the equation.</p></div><div class="stats"><div class="eyebrow" style="color:#4f775c">Matches removed</div><div class="big" id="removed">—</div><div class="small">Completed matches involving Madrid or Barcelona that no longer count.</div></div></section>
+<section class="metrics-section" aria-labelledby="insights-heading">
+  <h2 id="insights-heading">Turns out they weren’t essential.</h2>
+  <div class="metrics-grid">
+    <article class="metric-card"><div class="metric-label" id="race-label">The title race</div><h3 class="metric-value" id="race-value">—</h3><p class="metric-explain" id="race-explain"></p></article>
+    <article class="metric-card"><div class="metric-label" id="slayers-label">Points quietly erased</div><h3 class="metric-value" id="slayers-value">—</h3><p class="metric-explain" id="slayers-explain"></p></article>
+    <article class="metric-card"><div class="metric-label" id="rebound-label">Goal difference restored</div><h3 class="metric-value" id="rebound-value">—</h3><p class="metric-explain" id="rebound-explain"></p></article>
+  </div>
 </section>
 <div class="sectionhead" id="how-it-works"><h2>How we stole the league</h2></div><section class="rules"><div class="rule"><span>01 / THE EXITS</span><b>Two clubs. One polite goodbye.</b><p>Real Madrid and Barcelona have their own table. This one is for everyone else.</p></div><div class="rule"><span>02 / THE ERASER</span><b>Their results go with them.</b><p>Every fixture against either club disappears. Points, goals, games played. We don’t do half-measures.</p></div><div class="rule"><span>03 / THE FUN</span><b>Then things get interesting.</b><p>Everyone else keeps their actual results. No invented scores, no fantasy transfers. Just a different champion.</p></div></section>
 <div class="actionrow"><button class="primary" id="share">Share the table ↗</button><button class="secondary" id="copy">Copy link</button><span class="notification" id="notice" role="status" aria-live="polite"></span></div>

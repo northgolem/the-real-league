@@ -3,17 +3,17 @@
   'use strict';
   const strings = {
     en: {
-      topSpain: 'Spain', topEngland: 'England', kicker:'NO GODS. JUST FOOTBALL.',
-      title1:'Let the rich kids keep the sandpit.', title2:"We're having a league.",
-      deck:"We rebuild football league tables using real results. Exclude the biggest clubs and every match they played, then see who comes out on top. Choose Spain or England to try it.",
-      choose:'CHOOSE YOUR LEAGUE', spainTitle:'Spain', englandTitle:'England',
+      topSpain: 'Spain', topEngland: 'England', kicker:'REAL RESULTS. ALTERNATIVE LEAGUES.',
+      title1:'Football without', title2:"the usual winners.",
+      deck:"Remove the biggest clubs and every match they played. See who leads with the real results that remain.",
+      choose:'CURRENT LEAGUES', spainTitle:'Spain', englandTitle:'England',
       spainSub:'No Madrid. No Barça.', englandSub:'Big Six? You decide who goes.',
       spainDesc:'We remove Real Madrid, Barcelona and every match involving either club. Then we recalculate La Liga using only the real results between the teams left — season by season.',
       englandDesc:'You choose which of the Big Six to kick out — any, all or none. We remove their matches and rebuild the Premier League table from real results. Every season since 1992/93.',
       label:'CURRENT ALTERNATIVE LEADERS', pending:'See the recalculated table →',
       leaders:(name,points)=>name+' · '+points+' pts',
       enterSpain:'SEE CURRENT SPAIN', enterEngland:'ENTER ENGLAND',
-      historyIntro:'Looking for a particular old season?',
+      historyIntro:'Explore past seasons',
       historySpain:'Spain · 94 historical seasons ↗', historyEngland:'England · 34 historical seasons ↗',
       why:'Real matches. New league tables.',
       whyBody:'Exclude a club, and all its matches disappear — for both teams. No fantasy scores, no redistributed points. Only completed games between the remaining clubs count.',
@@ -21,17 +21,17 @@
       labels: ['THE USURPER LEAGUE / SPAIN','THE USURPER LEAGUE / ENGLAND']
     },
     es: {
-      topSpain:'España',topEngland:'Inglaterra',kicker:'SIN DIOSES. SOLO FÚTBOL.',
-      title1:'Que los niños ricos se queden con su patio.',title2:'Nosotros montamos nuestra liga.',
+      topSpain:'España',topEngland:'Inglaterra',kicker:'RESULTADOS REALES. LIGAS ALTERNATIVAS.',
+      title1:'El fútbol sin',title2:'los ganadores de siempre.',
       deck:'Recalculamos las ligas utilizando resultados reales. Excluimos a los clubes más poderosos y todos sus partidos para descubrir quién termina arriba. Elige España o Inglaterra.',
-      choose:'ELIGE TU LIGA',spainTitle:'España',englandTitle:'Inglaterra',
+      choose:'LIGAS ACTUALES',spainTitle:'España',englandTitle:'Inglaterra',
       spainSub:'Sin Madrid. Sin Barça.',englandSub:'¿Los seis grandes? Tú decides.',
       spainDesc:'Quitamos al Real Madrid, al Barcelona y todos sus partidos. Después recalculamos La Liga usando únicamente los resultados reales entre los demás equipos.',
       englandDesc:'Tú eliges cuáles de los seis grandes quedan fuera: algunos, todos o ninguno. Borramos sus partidos y recalculamos la Premier League con resultados reales desde 1992/93.',
       label:'LÍDERES DE LA TABLA ALTERNATIVA',pending:'Ver la clasificación →',
       leaders:(name,points)=>name+' · '+points+' puntos',
       enterSpain:'VER ESPAÑA ACTUAL',enterEngland:'ENTRAR A INGLATERRA',
-      historyIntro:'¿Buscas una temporada antigua?',
+      historyIntro:'Explora temporadas anteriores',
       historySpain:'España · 94 temporadas históricas ↗',historyEngland:'Inglaterra · 34 temporadas históricas ↗',
       why:'Partidos reales. Una clasificación diferente.',
       whyBody:'Cuando excluyes a un club, desaparecen todos sus partidos, para ambos equipos. Sin marcadores inventados ni puntos redistribuidos: solo cuentan los partidos entre los clubes restantes.',
@@ -68,6 +68,29 @@
           : 'Choose which clubs to exclude. We remove all their matches and recalculate the table from real results between the teams left.');
       }
     }
+    setText('how-kicker',lang==='es'?'CÓMO FUNCIONA':'HOW IT WORKS');
+    $('spain-card').setAttribute('aria-label',lang==='es'?'Ver la liga de España sin Madrid ni Barcelona':'View Spain without Madrid or Barcelona');
+    $('england-card').setAttribute('aria-label',lang==='es'?'Ver la liga de Inglaterra (en inglés)':'View England and choose excluded clubs');
+    const editorial = lang === 'es' ? {
+      'journal-title':'THE USURPER JOURNAL','journal-intro':'Historias del archivo. Los resultados son reales; los trofeos, hipotéticos.',
+      'journal-one-tag':'INGLATERRA · 1992/93','journal-one-title':'Norwich. Otro desenlace.','journal-one-copy':'La primera Premier League, sin los partidos de los seis grandes. Artículo en inglés.',
+      'journal-two-tag':'ESPAÑA · 1995/96','journal-two-title':'¿Cambia el campeón si quitamos a los favoritos?','journal-two-copy':'Compara la temporada alternativa con la clasificación final publicada y verificada.',
+      'journal-three-tag':'LAS REGLAS','journal-three-title':'No puedes quedarte con medio partido.','journal-three-copy':'Si excluyes un club, se eliminan todos sus partidos para ambos equipos.'
+    } : {'journal-title':'THE USURPER JOURNAL','journal-intro':'Stories from the archive. The results are real; the trophies are hypothetical.',
+      'journal-one-tag':'ENGLAND · 1992/93','journal-one-title':'Norwich. A different ending.','journal-one-copy':'Revisit the first Premier League season with the Big Six fixtures removed.',
+      'journal-two-tag':'SPAIN · 1995/96','journal-two-title':'Does removing the favourites change the winner?','journal-two-copy':'Compare the alternative season with the verified published final table.',
+      'journal-three-tag':'THE RULEBOOK','journal-three-title':'You cannot keep half a match.','journal-three-copy':'When a club goes, every match it played goes too — for both teams.'};
+    for (const [id, text] of Object.entries(editorial)) setText(id,text);
+    if ($('journal-spain')) $('journal-spain').href=lang==='es'?'/es/la-liga/1995-96/':'/la-liga/1995-96/';
+    if ($('journal-rules')) $('journal-rules').href=lang==='es'?'/spain/?lang=es#how-it-works':'/spain/#how-it-works';
+    if ($('history-shortcut-spain')) $('history-shortcut-spain').href=lang==='es'?'/es/la-liga/':'/la-liga/';
+    if (lang==='es') setText('history-shortcut-england','Inglaterra · 34 temporadas (en inglés) ↗');
+    if (lang==='es') setText('england-enter','VER INGLATERRA · EN INGLÉS');
+    for (const region of ['spain','england']) {
+      const date=leaders[region]?.generatedAt;
+      const valid=date && Number.isFinite(Date.parse(date));
+      setText(region+'-date',valid ? (lang==='es'?'Datos actualizados: ':'Data updated: ')+new Date(date).toLocaleDateString(lang==='es'?'es-ES':'en-GB',{timeZone:'UTC'})+(Date.now()-Date.parse(date)>48*3600000 ? (lang==='es'?' · actualización pendiente':' · update overdue') : '') : '');
+    }
     document.querySelectorAll('.lang button').forEach(button => {
       button.setAttribute('aria-pressed',String(button.dataset.lang===lang));
     });
@@ -103,7 +126,7 @@
     if (!top || typeof top.name!=='string' || !top.name.trim() ||
         !Number.isInteger(top.Pts) || !Number.isInteger(top.P) || top.P<0 ||
         !Number.isInteger(top.position) || top.position!==1) return null;
-    return {name:top.name,points:top.Pts};
+    return {name:top.name,points:top.Pts,generatedAt:data.generatedAt};
   }
   async function load(region,path) {
     try {

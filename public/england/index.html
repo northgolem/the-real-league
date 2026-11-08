@@ -16,6 +16,7 @@
 <meta name="twitter:card" content="summary">
 <link rel="stylesheet" href="/archive.css">
 <link rel="stylesheet" href="/premier-league/league.css">
+<link rel="stylesheet" href="/refresh.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Make Your Own Premier League | The Usurper League — England","url":"https://usurperleague.com/england/","inLanguage":"en"}</script>
 <script defer src="/premier-league/core.js"></script>
 <script defer src="/premier-league/customizer.js"></script>
@@ -33,15 +34,16 @@
   <section class="hero-england">
     <div class="page-width england-hero-layout">
       <div>
-        <div class="kicker">THE USURPER LEAGUE / ENGLAND / 2026–27</div>
-        <h1>What if the Big Six<br><em>weren't in the league?</em></h1>
+        <img class="edition-logo" src="/usurper-logo.png" width="1150" height="655" alt="The Usurper League">
+        <div class="kicker">ENGLAND · PREMIER LEAGUE</div>
+        <h1>England.<br><em>A different title race.</em></h1>
         <p class="england-intro">Build your own Premier League. Choose which of the Big Six you want to kick out.</p>
         <p class="england-explainer" id="england-method"><strong>We remove those clubs and every match they played.</strong> Then we recalculate the table using only real results between the teams left.</p>
         <p class="england-opening" id="england-opening">All six are out by default. Bring any back—or invite everyone.</p>
         <a class="primary-link england-cta" href="#the-table">Make your league ↓</a>
         <a class="english-history-link" href="/england/history/">Or explore 34 seasons of alternative champions ↗</a>
       </div>
-      <aside class="big-six-paper" aria-label="Clubs currently excluded from your alternative league">
+      <aside hidden class="big-six-paper" aria-label="Clubs currently excluded from your alternative league">
         <span class="kicker">YOUR EXCLUDED CLUBS / CURRENT SELECTION</span>
         <ul id="excluded-list">
           <li>Arsenal</li>
@@ -57,24 +59,6 @@
   </section>
 
   <div class="page-width">
-    <section class="how-it-works-fast" aria-labelledby="how-it-works-fast-title">
-      <div class="rule-intro">
-        <span class="kicker">THE RULES. REALLY SIMPLE.</span>
-        <h2 id="how-it-works-fast-title">Same match. Different rules.</h2>
-        <p class="fixture-example-intro">Take Arsenal vs Everton. Here’s what happens when you change Arsenal’s status:</p>
-      </div>
-      <div class="example-fixtures">
-        <div class="example-fixture">
-          <span class="example-mark gone">ARSENAL OUT</span>
-          <div><strong>Arsenal vs Everton</strong><small>Match <b>removed</b> completely, including Everton’s result.</small></div>
-        </div>
-        <div class="example-fixture">
-          <span class="example-mark kept">ARSENAL IN</span>
-          <div><strong>Arsenal vs Everton</strong><small>Same match <b>counts</b> as normal for both teams.</small></div>
-        </div>
-      </div>
-      <p class="rule-disclaimer">An illustrative fixture, shown under two different rules—not a claim about a particular result. Only actual, completed matches count. No points are handed out or reassigned.</p>
-    </section>
     <section class="league-current" id="the-table" aria-labelledby="table-title">
       <div class="league-intro">
         <div><span class="section-marker">YOUR VERSION OF THE PREMIER LEAGUE</span>
@@ -103,14 +87,6 @@
             <button type="button" id="no-big-six" aria-pressed="true" disabled>Kick out the Big Six</button>
             <button type="button" id="all-teams" aria-pressed="false" disabled>Let everyone play</button>
           </div>
-          <div class="share-buttons">
-            <button type="button" id="custom-native-share" class="share-league" disabled>Share my league <span aria-hidden="true">↗</span></button>
-            <button type="button" id="custom-share" class="copy-league" disabled>Copy link <span aria-hidden="true">⧉</span></button>
-          </div>
-        </div>
-        <div class="share-challenge">
-          <span class="kicker">GIVE THEM SOMETHING TO ARGUE ABOUT</span>
-          <p id="share-pitch">Choose your clubs and season. We'll generate your challenge using actual football results.</p>
         </div>
         <p id="custom-feedback" class="lab-feedback" role="status" aria-live="polite">Loading the real match results…</p>
         <button type="button" id="mobile-show-table" class="mobile-table-shortcut" disabled aria-controls="premier-table">See your table ↓ <span id="mobile-table-summary">14 clubs left</span></button>
@@ -119,23 +95,31 @@
       <div class="panel english-table" id="premier-table">
         <div class="panel-intro">
           <span class="kicker" id="table-kicker">THE OTHER PREMIER LEAGUE</span>
-          <h3 id="table-heading" tabindex="-1">Your alternative Premier League table</h3>
+          <h3 id="table-heading" tabindex="-1">Usurper League</h3>
           <div class="table-mode-switch" role="group" aria-label="Compare the two calculated standings">
-            <button type="button" id="custom-table-mode" aria-pressed="true" disabled>My league</button>
-            <button type="button" id="full-table-mode" aria-pressed="false" disabled>All clubs · comparison</button>
+            <button type="button" id="custom-table-mode" aria-pressed="true" disabled>Usurper League</button>
+            <button type="button" id="full-table-mode" aria-pressed="false" disabled>All clubs</button>
           </div>
           <p id="table-comparison" class="table-comparison" role="status" aria-live="polite">Both tables use real match results. This is an independent calculation, not the Premier League's official table.</p>
           <p id="match-info">All completed Premier League matches involving Arsenal, Chelsea, Liverpool, Manchester City, Manchester United and Tottenham are excluded.</p>
           <p class="custom-hint">We don't guess what would have happened. We only count completed matches between the clubs you kept.</p>
         </div>
         <div class="table-scroll">
-          <table id="premier-standings" aria-label="Your alternative Premier League standings">
+          <table id="premier-standings" aria-label="Usurper League standings">
             <thead><tr><th scope="col">#</th><th scope="col">Club</th><th scope="col">P</th><th scope="col" class="mobile-hide">W</th><th scope="col" class="mobile-hide">D</th><th scope="col" class="mobile-hide">L</th><th scope="col">GD</th><th scope="col">Pts</th></tr></thead>
             <tbody id="premier-rows"></tbody>
           </table>
           <div class="table-notice" id="table-notice"><strong>Even usurpers need results.</strong><p>We're waiting for a verified Premier League feed. No imaginary scores while we're setting things up.</p></div>
         </div>
       </div>
+          <div class="share-buttons">
+            <button type="button" id="custom-native-share" class="share-league" disabled>Share my league <span aria-hidden="true">↗</span></button>
+            <button type="button" id="custom-share" class="copy-league" disabled>Copy link <span aria-hidden="true">⧉</span></button>
+          </div>
+        <div class="share-challenge">
+          <span class="kicker">GIVE THEM SOMETHING TO ARGUE ABOUT</span>
+          <p id="share-pitch">Choose your clubs and season. We'll generate your challenge using actual football results.</p>
+        </div>
       <div class="england-stats" aria-label="Facts from verified matches">
         <div><span>Matches kept</span><strong id="matches-kept">—</strong><small>Finished games between surviving clubs</small></div>
         <div><span>Matches removed</span><strong id="matches-removed">—</strong><small>Finished games involving your excluded clubs</small></div>
@@ -151,10 +135,28 @@
     <section class="english-history-teaser">
       <div>
         <span class="kicker">THE OTHER PREMIER LEAGUE / 1992–2026</span>
-        <h2>Thirty-four seasons. A rather different honours board.</h2>
+        <h2>Explore 34 completed seasons.</h2>
         <p>Norwich in 1993. Newcastle, Everton, Villa and the others finally getting their turn. Every surviving score is genuine. Every trophy is purely imaginary.</p>
       </div>
       <a class="primary-link" href="/england/history/">Explore the history ↗</a>
+    </section>
+    <section class="how-it-works-fast" aria-labelledby="how-it-works-fast-title">
+      <div class="rule-intro">
+        <span class="kicker">THE RULES. REALLY SIMPLE.</span>
+        <h2 id="how-it-works-fast-title">Same match. Different rules.</h2>
+        <p class="fixture-example-intro">Take Arsenal vs Everton. Here’s what happens when you change Arsenal’s status:</p>
+      </div>
+      <div class="example-fixtures">
+        <div class="example-fixture">
+          <span class="example-mark gone">ARSENAL OUT</span>
+          <div><strong>Arsenal vs Everton</strong><small>Match <b>removed</b> completely, including Everton’s result.</small></div>
+        </div>
+        <div class="example-fixture">
+          <span class="example-mark kept">ARSENAL IN</span>
+          <div><strong>Arsenal vs Everton</strong><small>Same match <b>counts</b> as normal for both teams.</small></div>
+        </div>
+      </div>
+      <p class="rule-disclaimer">An illustrative fixture, shown under two different rules—not a claim about a particular result. Only actual, completed matches count. No points are handed out or reassigned.</p>
     </section>
     <section class="england-about" id="how-we-count" aria-labelledby="how-title">
       <span class="kicker">THE RULEBOOK, ABRIDGED</span>
@@ -171,6 +173,6 @@
     </p>
   </div>
 </main>
-<footer class="footer"><div class="page-width footer-grid"><span><b>The Usurper League.</b> Let the rich kids keep the sandpit. We're having a league.</span><span><a href="/spain/">Spanish league</a> · <a href="/england/history/">English archive</a> · <a href="/england/">English league</a>. Independent football thought experiment.</span></div></footer>
+<footer class="footer"><div class="page-width footer-grid"><span><b>The Usurper League.</b> Real results. Hypothetical competitions.</span><span><a href="/spain/">Spanish league</a> · <a href="/england/history/">English archive</a> · <a href="/england/">English league</a>. Independent football thought experiment.</span></div></footer>
 </body>
 </html>

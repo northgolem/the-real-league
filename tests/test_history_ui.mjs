@@ -32,11 +32,11 @@ assert(script&&script.includes("location.replace"),
 function destination(query){
   let result=null;
   const location={search:query,replace(path){result=path}};
-  vm.runInNewContext(script,{location,URLSearchParams});
+  vm.runInNewContext(script,{location,URLSearchParams,navigator:{language:'en'}});
   return result;
 }
 assert.equal(destination('?season=1995-96'),'/la-liga/1995-96/');
-assert.equal(destination('?season=1928-29&lang=es'),'/la-liga/1928-29/');
+assert.equal(destination('?season=1928-29&lang=es'),'/es/la-liga/1928-29/');
 assert.equal(destination('?season=2026-27'),null,'Current season remains on Spain homepage');
 assert.equal(destination('?season=bad'),null,'Invalid dates should never redirect');
 assert.equal(destination(''),null);

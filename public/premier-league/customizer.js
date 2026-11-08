@@ -176,6 +176,7 @@
        calculated.kept+calculated.removed!==state.games.matches.length ||
        full.kept!==state.games.matches.length || full.removed!==0)
       throw Error("Table comparison failed its verified fixture accounting check");
+    if ($("table-notice")) $("table-notice").hidden=true;
     const showingFull=state.tableMode==="full";
     const historic=state.season!==state.current.id;
     const published=historic?state.games.published:null;
@@ -227,7 +228,7 @@
     $("matches-removed").textContent=calculated.removed;
     $("clubs-left").textContent=calculated.clubsRemaining;
     $("match-info").textContent=showingFull
-      ? "All "+full.kept+" finished games count in this comparison. Your excluded-club choices are still saved above — switch to My league to see them applied."
+      ? "All "+full.kept+" finished games count in this comparison. Your excluded-club choices are still saved above — switch to Usurper League to see them applied."
       : excluded.length
         ? calculated.kept+" real, completed matches between the clubs still in your league. "+
           calculated.removed+" matches involving excluded clubs have been removed for BOTH teams."
@@ -238,7 +239,7 @@
       ?"Published Premier League final standings · verified against full-time results"
       :"Verified full-time results · independent calculation";
     $("results-updated").textContent=seasonLabel()+
-      (state.season===state.current.id?" · current season (not live scores)":" · complete historical season");
+      (state.season===state.current.id?" · data updated "+(Number.isFinite(Date.parse(state.current.data.generatedAt)) ? new Date(state.current.data.generatedAt).toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric",timeZone:"UTC"}) : "date unavailable")+" · not live scores":" · complete historical season");
     $("story-title").textContent=myLeader.name+" are top. Well, well.";
     const out=selectedNames();
     const sentence=out.length?"I kicked out "+out.join(", ")+".":"I let all the clubs play.";
@@ -254,6 +255,7 @@
   }
 
   function fail(message) {
+    if ($("table-notice")) $("table-notice").hidden=false;
     $("premier-rows").replaceChildren();
     $("results-status").textContent="This season's results could not be verified";
     $("results-updated").textContent="No imaginary scores will be displayed";
@@ -272,6 +274,7 @@
     const generation=++state.generation;
     $("custom-season").value=season;
     tickedUI();
+    if ($("table-notice")) $("table-notice").hidden=false;
     $("premier-rows").replaceChildren();
     $("results-status").textContent="Checking "+seasonLabel()+" results…";
     if(replaceURL)updateURL();
