@@ -75,11 +75,11 @@
     $('england-card').setAttribute('aria-label',lang==='es'?'Ver la liga de Inglaterra (en inglés)':'View England and choose excluded clubs');
     const editorial = lang === 'es' ? {
       'journal-title':'THE USURPER JOURNAL','journal-intro':'Historias del archivo. Los resultados son reales; los trofeos, hipotéticos.',
-      'journal-one-tag':'INGLATERRA · 1992/93','journal-one-title':'Norwich. Otro desenlace.','journal-one-copy':'La primera Premier League, sin los partidos de los seis grandes. Artículo en inglés.',
+      'journal-one-tag':'INGLATERRA · 2018/19','journal-one-title':'Watford. Del undécimo al primero.','journal-one-copy':'Sin los partidos de los seis grandes, Watford acaba primero en 2018/19. Artículo en inglés.',
       'journal-two-tag':'ESPAÑA · 1998/99','journal-two-title':'Espanyol. Del séptimo al primero.','journal-two-copy':'Empatado con el Mallorca a puntos y diferencia de goles. Así decide nuestra tabla.',
       'journal-three-tag':'LAS REGLAS','journal-three-title':'No puedes quedarte con medio partido.','journal-three-copy':'Si excluyes un club, se eliminan todos sus partidos para ambos equipos. Artículo en inglés.'
     } : {'journal-title':'THE USURPER JOURNAL','journal-intro':'Stories from the archive. The results are real; the trophies are hypothetical.',
-      'journal-one-tag':'ENGLAND · 1992/93','journal-one-title':'Norwich. A different ending.','journal-one-copy':'Revisit the first Premier League season with the Big Six fixtures removed.',
+      'journal-one-tag':'ENGLAND · 2018/19','journal-one-title':'Watford. From eleventh to first.','journal-one-copy':'Remove the Big Six fixtures. Watford finish five points clear in 2018/19.',
       'journal-two-tag':'SPAIN · 1998/99 · ESPAÑOL','journal-two-title':'Espanyol. From seventh to first.','journal-two-copy':'Level with Mallorca on points and goal difference. Read the story in Spanish.',
       'journal-three-tag':'THE RULEBOOK','journal-three-title':'You cannot keep half a match.','journal-three-copy':'When a club goes, every match it played goes too — for both teams.'};
     for (const [id, text] of Object.entries(editorial)) setText(id,text);

@@ -47,13 +47,14 @@ s=social(s,'league-es')
 (PUBLIC/'es/index.html').write_text(s)
 for p in (PUBLIC/'journal').rglob('index.html'):
     s=p.read_text();slug=p.parent.name if p.parent.name!='journal' else 'league'
-    s=social(s,slug)
+    image_slug=slug if (PUBLIC/'social'/f'{slug}.png').exists() else 'league'
+    s=social(s,image_slug)
     title=unescape(re.search(r'<h1[^>]*>(.*?)</h1>',s,re.S)[1])
     s=meta(s,'og:image:alt',title)
     s=re.sub(r'<script type="application/ld\+json" data-discovery>.*?</script>','',s,flags=re.S)
     if slug!='league':
         canonical=re.search(r'<link rel="canonical" href="([^"]+)"',s)[1]
-        data={'@context':'https://schema.org','@type':'Article','headline':title,'inLanguage':'es' if slug.startswith('espanyol') else 'en','datePublished':'2026-11-08','mainEntityOfPage':canonical,'image':BASE+'/social/'+slug+'.png','author':{'@type':'Organization','name':'The Usurper League','url':BASE+'/'},'publisher':{'@type':'Organization','name':'The Usurper League','url':BASE+'/'}}
+        data={'@context':'https://schema.org','@type':'Article','headline':title,'inLanguage':'es' if slug.startswith('espanyol') else 'en','datePublished':(re.search(r'<meta property="article:published_time" content="([^"]+)"',s)[1] if 'property="article:published_time"' in s else '2026-11-08'),'mainEntityOfPage':canonical,'image':BASE+'/social/'+image_slug+'.png','author':{'@type':'Organization','name':'The Usurper League','url':BASE+'/'},'publisher':{'@type':'Organization','name':'The Usurper League','url':BASE+'/'}}
         s=s.replace('</head>','<script type="application/ld+json" data-discovery>'+json.dumps(data,ensure_ascii=False).replace('<','\\u003c')+'</script></head>')
     else: s=meta(s,'og:type','website')
     if 'data-share-status' not in s:

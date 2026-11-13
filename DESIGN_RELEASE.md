@@ -21,3 +21,7 @@ Owner explicitly approved live contact link and requested invitations for improv
 
 ## Journal release — 2026-11-08
 Owner approved publication of the drafted texts. Added Norwich 1992/93 (EN), Espanyol 1998/99 (ES), methodology (EN), journal index and homepage links. Independently recounted Espanyol/Mallorca from 380 raw results: both 60 pts/+17; goals scored 48/43. Sitemap generator and validation include journal pages. No outreach, tracking, service or spending added.
+
+
+## Watford editorial — 13 November 2026
+Owner explicitly approved publication of the Watford 2018/19 draft. Published the approved article with source attribution, journal/home discovery links, sitemap and article metadata. Reused the existing brand social image and logo. Preserve publication dates and valid image fallback when rebuilding discovery metadata. Forest remains unpublished. No spending, external outreach or tracking changes.
