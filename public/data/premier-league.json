@@ -2,8 +2,8 @@
   "mode": "live",
   "competition": "The Usurper League — England",
   "season": "2026/27",
-  "generatedAt": "2026-11-08T21:39:27+00:00",
-  "latestResultAt": "2026-11-08T16:30:00Z",
+  "generatedAt": "2026-11-21T16:20:38+00:00",
+  "latestResultAt": "2026-11-21T12:30:00Z",
   "excluded": [
     "Arsenal",
     "Chelsea",
@@ -20,8 +20,8 @@
     66,
     73
   ],
-  "completedMatches": 100,
-  "excludedMatches": 53,
+  "completedMatches": 101,
+  "excludedMatches": 54,
   "includedMatches": 47,
   "officialTableApproximation": [
     {
@@ -53,14 +53,14 @@
     {
       "id": 65,
       "name": "Manchester City",
-      "P": 10,
+      "P": 11,
       "W": 7,
-      "D": 0,
+      "D": 1,
       "L": 3,
-      "GF": 21,
-      "GA": 13,
+      "GF": 22,
+      "GA": 14,
       "GD": 8,
-      "Pts": 21,
+      "Pts": 22,
       "position": 3
     },
     {
@@ -194,6 +194,19 @@
       "position": 13
     },
     {
+      "id": 63,
+      "name": "Fulham",
+      "P": 11,
+      "W": 2,
+      "D": 5,
+      "L": 4,
+      "GF": 11,
+      "GA": 13,
+      "GD": -2,
+      "Pts": 11,
+      "position": 14
+    },
+    {
       "id": 349,
       "name": "Ipswich Town",
       "P": 10,
@@ -204,19 +217,6 @@
       "GA": 20,
       "GD": -5,
       "Pts": 11,
-      "position": 14
-    },
-    {
-      "id": 63,
-      "name": "Fulham",
-      "P": 10,
-      "W": 2,
-      "D": 4,
-      "L": 4,
-      "GF": 10,
-      "GA": 12,
-      "GD": -2,
-      "Pts": 10,
       "position": 15
     },
     {
@@ -343,8 +343,8 @@
       "GD": 1,
       "Pts": 11,
       "position": 4,
-      "originalPosition": 14,
-      "positionChange": 10
+      "originalPosition": 15,
+      "positionChange": 11
     },
     {
       "id": 341,
@@ -403,8 +403,8 @@
       "GD": -1,
       "Pts": 8,
       "position": 8,
-      "originalPosition": 15,
-      "positionChange": 7
+      "originalPosition": 14,
+      "positionChange": 6
     },
     {
       "id": 67,
