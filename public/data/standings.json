@@ -2,8 +2,8 @@
   "mode": "live",
   "competition": "La Liga de los Mortales",
   "season": "2026/27",
-  "generatedAt": "2026-11-09T09:19:22+00:00",
-  "latestResultAt": "2026-11-08T20:00:00Z",
+  "generatedAt": "2026-11-21T16:08:04+00:00",
+  "latestResultAt": "2026-11-21T13:00:00Z",
   "excluded": [
     "Real Madrid",
     "FC Barcelona"
@@ -12,9 +12,9 @@
     81,
     86
   ],
-  "completedMatches": 119,
+  "completedMatches": 121,
   "excludedMatches": 23,
-  "includedMatches": 96,
+  "includedMatches": 98,
   "officialTableApproximation": [
     {
       "id": 81,
@@ -97,15 +97,28 @@
     {
       "id": 77,
       "name": "Athletic Club",
-      "P": 11,
+      "P": 12,
       "W": 4,
       "D": 4,
-      "L": 3,
+      "L": 4,
       "GF": 15,
-      "GA": 11,
-      "GD": 4,
+      "GA": 12,
+      "GD": 3,
       "Pts": 16,
       "position": 7
+    },
+    {
+      "id": 263,
+      "name": "Alavés",
+      "P": 13,
+      "W": 4,
+      "D": 4,
+      "L": 5,
+      "GF": 18,
+      "GA": 18,
+      "GD": 0,
+      "Pts": 16,
+      "position": 8
     },
     {
       "id": 94,
@@ -118,20 +131,33 @@
       "GA": 15,
       "GD": 2,
       "Pts": 15,
-      "position": 8
+      "position": 9
+    },
+    {
+      "id": 80,
+      "name": "Espanyol",
+      "P": 13,
+      "W": 4,
+      "D": 3,
+      "L": 6,
+      "GF": 14,
+      "GA": 14,
+      "GD": 0,
+      "Pts": 15,
+      "position": 10
     },
     {
       "id": 560,
       "name": "Deportivo La Coruña",
-      "P": 12,
+      "P": 13,
       "W": 3,
       "D": 6,
-      "L": 3,
-      "GF": 15,
-      "GA": 14,
-      "GD": 1,
+      "L": 4,
+      "GF": 16,
+      "GA": 17,
+      "GD": -1,
       "Pts": 15,
-      "position": 9
+      "position": 11
     },
     {
       "id": 5335,
@@ -144,7 +170,7 @@
       "GA": 30,
       "GD": -13,
       "Pts": 14,
-      "position": 10
+      "position": 12
     },
     {
       "id": 558,
@@ -157,32 +183,6 @@
       "GA": 10,
       "GD": 0,
       "Pts": 13,
-      "position": 11
-    },
-    {
-      "id": 263,
-      "name": "Alavés",
-      "P": 12,
-      "W": 3,
-      "D": 4,
-      "L": 5,
-      "GF": 15,
-      "GA": 17,
-      "GD": -2,
-      "Pts": 13,
-      "position": 12
-    },
-    {
-      "id": 80,
-      "name": "Espanyol",
-      "P": 12,
-      "W": 3,
-      "D": 3,
-      "L": 6,
-      "GF": 13,
-      "GA": 14,
-      "GD": -1,
-      "Pts": 12,
       "position": 13
     },
     {
@@ -339,19 +339,34 @@
       "positionChange": 2
     },
     {
-      "id": 77,
-      "name": "Athletic Club",
-      "P": 10,
+      "id": 263,
+      "name": "Alavés",
+      "P": 12,
       "W": 4,
       "D": 4,
-      "L": 2,
-      "GF": 15,
-      "GA": 9,
-      "GD": 6,
+      "L": 4,
+      "GF": 17,
+      "GA": 12,
+      "GD": 5,
       "Pts": 16,
       "position": 5,
+      "originalPosition": 8,
+      "positionChange": 3
+    },
+    {
+      "id": 77,
+      "name": "Athletic Club",
+      "P": 11,
+      "W": 4,
+      "D": 4,
+      "L": 3,
+      "GF": 15,
+      "GA": 10,
+      "GD": 5,
+      "Pts": 16,
+      "position": 6,
       "originalPosition": 7,
-      "positionChange": 2
+      "positionChange": 1
     },
     {
       "id": 94,
@@ -364,23 +379,38 @@
       "GA": 14,
       "GD": 3,
       "Pts": 15,
-      "position": 6,
-      "originalPosition": 8,
+      "position": 7,
+      "originalPosition": 9,
+      "positionChange": 2
+    },
+    {
+      "id": 80,
+      "name": "Espanyol",
+      "P": 12,
+      "W": 4,
+      "D": 3,
+      "L": 5,
+      "GF": 13,
+      "GA": 12,
+      "GD": 1,
+      "Pts": 15,
+      "position": 8,
+      "originalPosition": 10,
       "positionChange": 2
     },
     {
       "id": 560,
       "name": "Deportivo La Coruña",
-      "P": 12,
+      "P": 13,
       "W": 3,
       "D": 6,
-      "L": 3,
-      "GF": 15,
-      "GA": 14,
-      "GD": 1,
+      "L": 4,
+      "GF": 16,
+      "GA": 17,
+      "GD": -1,
       "Pts": 15,
-      "position": 7,
-      "originalPosition": 9,
+      "position": 9,
+      "originalPosition": 11,
       "positionChange": 2
     },
     {
@@ -394,24 +424,9 @@
       "GA": 20,
       "GD": -5,
       "Pts": 14,
-      "position": 8,
-      "originalPosition": 10,
-      "positionChange": 2
-    },
-    {
-      "id": 263,
-      "name": "Alavés",
-      "P": 11,
-      "W": 3,
-      "D": 4,
-      "L": 4,
-      "GF": 14,
-      "GA": 11,
-      "GD": 3,
-      "Pts": 13,
-      "position": 9,
+      "position": 10,
       "originalPosition": 12,
-      "positionChange": 3
+      "positionChange": 2
     },
     {
       "id": 558,
@@ -424,21 +439,6 @@
       "GA": 10,
       "GD": 0,
       "Pts": 13,
-      "position": 10,
-      "originalPosition": 11,
-      "positionChange": 1
-    },
-    {
-      "id": 80,
-      "name": "Espanyol",
-      "P": 11,
-      "W": 3,
-      "D": 3,
-      "L": 5,
-      "GF": 12,
-      "GA": 12,
-      "GD": 0,
-      "Pts": 12,
       "position": 11,
       "originalPosition": 13,
       "positionChange": 2
@@ -633,15 +633,28 @@
     {
       "id": 77,
       "name": "Athletic Club",
-      "P": 11,
+      "P": 12,
       "W": 4,
       "D": 4,
-      "L": 3,
+      "L": 4,
       "GF": 15,
-      "GA": 11,
-      "GD": 4,
+      "GA": 12,
+      "GD": 3,
       "Pts": 16,
       "position": 7
+    },
+    {
+      "id": 263,
+      "name": "Alavés",
+      "P": 13,
+      "W": 4,
+      "D": 4,
+      "L": 5,
+      "GF": 18,
+      "GA": 18,
+      "GD": 0,
+      "Pts": 16,
+      "position": 8
     },
     {
       "id": 94,
@@ -654,20 +667,33 @@
       "GA": 15,
       "GD": 2,
       "Pts": 15,
-      "position": 8
+      "position": 9
+    },
+    {
+      "id": 80,
+      "name": "Espanyol",
+      "P": 13,
+      "W": 4,
+      "D": 3,
+      "L": 6,
+      "GF": 14,
+      "GA": 14,
+      "GD": 0,
+      "Pts": 15,
+      "position": 10
     },
     {
       "id": 560,
       "name": "Deportivo La Coruña",
-      "P": 12,
+      "P": 13,
       "W": 3,
       "D": 6,
-      "L": 3,
-      "GF": 15,
-      "GA": 14,
-      "GD": 1,
+      "L": 4,
+      "GF": 16,
+      "GA": 17,
+      "GD": -1,
       "Pts": 15,
-      "position": 9
+      "position": 11
     },
     {
       "id": 5335,
@@ -680,7 +706,7 @@
       "GA": 30,
       "GD": -13,
       "Pts": 14,
-      "position": 10
+      "position": 12
     },
     {
       "id": 558,
@@ -693,32 +719,6 @@
       "GA": 10,
       "GD": 0,
       "Pts": 13,
-      "position": 11
-    },
-    {
-      "id": 263,
-      "name": "Alavés",
-      "P": 12,
-      "W": 3,
-      "D": 4,
-      "L": 5,
-      "GF": 15,
-      "GA": 17,
-      "GD": -2,
-      "Pts": 13,
-      "position": 12
-    },
-    {
-      "id": 80,
-      "name": "Espanyol",
-      "P": 12,
-      "W": 3,
-      "D": 3,
-      "L": 6,
-      "GF": 13,
-      "GA": 14,
-      "GD": -1,
-      "Pts": 12,
       "position": 13
     },
     {
