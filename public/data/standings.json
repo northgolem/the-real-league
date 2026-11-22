@@ -2,8 +2,8 @@
   "mode": "live",
   "competition": "La Liga de los Mortales",
   "season": "2026/27",
-  "generatedAt": "2026-11-21T16:08:04+00:00",
-  "latestResultAt": "2026-11-21T13:00:00Z",
+  "generatedAt": "2026-11-22T16:15:21+00:00",
+  "latestResultAt": "2026-11-22T13:00:00Z",
   "excluded": [
     "Real Madrid",
     "FC Barcelona"
@@ -12,34 +12,34 @@
     81,
     86
   ],
-  "completedMatches": 121,
-  "excludedMatches": 23,
-  "includedMatches": 98,
+  "completedMatches": 125,
+  "excludedMatches": 25,
+  "includedMatches": 100,
   "officialTableApproximation": [
     {
       "id": 81,
       "name": "FC Barcelona",
-      "P": 12,
-      "W": 11,
+      "P": 13,
+      "W": 12,
       "D": 0,
       "L": 1,
-      "GF": 48,
-      "GA": 13,
-      "GD": 35,
-      "Pts": 33,
+      "GF": 51,
+      "GA": 15,
+      "GD": 36,
+      "Pts": 36,
       "position": 1
     },
     {
       "id": 86,
       "name": "Real Madrid",
-      "P": 12,
-      "W": 10,
+      "P": 13,
+      "W": 11,
       "D": 0,
       "L": 2,
-      "GF": 31,
-      "GA": 10,
-      "GD": 21,
-      "Pts": 30,
+      "GF": 33,
+      "GA": 11,
+      "GD": 22,
+      "Pts": 33,
       "position": 2
     },
     {
@@ -58,14 +58,14 @@
     {
       "id": 90,
       "name": "Real Betis",
-      "P": 12,
+      "P": 13,
       "W": 8,
-      "D": 2,
+      "D": 3,
       "L": 2,
-      "GF": 20,
-      "GA": 15,
+      "GF": 21,
+      "GA": 16,
       "GD": 5,
-      "Pts": 26,
+      "Pts": 27,
       "position": 4
     },
     {
@@ -84,14 +84,14 @@
     {
       "id": 559,
       "name": "Sevilla FC",
-      "P": 12,
+      "P": 13,
       "W": 5,
-      "D": 3,
+      "D": 4,
       "L": 4,
-      "GF": 17,
-      "GA": 19,
+      "GF": 18,
+      "GA": 20,
       "GD": -2,
-      "Pts": 18,
+      "Pts": 19,
       "position": 6
     },
     {
@@ -123,13 +123,13 @@
     {
       "id": 94,
       "name": "Villarreal",
-      "P": 12,
+      "P": 13,
       "W": 4,
       "D": 3,
-      "L": 5,
-      "GF": 17,
-      "GA": 15,
-      "GD": 2,
+      "L": 6,
+      "GF": 19,
+      "GA": 18,
+      "GD": 1,
       "Pts": 15,
       "position": 9
     },
@@ -175,26 +175,26 @@
     {
       "id": 558,
       "name": "Celta Vigo",
-      "P": 12,
+      "P": 13,
       "W": 2,
       "D": 7,
-      "L": 3,
-      "GF": 10,
-      "GA": 10,
-      "GD": 0,
+      "L": 4,
+      "GF": 11,
+      "GA": 12,
+      "GD": -1,
       "Pts": 13,
       "position": 13
     },
     {
       "id": 87,
       "name": "Rayo Vallecano",
-      "P": 11,
+      "P": 12,
       "W": 3,
       "D": 3,
-      "L": 5,
+      "L": 6,
       "GF": 15,
-      "GA": 21,
-      "GD": -6,
+      "GA": 22,
+      "GD": -7,
       "Pts": 12,
       "position": 14
     },
@@ -225,6 +225,19 @@
       "position": 16
     },
     {
+      "id": 95,
+      "name": "Valencia",
+      "P": 13,
+      "W": 3,
+      "D": 3,
+      "L": 7,
+      "GF": 9,
+      "GA": 20,
+      "GD": -11,
+      "Pts": 12,
+      "position": 17
+    },
+    {
       "id": 88,
       "name": "Levante",
       "P": 12,
@@ -235,7 +248,7 @@
       "GA": 21,
       "GD": -5,
       "Pts": 11,
-      "position": 17
+      "position": 18
     },
     {
       "id": 285,
@@ -248,19 +261,6 @@
       "GA": 20,
       "GD": -6,
       "Pts": 10,
-      "position": 18
-    },
-    {
-      "id": 95,
-      "name": "Valencia",
-      "P": 12,
-      "W": 2,
-      "D": 3,
-      "L": 7,
-      "GF": 8,
-      "GA": 20,
-      "GD": -12,
-      "Pts": 9,
       "position": 19
     },
     {
@@ -296,14 +296,14 @@
     {
       "id": 90,
       "name": "Real Betis",
-      "P": 10,
+      "P": 11,
       "W": 7,
-      "D": 2,
+      "D": 3,
       "L": 1,
-      "GF": 17,
-      "GA": 10,
+      "GF": 18,
+      "GA": 11,
       "GD": 7,
-      "Pts": 23,
+      "Pts": 24,
       "position": 2,
       "originalPosition": 4,
       "positionChange": 2
@@ -326,14 +326,14 @@
     {
       "id": 559,
       "name": "Sevilla FC",
-      "P": 10,
+      "P": 11,
       "W": 5,
-      "D": 3,
+      "D": 4,
       "L": 2,
-      "GF": 15,
-      "GA": 12,
+      "GF": 16,
+      "GA": 13,
       "GD": 3,
-      "Pts": 18,
+      "Pts": 19,
       "position": 4,
       "originalPosition": 6,
       "positionChange": 2
@@ -446,17 +446,32 @@
     {
       "id": 87,
       "name": "Rayo Vallecano",
-      "P": 9,
+      "P": 10,
       "W": 3,
       "D": 3,
-      "L": 3,
+      "L": 4,
       "GF": 12,
-      "GA": 12,
-      "GD": 0,
+      "GA": 13,
+      "GD": -1,
       "Pts": 12,
       "position": 12,
       "originalPosition": 14,
       "positionChange": 2
+    },
+    {
+      "id": 95,
+      "name": "Valencia",
+      "P": 11,
+      "W": 3,
+      "D": 3,
+      "L": 5,
+      "GF": 9,
+      "GA": 12,
+      "GD": -3,
+      "Pts": 12,
+      "position": 13,
+      "originalPosition": 17,
+      "positionChange": 4
     },
     {
       "id": 82,
@@ -469,9 +484,9 @@
       "GA": 15,
       "GD": -7,
       "Pts": 12,
-      "position": 13,
+      "position": 14,
       "originalPosition": 15,
-      "positionChange": 2
+      "positionChange": 1
     },
     {
       "id": 79,
@@ -484,9 +499,9 @@
       "GA": 23,
       "GD": -11,
       "Pts": 12,
-      "position": 14,
+      "position": 15,
       "originalPosition": 16,
-      "positionChange": 2
+      "positionChange": 1
     },
     {
       "id": 88,
@@ -499,8 +514,8 @@
       "GA": 17,
       "GD": -3,
       "Pts": 11,
-      "position": 15,
-      "originalPosition": 17,
+      "position": 16,
+      "originalPosition": 18,
       "positionChange": 2
     },
     {
@@ -514,21 +529,6 @@
       "GA": 12,
       "GD": 0,
       "Pts": 10,
-      "position": 16,
-      "originalPosition": 18,
-      "positionChange": 2
-    },
-    {
-      "id": 95,
-      "name": "Valencia",
-      "P": 10,
-      "W": 2,
-      "D": 3,
-      "L": 5,
-      "GF": 8,
-      "GA": 12,
-      "GD": -4,
-      "Pts": 9,
       "position": 17,
       "originalPosition": 19,
       "positionChange": 2
@@ -555,27 +555,27 @@
     {
       "id": 81,
       "name": "FC Barcelona",
-      "P": 12,
-      "W": 11,
+      "P": 13,
+      "W": 12,
       "D": 0,
       "L": 1,
-      "GF": 48,
-      "GA": 13,
-      "GD": 35,
-      "Pts": 33,
+      "GF": 51,
+      "GA": 15,
+      "GD": 36,
+      "Pts": 36,
       "position": 1
     },
     {
       "id": 86,
       "name": "Real Madrid",
-      "P": 12,
-      "W": 10,
+      "P": 13,
+      "W": 11,
       "D": 0,
       "L": 2,
-      "GF": 31,
-      "GA": 10,
-      "GD": 21,
-      "Pts": 30,
+      "GF": 33,
+      "GA": 11,
+      "GD": 22,
+      "Pts": 33,
       "position": 2
     },
     {
@@ -594,14 +594,14 @@
     {
       "id": 90,
       "name": "Real Betis",
-      "P": 12,
+      "P": 13,
       "W": 8,
-      "D": 2,
+      "D": 3,
       "L": 2,
-      "GF": 20,
-      "GA": 15,
+      "GF": 21,
+      "GA": 16,
       "GD": 5,
-      "Pts": 26,
+      "Pts": 27,
       "position": 4
     },
     {
@@ -620,14 +620,14 @@
     {
       "id": 559,
       "name": "Sevilla FC",
-      "P": 12,
+      "P": 13,
       "W": 5,
-      "D": 3,
+      "D": 4,
       "L": 4,
-      "GF": 17,
-      "GA": 19,
+      "GF": 18,
+      "GA": 20,
       "GD": -2,
-      "Pts": 18,
+      "Pts": 19,
       "position": 6
     },
     {
@@ -659,13 +659,13 @@
     {
       "id": 94,
       "name": "Villarreal",
-      "P": 12,
+      "P": 13,
       "W": 4,
       "D": 3,
-      "L": 5,
-      "GF": 17,
-      "GA": 15,
-      "GD": 2,
+      "L": 6,
+      "GF": 19,
+      "GA": 18,
+      "GD": 1,
       "Pts": 15,
       "position": 9
     },
@@ -711,26 +711,26 @@
     {
       "id": 558,
       "name": "Celta Vigo",
-      "P": 12,
+      "P": 13,
       "W": 2,
       "D": 7,
-      "L": 3,
-      "GF": 10,
-      "GA": 10,
-      "GD": 0,
+      "L": 4,
+      "GF": 11,
+      "GA": 12,
+      "GD": -1,
       "Pts": 13,
       "position": 13
     },
     {
       "id": 87,
       "name": "Rayo Vallecano",
-      "P": 11,
+      "P": 12,
       "W": 3,
       "D": 3,
-      "L": 5,
+      "L": 6,
       "GF": 15,
-      "GA": 21,
-      "GD": -6,
+      "GA": 22,
+      "GD": -7,
       "Pts": 12,
       "position": 14
     },
@@ -761,6 +761,19 @@
       "position": 16
     },
     {
+      "id": 95,
+      "name": "Valencia",
+      "P": 13,
+      "W": 3,
+      "D": 3,
+      "L": 7,
+      "GF": 9,
+      "GA": 20,
+      "GD": -11,
+      "Pts": 12,
+      "position": 17
+    },
+    {
       "id": 88,
       "name": "Levante",
       "P": 12,
@@ -771,7 +784,7 @@
       "GA": 21,
       "GD": -5,
       "Pts": 11,
-      "position": 17
+      "position": 18
     },
     {
       "id": 285,
@@ -784,19 +797,6 @@
       "GA": 20,
       "GD": -6,
       "Pts": 10,
-      "position": 18
-    },
-    {
-      "id": 95,
-      "name": "Valencia",
-      "P": 12,
-      "W": 2,
-      "D": 3,
-      "L": 7,
-      "GF": 8,
-      "GA": 20,
-      "GD": -12,
-      "Pts": 9,
       "position": 19
     },
     {
