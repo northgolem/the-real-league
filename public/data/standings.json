@@ -2,8 +2,8 @@
   "mode": "live",
   "competition": "La Liga de los Mortales",
   "season": "2026/27",
-  "generatedAt": "2026-11-22T16:15:21+00:00",
-  "latestResultAt": "2026-11-22T13:00:00Z",
+  "generatedAt": "2026-11-23T20:12:01+00:00",
+  "latestResultAt": "2026-11-22T20:00:00Z",
   "excluded": [
     "Real Madrid",
     "FC Barcelona"
@@ -12,9 +12,9 @@
     81,
     86
   ],
-  "completedMatches": 125,
+  "completedMatches": 128,
   "excludedMatches": 25,
-  "includedMatches": 100,
+  "includedMatches": 103,
   "officialTableApproximation": [
     {
       "id": 81,
@@ -45,14 +45,14 @@
     {
       "id": 78,
       "name": "Atlético Madrid",
-      "P": 12,
-      "W": 9,
+      "P": 13,
+      "W": 10,
       "D": 1,
       "L": 2,
-      "GF": 23,
+      "GF": 26,
       "GA": 10,
-      "GD": 13,
-      "Pts": 28,
+      "GD": 16,
+      "Pts": 31,
       "position": 3
     },
     {
@@ -71,13 +71,13 @@
     {
       "id": 92,
       "name": "Real Sociedad",
-      "P": 12,
+      "P": 13,
       "W": 7,
       "D": 1,
-      "L": 4,
-      "GF": 21,
-      "GA": 20,
-      "GD": 1,
+      "L": 5,
+      "GF": 23,
+      "GA": 23,
+      "GD": 0,
       "Pts": 22,
       "position": 5
     },
@@ -95,6 +95,19 @@
       "position": 6
     },
     {
+      "id": 5335,
+      "name": "Racing Santander",
+      "P": 13,
+      "W": 5,
+      "D": 2,
+      "L": 6,
+      "GF": 20,
+      "GA": 32,
+      "GD": -12,
+      "Pts": 17,
+      "position": 7
+    },
+    {
       "id": 77,
       "name": "Athletic Club",
       "P": 12,
@@ -105,7 +118,7 @@
       "GA": 12,
       "GD": 3,
       "Pts": 16,
-      "position": 7
+      "position": 8
     },
     {
       "id": 263,
@@ -118,7 +131,7 @@
       "GA": 18,
       "GD": 0,
       "Pts": 16,
-      "position": 8
+      "position": 9
     },
     {
       "id": 94,
@@ -131,7 +144,7 @@
       "GA": 18,
       "GD": 1,
       "Pts": 15,
-      "position": 9
+      "position": 10
     },
     {
       "id": 80,
@@ -144,7 +157,7 @@
       "GA": 14,
       "GD": 0,
       "Pts": 15,
-      "position": 10
+      "position": 11
     },
     {
       "id": 560,
@@ -157,20 +170,20 @@
       "GA": 17,
       "GD": -1,
       "Pts": 15,
-      "position": 11
+      "position": 12
     },
     {
-      "id": 5335,
-      "name": "Racing Santander",
-      "P": 12,
+      "id": 79,
+      "name": "Osasuna",
+      "P": 13,
       "W": 4,
-      "D": 2,
+      "D": 3,
       "L": 6,
-      "GF": 17,
-      "GA": 30,
-      "GD": -13,
-      "Pts": 14,
-      "position": 12
+      "GF": 13,
+      "GA": 23,
+      "GD": -10,
+      "Pts": 15,
+      "position": 13
     },
     {
       "id": 558,
@@ -183,7 +196,7 @@
       "GA": 12,
       "GD": -1,
       "Pts": 13,
-      "position": 13
+      "position": 14
     },
     {
       "id": 87,
@@ -196,33 +209,7 @@
       "GA": 22,
       "GD": -7,
       "Pts": 12,
-      "position": 14
-    },
-    {
-      "id": 82,
-      "name": "Getafe",
-      "P": 12,
-      "W": 3,
-      "D": 3,
-      "L": 6,
-      "GF": 8,
-      "GA": 18,
-      "GD": -10,
-      "Pts": 12,
       "position": 15
-    },
-    {
-      "id": 79,
-      "name": "Osasuna",
-      "P": 12,
-      "W": 3,
-      "D": 3,
-      "L": 6,
-      "GF": 12,
-      "GA": 23,
-      "GD": -11,
-      "Pts": 12,
-      "position": 16
     },
     {
       "id": 95,
@@ -234,6 +221,19 @@
       "GF": 9,
       "GA": 20,
       "GD": -11,
+      "Pts": 12,
+      "position": 16
+    },
+    {
+      "id": 82,
+      "name": "Getafe",
+      "P": 13,
+      "W": 3,
+      "D": 3,
+      "L": 7,
+      "GF": 8,
+      "GA": 21,
+      "GD": -13,
       "Pts": 12,
       "position": 17
     },
@@ -266,13 +266,13 @@
     {
       "id": 84,
       "name": "Málaga",
-      "P": 12,
+      "P": 13,
       "W": 0,
       "D": 5,
-      "L": 7,
+      "L": 8,
       "GF": 9,
-      "GA": 23,
-      "GD": -14,
+      "GA": 24,
+      "GD": -15,
       "Pts": 5,
       "position": 20
     }
@@ -281,14 +281,14 @@
     {
       "id": 78,
       "name": "Atlético Madrid",
-      "P": 10,
-      "W": 8,
+      "P": 11,
+      "W": 9,
       "D": 1,
       "L": 1,
-      "GF": 20,
+      "GF": 23,
       "GA": 7,
-      "GD": 13,
-      "Pts": 25,
+      "GD": 16,
+      "Pts": 28,
       "position": 1,
       "originalPosition": 3,
       "positionChange": 2
@@ -311,13 +311,13 @@
     {
       "id": 92,
       "name": "Real Sociedad",
-      "P": 11,
+      "P": 12,
       "W": 7,
       "D": 1,
-      "L": 3,
-      "GF": 20,
-      "GA": 16,
-      "GD": 4,
+      "L": 4,
+      "GF": 22,
+      "GA": 19,
+      "GD": 3,
       "Pts": 22,
       "position": 3,
       "originalPosition": 5,
@@ -339,6 +339,21 @@
       "positionChange": 2
     },
     {
+      "id": 5335,
+      "name": "Racing Santander",
+      "P": 11,
+      "W": 5,
+      "D": 2,
+      "L": 4,
+      "GF": 18,
+      "GA": 22,
+      "GD": -4,
+      "Pts": 17,
+      "position": 5,
+      "originalPosition": 7,
+      "positionChange": 2
+    },
+    {
       "id": 263,
       "name": "Alavés",
       "P": 12,
@@ -349,8 +364,8 @@
       "GA": 12,
       "GD": 5,
       "Pts": 16,
-      "position": 5,
-      "originalPosition": 8,
+      "position": 6,
+      "originalPosition": 9,
       "positionChange": 3
     },
     {
@@ -364,8 +379,8 @@
       "GA": 10,
       "GD": 5,
       "Pts": 16,
-      "position": 6,
-      "originalPosition": 7,
+      "position": 7,
+      "originalPosition": 8,
       "positionChange": 1
     },
     {
@@ -379,8 +394,8 @@
       "GA": 14,
       "GD": 3,
       "Pts": 15,
-      "position": 7,
-      "originalPosition": 9,
+      "position": 8,
+      "originalPosition": 10,
       "positionChange": 2
     },
     {
@@ -394,8 +409,8 @@
       "GA": 12,
       "GD": 1,
       "Pts": 15,
-      "position": 8,
-      "originalPosition": 10,
+      "position": 9,
+      "originalPosition": 11,
       "positionChange": 2
     },
     {
@@ -409,23 +424,23 @@
       "GA": 17,
       "GD": -1,
       "Pts": 15,
-      "position": 9,
-      "originalPosition": 11,
+      "position": 10,
+      "originalPosition": 12,
       "positionChange": 2
     },
     {
-      "id": 5335,
-      "name": "Racing Santander",
-      "P": 10,
+      "id": 79,
+      "name": "Osasuna",
+      "P": 13,
       "W": 4,
-      "D": 2,
-      "L": 4,
-      "GF": 15,
-      "GA": 20,
-      "GD": -5,
-      "Pts": 14,
-      "position": 10,
-      "originalPosition": 12,
+      "D": 3,
+      "L": 6,
+      "GF": 13,
+      "GA": 23,
+      "GD": -10,
+      "Pts": 15,
+      "position": 11,
+      "originalPosition": 13,
       "positionChange": 2
     },
     {
@@ -439,8 +454,8 @@
       "GA": 10,
       "GD": 0,
       "Pts": 13,
-      "position": 11,
-      "originalPosition": 13,
+      "position": 12,
+      "originalPosition": 14,
       "positionChange": 2
     },
     {
@@ -454,8 +469,8 @@
       "GA": 13,
       "GD": -1,
       "Pts": 12,
-      "position": 12,
-      "originalPosition": 14,
+      "position": 13,
+      "originalPosition": 15,
       "positionChange": 2
     },
     {
@@ -469,39 +484,24 @@
       "GA": 12,
       "GD": -3,
       "Pts": 12,
-      "position": 13,
-      "originalPosition": 17,
-      "positionChange": 4
+      "position": 14,
+      "originalPosition": 16,
+      "positionChange": 2
     },
     {
       "id": 82,
       "name": "Getafe",
-      "P": 11,
-      "W": 3,
-      "D": 3,
-      "L": 5,
-      "GF": 8,
-      "GA": 15,
-      "GD": -7,
-      "Pts": 12,
-      "position": 14,
-      "originalPosition": 15,
-      "positionChange": 1
-    },
-    {
-      "id": 79,
-      "name": "Osasuna",
       "P": 12,
       "W": 3,
       "D": 3,
       "L": 6,
-      "GF": 12,
-      "GA": 23,
-      "GD": -11,
+      "GF": 8,
+      "GA": 18,
+      "GD": -10,
       "Pts": 12,
       "position": 15,
-      "originalPosition": 16,
-      "positionChange": 1
+      "originalPosition": 17,
+      "positionChange": 2
     },
     {
       "id": 88,
@@ -536,13 +536,13 @@
     {
       "id": 84,
       "name": "Málaga",
-      "P": 11,
+      "P": 12,
       "W": 0,
       "D": 5,
-      "L": 6,
+      "L": 7,
       "GF": 9,
-      "GA": 19,
-      "GD": -10,
+      "GA": 20,
+      "GD": -11,
       "Pts": 5,
       "position": 18,
       "originalPosition": 20,
@@ -581,14 +581,14 @@
     {
       "id": 78,
       "name": "Atlético Madrid",
-      "P": 12,
-      "W": 9,
+      "P": 13,
+      "W": 10,
       "D": 1,
       "L": 2,
-      "GF": 23,
+      "GF": 26,
       "GA": 10,
-      "GD": 13,
-      "Pts": 28,
+      "GD": 16,
+      "Pts": 31,
       "position": 3
     },
     {
@@ -607,13 +607,13 @@
     {
       "id": 92,
       "name": "Real Sociedad",
-      "P": 12,
+      "P": 13,
       "W": 7,
       "D": 1,
-      "L": 4,
-      "GF": 21,
-      "GA": 20,
-      "GD": 1,
+      "L": 5,
+      "GF": 23,
+      "GA": 23,
+      "GD": 0,
       "Pts": 22,
       "position": 5
     },
@@ -631,6 +631,19 @@
       "position": 6
     },
     {
+      "id": 5335,
+      "name": "Racing Santander",
+      "P": 13,
+      "W": 5,
+      "D": 2,
+      "L": 6,
+      "GF": 20,
+      "GA": 32,
+      "GD": -12,
+      "Pts": 17,
+      "position": 7
+    },
+    {
       "id": 77,
       "name": "Athletic Club",
       "P": 12,
@@ -641,7 +654,7 @@
       "GA": 12,
       "GD": 3,
       "Pts": 16,
-      "position": 7
+      "position": 8
     },
     {
       "id": 263,
@@ -654,7 +667,7 @@
       "GA": 18,
       "GD": 0,
       "Pts": 16,
-      "position": 8
+      "position": 9
     },
     {
       "id": 94,
@@ -667,7 +680,7 @@
       "GA": 18,
       "GD": 1,
       "Pts": 15,
-      "position": 9
+      "position": 10
     },
     {
       "id": 80,
@@ -680,7 +693,7 @@
       "GA": 14,
       "GD": 0,
       "Pts": 15,
-      "position": 10
+      "position": 11
     },
     {
       "id": 560,
@@ -693,20 +706,20 @@
       "GA": 17,
       "GD": -1,
       "Pts": 15,
-      "position": 11
+      "position": 12
     },
     {
-      "id": 5335,
-      "name": "Racing Santander",
-      "P": 12,
+      "id": 79,
+      "name": "Osasuna",
+      "P": 13,
       "W": 4,
-      "D": 2,
+      "D": 3,
       "L": 6,
-      "GF": 17,
-      "GA": 30,
-      "GD": -13,
-      "Pts": 14,
-      "position": 12
+      "GF": 13,
+      "GA": 23,
+      "GD": -10,
+      "Pts": 15,
+      "position": 13
     },
     {
       "id": 558,
@@ -719,7 +732,7 @@
       "GA": 12,
       "GD": -1,
       "Pts": 13,
-      "position": 13
+      "position": 14
     },
     {
       "id": 87,
@@ -732,33 +745,7 @@
       "GA": 22,
       "GD": -7,
       "Pts": 12,
-      "position": 14
-    },
-    {
-      "id": 82,
-      "name": "Getafe",
-      "P": 12,
-      "W": 3,
-      "D": 3,
-      "L": 6,
-      "GF": 8,
-      "GA": 18,
-      "GD": -10,
-      "Pts": 12,
       "position": 15
-    },
-    {
-      "id": 79,
-      "name": "Osasuna",
-      "P": 12,
-      "W": 3,
-      "D": 3,
-      "L": 6,
-      "GF": 12,
-      "GA": 23,
-      "GD": -11,
-      "Pts": 12,
-      "position": 16
     },
     {
       "id": 95,
@@ -770,6 +757,19 @@
       "GF": 9,
       "GA": 20,
       "GD": -11,
+      "Pts": 12,
+      "position": 16
+    },
+    {
+      "id": 82,
+      "name": "Getafe",
+      "P": 13,
+      "W": 3,
+      "D": 3,
+      "L": 7,
+      "GF": 8,
+      "GA": 21,
+      "GD": -13,
       "Pts": 12,
       "position": 17
     },
@@ -802,13 +802,13 @@
     {
       "id": 84,
       "name": "Málaga",
-      "P": 12,
+      "P": 13,
       "W": 0,
       "D": 5,
-      "L": 7,
+      "L": 8,
       "GF": 9,
-      "GA": 23,
-      "GD": -14,
+      "GA": 24,
+      "GD": -15,
       "Pts": 5,
       "position": 20
     }
